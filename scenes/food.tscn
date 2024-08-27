@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://ckbjoq8xviyto"]
+
+[node name="Food" type="Node2D"]
+modulate = Color(0.784314, 0.317647, 0, 1)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-30, 6, -10, 6, -4, -9, 6, -9, 11, 5, 30, 5, 30, 12, -30, 12)

@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://q1ju54xhs2x4"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_cen3t"]
+[ext_resource type="PackedScene" uid="uid://catl8ykewblyf" path="res://scenes/entity.tscn" id="2_ytmld"]
+[ext_resource type="PackedScene" uid="uid://iud7tu1t42cs" path="res://scenes/bed.tscn" id="3_7gaav"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_cen3t")
+
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="NPC" parent="Entities" instance=ExtResource("2_ytmld")]
+position = Vector2(496, 216)
+
+[node name="Bed" parent="Entities" instance=ExtResource("3_7gaav")]
+position = Vector2(351, 295)

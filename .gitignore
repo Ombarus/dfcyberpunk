@@ -1,0 +1,11 @@
+# Godot 4+ specific ignores
+.godot/
+*tmp*
+/data/private
+*.png~
+*~
+*.exe
+*.apk
+*.aab
+*.x86_64
+*-autosave*
