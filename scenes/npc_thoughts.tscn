@@ -1,0 +1,70 @@
+[gd_scene load_steps=2 format=3 uid="uid://podwo6g81pr2"]
+
+[sub_resource type="Theme" id="Theme_c8kyr"]
+default_font_size = 12
+
+[node name="NPCThoughts" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_c8kyr")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.341176, 0.501961, 0.560784, 0.505882)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Action" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Action: SleepInBed->Goto"
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Meters" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Energy" type="HBoxContainer" parent="VBoxContainer/Meters"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Meters/Energy"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+text = "Energy : "
+
+[node name="EnergyProgress" type="ProgressBar" parent="VBoxContainer/Meters/Energy"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+value = 0.5
+
+[node name="Satiety" type="HBoxContainer" parent="VBoxContainer/Meters"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Meters/Satiety"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+text = "Satiety : "
+
+[node name="SatietyProgress" type="ProgressBar" parent="VBoxContainer/Meters/Satiety"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+value = 0.5

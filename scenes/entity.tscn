@@ -1,9 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://catl8ykewblyf"]
+[gd_scene load_steps=3 format=3 uid="uid://catl8ykewblyf"]
 
 [ext_resource type="Script" path="res://scripts/entity.gd" id="1_oba6i"]
+[ext_resource type="PackedScene" uid="uid://podwo6g81pr2" path="res://scenes/npc_thoughts.tscn" id="2_5vxit"]
 
 [node name="Entity" type="Node2D"]
 script = ExtResource("1_oba6i")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(-10, 15, 10, 15, 10, -15, -10, -15)
+
+[node name="NPCThoughts" parent="." instance=ExtResource("2_5vxit")]
+offset_left = 110.0
+offset_top = -71.0
+offset_right = 110.0
+offset_bottom = -71.0

@@ -11,18 +11,24 @@ enum STATE {
 @export var CookUnitSec : float = 0.3334
 @export var SleepEnerSec : float = 0.1
 
-@export var Sasiety : float = 0.0
+@export var Satiety : float = 0.0
 @export var Energy : float = 0.0
 
 var curParam : Dictionary
 var actionStack : Array
 var lastAction : String
 var lastState : int
+var debugThoughtsAction : Label
+var debugThoughtsSatiety : ProgressBar
+var debugThoughtsEnergy : ProgressBar
 
 func _ready() -> void:
 	var target := Vector2(100, 100)
 	self.curParam = {"target": target}
 	self.actionStack = ["Goto"]
+	self.debugThoughtsEnergy = self.find_child("EnergyProgress", true, false) as ProgressBar
+	self.debugThoughtsSatiety = self.find_child("SatietyProgress", true, false) as ProgressBar
+	self.debugThoughtsAction = self.find_child("Action", true, false) as Label
 
 func _process(delta: float) -> void:
 	var cur_action = self.getCurAction()
@@ -31,8 +37,19 @@ func _process(delta: float) -> void:
 		self.popAction()
 	
 	self.lastState = s
-	self.modulate.r = self.Sasiety
-	self.modulate.g = self.Energy
+	UpdateThoughts()
+	#self.modulate.r = self.Satiety
+	#self.modulate.g = self.Energy
+
+func UpdateThoughts():
+	self.debugThoughtsEnergy.value = self.Energy
+	self.debugThoughtsSatiety.value = self.Satiety
+	var actions = ""
+	for a in actionStack:
+		if actions != "":
+			actions += "->"
+		actions += a
+	self.debugThoughtsAction.text = actions
 
 func Goto(delta : float, param : Dictionary) -> int:
 	var cur_pos := self.position
@@ -54,7 +71,7 @@ func Eat(delta : float, param : Dictionary) -> int:
 		eat = food_left
 		ret_val = STATE.FINISHED
 	param["food"] = food_left - eat
-	self.Sasiety = clamp(self.Sasiety + eat, 0.0, 1.0)
+	self.Satiety = clamp(self.Satiety + eat, 0.0, 1.0)
 	
 	return ret_val
 	
@@ -67,7 +84,7 @@ func Cook(delta : float, param : Dictionary) -> int:
 	var progress := self.CookUnitSec * delta
 	if progress > cook_left:
 		progress = cook_left
-		param["scene"] = "res://scenes/entity.tscn"
+		param["scene"] = "res://scenes/food.tscn"
 		param["pos"] = self.position
 		self.pushAction("Spawn")
 	param["meal"] = cook_left - progress
@@ -76,12 +93,11 @@ func Cook(delta : float, param : Dictionary) -> int:
 func Default(delta : float, param : Dictionary) -> int:
 	var ret_val := STATE.RUNNING
 	if self.Energy <= 0.001:
-		self.pushAction("Sleep")
-		param["wake"] = randf_range(0.90, 1.00)
-	elif self.Sasiety <= 0.001 and not self.position.is_equal_approx(Vector2(150, 0)):
+		self.pushAction("SleepInBed")
+	elif self.Satiety <= 0.001 and not self.position.is_equal_approx(Vector2(150, 300)):
 		self.pushAction("Goto")
-		param["target"] = Vector2(150, 0)
-	elif self.Sasiety <= 0.001 and self.position.is_equal_approx(Vector2(150, 0)):
+		param["target"] = Vector2(150, 300)
+	elif self.Satiety <= 0.001 and self.position.is_equal_approx(Vector2(150, 300)):
 		self.pushAction("Cook")
 		param["meal"] = 1.0
 	return ret_val
@@ -105,6 +121,19 @@ func Pickup(delta : float, param : Dictionary) -> int:
 	param["inventory"] = inv
 	item.queue_free()
 	return STATE.FINISHED
+	
+func SleepInBed(delta : float, param : Dictionary) -> int:
+	var ret_val := STATE.RUNNING
+	if self.Energy > 0.8:
+		return STATE.FINISHED
+	var bed : Node2D = self.get_parent().find_child("Bed", false, false) as Node2D
+	if self.position != bed.position:
+		param["target"] = bed.position
+		self.pushAction("Goto")
+	else:
+		param["wake"] = randf_range(0.90, 1.00)
+		self.pushAction("Sleep")
+	return ret_val
 	
 func Sleep(delta : float, param : Dictionary) -> int:
 	var ret_val := STATE.RUNNING
