@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dn7pevwva7iml"]
+
+[ext_resource type="Texture2D" uid="uid://dki8coenfhkb1" path="res://data/roguelikeIndoor_transparent.png" id="1_05kyd"]
+
+[node name="Chair" type="Node2D"]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-15, 20, 15, 20, 15, -20, -15, -20)
+
+[node name="RoguelikeIndoorTransparent" type="Sprite2D" parent="."]
+texture = ExtResource("1_05kyd")
+region_enabled = true
+region_rect = Rect2(51, 119, 16, 16)
