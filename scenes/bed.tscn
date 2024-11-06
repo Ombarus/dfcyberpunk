@@ -1,10 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://iud7tu1t42cs"]
+[gd_scene load_steps=3 format=3 uid="uid://iud7tu1t42cs"]
+
+[ext_resource type="Script" path="res://scripts/advertisement.gd" id="1_2uv3a"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0afvf"]
 load_path = "res://.godot/imported/roguelikeIndoor_transparent.png-ac3d2dcb7c8e2f44fd679f51a7dffa66.ctex"
 
 [node name="Bed" type="Node2D"]
 position = Vector2(0, 3)
+script = ExtResource("1_2uv3a")
+Type = 0
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 visible = false

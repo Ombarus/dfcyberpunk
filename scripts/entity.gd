@@ -1,4 +1,4 @@
-extends Node2D
+extends Advertisement
 
 enum STATE {
 	RUNNING,
@@ -9,6 +9,7 @@ enum STATE {
 @export var MovePixSec : float = 100.0
 @export var EatUnitSec : float = 0.3334
 @export var CookUnitSec : float = 0.3334
+@export var CookEnerSec : float = 0.07
 @export var SleepEnerSec : float = 0.1
 
 @export var Satiety : float = 0.0
@@ -82,24 +83,62 @@ func Cook(delta : float, param : Dictionary) -> int:
 	var ret_val = STATE.RUNNING
 	var cook_left := param["meal"] as float
 	var progress := self.CookUnitSec * delta
+	var ener := self.CookEnerSec * delta
 	if progress > cook_left:
 		progress = cook_left
+		# calculate energy loss based on the fraction of the dt we used to cook
+		ener = self.CookEnerSec * (progress / self.CookUnitSec)
 		param["scene"] = "res://scenes/food.tscn"
-		param["pos"] = self.position
+		param["pos"] = self.position + Vector2(100.0, 0.0)
 		self.pushAction("Spawn")
+	self.Energy -= ener
 	param["meal"] = cook_left - progress
 	return ret_val
 
 func Default(delta : float, param : Dictionary) -> int:
 	var ret_val := STATE.RUNNING
+	var food : Node2D = self.getFirstOf(TYPE.FOOD)
 	if self.Energy <= 0.001:
 		self.pushAction("SleepInBed")
-	elif self.Satiety <= 0.001 and not self.position.is_equal_approx(Vector2(150, 300)):
+	elif self.Satiety <= 0.001 and food == null:
+		self.pushAction("CookInKitchen")
+	elif self.Satiety <= 0.001 and food != null:
+		self.pushAction("EatClosestFood")
+	return ret_val
+	
+func EatClosestFood(delta : float, param : Dictionary) -> int:
+	if self.Satiety > 0.1:
+		return STATE.FINISHED
+	
+	var inv : Array = param.get("inventory", [])
+	if inv.size() > 0:
+		var f = inv.pop_back()
+		param["food"] = 0.6
+		self.pushAction("Eat")
+		return STATE.RUNNING
+
+	var food : Node2D = self.getFirstOf(TYPE.FOOD)
+	if self.position != food.position:
+		param["target"] = food.position
 		self.pushAction("Goto")
-		param["target"] = Vector2(150, 300)
-	elif self.Satiety <= 0.001 and self.position.is_equal_approx(Vector2(150, 300)):
-		self.pushAction("Cook")
+	else:
+		param["item"] = food
+		self.pushAction("Pickup")
+
+	return STATE.RUNNING
+	
+func CookInKitchen(delta : float, param : Dictionary) -> int:
+	var ret_val := STATE.RUNNING
+	var kitchen : Node2D = self.getFirstOf(TYPE.KITCHEN)
+	var food : Node2D = self.getFirstOf(TYPE.FOOD)
+	if food != null:
+		return STATE.FINISHED
+	if self.position != kitchen.position:
+		param["target"] = kitchen.position
+		self.pushAction("Goto")
+	else:
 		param["meal"] = 1.0
+		self.pushAction("Cook")
 	return ret_val
 
 func Spawn(delta : float, param : Dictionary) -> int:
@@ -126,7 +165,7 @@ func SleepInBed(delta : float, param : Dictionary) -> int:
 	var ret_val := STATE.RUNNING
 	if self.Energy > 0.8:
 		return STATE.FINISHED
-	var bed : Node2D = self.get_parent().find_child("Bed", false, false) as Node2D
+	var bed : Node2D = self.getFirstOf(TYPE.BED)
 	if self.position != bed.position:
 		param["target"] = bed.position
 		self.pushAction("Goto")
@@ -159,3 +198,10 @@ func getCurAction() -> String:
 	if len(self.actionStack) <= 0:
 		return "Default"
 	return self.actionStack[-1]
+	
+func getFirstOf(t : TYPE) -> Node2D:
+	var nodes : Array = get_tree().get_nodes_in_group(str(t))
+	if nodes.size() > 0:
+		return get_tree().get_nodes_in_group(str(t))[0]
+	else:
+		return null

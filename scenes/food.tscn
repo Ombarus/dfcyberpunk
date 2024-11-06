@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://ckbjoq8xviyto"]
+[gd_scene load_steps=3 format=3 uid="uid://ckbjoq8xviyto"]
 
+[ext_resource type="Script" path="res://scripts/advertisement.gd" id="1_n306e"]
 [ext_resource type="Texture2D" uid="uid://k8s4tftgwhmp" path="res://data/roguelikeSheet_transparent.png" id="1_vb1e6"]
 
 [node name="Food" type="Node2D"]
+script = ExtResource("1_n306e")
+Type = 1
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 visible = false
