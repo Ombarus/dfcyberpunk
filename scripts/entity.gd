@@ -7,13 +7,15 @@ enum STATE {
 }
 
 @export var MovePixSec : float = 100.0
+@export var MoveEnerSec : float = 0.01
 @export var EatUnitSec : float = 0.3334
 @export var CookUnitSec : float = 0.3334
 @export var CookEnerSec : float = 0.07
 @export var SleepEnerSec : float = 0.1
+@export var SatSec : float = 0.01 # consider 1 day = 100 seconds, 0.01 means 1 to 0 in 100 seconds
 
-@export var Satiety : float = 0.0
-@export var Energy : float = 0.0
+@export var Satiety : float = 0.3
+@export var Energy : float = 0.3
 
 var curParam : Dictionary
 var actionStack : Array
@@ -39,8 +41,7 @@ func _process(delta: float) -> void:
 	
 	self.lastState = s
 	UpdateThoughts()
-	#self.modulate.r = self.Satiety
-	#self.modulate.g = self.Energy
+	UpdateSatiety(delta)
 
 func UpdateThoughts():
 	self.debugThoughtsEnergy.value = self.Energy
@@ -52,6 +53,9 @@ func UpdateThoughts():
 		actions += a
 	self.debugThoughtsAction.text = actions
 
+func UpdateSatiety(delta : float) -> void:
+	self.Satiety -= self.SatSec * delta
+
 func Goto(delta : float, param : Dictionary) -> int:
 	var cur_pos := self.position
 	var dir := (param["target"] as Vector2) - cur_pos
@@ -61,7 +65,9 @@ func Goto(delta : float, param : Dictionary) -> int:
 	if move.length_squared() > dir.length_squared() or move.length_squared() <= 0.0001:
 		move = dir
 		ret_val = STATE.FINISHED
+	var energy : float = move.length() / self.MovePixSec * self.MoveEnerSec
 	self.position += move
+	self.Energy -= energy
 	return ret_val
 
 func Eat(delta : float, param : Dictionary) -> int:
@@ -72,16 +78,17 @@ func Eat(delta : float, param : Dictionary) -> int:
 		eat = food_left
 		ret_val = STATE.FINISHED
 	param["food"] = food_left - eat
+	# Can you eat more than your fill? (maybe you get fat?)
 	self.Satiety = clamp(self.Satiety + eat, 0.0, 1.0)
 	
 	return ret_val
 	
 func Cook(delta : float, param : Dictionary) -> int:
-	if param.get("scene", "") != "":
-		return STATE.FINISHED
-		
 	var ret_val = STATE.RUNNING
 	var cook_left := param["meal"] as float
+	if cook_left == 0:
+		return STATE.FINISHED
+		
 	var progress := self.CookUnitSec * delta
 	var ener := self.CookEnerSec * delta
 	if progress > cook_left:
@@ -89,7 +96,7 @@ func Cook(delta : float, param : Dictionary) -> int:
 		# calculate energy loss based on the fraction of the dt we used to cook
 		ener = self.CookEnerSec * (progress / self.CookUnitSec)
 		param["scene"] = "res://scenes/food.tscn"
-		param["pos"] = self.position + Vector2(100.0, 0.0)
+		param["pos"] = self.position + Vector2(randi_range(-50.0, 50.0), randi_range(-50.0, 50.0))
 		self.pushAction("Spawn")
 	self.Energy -= ener
 	param["meal"] = cook_left - progress
@@ -98,12 +105,18 @@ func Cook(delta : float, param : Dictionary) -> int:
 func Default(delta : float, param : Dictionary) -> int:
 	var ret_val := STATE.RUNNING
 	var food : Node2D = self.getFirstOf(TYPE.FOOD)
-	if self.Energy <= 0.001:
+	if self.Energy <= 0.03:
 		self.pushAction("SleepInBed")
-	elif self.Satiety <= 0.001 and food == null:
-		self.pushAction("CookInKitchen")
-	elif self.Satiety <= 0.001 and food != null:
+	elif self.Satiety <= 0.03 and food != null:
 		self.pushAction("EatClosestFood")
+	elif food == null:
+		self.pushAction("CookInKitchen")
+	else:
+		var pos_x := randi_range(50, get_viewport_rect().size.x - 50)
+		var pos_y := randi_range(20, get_viewport_rect().size.y - 20)
+		param["target"] = Vector2(pos_x, pos_y)
+		self.pushAction("Goto")
+		
 	return ret_val
 	
 func EatClosestFood(delta : float, param : Dictionary) -> int:

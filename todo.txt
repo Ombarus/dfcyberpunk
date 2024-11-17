@@ -1,0 +1,2 @@
+- Need a way to interrupt action with higher prio stuff? (like stop going somewhere if you're too hungry)
+- Explore iter-entity interactions (ex: using item from kitchen to make food)
