@@ -1,2 +1,8 @@
 - Need a way to interrupt action with higher prio stuff? (like stop going somewhere if you're too hungry)
-- Explore iter-entity interactions (ex: using item from kitchen to make food)
+- Explore inter-entity interactions (ex: using item from kitchen to make food)
+- Develop inventory (is inventory an entity? can it take actions? (rot?) how do npc interact with it?)
+
+
+
+-- (need inter-entity interaction) can I standardize coefficients (player base + item bonus + moods + environ + tool quality + exp + ???) (ex: fast sleeper in a good bed in a lavish bedroom in a quiet neibhorhood)
+	-- Can later tie into goals and dreams (a person with insomnia would invest in good pillows and bedroom furnitures to gain better bonuses)

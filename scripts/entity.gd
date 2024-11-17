@@ -20,7 +20,6 @@ enum STATE {
 var curParam : Dictionary
 var actionStack : Array
 var lastAction : String
-var lastState : int
 var debugThoughtsAction : Label
 var debugThoughtsSatiety : ProgressBar
 var debugThoughtsEnergy : ProgressBar
@@ -34,12 +33,14 @@ func _ready() -> void:
 	self.debugThoughtsAction = self.find_child("Action", true, false) as Label
 
 func _process(delta: float) -> void:
-	var cur_action = self.getCurAction()
-	var s = self.callv(cur_action, [delta, self.curParam])
-	if (s == STATE.FINISHED):
-		self.popAction()
+	if self.actionStack.size() == 0:
+		self.pushAction("Default", -1)
+	for i in self.actionStack.size():
+		var s = self.callv(self.actionStack[i], [delta, self.curParam, i])
+		
+		if (s == STATE.FINISHED):
+			self.popAction()
 	
-	self.lastState = s
 	UpdateThoughts()
 	UpdateSatiety(delta)
 
@@ -56,7 +57,7 @@ func UpdateThoughts():
 func UpdateSatiety(delta : float) -> void:
 	self.Satiety -= self.SatSec * delta
 
-func Goto(delta : float, param : Dictionary) -> int:
+func Goto(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var cur_pos := self.position
 	var dir := (param["target"] as Vector2) - cur_pos
 	var dir_norm = dir.normalized()
@@ -70,7 +71,7 @@ func Goto(delta : float, param : Dictionary) -> int:
 	self.Energy -= energy
 	return ret_val
 
-func Eat(delta : float, param : Dictionary) -> int:
+func Eat(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var ret_val = STATE.RUNNING
 	var food_left := param["food"] as float
 	var eat := self.EatUnitSec * delta
@@ -83,89 +84,97 @@ func Eat(delta : float, param : Dictionary) -> int:
 	
 	return ret_val
 	
-func Cook(delta : float, param : Dictionary) -> int:
-	var ret_val = STATE.RUNNING
+func Cook(delta : float, param : Dictionary, actionDepth : int) -> int:
+	# You cannot be interrupted while cooking?
+	if actionDepth < lastActionIndex():
+		return STATE.RUNNING
+		
 	var cook_left := param["meal"] as float
 	if cook_left == 0:
 		return STATE.FINISHED
 		
 	var progress := self.CookUnitSec * delta
 	var ener := self.CookEnerSec * delta
-	if progress > cook_left:
+	if progress >= cook_left:
 		progress = cook_left
 		# calculate energy loss based on the fraction of the dt we used to cook
 		ener = self.CookEnerSec * (progress / self.CookUnitSec)
 		param["scene"] = "res://scenes/food.tscn"
 		param["pos"] = self.position + Vector2(randi_range(-50.0, 50.0), randi_range(-50.0, 50.0))
-		self.pushAction("Spawn")
+		self.pushAction("Spawn", actionDepth)
 	self.Energy -= ener
 	param["meal"] = cook_left - progress
-	return ret_val
+	return STATE.RUNNING
 
-func Default(delta : float, param : Dictionary) -> int:
+func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var ret_val := STATE.RUNNING
 	var food : Node2D = self.getFirstOf(TYPE.FOOD)
 	if self.Energy <= 0.03:
-		self.pushAction("SleepInBed")
+		self.pushAction("SleepInBed", actionDepth)
 	elif self.Satiety <= 0.03 and food != null:
-		self.pushAction("EatClosestFood")
+		self.pushAction("EatClosestFood", actionDepth)
 	elif food == null:
-		self.pushAction("CookInKitchen")
+		self.pushAction("CookInKitchen", actionDepth)
 	else:
-		var pos_x := randi_range(50, get_viewport_rect().size.x - 50)
-		var pos_y := randi_range(20, get_viewport_rect().size.y - 20)
-		param["target"] = Vector2(pos_x, pos_y)
-		self.pushAction("Goto")
+		if actionDepth < lastActionIndex():
+			var pos_x := randi_range(50, get_viewport_rect().size.x - 50)
+			var pos_y := randi_range(20, get_viewport_rect().size.y - 20)
+			param["target"] = Vector2(pos_x, pos_y)
+		self.pushAction("Goto", actionDepth)
 		
 	return ret_val
 	
-func EatClosestFood(delta : float, param : Dictionary) -> int:
-	if self.Satiety > 0.1:
+func EatClosestFood(delta : float, param : Dictionary, actionDepth : int) -> int:
+	# By running every frame, this will automatically change target
+	# if it disappear or move and pick new food if it get stolen or something
+	var inv : Array = param.get("inventory", [])
+	var is_top_of_stack : bool = actionDepth < lastActionIndex()
+	if self.Satiety > 0.1 and is_top_of_stack:
+		var f = inv.pop_back()
 		return STATE.FINISHED
 	
-	var inv : Array = param.get("inventory", [])
 	if inv.size() > 0:
-		var f = inv.pop_back()
-		param["food"] = 0.6
-		self.pushAction("Eat")
+		if is_top_of_stack:
+			# TODO: get from food value in inventory?
+			param["food"] = 0.6
+		self.pushAction("Eat", actionDepth)
 		return STATE.RUNNING
 
 	var food : Node2D = self.getFirstOf(TYPE.FOOD)
 	if self.position != food.position:
 		param["target"] = food.position
-		self.pushAction("Goto")
+		self.pushAction("Goto", actionDepth)
 	else:
 		param["item"] = food
-		self.pushAction("Pickup")
+		self.pushAction("Pickup", actionDepth)
 
 	return STATE.RUNNING
 	
-func CookInKitchen(delta : float, param : Dictionary) -> int:
-	var ret_val := STATE.RUNNING
+func CookInKitchen(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var kitchen : Node2D = self.getFirstOf(TYPE.KITCHEN)
 	var food : Node2D = self.getFirstOf(TYPE.FOOD)
+	var is_top_of_stack : bool = actionDepth < lastActionIndex()
 	if food != null:
 		return STATE.FINISHED
 	if self.position != kitchen.position:
 		param["target"] = kitchen.position
-		self.pushAction("Goto")
+		self.pushAction("Goto", actionDepth)
 	else:
-		param["meal"] = 1.0
-		self.pushAction("Cook")
-	return ret_val
+		if is_top_of_stack:
+			param["meal"] = 1.0
+		self.pushAction("Cook", actionDepth)
+	return STATE.RUNNING
 
-func Spawn(delta : float, param : Dictionary) -> int:
-	var ret_val := STATE.RUNNING
+func Spawn(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var scene_name : String = param["scene"] as String
 	var pos : Vector2 = param["pos"] as Vector2
 	var pack := load(scene_name) as PackedScene
 	var n : Node2D = pack.instantiate() as Node2D
 	self.get_parent().add_child(n)
 	n.position = pos
-	ret_val = STATE.FINISHED
-	return ret_val
+	return STATE.FINISHED
 
-func Pickup(delta : float, param : Dictionary) -> int:
+func Pickup(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var item : Node2D = param["item"] as Node2D
 	param.erase("item")
 	var inv : Array = param.get("inventory", [])
@@ -174,20 +183,19 @@ func Pickup(delta : float, param : Dictionary) -> int:
 	item.queue_free()
 	return STATE.FINISHED
 	
-func SleepInBed(delta : float, param : Dictionary) -> int:
-	var ret_val := STATE.RUNNING
+func SleepInBed(delta : float, param : Dictionary, actionDepth : int) -> int:
 	if self.Energy > 0.8:
 		return STATE.FINISHED
 	var bed : Node2D = self.getFirstOf(TYPE.BED)
 	if self.position != bed.position:
 		param["target"] = bed.position
-		self.pushAction("Goto")
+		self.pushAction("Goto", actionDepth)
 	else:
 		param["wake"] = randf_range(0.90, 1.00)
-		self.pushAction("Sleep")
-	return ret_val
+		self.pushAction("Sleep", actionDepth)
+	return STATE.RUNNING
 	
-func Sleep(delta : float, param : Dictionary) -> int:
+func Sleep(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var ret_val := STATE.RUNNING
 	var recover := self.SleepEnerSec * delta
 	var wake_ener : float = param["wake"] as float
@@ -197,9 +205,17 @@ func Sleep(delta : float, param : Dictionary) -> int:
 	self.Energy += recover
 	return ret_val
 
-func pushAction(action : String) -> void:
-	print("Entity %s Pushed %s" % [self.name, action])
-	self.actionStack.push_back(action)
+func pushAction(action : String, afterIndex : int) -> void:
+	var at_index = afterIndex + 1
+	if at_index == self.actionStack.size():
+		print("Entity %s Pushed %s" % [self.name, action])
+		self.actionStack.push_back(action)
+		return
+		
+	if self.actionStack[at_index] == action:
+		return
+	print("Entity %s Inserted %s at %i" % [self.name, action, at_index])
+	self.actionStack.insert(at_index, action)
 	
 func popAction() -> void:
 	var last_action = self.actionStack[-1]
@@ -211,6 +227,9 @@ func getCurAction() -> String:
 	if len(self.actionStack) <= 0:
 		return "Default"
 	return self.actionStack[-1]
+	
+func lastActionIndex() -> int:
+	return self.actionStack.size() - 1
 	
 func getFirstOf(t : TYPE) -> Node2D:
 	var nodes : Array = get_tree().get_nodes_in_group(str(t))
