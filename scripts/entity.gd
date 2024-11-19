@@ -86,7 +86,7 @@ func Eat(delta : float, param : Dictionary, actionDepth : int) -> int:
 	
 func Cook(delta : float, param : Dictionary, actionDepth : int) -> int:
 	# You cannot be interrupted while cooking?
-	if actionDepth < lastActionIndex():
+	if not isTopOfStack(actionDepth):
 		return STATE.RUNNING
 		
 	var cook_left := param["meal"] as float
@@ -113,13 +113,12 @@ func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 		self.pushAction("SleepInBed", actionDepth)
 	elif self.Satiety <= 0.03 and food != null:
 		self.pushAction("EatClosestFood", actionDepth)
-	elif food == null:
+	elif food == null and isTopOfStack(actionDepth):
 		self.pushAction("CookInKitchen", actionDepth)
-	else:
-		if actionDepth < lastActionIndex():
-			var pos_x := randi_range(50, get_viewport_rect().size.x - 50)
-			var pos_y := randi_range(20, get_viewport_rect().size.y - 20)
-			param["target"] = Vector2(pos_x, pos_y)
+	elif isTopOfStack(actionDepth):
+		var pos_x := randi_range(50, get_viewport_rect().size.x - 50)
+		var pos_y := randi_range(20, get_viewport_rect().size.y - 20)
+		param["target"] = Vector2(pos_x, pos_y)
 		self.pushAction("Goto", actionDepth)
 		
 	return ret_val
@@ -128,13 +127,12 @@ func EatClosestFood(delta : float, param : Dictionary, actionDepth : int) -> int
 	# By running every frame, this will automatically change target
 	# if it disappear or move and pick new food if it get stolen or something
 	var inv : Array = param.get("inventory", [])
-	var is_top_of_stack : bool = actionDepth < lastActionIndex()
-	if self.Satiety > 0.1 and is_top_of_stack:
+	if self.Satiety > 0.1 and isTopOfStack(actionDepth):
 		var f = inv.pop_back()
 		return STATE.FINISHED
 	
 	if inv.size() > 0:
-		if is_top_of_stack:
+		if isTopOfStack(actionDepth):
 			# TODO: get from food value in inventory?
 			param["food"] = 0.6
 		self.pushAction("Eat", actionDepth)
@@ -153,8 +151,8 @@ func EatClosestFood(delta : float, param : Dictionary, actionDepth : int) -> int
 func CookInKitchen(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var kitchen : Node2D = self.getFirstOf(TYPE.KITCHEN)
 	var food : Node2D = self.getFirstOf(TYPE.FOOD)
-	var is_top_of_stack : bool = actionDepth < lastActionIndex()
-	if food != null:
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	if food != null and is_top_of_stack:
 		return STATE.FINISHED
 	if self.position != kitchen.position:
 		param["target"] = kitchen.position
@@ -184,14 +182,16 @@ func Pickup(delta : float, param : Dictionary, actionDepth : int) -> int:
 	return STATE.FINISHED
 	
 func SleepInBed(delta : float, param : Dictionary, actionDepth : int) -> int:
-	if self.Energy > 0.8:
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	if self.Energy > 0.8 and is_top_of_stack:
 		return STATE.FINISHED
 	var bed : Node2D = self.getFirstOf(TYPE.BED)
 	if self.position != bed.position:
 		param["target"] = bed.position
 		self.pushAction("Goto", actionDepth)
 	else:
-		param["wake"] = randf_range(0.90, 1.00)
+		if is_top_of_stack:
+			param["wake"] = randf_range(0.90, 1.00)
 		self.pushAction("Sleep", actionDepth)
 	return STATE.RUNNING
 	
@@ -207,15 +207,21 @@ func Sleep(delta : float, param : Dictionary, actionDepth : int) -> int:
 
 func pushAction(action : String, afterIndex : int) -> void:
 	var at_index = afterIndex + 1
+	# At the end of the list, simply add the action
 	if at_index == self.actionStack.size():
 		print("Entity %s Pushed %s" % [self.name, action])
 		self.actionStack.push_back(action)
 		return
 		
+	# Trying to add the same action serves as confirmation to keep going
 	if self.actionStack[at_index] == action:
 		return
+		
+	# Trying to add a new action means a parent action got cancelled and we should
+	# flush the current action Stack
 	print("Entity %s Inserted %s at %i" % [self.name, action, at_index])
-	self.actionStack.insert(at_index, action)
+	self.actionStack = self.actionStack.slice(0, at_index)
+	self.actionStack.push_back(action)
 	
 func popAction() -> void:
 	var last_action = self.actionStack[-1]
@@ -231,6 +237,9 @@ func getCurAction() -> String:
 func lastActionIndex() -> int:
 	return self.actionStack.size() - 1
 	
+func isTopOfStack(actionDepth : int) -> bool:
+	return not actionDepth < lastActionIndex()
+
 func getFirstOf(t : TYPE) -> Node2D:
 	var nodes : Array = get_tree().get_nodes_in_group(str(t))
 	if nodes.size() > 0:
