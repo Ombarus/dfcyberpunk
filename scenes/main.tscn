@@ -30,3 +30,6 @@ position = Vector2(416, 336)
 
 [node name="NPC" parent="Entities" instance=ExtResource("2_ytmld")]
 position = Vector2(224, 192)
+
+[node name="NPC2" parent="Entities" instance=ExtResource("2_ytmld")]
+position = Vector2(256, 224)

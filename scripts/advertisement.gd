@@ -10,6 +10,8 @@ enum TYPE {
 
 @export var Type : TYPE = TYPE.OTHER
 
+@export var Owner : Entity
+
 func _ready() -> void:
 	self.add_to_group(str(self.Type))
 	
