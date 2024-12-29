@@ -1,6 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://iud7tu1t42cs"]
+[gd_scene load_steps=5 format=3 uid="uid://iud7tu1t42cs"]
 
 [ext_resource type="Script" path="res://scripts/advertisement.gd" id="1_2uv3a"]
+[ext_resource type="Script" path="res://scripts/actionplan.gd" id="2_den4j"]
+
+[sub_resource type="Resource" id="Resource_iyeqv"]
+script = ExtResource("2_den4j")
+ActionName = "SleepInBed"
+EnergyReward = 0.9
+SatietyReward = 0.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0afvf"]
 load_path = "res://.godot/imported/roguelikeIndoor_transparent.png-ac3d2dcb7c8e2f44fd679f51a7dffa66.ctex"
@@ -9,12 +16,7 @@ load_path = "res://.godot/imported/roguelikeIndoor_transparent.png-ac3d2dcb7c8e2
 position = Vector2(0, 3)
 script = ExtResource("1_2uv3a")
 Type = 0
-ActionPlans = {
-"SleepInBed": {
-"Energy": 0.9,
-"Satiety": 0.0
-}
-}
+ActionPlans = [SubResource("Resource_iyeqv")]
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 visible = false

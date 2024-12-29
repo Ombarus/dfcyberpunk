@@ -10,14 +10,12 @@ enum TYPE {
 
 @export var Type : TYPE = TYPE.OTHER
 
-@export var Owner : Entity
+# Wanted to call this "Owner" but Godot has a property "owner" that clashes
+# The idea is to eventually have more complex relationship anyway
+# Like Borrowed, Selling, etc.
+@export var BelongTo : Entity
 
-@export var ActionPlans : Dictionary = {
-	"SleepInBed": {
-		"Satiety": 0.0,
-		"Energy": 0.0	
-	}
-}
+@export var ActionPlans : Array
 
 func _ready() -> void:
 	self.add_to_group(str(self.Type))

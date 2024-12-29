@@ -17,7 +17,7 @@ class_name Entity
 
 # I'm in the process of feeding certain actions (called "ActionPlans") from items. Items can advertise certain action(s)
 # With promised rewards (like Energy or Satiety) and the NPC (usually in the "Default" Action) can decide to "pick" that Plan to fulfil it's needs
-# When an item become used (picked up, sit on, slept on, etc.) it's "Owner" is set to the current NPC, preventing others from using the item
+# When an item become used (picked up, sit on, slept on, etc.) it's "Owner(BelongTo)" is set to the current NPC, preventing others from using the item
 # The ActionPlan can then use the Items reward as params for the actions (like how much "Satiety" a food item is worth)
 
 # There are still some uncertainties about how Items should advertise and how to "stick" to a given actionplan.
@@ -137,19 +137,29 @@ func Cook(delta : float, param : Dictionary, actionDepth : int) -> int:
 func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var food : Advertisement = self.getFirstOf(TYPE.FOOD)
 	var bed : Advertisement = self.getFirstOf(TYPE.BED)
-	var prefered_action = ""
+	var prefered_energy_action := ""
+	var prefered_energy_reward := 0.0
 	if bed != null:
-		for k in bed.ActionPlans:
-			if bed.ActionPlans[k]["Energy"] > 0.0:
-				prefered_action = k
+		for a in bed.ActionPlans:
+			if a.EnergyReward > prefered_energy_reward:
+				prefered_energy_reward = a.EnergyReward
+				prefered_energy_action = a.ActionName
+	var prefered_satiety_action := ""
+	var prefered_satiety_reward := 0.0
+	if food != null:
+		for a in food.ActionPlans:
+			if a.SatietyReward > prefered_satiety_reward:
+				prefered_satiety_reward = a.SatietyReward
+				prefered_satiety_action = a.ActionName
+
 	# next_action implement "sticky" actions, so we don't alternate between two high-prio cancel
 	var next_action : String = getCurAction(actionDepth+1)
-	if bed != null and (self.Energy <= 0.03 or next_action == prefered_action):
-		self.pushAction(prefered_action, actionDepth)
-	elif bed == null and (self.Energy <= 0.03 or next_action == "SleepInBed" or next_action == "SleepOnFloor"):
+	if bed != null and (self.Energy <= 0.03 or (prefered_energy_action != "" and next_action == prefered_energy_action)):
+		self.pushAction(prefered_energy_action, actionDepth)
+	elif bed == null and (self.Energy <= 0.03 or (prefered_energy_action != "" and next_action == prefered_energy_action) or next_action == "SleepOnFloor"):
 		self.pushAction("SleepOnFloor", actionDepth)
-	elif self.Satiety <= 0.03 and food != null or next_action == "EatClosestFood":
-		self.pushAction("EatClosestFood", actionDepth)
+	elif self.Satiety <= 0.03 and (food != null or (prefered_satiety_action != "" and next_action == prefered_satiety_action)):
+		self.pushAction(prefered_satiety_action, actionDepth)
 	elif food == null and isTopOfStack(actionDepth):
 		self.pushAction("CookInKitchen", actionDepth)
 	elif isTopOfStack(actionDepth):
@@ -178,7 +188,11 @@ func EatClosestFood(delta : float, param : Dictionary, actionDepth : int) -> int
 	
 	if food_to_eat != null:
 		if isTopOfStack(actionDepth):
-			param["food"] = food_to_eat.ActionPlans["EatClosestFood"]["Energy"]
+			var prefered_satiety_reward := 0.0
+			for a in food_to_eat.ActionPlans:
+				if a.ActionName == "EatClosestFood":
+					prefered_satiety_reward = a.SatietyReward
+			param["food"] = prefered_satiety_reward
 		self.pushAction("Eat", actionDepth)
 		return STATE.RUNNING
 
@@ -227,7 +241,7 @@ func Pickup(delta : float, param : Dictionary, actionDepth : int) -> int:
 	param["inventory"] = inv
 	#item.queue_free()
 	item.visible = false
-	item.owner = self
+	item.BelongTo = self
 	return STATE.FINISHED
 	
 func SleepOnFloor(delta : float, param : Dictionary, actionDepth : int) -> int:
@@ -247,18 +261,23 @@ func SleepInBed(delta : float, param : Dictionary, actionDepth : int) -> int:
 		return STATE.ERROR
 		
 	if self.Energy > 0.8 and is_top_of_stack:
-		bed.Owner = null
+		bed.BelongTo = null
 		return STATE.FINISHED
 	if self.position != bed.position:
 		param["target"] = bed.position
 		self.pushAction("Goto", actionDepth)
 	else:
 		if is_top_of_stack:
-			var base_sleep = bed.ActionPlans["SleepInBed"]["Energy"]
+			var prefered_action_reward = 0
+			if bed != null:
+				for a in bed.ActionPlans:
+					if a.EnergyReward > prefered_action_reward:
+						prefered_action_reward = a.EnergyReward
+			var base_sleep = prefered_action_reward
 			var jitter = randf_range(-self.SleepJitter, self.SleepJitter)
 			var wake = clamp(self.Energy + base_sleep + jitter, 0.0, 1.0)
 			param["wake"] = wake
-			bed.Owner = self
+			bed.BelongTo = self
 		self.pushAction("Sleep", actionDepth)
 	return STATE.RUNNING
 	
@@ -313,6 +332,6 @@ func getFirstOf(t : TYPE) -> Advertisement:
 	var nodes : Array = get_tree().get_nodes_in_group(str(t))
 	for n in nodes:
 		n = n as Advertisement
-		if n and n.Owner == null or n.Owner == self:
+		if n and n.BelongTo == null or n.BelongTo == self:
 			return n
 	return null
