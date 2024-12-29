@@ -1,6 +1,32 @@
 extends Advertisement
 class_name Entity
 
+#######################################
+# NEED-BASED ACTION PLANS
+######################################
+# Current Implementation
+# Each actions represent a Method of the same name (ie: action "Eat" has a method "Eat()")
+# NPCs have a param dictionary that can contain any configuration necessary to perform actions (ie: where to go, how much to sleep, etc.)
+# This is used to communicate between actions
+# Actions are kept in an ordered "Stack" Array list of actions. Any Actions can push more actions
+# Every frame, we call the action method in order from bottom of stack to top (top being the most recent action)
+# If nothing changed, the action pushes the same stack and we do nothing special
+# If the action pushes a different action from last frame, we discard everything else and move to the new action child
+# If the action is considered "done" or "errored" we push nothing and return the state "FINISHED" or "ERROR" which will remove
+# the action from the stack. All actions will eventually finish except "Default" which will always be pushed if nothing else is there.
+
+# I'm in the process of feeding certain actions (called "ActionPlans") from items. Items can advertise certain action(s)
+# With promised rewards (like Energy or Satiety) and the NPC (usually in the "Default" Action) can decide to "pick" that Plan to fulfil it's needs
+# When an item become used (picked up, sit on, slept on, etc.) it's "Owner" is set to the current NPC, preventing others from using the item
+# The ActionPlan can then use the Items reward as params for the actions (like how much "Satiety" a food item is worth)
+
+# There are still some uncertainties about how Items should advertise and how to "stick" to a given actionplan.
+# Right now most items only have one "ActionPlan" and a set reward. But I would like to make them more dynamic in the future
+# and a NPC who decide for example to eat Food A, should stick with the ActionPlan of that specific food unless for some reason
+# that food becomes unavailable (rot, is picked up by someone, etc.)
+# I'm not sure how to transition between an Action fed from an Item and an Action pushed by the NPC or another Action
+
+
 enum STATE {
 	RUNNING,
 	FINISHED,
@@ -14,6 +40,7 @@ enum STATE {
 @export var CookEnerSec : float = 0.07
 @export var SleepEnerSec : float = 0.1
 @export var SatSec : float = 0.01 # consider 1 day = 100 seconds, 0.01 means 1 to 0 in 100 seconds
+@export var SleepJitter : float = 0.1 # Random variation in % (if bed give +0.9, this will add/remove 10% of 0.9)
 
 @export var Satiety : float = 0.3
 @export var Energy : float = 0.3
@@ -110,10 +137,15 @@ func Cook(delta : float, param : Dictionary, actionDepth : int) -> int:
 func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var food : Advertisement = self.getFirstOf(TYPE.FOOD)
 	var bed : Advertisement = self.getFirstOf(TYPE.BED)
+	var prefered_action = ""
+	if bed != null:
+		for k in bed.ActionPlans:
+			if bed.ActionPlans[k]["Energy"] > 0.0:
+				prefered_action = k
 	# next_action implement "sticky" actions, so we don't alternate between two high-prio cancel
 	var next_action : String = getCurAction(actionDepth+1)
-	if bed != null and (self.Energy <= 0.03 or next_action == "SleepInBed"):
-		self.pushAction("SleepInBed", actionDepth)
+	if bed != null and (self.Energy <= 0.03 or next_action == prefered_action):
+		self.pushAction(prefered_action, actionDepth)
 	elif bed == null and (self.Energy <= 0.03 or next_action == "SleepInBed" or next_action == "SleepOnFloor"):
 		self.pushAction("SleepOnFloor", actionDepth)
 	elif self.Satiety <= 0.03 and food != null or next_action == "EatClosestFood":
@@ -132,14 +164,21 @@ func EatClosestFood(delta : float, param : Dictionary, actionDepth : int) -> int
 	# By running every frame, this will automatically change target
 	# if it disappear or move and pick new food if it get stolen or something
 	var inv : Array = param.get("inventory", [])
+	var food_to_eat : Advertisement
+	for i in inv:
+		var ad = (i as Advertisement)
+		if (i as Advertisement).Type == TYPE.FOOD:
+			food_to_eat = ad
+			break
+			
 	if self.Satiety > 0.1 and isTopOfStack(actionDepth):
-		var f = inv.pop_back()
+		inv.erase(food_to_eat)
+		food_to_eat.queue_free()
 		return STATE.FINISHED
 	
-	if inv.size() > 0:
+	if food_to_eat != null:
 		if isTopOfStack(actionDepth):
-			# TODO: get from food value in inventory?
-			param["food"] = 0.6
+			param["food"] = food_to_eat.ActionPlans["EatClosestFood"]["Energy"]
 		self.pushAction("Eat", actionDepth)
 		return STATE.RUNNING
 
@@ -184,9 +223,11 @@ func Pickup(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var item : Node2D = param["item"] as Node2D
 	param.erase("item")
 	var inv : Array = param.get("inventory", [])
-	inv.push_back(item.name)
+	inv.push_back(item)
 	param["inventory"] = inv
-	item.queue_free()
+	#item.queue_free()
+	item.visible = false
+	item.owner = self
 	return STATE.FINISHED
 	
 func SleepOnFloor(delta : float, param : Dictionary, actionDepth : int) -> int:
@@ -213,7 +254,10 @@ func SleepInBed(delta : float, param : Dictionary, actionDepth : int) -> int:
 		self.pushAction("Goto", actionDepth)
 	else:
 		if is_top_of_stack:
-			param["wake"] = randf_range(0.90, 1.00)
+			var base_sleep = bed.ActionPlans["SleepInBed"]["Energy"]
+			var jitter = randf_range(-self.SleepJitter, self.SleepJitter)
+			var wake = clamp(self.Energy + base_sleep + jitter, 0.0, 1.0)
+			param["wake"] = wake
 			bed.Owner = self
 		self.pushAction("Sleep", actionDepth)
 	return STATE.RUNNING

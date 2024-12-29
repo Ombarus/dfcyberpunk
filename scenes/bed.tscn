@@ -9,6 +9,12 @@ load_path = "res://.godot/imported/roguelikeIndoor_transparent.png-ac3d2dcb7c8e2
 position = Vector2(0, 3)
 script = ExtResource("1_2uv3a")
 Type = 0
+ActionPlans = {
+"SleepInBed": {
+"Energy": 0.9,
+"Satiety": 0.0
+}
+}
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 visible = false

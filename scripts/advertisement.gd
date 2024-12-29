@@ -12,6 +12,13 @@ enum TYPE {
 
 @export var Owner : Entity
 
+@export var ActionPlans : Dictionary = {
+	"SleepInBed": {
+		"Satiety": 0.0,
+		"Energy": 0.0	
+	}
+}
+
 func _ready() -> void:
 	self.add_to_group(str(self.Type))
 	
