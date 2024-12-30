@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://catl8ykewblyf" path="res://scenes/entity.tscn" id="2_ytmld"]
 [ext_resource type="PackedScene" uid="uid://bjylvqqgaord7" path="res://scenes/kitchen.tscn" id="3_0mc40"]
 [ext_resource type="PackedScene" uid="uid://iud7tu1t42cs" path="res://scenes/bed.tscn" id="3_7gaav"]
-[ext_resource type="PackedScene" uid="uid://m7eto17hb6nx" path="res://scenes/fridge.tscn" id="4_m4ddv"]
+[ext_resource type="PackedScene" uid="uid://8rrsemvrpncr" path="res://scenes/fridge.tscn" id="4_m4ddv"]
 [ext_resource type="PackedScene" uid="uid://dlhtr4u8rgpmm" path="res://scenes/table.tscn" id="5_n7c6k"]
 [ext_resource type="PackedScene" uid="uid://dn7pevwva7iml" path="res://scenes/chair.tscn" id="6_twp8x"]
 

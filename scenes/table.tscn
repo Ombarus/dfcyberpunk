@@ -1,15 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dlhtr4u8rgpmm"]
+[gd_scene load_steps=4 format=3 uid="uid://dlhtr4u8rgpmm"]
 
 [ext_resource type="Texture2D" uid="uid://dki8coenfhkb1" path="res://data/roguelikeIndoor_transparent.png" id="1_7s80m"]
+[ext_resource type="Script" path="res://scripts/advertisement.gd" id="1_s4g3s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g6yff"]
 size = Vector2(16, 16)
 
 [node name="Table" type="Node2D"]
-
-[node name="Polygon2D" type="Polygon2D" parent="."]
-visible = false
-polygon = PackedVector2Array(-15, 20, 15, 20, 15, -20, -15, -20)
+script = ExtResource("1_s4g3s")
 
 [node name="RoguelikeIndoorTransparent" type="Sprite2D" parent="."]
 texture = ExtResource("1_7s80m")

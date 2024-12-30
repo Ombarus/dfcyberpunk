@@ -1,12 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://dn7pevwva7iml"]
+[gd_scene load_steps=3 format=3 uid="uid://dn7pevwva7iml"]
 
 [ext_resource type="Texture2D" uid="uid://dki8coenfhkb1" path="res://data/roguelikeIndoor_transparent.png" id="1_05kyd"]
+[ext_resource type="Script" path="res://scripts/advertisement.gd" id="1_rr11j"]
 
 [node name="Chair" type="Node2D"]
-
-[node name="Polygon2D" type="Polygon2D" parent="."]
-visible = false
-polygon = PackedVector2Array(-15, 20, 15, 20, 15, -20, -15, -20)
+script = ExtResource("1_rr11j")
 
 [node name="RoguelikeIndoorTransparent" type="Sprite2D" parent="."]
 texture = ExtResource("1_05kyd")

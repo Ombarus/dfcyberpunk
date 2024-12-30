@@ -1,17 +1,17 @@
 [gd_scene load_steps=5 format=3 uid="uid://ckbjoq8xviyto"]
 
-[ext_resource type="Script" path="res://scripts/advertisement.gd" id="1_n306e"]
-[ext_resource type="Texture2D" uid="uid://k8s4tftgwhmp" path="res://data/roguelikeSheet_transparent.png" id="1_vb1e6"]
-[ext_resource type="Script" path="res://scripts/actionplan.gd" id="2_qhq7r"]
+[ext_resource type="Script" path="res://scripts/advertisement.gd" id="1_1u60p"]
+[ext_resource type="Script" path="res://scripts/actionplan.gd" id="2_apm55"]
+[ext_resource type="Texture2D" uid="uid://k8s4tftgwhmp" path="res://data/roguelikeSheet_transparent.png" id="3_uyeuw"]
 
 [sub_resource type="Resource" id="Resource_q3ka1"]
-script = ExtResource("2_qhq7r")
+script = ExtResource("2_apm55")
 ActionName = "EatClosestFood"
 EnergyReward = 0.0
-SatietyReward = 0.6
+SatietyReward = 0.5
 
-[node name="Food" type="Node2D"]
-script = ExtResource("1_n306e")
+[node name="Spaghetti" type="Node2D"]
+script = ExtResource("1_1u60p")
 Type = 1
 ActionPlans = [SubResource("Resource_q3ka1")]
 
@@ -20,6 +20,6 @@ visible = false
 polygon = PackedVector2Array(-15, 6, -10, 6, -4, -9, 6, -9, 11, 5, 15, 5, 15, 12, -15, 12)
 
 [node name="RoguelikeSheetTransparent" type="Sprite2D" parent="."]
-texture = ExtResource("1_vb1e6")
+texture = ExtResource("3_uyeuw")
 region_enabled = true
 region_rect = Rect2(939, 226, 9, 7)

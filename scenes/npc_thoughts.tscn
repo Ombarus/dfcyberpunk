@@ -68,3 +68,17 @@ layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
 value = 0.5
+
+[node name="Satisfaction" type="HBoxContainer" parent="VBoxContainer/Meters"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Meters/Satisfaction"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+text = "Satisfaction : "
+
+[node name="SatisfactionProgress" type="ProgressBar" parent="VBoxContainer/Meters/Satisfaction"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+value = 0.5

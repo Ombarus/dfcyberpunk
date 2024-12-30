@@ -1,15 +1,45 @@
-[gd_scene load_steps=3 format=3 uid="uid://m7eto17hb6nx"]
+[gd_scene load_steps=11 format=3 uid="uid://8rrsemvrpncr"]
 
+[ext_resource type="Script" path="res://scripts/advertisement.gd" id="1_k0nhw"]
 [ext_resource type="Texture2D" uid="uid://dki8coenfhkb1" path="res://data/roguelikeIndoor_transparent.png" id="1_xik7o"]
+[ext_resource type="Script" path="res://scripts/actionplan.gd" id="2_3tt4i"]
+[ext_resource type="PackedScene" uid="uid://ckbjoq8xviyto" path="res://scenes/food_spag.tscn" id="2_olbga"]
+[ext_resource type="PackedScene" uid="uid://qbsckwjvs831" path="res://scenes/food_pie.tscn" id="4_x0w5l"]
+[ext_resource type="PackedScene" uid="uid://rvqkaqjk3xcq" path="res://scenes/food_steak.tscn" id="5_xgt3t"]
+
+[sub_resource type="Resource" id="Resource_yn4c1"]
+script = ExtResource("2_3tt4i")
+ActionName = "CookInKitchen"
+EnergyReward = -0.3
+SatietyReward = 0.0
+SatisfactionReward = 0.1
+SpawnReward = ExtResource("2_olbga")
+SpawnRewardType = 1
+
+[sub_resource type="Resource" id="Resource_pcgpy"]
+script = ExtResource("2_3tt4i")
+ActionName = "CookInKitchen"
+EnergyReward = -0.3
+SatietyReward = 0.0
+SatisfactionReward = 0.2
+SpawnReward = ExtResource("4_x0w5l")
+SpawnRewardType = 1
+
+[sub_resource type="Resource" id="Resource_t4x6n"]
+script = ExtResource("2_3tt4i")
+ActionName = "CookInKitchen"
+EnergyReward = -0.2
+SatietyReward = 0.0
+SatisfactionReward = 0.1
+SpawnReward = ExtResource("5_xgt3t")
+SpawnRewardType = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_khfsh"]
 size = Vector2(10, 16)
 
 [node name="Fridge" type="Node2D"]
-
-[node name="Polygon2D" type="Polygon2D" parent="."]
-visible = false
-polygon = PackedVector2Array(-15, 20, 15, 20, 15, -20, -15, -20)
+script = ExtResource("1_k0nhw")
+ActionPlans = [SubResource("Resource_yn4c1"), SubResource("Resource_pcgpy"), SubResource("Resource_t4x6n")]
 
 [node name="RoguelikeIndoorTransparent" type="Sprite2D" parent="."]
 texture = ExtResource("1_xik7o")
