@@ -26,6 +26,14 @@ class_name Entity
 # that food becomes unavailable (rot, is picked up by someone, etc.)
 # I'm not sure how to transition between an Action fed from an Item and an Action pushed by the NPC or another Action
 
+# Pain Points:
+# Passing Knowledge between actions is tricky. 
+#    Though we probably want to make them independent where possible 
+#    (ie: instead of waiting for a message: "I'm done" it's better for the action to "notice that the item is now in our inventory" for example)
+# Action don't know if child action is done or not
+# How to express preferences? ie: NPC like to eat healthy so he should get a bonus to cooking healthy food...
+#    but just from the needs/reward of the action plan we can't really tell
+
 
 enum STATE {
 	RUNNING,
@@ -36,7 +44,7 @@ enum STATE {
 @export var MovePixSec : float = 100.0
 @export var MoveEnerSec : float = 0.01
 @export var EatUnitSec : float = 0.3334
-@export var CookEnerSec : float = 0.001
+@export var CookEnerSec : float = 0.01
 @export var SleepEnerSec : float = 0.1
 @export var SatSec : float = 0.01 # consider 1 day = 100 seconds, 0.01 means 1 to 0 in 100 seconds
 @export var SatisSec : float = 0.001
@@ -53,6 +61,7 @@ var debugThoughtsAction : Label
 var debugThoughtsSatiety : ProgressBar
 var debugThoughtsEnergy : ProgressBar
 var debugThoughtsSatisfaction : ProgressBar
+
 
 func _ready() -> void:
 	var target := Vector2(100, 100)
@@ -99,7 +108,7 @@ func Goto(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var dir_norm = dir.normalized()
 	var move : Vector2 = dir_norm * self.MovePixSec * delta
 	var ret_val = STATE.RUNNING
-	if move.length_squared() > dir.length_squared() or move.length_squared() <= 0.0001:
+	if move.length_squared() > dir.length_squared():
 		move = dir
 		ret_val = STATE.FINISHED
 	var energy : float = move.length() / self.MovePixSec * self.MoveEnerSec
@@ -126,6 +135,9 @@ func Cook(delta : float, param : Dictionary, actionDepth : int) -> int:
 		return STATE.RUNNING
 		
 	var cook_left := param["meal"] as float
+	# Should eventually be able to handle positive OR negative values
+	# For now, I know cooking should consume energy so it'll be negative
+	cook_left = abs(cook_left)
 	var inv : Array = param.get("inventory", [])
 	var food_to_drop : Advertisement
 	for i in inv:
@@ -149,7 +161,9 @@ func Cook(delta : float, param : Dictionary, actionDepth : int) -> int:
 		param["scene"] = cur_plan.SpawnReward
 		self.pushAction("Spawn", actionDepth)
 	self.Energy -= ener
-	param["meal"] = cook_left - ener
+	# Can't be bottered to redo the logic so just flip the sign
+	# (see comment above)
+	param["meal"] = -(cook_left - ener)
 	return STATE.RUNNING
 
 func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
@@ -178,7 +192,7 @@ func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 		self.pushAction("SleepOnFloor", actionDepth)
 	elif self.Satiety <= 0.03 and (food != null or (prefered_satiety_action != "" and next_action == prefered_satiety_action)):
 		self.pushAction(prefered_satiety_action, actionDepth)
-	elif food == null and isTopOfStack(actionDepth):
+	elif food == null:
 		var choosen_plan : ActionPlan = param.get("current_plan", null)
 		if choosen_plan == null or choosen_plan.SpawnRewardType != TYPE.FOOD:
 			var food_plans := []
@@ -244,8 +258,12 @@ func CookInKitchen(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var cur_plan : ActionPlan = param["current_plan"]
 	#var food : Advertisement = self.getFirstOf(TYPE.FOOD)
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
-	#if food != null and is_top_of_stack:
-	#	return STATE.FINISHED
+	var meal_left = param.get("meal", null)
+	if meal_left != null and meal_left <= 0 and is_top_of_stack:
+		param.erase("meal")
+		param.erase("meal_sati")
+		param.erase("current_plan")
+		return STATE.FINISHED
 	if self.position != kitchen.position:
 		param["target"] = kitchen.position
 		self.pushAction("Goto", actionDepth)

@@ -10,7 +10,7 @@
 [sub_resource type="Resource" id="Resource_yn4c1"]
 script = ExtResource("2_3tt4i")
 ActionName = "CookInKitchen"
-EnergyReward = -0.3
+EnergyReward = -0.05
 SatietyReward = 0.0
 SatisfactionReward = 0.1
 SpawnReward = ExtResource("2_olbga")
@@ -19,7 +19,7 @@ SpawnRewardType = 1
 [sub_resource type="Resource" id="Resource_pcgpy"]
 script = ExtResource("2_3tt4i")
 ActionName = "CookInKitchen"
-EnergyReward = -0.3
+EnergyReward = -0.045
 SatietyReward = 0.0
 SatisfactionReward = 0.2
 SpawnReward = ExtResource("4_x0w5l")
@@ -28,7 +28,7 @@ SpawnRewardType = 1
 [sub_resource type="Resource" id="Resource_t4x6n"]
 script = ExtResource("2_3tt4i")
 ActionName = "CookInKitchen"
-EnergyReward = -0.2
+EnergyReward = -0.03
 SatietyReward = 0.0
 SatisfactionReward = 0.1
 SpawnReward = ExtResource("5_xgt3t")

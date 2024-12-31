@@ -9,17 +9,15 @@ script = ExtResource("2_4pbd8")
 ActionName = "EatClosestFood"
 EnergyReward = 0.0
 SatietyReward = 0.6
+SatisfactionReward = 0.0
+SpawnRewardType = 0
 
 [node name="Steak" type="Node2D"]
 script = ExtResource("1_s8drr")
 Type = 1
 ActionPlans = [SubResource("Resource_q3ka1")]
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-visible = false
-polygon = PackedVector2Array(-15, 6, -10, 6, -4, -9, 6, -9, 11, 5, 15, 5, 15, 12, -15, 12)
-
 [node name="RoguelikeSheetTransparent" type="Sprite2D" parent="."]
 texture = ExtResource("3_ay2q4")
 region_enabled = true
-region_rect = Rect2(939, 226, 9, 7)
+region_rect = Rect2(920, 259, 14, 10)
