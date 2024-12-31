@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://q1ju54xhs2x4"]
+[gd_scene load_steps=9 format=3 uid="uid://q1ju54xhs2x4"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_cen3t"]
 [ext_resource type="PackedScene" uid="uid://catl8ykewblyf" path="res://scenes/entity.tscn" id="2_ytmld"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://8rrsemvrpncr" path="res://scenes/fridge.tscn" id="4_m4ddv"]
 [ext_resource type="PackedScene" uid="uid://dlhtr4u8rgpmm" path="res://scenes/table.tscn" id="5_n7c6k"]
 [ext_resource type="PackedScene" uid="uid://dn7pevwva7iml" path="res://scenes/chair.tscn" id="6_twp8x"]
+[ext_resource type="PackedScene" uid="uid://dc44fjb7edmjp" path="res://scenes/office.tscn" id="8_xmier"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_cen3t")
@@ -14,22 +15,29 @@ script = ExtResource("1_cen3t")
 [node name="Entities" type="Node2D" parent="."]
 
 [node name="Bed" parent="Entities" instance=ExtResource("3_7gaav")]
-position = Vector2(160, 240)
+position = Vector2(32, 144)
 
 [node name="Kitchen" parent="Entities" instance=ExtResource("3_0mc40")]
-position = Vector2(400, 288)
+position = Vector2(272, 192)
 
 [node name="Fridge" parent="Entities" instance=ExtResource("4_m4ddv")]
-position = Vector2(416, 256)
+position = Vector2(288, 160)
 
 [node name="Table" parent="Entities" instance=ExtResource("5_n7c6k")]
-position = Vector2(400, 336)
+position = Vector2(272, 240)
 
 [node name="Chair" parent="Entities" instance=ExtResource("6_twp8x")]
-position = Vector2(416, 336)
+position = Vector2(288, 240)
 
 [node name="NPC" parent="Entities" instance=ExtResource("2_ytmld")]
-position = Vector2(224, 192)
+position = Vector2(96, 96)
 
 [node name="NPC2" parent="Entities" instance=ExtResource("2_ytmld")]
-position = Vector2(256, 224)
+position = Vector2(128, 128)
+
+[node name="Office" parent="Entities" instance=ExtResource("8_xmier")]
+position = Vector2(480, 96)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(288, 160)
+zoom = Vector2(2, 2)

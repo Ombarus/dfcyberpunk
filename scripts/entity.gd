@@ -207,8 +207,9 @@ func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 			param["current_plan"] = choosen_plan
 		self.pushAction(choosen_plan.ActionName, actionDepth)
 	elif isTopOfStack(actionDepth):
-		var pos_x := randi_range(50, get_viewport_rect().size.x - 50)
-		var pos_y := randi_range(20, get_viewport_rect().size.y - 20)
+		var view_size = get_viewport_rect().size / get_viewport().get_camera_2d().zoom
+		var pos_x := randi_range(25, view_size.x - 25)
+		var pos_y := randi_range(10, view_size.y - 10)
 		param["target"] = Vector2(pos_x, pos_y)
 		self.pushAction("Goto", actionDepth)
 		

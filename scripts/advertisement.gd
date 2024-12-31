@@ -5,6 +5,7 @@ enum TYPE {
 	BED,
 	FOOD,
 	KITCHEN,
+	CURRENCY,
 	OTHER
 }
 

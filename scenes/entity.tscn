@@ -15,10 +15,11 @@ visible = false
 polygon = PackedVector2Array(-10, 15, 10, 15, 10, -15, -10, -15)
 
 [node name="NPCThoughts" parent="." instance=ExtResource("2_5vxit")]
-offset_left = 110.0
-offset_top = -71.0
-offset_right = 110.0
-offset_bottom = -71.0
+offset_left = 51.0
+offset_top = -39.0
+offset_right = 51.0
+offset_bottom = -39.0
+scale = Vector2(0.5, 0.5)
 
 [node name="SpritesheetCharacters" type="Sprite2D" parent="."]
 scale = Vector2(0.37, 0.37)
