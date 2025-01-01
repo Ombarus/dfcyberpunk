@@ -44,10 +44,6 @@ class_name Entity
 @export var SatisSec : float = 0.001
 @export var SleepJitter : float = 0.1 # Random variation in % (if bed give +0.9, this will add/remove 10% of 0.9)
 
-@export var Satiety : float = 0.3
-@export var Energy : float = 0.3
-@export var Satisfaction : float = 0.0
-
 var Needs := NeedHandler.new()
 
 var curParam : Dictionary
@@ -84,7 +80,7 @@ func _process(delta: float) -> void:
 func UpdateThoughts():
 	self.debugThoughtsEnergy.value = Needs.Current(Globals.NEEDS.Energy)
 	self.debugThoughtsSatiety.value = Needs.Current(Globals.NEEDS.Satiety)
-	self.debugThoughtsSatisfaction.value = self.Satisfaction
+	self.debugThoughtsSatisfaction.value = Needs.Current(Globals.NEEDS.Satisfaction)
 	var actions = ""
 	for a in actionStack:
 		if actions != "":
@@ -93,10 +89,10 @@ func UpdateThoughts():
 	self.debugThoughtsAction.text = actions
 
 func UpdateSatiety(delta : float) -> void:
-	self.Satiety -= self.SatSec * delta
+	Needs.ApplyNeedOverTime(Globals.NEEDS.Satiety, -self.SatSec, delta)
 	
 func UpdateSatisfaction(delta : float) -> void:
-	self.Satisfaction -= self.SatisSec * delta
+	Needs.ApplyNeedOverTime(Globals.NEEDS.Satisfaction, -self.SatisSec, delta)
 
 func Goto(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var cur_pos := self.position
@@ -109,7 +105,7 @@ func Goto(delta : float, param : Dictionary, actionDepth : int) -> int:
 		ret_val = Globals.ACTION_STATE.Finished
 	var energy : float = move.length() / self.MovePixSec * self.MoveEnerSec
 	self.position += move
-	self.Energy -= energy
+	Needs.ApplyNeed(Globals.NEEDS.Energy, -energy)
 	return ret_val
 
 func Eat(delta : float, param : Dictionary, actionDepth : int) -> int:
@@ -120,8 +116,9 @@ func Eat(delta : float, param : Dictionary, actionDepth : int) -> int:
 		eat = food_left
 		ret_val = Globals.ACTION_STATE.Finished
 	param["food"] = food_left - eat
+	
 	# Can you eat more than your fill? (maybe you get fat?)
-	self.Satiety = clamp(self.Satiety + eat, 0.0, 1.0)
+	Needs.ApplyNeed(Globals.NEEDS.Satiety, eat)
 	
 	return ret_val
 	
@@ -156,7 +153,7 @@ func Cook(delta : float, param : Dictionary, actionDepth : int) -> int:
 		ener = cook_left
 		param["scene"] = cur_plan.SpawnReward
 		self.pushAction("Spawn", actionDepth)
-	self.Energy -= ener
+	Needs.ApplyNeed(Globals.NEEDS.Energy, -ener)
 	# Can't be bottered to redo the logic so just flip the sign
 	# (see comment above)
 	param["meal"] = -(cook_left - ener)
@@ -182,11 +179,13 @@ func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 
 	# next_action implement "sticky" actions, so we don't alternate between two high-prio cancel
 	var next_action : String = getCurAction(actionDepth+1)
-	if bed != null and (self.Energy <= 0.03 or (prefered_energy_action != "" and next_action == prefered_energy_action)):
+	var cur_ener : float = Needs.GetNeed(Globals.NEEDS.Energy)
+	var cur_sat : float = Needs.GetNeed(Globals.NEEDS.Satiety)
+	if bed != null and (cur_ener <= 0.03 or (prefered_energy_action != "" and next_action == prefered_energy_action)):
 		self.pushAction(prefered_energy_action, actionDepth)
-	elif bed == null and (self.Energy <= 0.03 or (prefered_energy_action != "" and next_action == prefered_energy_action) or next_action == "SleepOnFloor"):
+	elif bed == null and (cur_ener <= 0.03 or (prefered_energy_action != "" and next_action == prefered_energy_action) or next_action == "SleepOnFloor"):
 		self.pushAction("SleepOnFloor", actionDepth)
-	elif self.Satiety <= 0.03 and (food != null or (prefered_satiety_action != "" and next_action == prefered_satiety_action)):
+	elif cur_sat <= 0.03 and (food != null or (prefered_satiety_action != "" and next_action == prefered_satiety_action)):
 		self.pushAction(prefered_satiety_action, actionDepth)
 	elif food == null:
 		var choosen_plan : ActionPlan = param.get("current_plan", null)
@@ -222,7 +221,7 @@ func EatClosestFood(delta : float, param : Dictionary, actionDepth : int) -> int
 			food_to_eat = ad
 			break
 			
-	if self.Satiety > 0.1 and isTopOfStack(actionDepth):
+	if Needs.GetNeed(Globals.NEEDS.Satiety) > 0.1 and isTopOfStack(actionDepth):
 		inv.erase(food_to_eat)
 		food_to_eat.queue_free()
 		return Globals.ACTION_STATE.Finished
@@ -316,7 +315,7 @@ func Wait(delta : float, param : Dictionary, actionDepth: int) -> int:
 	
 func SleepOnFloor(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
-	if self.Energy > 0.5 and is_top_of_stack:
+	if Needs.GetNeed(Globals.NEEDS.Energy) > 0.5 and is_top_of_stack:
 		return Globals.ACTION_STATE.Finished
 	else:
 		if is_top_of_stack:
@@ -330,7 +329,7 @@ func SleepInBed(delta : float, param : Dictionary, actionDepth : int) -> int:
 	if bed == null:
 		return Globals.ACTION_STATE.Error
 		
-	if self.Energy > 0.8 and is_top_of_stack:
+	if Needs.GetNeed(Globals.NEEDS.Energy) > 0.8 and is_top_of_stack:
 		bed.BelongTo = null
 		return Globals.ACTION_STATE.Finished
 	if self.position != bed.position:
@@ -345,7 +344,7 @@ func SleepInBed(delta : float, param : Dictionary, actionDepth : int) -> int:
 						prefered_action_reward = a.EnergyReward
 			var base_sleep = prefered_action_reward
 			var jitter = randf_range(-self.SleepJitter, self.SleepJitter)
-			var wake = clamp(self.Energy + base_sleep + jitter, 0.0, 1.0)
+			var wake = clamp(Needs.GetNeed(Globals.NEEDS.Energy) + base_sleep + jitter, 0.0, 1.0)
 			param["wake"] = wake
 			bed.BelongTo = self
 		self.pushAction("Sleep", actionDepth)
@@ -355,10 +354,10 @@ func Sleep(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var ret_val := Globals.ACTION_STATE.Running
 	var recover := self.SleepEnerSec * delta
 	var wake_ener : float = param["wake"] as float
-	if self.Energy + recover > wake_ener:
-		self.Energy = wake_ener
+	if Needs.GetNeed(Globals.NEEDS.Energy) + recover > wake_ener:
+		Needs.SetNeed(Globals.NEEDS.Energy, wake_ener)
 		return Globals.ACTION_STATE.Finished
-	self.Energy += recover
+	Needs.ApplyNeed(Globals.NEEDS.Energy, recover)
 	return ret_val
 
 func pushAction(action : String, afterIndex : int) -> void:
