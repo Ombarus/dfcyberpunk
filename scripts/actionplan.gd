@@ -18,4 +18,4 @@ class_name ActionPlan
 # How far is this? How strong is it? How much damage does it do? etc.
 # Not sure how to keep this generic for all the type of ads
 # Maybe a generic Dictionary or a list of "tags"
-@export var SpawnRewardType : Advertisement.TYPE
+@export var SpawnRewardType : Globals.AD_TYPE

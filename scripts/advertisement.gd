@@ -1,15 +1,7 @@
 extends Node2D
 class_name Advertisement
 
-enum TYPE {
-	BED,
-	FOOD,
-	KITCHEN,
-	CURRENCY,
-	OTHER
-}
-
-@export var Type : TYPE = TYPE.OTHER
+@export var Type : Globals.AD_TYPE = Globals.AD_TYPE.Other
 
 # Wanted to call this "Owner" but Godot has a property "owner" that clashes
 # The idea is to eventually have more complex relationship anyway

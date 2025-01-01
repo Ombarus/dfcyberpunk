@@ -12,7 +12,7 @@ class_name Entity
 # Every frame, we call the action method in order from bottom of stack to top (top being the most recent action)
 # If nothing changed, the action pushes the same stack and we do nothing special
 # If the action pushes a different action from last frame, we discard everything else and move to the new action child
-# If the action is considered "done" or "errored" we push nothing and return the state "FINISHED" or "ERROR" which will remove
+# If the action is considered "done" or "errored" we push nothing and return the state "Finished" or "ERROR" which will remove
 # the action from the stack. All actions will eventually finish except "Default" which will always be pushed if nothing else is there.
 
 # I'm in the process of feeding certain actions (called "ActionPlans") from items. Items can advertise certain action(s)
@@ -35,12 +35,6 @@ class_name Entity
 #    but just from the needs/reward of the action plan we can't really tell
 
 
-enum STATE {
-	RUNNING,
-	FINISHED,
-	ERROR
-}
-
 @export var MovePixSec : float = 100.0
 @export var MoveEnerSec : float = 0.01
 @export var EatUnitSec : float = 0.3334
@@ -53,6 +47,8 @@ enum STATE {
 @export var Satiety : float = 0.3
 @export var Energy : float = 0.3
 @export var Satisfaction : float = 0.0
+
+var Needs := NeedHandler.new()
 
 var curParam : Dictionary
 var actionStack : Array
@@ -78,7 +74,7 @@ func _process(delta: float) -> void:
 	for i in self.actionStack.size():
 		var s = self.callv(self.actionStack[i], [delta, self.curParam, i])
 		
-		if (s == STATE.FINISHED):
+		if (s == Globals.ACTION_STATE.Finished):
 			self.popAction()
 	
 	UpdateThoughts()
@@ -86,8 +82,8 @@ func _process(delta: float) -> void:
 	UpdateSatisfaction(delta)
 
 func UpdateThoughts():
-	self.debugThoughtsEnergy.value = self.Energy
-	self.debugThoughtsSatiety.value = self.Satiety
+	self.debugThoughtsEnergy.value = Needs.Current(Globals.NEEDS.Energy)
+	self.debugThoughtsSatiety.value = Needs.Current(Globals.NEEDS.Satiety)
 	self.debugThoughtsSatisfaction.value = self.Satisfaction
 	var actions = ""
 	for a in actionStack:
@@ -107,22 +103,22 @@ func Goto(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var dir := (param["target"] as Vector2) - cur_pos
 	var dir_norm = dir.normalized()
 	var move : Vector2 = dir_norm * self.MovePixSec * delta
-	var ret_val = STATE.RUNNING
+	var ret_val = Globals.ACTION_STATE.Running
 	if move.length_squared() > dir.length_squared():
 		move = dir
-		ret_val = STATE.FINISHED
+		ret_val = Globals.ACTION_STATE.Finished
 	var energy : float = move.length() / self.MovePixSec * self.MoveEnerSec
 	self.position += move
 	self.Energy -= energy
 	return ret_val
 
 func Eat(delta : float, param : Dictionary, actionDepth : int) -> int:
-	var ret_val = STATE.RUNNING
+	var ret_val = Globals.ACTION_STATE.Running
 	var food_left := param["food"] as float
 	var eat := self.EatUnitSec * delta
 	if eat > food_left:
 		eat = food_left
-		ret_val = STATE.FINISHED
+		ret_val = Globals.ACTION_STATE.Finished
 	param["food"] = food_left - eat
 	# Can you eat more than your fill? (maybe you get fat?)
 	self.Satiety = clamp(self.Satiety + eat, 0.0, 1.0)
@@ -132,7 +128,7 @@ func Eat(delta : float, param : Dictionary, actionDepth : int) -> int:
 func Cook(delta : float, param : Dictionary, actionDepth : int) -> int:
 	# You cannot be interrupted while cooking?
 	if not isTopOfStack(actionDepth):
-		return STATE.RUNNING
+		return Globals.ACTION_STATE.Running
 		
 	var cook_left := param["meal"] as float
 	# Should eventually be able to handle positive OR negative values
@@ -142,7 +138,7 @@ func Cook(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var food_to_drop : Advertisement
 	for i in inv:
 		var ad = (i as Advertisement)
-		if (i as Advertisement).Type == TYPE.FOOD:
+		if (i as Advertisement).Type == Globals.AD_TYPE.Food:
 			food_to_drop = ad
 			break
 	var cur_plan : ActionPlan = param["current_plan"]
@@ -151,9 +147,9 @@ func Cook(delta : float, param : Dictionary, actionDepth : int) -> int:
 		if food_to_drop != null:
 			param["item"] = food_to_drop
 			self.pushAction("Drop", actionDepth)
-			return STATE.RUNNING
+			return Globals.ACTION_STATE.Running
 		else:
-			return STATE.FINISHED
+			return Globals.ACTION_STATE.Finished
 		
 	var ener := self.CookEnerSec * delta
 	if ener >= cook_left:
@@ -164,11 +160,11 @@ func Cook(delta : float, param : Dictionary, actionDepth : int) -> int:
 	# Can't be bottered to redo the logic so just flip the sign
 	# (see comment above)
 	param["meal"] = -(cook_left - ener)
-	return STATE.RUNNING
+	return Globals.ACTION_STATE.Running
 
 func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
-	var food : Advertisement = self.getFirstOf(TYPE.FOOD)
-	var bed : Advertisement = self.getFirstOf(TYPE.BED)
+	var food : Advertisement = self.getFirstOf(Globals.AD_TYPE.Food)
+	var bed : Advertisement = self.getFirstOf(Globals.AD_TYPE.Bed)
 	var prefered_energy_action := ""
 	var prefered_energy_reward := 0.0
 	if bed != null:
@@ -194,14 +190,14 @@ func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 		self.pushAction(prefered_satiety_action, actionDepth)
 	elif food == null:
 		var choosen_plan : ActionPlan = param.get("current_plan", null)
-		if choosen_plan == null or choosen_plan.SpawnRewardType != TYPE.FOOD:
+		if choosen_plan == null or choosen_plan.SpawnRewardType != Globals.AD_TYPE.Food:
 			var food_plans := []
 			var ads = get_parent().get_children()
 			for o in ads:
 				var ad := (o as Advertisement)
 				for ao in ad.ActionPlans:
 					var plan := (ao as ActionPlan)
-					if plan.SpawnRewardType == TYPE.FOOD:
+					if plan.SpawnRewardType == Globals.AD_TYPE.Food:
 						food_plans.append(plan)
 			choosen_plan = food_plans.pick_random()
 			param["current_plan"] = choosen_plan
@@ -213,7 +209,7 @@ func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 		param["target"] = Vector2(pos_x, pos_y)
 		self.pushAction("Goto", actionDepth)
 		
-	return STATE.RUNNING
+	return Globals.ACTION_STATE.Running
 	
 func EatClosestFood(delta : float, param : Dictionary, actionDepth : int) -> int:
 	# By running every frame, this will automatically change target
@@ -222,14 +218,14 @@ func EatClosestFood(delta : float, param : Dictionary, actionDepth : int) -> int
 	var food_to_eat : Advertisement
 	for i in inv:
 		var ad = (i as Advertisement)
-		if (i as Advertisement).Type == TYPE.FOOD:
+		if (i as Advertisement).Type == Globals.AD_TYPE.Food:
 			food_to_eat = ad
 			break
 			
 	if self.Satiety > 0.1 and isTopOfStack(actionDepth):
 		inv.erase(food_to_eat)
 		food_to_eat.queue_free()
-		return STATE.FINISHED
+		return Globals.ACTION_STATE.Finished
 	
 	if food_to_eat != null:
 		if isTopOfStack(actionDepth):
@@ -239,11 +235,11 @@ func EatClosestFood(delta : float, param : Dictionary, actionDepth : int) -> int
 					prefered_satiety_reward = a.SatietyReward
 			param["food"] = prefered_satiety_reward
 		self.pushAction("Eat", actionDepth)
-		return STATE.RUNNING
+		return Globals.ACTION_STATE.Running
 
-	var food : Advertisement = self.getFirstOf(TYPE.FOOD)
+	var food : Advertisement = self.getFirstOf(Globals.AD_TYPE.Food)
 	if food == null:
-		return STATE.ERROR
+		return Globals.ACTION_STATE.Error
 		
 	if self.position != food.position:
 		param["target"] = food.position
@@ -252,10 +248,10 @@ func EatClosestFood(delta : float, param : Dictionary, actionDepth : int) -> int
 		param["item"] = food
 		self.pushAction("Pickup", actionDepth)
 
-	return STATE.RUNNING
+	return Globals.ACTION_STATE.Running
 
 func CookInKitchen(delta : float, param : Dictionary, actionDepth : int) -> int:
-	var kitchen : Advertisement = self.getFirstOf(TYPE.KITCHEN)
+	var kitchen : Advertisement = self.getFirstOf(Globals.AD_TYPE.Kitchen)
 	var cur_plan : ActionPlan = param["current_plan"]
 	#var food : Advertisement = self.getFirstOf(TYPE.FOOD)
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
@@ -264,7 +260,7 @@ func CookInKitchen(delta : float, param : Dictionary, actionDepth : int) -> int:
 		param.erase("meal")
 		param.erase("meal_sati")
 		param.erase("current_plan")
-		return STATE.FINISHED
+		return Globals.ACTION_STATE.Finished
 	if self.position != kitchen.position:
 		param["target"] = kitchen.position
 		self.pushAction("Goto", actionDepth)
@@ -273,7 +269,7 @@ func CookInKitchen(delta : float, param : Dictionary, actionDepth : int) -> int:
 			param["meal"] = cur_plan.EnergyReward
 			param["meal_sati"] = cur_plan.SatisfactionReward
 		self.pushAction("Cook", actionDepth)
-	return STATE.RUNNING
+	return Globals.ACTION_STATE.Running
 
 func Spawn(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var pos : Vector2 = self.position
@@ -286,7 +282,7 @@ func Spawn(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var inv : Array = param.get("inventory", [])
 	inv.append(n)
 	param["inventory"] = inv
-	return STATE.FINISHED
+	return Globals.ACTION_STATE.Finished
 
 func Pickup(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var item : Node2D = param["item"] as Node2D
@@ -297,7 +293,7 @@ func Pickup(delta : float, param : Dictionary, actionDepth : int) -> int:
 	#item.queue_free()
 	item.visible = false
 	item.BelongTo = self
-	return STATE.FINISHED
+	return Globals.ACTION_STATE.Finished
 	
 func Drop(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var inv : Array = param.get("inventory", [])
@@ -308,35 +304,35 @@ func Drop(delta : float, param : Dictionary, actionDepth : int) -> int:
 	item.BelongTo = null
 	var pos = self.position + Vector2(randi_range(-50.0, 50.0), randi_range(-50.0, 50.0))
 	item.position = pos
-	return STATE.FINISHED
+	return Globals.ACTION_STATE.Finished
 	
 func Wait(delta : float, param : Dictionary, actionDepth: int) -> int:
 	var wait_left : float = param["wait"]
 	wait_left -= delta
 	if wait_left <= 0.0:
-		return STATE.FINISHED
+		return Globals.ACTION_STATE.Finished
 	param["wait"] = wait_left
-	return STATE.RUNNING
+	return Globals.ACTION_STATE.Running
 	
 func SleepOnFloor(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	if self.Energy > 0.5 and is_top_of_stack:
-		return STATE.FINISHED
+		return Globals.ACTION_STATE.Finished
 	else:
 		if is_top_of_stack:
 			param["wake"] = randf_range(0.5, 0.8)
 		self.pushAction("Sleep", actionDepth)
-	return STATE.RUNNING
+	return Globals.ACTION_STATE.Running
 	
 func SleepInBed(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
-	var bed : Advertisement = self.getFirstOf(TYPE.BED)
+	var bed : Advertisement = self.getFirstOf(Globals.AD_TYPE.Bed)
 	if bed == null:
-		return STATE.ERROR
+		return Globals.ACTION_STATE.Error
 		
 	if self.Energy > 0.8 and is_top_of_stack:
 		bed.BelongTo = null
-		return STATE.FINISHED
+		return Globals.ACTION_STATE.Finished
 	if self.position != bed.position:
 		param["target"] = bed.position
 		self.pushAction("Goto", actionDepth)
@@ -353,15 +349,15 @@ func SleepInBed(delta : float, param : Dictionary, actionDepth : int) -> int:
 			param["wake"] = wake
 			bed.BelongTo = self
 		self.pushAction("Sleep", actionDepth)
-	return STATE.RUNNING
+	return Globals.ACTION_STATE.Running
 	
 func Sleep(delta : float, param : Dictionary, actionDepth : int) -> int:
-	var ret_val := STATE.RUNNING
+	var ret_val := Globals.ACTION_STATE.Running
 	var recover := self.SleepEnerSec * delta
 	var wake_ener : float = param["wake"] as float
 	if self.Energy + recover > wake_ener:
 		self.Energy = wake_ener
-		return STATE.FINISHED
+		return Globals.ACTION_STATE.Finished
 	self.Energy += recover
 	return ret_val
 
@@ -402,7 +398,7 @@ func lastActionIndex() -> int:
 func isTopOfStack(actionDepth : int) -> bool:
 	return not actionDepth < lastActionIndex()
 
-func getFirstOf(t : TYPE) -> Advertisement:
+func getFirstOf(t : Globals.AD_TYPE) -> Advertisement:
 	var nodes : Array = get_tree().get_nodes_in_group(str(t))
 	for n in nodes:
 		n = n as Advertisement
