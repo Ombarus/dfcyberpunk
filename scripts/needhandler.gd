@@ -26,9 +26,9 @@ func ApplyNeedOverTime(need : Globals.NEEDS, amount : float, delta : float) -> v
 	newval = clamp(newval, 0.0, 1.0)
 	CurrentNeeds[need] = newval
 
-func GetRewardScore(rewards : Dictionary) -> float:
+func GetRewardScoreFromPlan(plan : ActionPlan) -> float:
 	var score := 0.0
-	for need in rewards:
-		if rewards[need] != 0:
-			score += rewards[need] / CurrentNeeds[need]
+	score += plan.SatietyReward / max(CurrentNeeds[Globals.NEEDS.Satiety], 0.0001)
+	score += plan.EnergyReward / max(CurrentNeeds[Globals.NEEDS.Energy], 0.0001)
+	score += plan.SatisfactionReward / max(CurrentNeeds[Globals.NEEDS.Satisfaction], 0.0001)
 	return score

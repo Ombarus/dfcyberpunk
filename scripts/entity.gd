@@ -159,55 +159,61 @@ func Cook(delta : float, param : Dictionary, actionDepth : int) -> int:
 	param["meal"] = -(cook_left - ener)
 	return Globals.ACTION_STATE.Running
 
-func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
-	var food : Advertisement = self.getFirstOf(Globals.AD_TYPE.Food)
-	var bed : Advertisement = self.getFirstOf(Globals.AD_TYPE.Bed)
-	var prefered_energy_action := ""
-	var prefered_energy_reward := 0.0
-	if bed != null:
-		for a in bed.ActionPlans:
-			if a.EnergyReward > prefered_energy_reward:
-				prefered_energy_reward = a.EnergyReward
-				prefered_energy_action = a.ActionName
-	var prefered_satiety_action := ""
-	var prefered_satiety_reward := 0.0
-	if food != null:
-		for a in food.ActionPlans:
-			if a.SatietyReward > prefered_satiety_reward:
-				prefered_satiety_reward = a.SatietyReward
-				prefered_satiety_action = a.ActionName
-
-	# next_action implement "sticky" actions, so we don't alternate between two high-prio cancel
-	var next_action : String = getCurAction(actionDepth+1)
-	var cur_ener : float = Needs.GetNeed(Globals.NEEDS.Energy)
-	var cur_sat : float = Needs.GetNeed(Globals.NEEDS.Satiety)
-	if bed != null and (cur_ener <= 0.03 or (prefered_energy_action != "" and next_action == prefered_energy_action)):
-		self.pushAction(prefered_energy_action, actionDepth)
-	elif bed == null and (cur_ener <= 0.03 or (prefered_energy_action != "" and next_action == prefered_energy_action) or next_action == "SleepOnFloor"):
-		self.pushAction("SleepOnFloor", actionDepth)
-	elif cur_sat <= 0.03 and (food != null or (prefered_satiety_action != "" and next_action == prefered_satiety_action)):
-		self.pushAction(prefered_satiety_action, actionDepth)
-	elif food == null:
-		var choosen_plan : ActionPlan = param.get("current_plan", null)
-		if choosen_plan == null or choosen_plan.SpawnRewardType != Globals.AD_TYPE.Food:
-			var food_plans := []
-			var ads = get_parent().get_children()
-			for o in ads:
-				var ad := (o as Advertisement)
-				for ao in ad.ActionPlans:
-					var plan := (ao as ActionPlan)
-					if plan.SpawnRewardType == Globals.AD_TYPE.Food:
-						food_plans.append(plan)
-			choosen_plan = food_plans.pick_random()
-			param["current_plan"] = choosen_plan
-		self.pushAction(choosen_plan.ActionName, actionDepth)
-	elif isTopOfStack(actionDepth):
-		var view_size = get_viewport_rect().size / get_viewport().get_camera_2d().zoom
-		var pos_x := randi_range(25, view_size.x - 25)
-		var pos_y := randi_range(10, view_size.y - 10)
-		param["target"] = Vector2(pos_x, pos_y)
-		self.pushAction("Goto", actionDepth)
+class Sorter:
+	var sort_key
+	func _init(k):
+		sort_key = k
 		
+	func sort_desc(a, b):
+		if a[sort_key] > b[sort_key]:
+			return true
+		return false
+
+func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var random_goto_plan := ActionPlan.new()
+	random_goto_plan.ActionName = "Goto"
+	random_goto_plan.EnergyReward = 0.0
+	random_goto_plan.SatietyReward = 0.0
+	random_goto_plan.SatisfactionReward = 0.08 # Slightly higher than making food when we have a lot of food
+	
+	var fallback_sleep_plan := ActionPlan.new()
+	fallback_sleep_plan.ActionName = "SleepOnFloor"
+	fallback_sleep_plan.EnergyReward = 0.65
+	random_goto_plan.SatietyReward = 0.0
+	fallback_sleep_plan.SatisfactionReward = -0.02
+	
+	# Something like : [{name:"plan1", ad:<node>, score:123}, ...]
+	var collected_plans := []
+	# "Default" Plans when nothing better to do
+	collected_plans.append({
+		"plan": random_goto_plan,
+		"ad": self,
+		"score": Needs.GetRewardScoreFromPlan(random_goto_plan)
+	})
+	collected_plans.append({
+		"plan": fallback_sleep_plan,
+		"ad": self,
+		"score": Needs.GetRewardScoreFromPlan(fallback_sleep_plan)
+	})
+	for n in get_parent().get_children():
+		var ad := n as Advertisement
+		var plans : Array = ad.GetActionPlansFor(self)
+		for i in plans:
+			var data = {
+				"plan": i,
+				"ad": ad,
+				"score": Needs.GetRewardScoreFromPlan(i as ActionPlan)
+			}
+			collected_plans.append(data)
+			
+	var sorter := Sorter.new("score")
+	collected_plans.sort_custom(Callable(sorter, "sort_desc"))
+	
+	var best_action : Dictionary = collected_plans[0]
+	param["current_plan"] = best_action["plan"]
+	param["plan_ad"] = best_action["ad"]
+	self.pushAction(best_action["plan"].ActionName, actionDepth)
+
 	return Globals.ACTION_STATE.Running
 	
 func EatClosestFood(delta : float, param : Dictionary, actionDepth : int) -> int:
