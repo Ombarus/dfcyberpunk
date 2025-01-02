@@ -209,7 +209,22 @@ func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var sorter := Sorter.new("score")
 	collected_plans.sort_custom(Callable(sorter, "sort_desc"))
 	
-	var best_action : Dictionary = collected_plans[0]
+	var best_action : Dictionary = {}
+	# Skip actions that would put the NPC at more than 100% of their need
+	# This is because otherwise sleeping would always be at the top because of
+	# How much energy it gives, even with the scale-down factor for already satisfied needs
+	# TODO: It'd be nice to integrate this steep score cutoff directly in the score calculation but I'm not sure how
+	for data in collected_plans:
+		best_action = data
+		var cur_plan := data["plan"] as ActionPlan
+		var planed_sat : float = cur_plan.SatietyReward + Needs.Current(Globals.NEEDS.Satiety)
+		var planed_sati : float = cur_plan.SatisfactionReward + Needs.Current(Globals.NEEDS.Satisfaction) 
+		var planed_ener : float = cur_plan.EnergyReward + Needs.Current(Globals.NEEDS.Energy)
+		
+		if planed_sat < 1.0 and planed_sati < 1.0 and planed_ener < 1.0:
+			break
+	
+	#var best_action : Dictionary = collected_plans[0]
 	param["current_plan"] = best_action["plan"]
 	param["plan_ad"] = best_action["ad"]
 	self.pushAction(best_action["plan"].ActionName, actionDepth)
