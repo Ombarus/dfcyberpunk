@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_q3ka1"]
 script = ExtResource("2_4pbd8")
-ActionName = "EatClosestFood"
+ActionName = "EatSelectedFood"
 EnergyReward = 0.0
 SatietyReward = 0.6
 SatisfactionReward = 0.0

@@ -32,9 +32,6 @@ position = Vector2(288, 240)
 [node name="NPC" parent="Entities" instance=ExtResource("2_ytmld")]
 position = Vector2(96, 96)
 
-[node name="NPC2" parent="Entities" instance=ExtResource("2_ytmld")]
-position = Vector2(128, 128)
-
 [node name="Office" parent="Entities" instance=ExtResource("8_xmier")]
 position = Vector2(480, 96)
 

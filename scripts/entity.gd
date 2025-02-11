@@ -31,6 +31,7 @@ class_name Entity
 #    Though we probably want to make them independent where possible 
 #    (ie: instead of waiting for a message: "I'm done" it's better for the action to "notice that the item is now in our inventory" for example)
 # Action don't know if child action is done or not
+# Canceling action means we might stay in a weird state if parents didn't clean up properly
 # How to express preferences? ie: NPC like to eat healthy so he should get a bonus to cooking healthy food...
 #    but just from the needs/reward of the action plan we can't really tell
 
@@ -94,6 +95,23 @@ func UpdateSatiety(delta : float) -> void:
 func UpdateSatisfaction(delta : float) -> void:
 	Needs.ApplyNeedOverTime(Globals.NEEDS.Satisfaction, -self.SatisSec, delta)
 
+func WalkRandomly(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var target = param.get("target", null)
+	if target == null:
+		var view_size = get_viewport_rect().size / get_viewport().get_camera_2d().zoom
+		var pos_x := randi_range(25, view_size.x - 25)
+		var pos_y := randi_range(10, view_size.y - 10)
+		target = Vector2(pos_x, pos_y)
+		param["target"] = target
+	
+	if target == self.position:
+		param.erase("target")
+		return Globals.ACTION_STATE.Finished
+		
+	self.pushAction("Goto", actionDepth)
+	
+	return Globals.ACTION_STATE.Running
+
 func Goto(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var cur_pos := self.position
 	var dir := (param["target"] as Vector2) - cur_pos
@@ -110,15 +128,25 @@ func Goto(delta : float, param : Dictionary, actionDepth : int) -> int:
 
 func Eat(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var ret_val = Globals.ACTION_STATE.Running
-	var food_left := param["food"] as float
+	var rewards : Dictionary = param.get("food", {})
+	var food : Advertisement = param.get("plan_ad", null)
+
 	var eat := self.EatUnitSec * delta
-	if eat > food_left:
-		eat = food_left
+	if eat > rewards[Globals.NEEDS.Satiety]:
+		eat = rewards[Globals.NEEDS.Satiety]
 		ret_val = Globals.ACTION_STATE.Finished
-	param["food"] = food_left - eat
-	
+		# Energy and Satisfaction only get applied once the whole meal is consumed?
+		Needs.ApplyNeed(Globals.NEEDS.Satisfaction, rewards[Globals.NEEDS.Satisfaction])
+		Needs.ApplyNeed(Globals.NEEDS.Energy, rewards[Globals.NEEDS.Energy])
+		param.erase("food")
+		param["plan_ad"] = null
+		var inv : Array = param.get("inventory", [])
+		inv.erase(food)
+		food.queue_free()
+		
 	# Can you eat more than your fill? (maybe you get fat?)
 	Needs.ApplyNeed(Globals.NEEDS.Satiety, eat)
+	rewards[Globals.NEEDS.Satiety] -= eat
 	
 	return ret_val
 	
@@ -146,6 +174,8 @@ func Cook(delta : float, param : Dictionary, actionDepth : int) -> int:
 			self.pushAction("Drop", actionDepth)
 			return Globals.ACTION_STATE.Running
 		else:
+			var sati_reward : float = param.get("meal_sati", 0.0)
+			Needs.ApplyNeed(Globals.NEEDS.Satisfaction, sati_reward)
 			return Globals.ACTION_STATE.Finished
 		
 	var ener := self.CookEnerSec * delta
@@ -170,8 +200,14 @@ class Sorter:
 		return false
 
 func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	# For now, don't interrupt running actions
+	# But what if we decide to go to sleep before finishing cooking?
+	if not is_top_of_stack:
+		return Globals.ACTION_STATE.Running
+		
 	var random_goto_plan := ActionPlan.new()
-	random_goto_plan.ActionName = "Goto"
+	random_goto_plan.ActionName = "WalkRandomly"
 	random_goto_plan.EnergyReward = 0.0
 	random_goto_plan.SatietyReward = 0.0
 	random_goto_plan.SatisfactionReward = 0.08 # Slightly higher than making food when we have a lot of food
@@ -197,6 +233,9 @@ func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 	})
 	for n in get_parent().get_children():
 		var ad := n as Advertisement
+		# Only null (belong to no one) or belonging to me
+		if ad.BelongTo != null and ad.BelongTo != self:
+			continue
 		var plans : Array = ad.GetActionPlansFor(self)
 		for i in plans:
 			var data = {
@@ -231,36 +270,33 @@ func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 
 	return Globals.ACTION_STATE.Running
 	
-func EatClosestFood(delta : float, param : Dictionary, actionDepth : int) -> int:
-	# By running every frame, this will automatically change target
-	# if it disappear or move and pick new food if it get stolen or something
-	var inv : Array = param.get("inventory", [])
-	var food_to_eat : Advertisement
-	for i in inv:
-		var ad = (i as Advertisement)
-		if (i as Advertisement).Type == Globals.AD_TYPE.Food:
-			food_to_eat = ad
-			break
-			
-	if Needs.GetNeed(Globals.NEEDS.Satiety) > 0.1 and isTopOfStack(actionDepth):
-		inv.erase(food_to_eat)
-		food_to_eat.queue_free()
+func EatSelectedFood(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var plan : ActionPlan = param.get("current_plan", null)
+	var food : Advertisement = param.get("plan_ad", null)
+	var left = param.get("food", null)
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	
+	if plan == null or food == null:
 		return Globals.ACTION_STATE.Finished
 	
-	if food_to_eat != null:
-		if isTopOfStack(actionDepth):
-			var prefered_satiety_reward := 0.0
-			for a in food_to_eat.ActionPlans:
-				if a.ActionName == "EatClosestFood":
-					prefered_satiety_reward = a.SatietyReward
-			param["food"] = prefered_satiety_reward
+	var inv : Array = param.get("inventory", [])
+	var in_inventory := false
+	for i in inv:
+		if i == food:
+			in_inventory = true
+			break
+	
+	if in_inventory == true:
+		if is_top_of_stack:
+			var rewards := {
+				Globals.NEEDS.Satiety: plan.SatietyReward,
+				Globals.NEEDS.Energy: plan.EnergyReward,
+				Globals.NEEDS.Satisfaction: plan.SatisfactionReward
+			}
+			param["food"] = rewards
 		self.pushAction("Eat", actionDepth)
 		return Globals.ACTION_STATE.Running
-
-	var food : Advertisement = self.getFirstOf(Globals.AD_TYPE.Food)
-	if food == null:
-		return Globals.ACTION_STATE.Error
-		
+	
 	if self.position != food.position:
 		param["target"] = food.position
 		self.pushAction("Goto", actionDepth)
@@ -345,8 +381,10 @@ func SleepOnFloor(delta : float, param : Dictionary, actionDepth : int) -> int:
 	return Globals.ACTION_STATE.Running
 	
 func SleepInBed(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var plan : ActionPlan = param.get("current_plan", null)
+	var bed : Advertisement = param.get("plan_ad", null)
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
-	var bed : Advertisement = self.getFirstOf(Globals.AD_TYPE.Bed)
+
 	if bed == null:
 		return Globals.ACTION_STATE.Error
 		
@@ -358,12 +396,7 @@ func SleepInBed(delta : float, param : Dictionary, actionDepth : int) -> int:
 		self.pushAction("Goto", actionDepth)
 	else:
 		if is_top_of_stack:
-			var prefered_action_reward = 0
-			if bed != null:
-				for a in bed.ActionPlans:
-					if a.EnergyReward > prefered_action_reward:
-						prefered_action_reward = a.EnergyReward
-			var base_sleep = prefered_action_reward
+			var base_sleep = plan.EnergyReward
 			var jitter = randf_range(-self.SleepJitter, self.SleepJitter)
 			var wake = clamp(Needs.GetNeed(Globals.NEEDS.Energy) + base_sleep + jitter, 0.0, 1.0)
 			param["wake"] = wake
@@ -395,7 +428,7 @@ func pushAction(action : String, afterIndex : int) -> void:
 		
 	# Trying to add a new action means a parent action got cancelled and we should
 	# flush the current action Stack
-	print("Entity %s Inserted %s at %i" % [self.name, action, at_index])
+	print("Entity %s Inserted %s at %d" % [self.name, action, at_index])
 	self.actionStack = self.actionStack.slice(0, at_index)
 	self.actionStack.push_back(action)
 	
