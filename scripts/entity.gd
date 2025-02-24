@@ -284,9 +284,23 @@ func UpdatePlanScoreDebug(collected_plans):
 	for c in self.debugPlanScore.get_children():
 		if c.name != "Title":
 			c.queue_free()
+	var greened := false
 	for p in collected_plans:
-		var l : Label = Label.new()
-		l.text = p["plan"].ActionName + ": " + str(p["score"])
+		var l : RichTextLabel = RichTextLabel.new()
+		l.bbcode_enabled = true
+		var color := "[color=white]"
+		var cur_plan := p["plan"] as ActionPlan
+		var planed_sat : float = cur_plan.SatietyReward + Needs.Current(Globals.NEEDS.Satiety)
+		var planed_sati : float = cur_plan.SatisfactionReward + Needs.Current(Globals.NEEDS.Satisfaction) 
+		var planed_ener : float = cur_plan.EnergyReward + Needs.Current(Globals.NEEDS.Energy)
+		if planed_sat < 1.0 and planed_sati < 1.0 and planed_ener < 1.0:
+			if greened == false:
+				color = "[color=green]"
+				greened = true
+		else:
+			color = "[color=red]"
+		l.text = color + p["plan"].ActionName + ": " + str(p["score"]) + "[/color]"
+		l.custom_minimum_size = Vector2(500, 20)
 		self.debugPlanScore.add_child(l)
 	
 func EatSelectedFood(delta : float, param : Dictionary, actionDepth : int) -> int:
