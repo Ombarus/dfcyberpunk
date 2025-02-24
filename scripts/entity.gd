@@ -54,6 +54,7 @@ var debugThoughtsAction : Label
 var debugThoughtsSatiety : ProgressBar
 var debugThoughtsEnergy : ProgressBar
 var debugThoughtsSatisfaction : ProgressBar
+var debugPlanScore : VBoxContainer
 
 
 func _ready() -> void:
@@ -64,15 +65,19 @@ func _ready() -> void:
 	self.debugThoughtsSatiety = self.find_child("SatietyProgress", true, false) as ProgressBar
 	self.debugThoughtsSatisfaction = self.find_child("SatisfactionProgress", true, false) as ProgressBar
 	self.debugThoughtsAction = self.find_child("Action", true, false) as Label
+	self.debugPlanScore = self.find_child("PlanScore", true, false) as VBoxContainer
 
 func _process(delta: float) -> void:
 	if self.actionStack.size() == 0:
 		self.pushAction("Default", -1)
-	for i in self.actionStack.size():
+	var i := 0
+	# For loop was having issue with updating actionStack during loop
+	while i < self.actionStack.size():
 		var s = self.callv(self.actionStack[i], [delta, self.curParam, i])
 		
 		if (s == Globals.ACTION_STATE.Finished):
 			self.popAction()
+		i += 1
 	
 	UpdateThoughts()
 	UpdateSatiety(delta)
@@ -155,7 +160,8 @@ func Cook(delta : float, param : Dictionary, actionDepth : int) -> int:
 	if not isTopOfStack(actionDepth):
 		return Globals.ACTION_STATE.Running
 		
-	var cook_left := param["meal"] as float
+	var cur_plan : ActionPlan = param["current_plan"]
+	var cook_left := cur_plan.PlanMetaData["meal"] as float
 	# Should eventually be able to handle positive OR negative values
 	# For now, I know cooking should consume energy so it'll be negative
 	cook_left = abs(cook_left)
@@ -166,7 +172,6 @@ func Cook(delta : float, param : Dictionary, actionDepth : int) -> int:
 		if (i as Advertisement).Type == Globals.AD_TYPE.Food:
 			food_to_drop = ad
 			break
-	var cur_plan : ActionPlan = param["current_plan"]
 	
 	if cook_left == 0:
 		if food_to_drop != null:
@@ -174,7 +179,7 @@ func Cook(delta : float, param : Dictionary, actionDepth : int) -> int:
 			self.pushAction("Drop", actionDepth)
 			return Globals.ACTION_STATE.Running
 		else:
-			var sati_reward : float = param.get("meal_sati", 0.0)
+			var sati_reward : float = cur_plan.PlanMetaData.get("meal_sati", 0.0)
 			Needs.ApplyNeed(Globals.NEEDS.Satisfaction, sati_reward)
 			return Globals.ACTION_STATE.Finished
 		
@@ -186,7 +191,7 @@ func Cook(delta : float, param : Dictionary, actionDepth : int) -> int:
 	Needs.ApplyNeed(Globals.NEEDS.Energy, -ener)
 	# Can't be bottered to redo the logic so just flip the sign
 	# (see comment above)
-	param["meal"] = -(cook_left - ener)
+	cur_plan.PlanMetaData["meal"] = -(cook_left - ener)
 	return Globals.ACTION_STATE.Running
 
 class Sorter:
@@ -248,6 +253,8 @@ func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var sorter := Sorter.new("score")
 	collected_plans.sort_custom(Callable(sorter, "sort_desc"))
 	
+	UpdatePlanScoreDebug(collected_plans)
+	
 	var best_action : Dictionary = {}
 	# Skip actions that would put the NPC at more than 100% of their need
 	# This is because otherwise sleeping would always be at the top because of
@@ -263,12 +270,24 @@ func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 		if planed_sat < 1.0 and planed_sati < 1.0 and planed_ener < 1.0:
 			break
 	
-	#var best_action : Dictionary = collected_plans[0]
-	param["current_plan"] = best_action["plan"]
+	# duplicate so we can modify properties in a unique way
+	# NOTE: might not always be the case, for example maybe a car would only ever have one active plan and the
+	#       state from the previous action would influence the current plan
+	# For now, all plans a duplicated
+	param["current_plan"] = best_action["plan"].duplicate()
 	param["plan_ad"] = best_action["ad"]
 	self.pushAction(best_action["plan"].ActionName, actionDepth)
 
 	return Globals.ACTION_STATE.Running
+	
+func UpdatePlanScoreDebug(collected_plans):
+	for c in self.debugPlanScore.get_children():
+		if c.name != "Title":
+			c.queue_free()
+	for p in collected_plans:
+		var l : Label = Label.new()
+		l.text = p["plan"].ActionName + ": " + str(p["score"])
+		self.debugPlanScore.add_child(l)
 	
 func EatSelectedFood(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var plan : ActionPlan = param.get("current_plan", null)
@@ -311,19 +330,18 @@ func CookInKitchen(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var cur_plan : ActionPlan = param["current_plan"]
 	#var food : Advertisement = self.getFirstOf(TYPE.FOOD)
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
-	var meal_left = param.get("meal", null)
-	if meal_left != null and meal_left <= 0 and is_top_of_stack:
-		param.erase("meal")
-		param.erase("meal_sati")
-		param.erase("current_plan")
+	
+	var left_progress : float = cur_plan.PlanMetaData.get("meal", 999.0)
+	if left_progress == 0.0:
 		return Globals.ACTION_STATE.Finished
+	
 	if self.position != kitchen.position:
 		param["target"] = kitchen.position
 		self.pushAction("Goto", actionDepth)
 	else:
 		if is_top_of_stack:
-			param["meal"] = cur_plan.EnergyReward
-			param["meal_sati"] = cur_plan.SatisfactionReward
+			cur_plan.PlanMetaData["meal"] = cur_plan.EnergyReward
+			cur_plan.PlanMetaData["meal_sati"] = cur_plan.SatisfactionReward
 		self.pushAction("Cook", actionDepth)
 	return Globals.ACTION_STATE.Running
 

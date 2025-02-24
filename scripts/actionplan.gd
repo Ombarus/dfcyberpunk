@@ -19,3 +19,9 @@ class_name ActionPlan
 # Not sure how to keep this generic for all the type of ads
 # Maybe a generic Dictionary or a list of "tags"
 @export var SpawnRewardType : Globals.AD_TYPE
+
+# Current thinking is plans picked up by NPCs are duplicated
+# and we keep the current "execution state" of the plan in here
+# Execution state could be stuff like how much left there is to cook
+# If rewards were given, etc.
+var PlanMetaData : Dictionary = {}
