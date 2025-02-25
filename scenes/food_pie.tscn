@@ -10,6 +10,7 @@ ActionName = "EatSelectedFood"
 EnergyReward = 0.0
 SatietyReward = 0.3
 SatisfactionReward = 0.0
+RichnessReward = 0.0
 SpawnRewardType = 0
 
 [node name="Pie" type="Node2D"]

@@ -30,6 +30,8 @@ class_name Entity
 # Passing Knowledge between actions is tricky. 
 #    Though we probably want to make them independent where possible 
 #    (ie: instead of waiting for a message: "I'm done" it's better for the action to "notice that the item is now in our inventory" for example)
+#    * If unavoidable. My current idea is to use an intermediary. Store it in the Plan/Ad as Metadata. This way if someone else comes along, they
+#      Can continue based on the data in the intermediary. This work well for stuff like preparing food where you would also have to "cleanup"
 # Action don't know if child action is done or not
 # Canceling action means we might stay in a weird state if parents didn't clean up properly
 # How to express preferences? ie: NPC like to eat healthy so he should get a bonus to cooking healthy food...
@@ -42,7 +44,7 @@ class_name Entity
 @export var CookEnerSec : float = 0.01
 @export var SleepEnerSec : float = 0.1
 @export var SatSec : float = 0.01 # consider 1 day = 100 seconds, 0.01 means 1 to 0 in 100 seconds
-@export var SatisSec : float = 0.001
+@export var SatisSec : float = 0.01
 @export var SleepJitter : float = 0.1 # Random variation in % (if bed give +0.9, this will add/remove 10% of 0.9)
 
 var Needs := NeedHandler.new()
@@ -50,6 +52,7 @@ var Needs := NeedHandler.new()
 var curParam : Dictionary
 var actionStack : Array
 var lastAction : String
+
 var debugThoughtsAction : Label
 var debugThoughtsSatiety : ProgressBar
 var debugThoughtsEnergy : ProgressBar
@@ -99,6 +102,10 @@ func UpdateSatiety(delta : float) -> void:
 	
 func UpdateSatisfaction(delta : float) -> void:
 	Needs.ApplyNeedOverTime(Globals.NEEDS.Satisfaction, -self.SatisSec, delta)
+
+###################################################################################################
+## ACTION FUNCTION
+###################################################################################################
 
 func WalkRandomly(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var target = param.get("target", null)
@@ -446,6 +453,44 @@ func Sleep(delta : float, param : Dictionary, actionDepth : int) -> int:
 		return Globals.ACTION_STATE.Finished
 	Needs.ApplyNeed(Globals.NEEDS.Energy, recover)
 	return ret_val
+	
+func WorkInOffice(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var plan : ActionPlan = param.get("current_plan", null)
+	var office : Advertisement = param.get("plan_ad", null)
+	if self.position != office.position:
+		param["target"] = office.position
+		self.pushAction("Goto", actionDepth)
+		return Globals.ACTION_STATE.Running
+	elif plan.PlanMetaData.get("finished", false) == true:
+		return Globals.ACTION_STATE.Finished
+	else:
+		self.pushAction("Work", actionDepth)
+	return Globals.ACTION_STATE.Running
+	
+func Work(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var world_clock : WorldTime = %WorldTime
+	var normal_work_day_ticks : float = world_clock.GameHoursToGameTick(2.0)
+	var plan : ActionPlan = param.get("current_plan", null)
+	var work_time_left : float = plan.PlanMetaData.get("work_time", normal_work_day_ticks)
+	var work_time_delta = world_clock.RealSecondToGameTick(delta)
+	if work_time_left < work_time_delta:
+		work_time_delta = work_time_left
+	work_time_left -= work_time_delta
+	plan.PlanMetaData["work_time"] = work_time_left
+	
+	var energy_loss : float = plan.EnergyReward / normal_work_day_ticks * work_time_delta
+	Needs.ApplyNeed(Globals.NEEDS.Energy, energy_loss)
+	
+	if work_time_left <= 0.0:
+		Needs.ApplyNeed(Globals.NEEDS.Satisfaction, plan.SatisfactionReward)
+		plan.PlanMetaData["finished"] = true
+		return Globals.ACTION_STATE.Finished
+	
+	return Globals.ACTION_STATE.Running
+	
+###################################################################################################
+## UTILITY FUNCTION
+###################################################################################################
 
 func pushAction(action : String, afterIndex : int) -> void:
 	var at_index = afterIndex + 1
