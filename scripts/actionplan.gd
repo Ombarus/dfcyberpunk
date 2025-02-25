@@ -5,6 +5,7 @@ class_name ActionPlan
 @export var EnergyReward : float
 @export var SatietyReward : float
 @export var SatisfactionReward : float
+@export var RichnessReward : float
 
 # This SpawnReward might not be necessary, maybe this
 # should be part of the ActionName

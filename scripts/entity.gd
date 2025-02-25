@@ -181,6 +181,7 @@ func Cook(delta : float, param : Dictionary, actionDepth : int) -> int:
 		else:
 			var sati_reward : float = cur_plan.PlanMetaData.get("meal_sati", 0.0)
 			Needs.ApplyNeed(Globals.NEEDS.Satisfaction, sati_reward)
+			cur_plan.PlanMetaData["finished"] = true
 			return Globals.ACTION_STATE.Finished
 		
 	var ener := self.CookEnerSec * delta
@@ -345,8 +346,8 @@ func CookInKitchen(delta : float, param : Dictionary, actionDepth : int) -> int:
 	#var food : Advertisement = self.getFirstOf(TYPE.FOOD)
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	
-	var left_progress : float = cur_plan.PlanMetaData.get("meal", 999.0)
-	if left_progress == 0.0:
+	var left_progress : bool = cur_plan.PlanMetaData.get("finished", false)
+	if left_progress == true:
 		return Globals.ACTION_STATE.Finished
 	
 	if self.position != kitchen.position:

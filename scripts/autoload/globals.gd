@@ -17,5 +17,6 @@ enum AD_TYPE {
 enum NEEDS {
 	Satiety,
 	Energy,
-	Satisfaction
+	Satisfaction,
+	Richness
 }

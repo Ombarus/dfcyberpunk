@@ -11,6 +11,7 @@ ActionName = "WorkAtOffice"
 EnergyReward = -0.33
 SatietyReward = 0.0
 SatisfactionReward = 0.33
+RichnessReward = 0.00025
 SpawnReward = ExtResource("2_1aqcx")
 SpawnRewardType = 3
 
