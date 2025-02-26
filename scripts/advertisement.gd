@@ -10,6 +10,8 @@ class_name Advertisement
 
 @export var ActionPlans : Array
 
+@export var AdMetaData := {}
+
 # Want to have somewhat dynamic plans.
 # This allow an Advertisement to recalculate reward based on who's asking
 func GetActionPlansFor(npc : Entity) -> Array:

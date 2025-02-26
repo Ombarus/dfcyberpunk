@@ -9,8 +9,11 @@ enum ACTION_STATE {
 enum AD_TYPE {
 	Bed,
 	Food,
+	Foodstuff,
 	Kitchen,
 	Currency,
+	Market,
+	Office,
 	Other
 }
 

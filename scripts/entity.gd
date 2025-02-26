@@ -195,6 +195,14 @@ func Cook(delta : float, param : Dictionary, actionDepth : int) -> int:
 	if ener >= cook_left:
 		ener = cook_left
 		param["scene"] = cur_plan.SpawnReward
+		var foodstuff : Advertisement
+		for i in inv:
+			var ad = (i as Advertisement)
+			if (i as Advertisement).Type == Globals.AD_TYPE.Foodstuff:
+				foodstuff = ad
+				break
+		inv.erase(foodstuff)
+		param["inventory"] = inv
 		self.pushAction("Spawn", actionDepth)
 	Needs.ApplyNeed(Globals.NEEDS.Energy, -ener)
 	# Can't be bottered to redo the logic so just flip the sign
@@ -350,22 +358,54 @@ func EatSelectedFood(delta : float, param : Dictionary, actionDepth : int) -> in
 func CookInKitchen(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var kitchen : Advertisement = self.getFirstOf(Globals.AD_TYPE.Kitchen)
 	var cur_plan : ActionPlan = param["current_plan"]
-	#var food : Advertisement = self.getFirstOf(TYPE.FOOD)
+	var fridge : Advertisement = param.get("plan_ad", null)
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	
 	var left_progress : bool = cur_plan.PlanMetaData.get("finished", false)
 	if left_progress == true:
 		return Globals.ACTION_STATE.Finished
+		
+	var inv : Array = param.get("inventory", [])
+	var foodstuff : Advertisement
+	for i in inv:
+		var ad = (i as Advertisement)
+		if (i as Advertisement).Type == Globals.AD_TYPE.Foodstuff:
+			foodstuff = ad
+			break
 	
-	if self.position != kitchen.position:
+	if foodstuff == null and self.position != fridge.position:
+		param["target"] = fridge.position
+		self.pushAction("Goto", actionDepth)
+	elif foodstuff == null and self.position == fridge.position:
+		param["item_type"] = Globals.AD_TYPE.Foodstuff
+		param["giver"] = fridge
+		self.pushAction("Receive", actionDepth)		
+	elif foodstuff != null and self.position != kitchen.position:
 		param["target"] = kitchen.position
 		self.pushAction("Goto", actionDepth)
-	else:
+	elif foodstuff != null and self.position == kitchen.position:
 		if is_top_of_stack:
 			cur_plan.PlanMetaData["meal"] = cur_plan.EnergyReward
 			cur_plan.PlanMetaData["meal_sati"] = cur_plan.SatisfactionReward
 		self.pushAction("Cook", actionDepth)
 	return Globals.ACTION_STATE.Running
+	
+func Receive(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var item_type : Globals.AD_TYPE = param["item_type"]
+	var giver : Advertisement = param["giver"]
+	var receiver_inv : Array = param.get("inventory", [])
+	var giver_inv : Array = giver.AdMetaData.get("inventory", [])
+	
+	for item in giver_inv:
+		var ad : Advertisement = item as Advertisement
+		if ad.Type == item_type:
+			receiver_inv.push_back(ad)
+			giver_inv.erase(ad)
+			param["inventory"] = receiver_inv
+			giver.AdMetaData["inventory"] = giver_inv
+			break
+		
+	return Globals.ACTION_STATE.Finished
 
 func Spawn(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var pos : Vector2 = self.position
@@ -487,6 +527,48 @@ func Work(delta : float, param : Dictionary, actionDepth : int) -> int:
 		return Globals.ACTION_STATE.Finished
 	
 	return Globals.ACTION_STATE.Running
+	
+func RefillFridge(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var plan : ActionPlan = param.get("current_plan", null)
+	var fridge : Advertisement = param.get("plan_ad", null)
+	var market : Advertisement = getFirstOf(Globals.AD_TYPE.Market)
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	
+	var inv : Array = param.get("inventory", [])
+	var foodstuff : Advertisement
+	for i in inv:
+		var ad = (i as Advertisement)
+		if (i as Advertisement).Type == Globals.AD_TYPE.Foodstuff:
+			foodstuff = ad
+			break
+	
+	if foodstuff != null and self.position != fridge.position:
+		param["target"] = fridge.position
+		self.pushAction("Goto", actionDepth)
+	elif foodstuff == null and self.position != fridge.position and self.position != market.position:
+		param["target"] = market.position
+		self.pushAction("Goto", actionDepth)
+	elif foodstuff != null and self.position == fridge.position:
+		param["item"] = foodstuff
+		param["receiver"] = fridge
+		self.pushAction("Give", actionDepth)
+	elif foodstuff == null and self.position == market.position:
+		param["scene"] = plan.SpawnReward
+		self.pushAction("Spawn", actionDepth)
+	elif is_top_of_stack and self.position == fridge.position and foodstuff == null:
+		return Globals.ACTION_STATE.Finished
+	return Globals.ACTION_STATE.Running
+	
+func Give(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var item : Advertisement = param["item"]
+	var receiver : Advertisement = param["receiver"]
+	
+	var inv : Array = param.get("inventory", [])
+	inv.erase(item)
+	receiver.AdMetaData["inventory"].push_back(item)
+	param["inventory"] = inv
+		
+	return Globals.ACTION_STATE.Finished
 	
 ###################################################################################################
 ## UTILITY FUNCTION

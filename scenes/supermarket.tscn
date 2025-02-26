@@ -1,82 +1,71 @@
-[gd_scene load_steps=5 format=3 uid="uid://boqcpysmhxy32"]
+[gd_scene load_steps=3 format=3 uid="uid://dc44fjb7edmjp"]
 
-[ext_resource type="Script" path="res://scripts/officeadvertisement.gd" id="1_og1es"]
-[ext_resource type="Script" path="res://scripts/actionplan.gd" id="2_ma3uf"]
-[ext_resource type="Texture2D" uid="uid://k8s4tftgwhmp" path="res://data/roguelikeSheet_transparent.png" id="3_6pq1s"]
+[ext_resource type="Script" path="res://scripts/advertisement.gd" id="1_nvwvj"]
+[ext_resource type="Texture2D" uid="uid://k8s4tftgwhmp" path="res://data/roguelikeSheet_transparent.png" id="2_8w66r"]
 
-[sub_resource type="Resource" id="Resource_6ta7i"]
-script = ExtResource("2_ma3uf")
-ActionName = "WorkInOffice"
-EnergyReward = -0.33
-SatietyReward = 0.0
-SatisfactionReward = 0.33
-RichnessReward = 0.00025
-SpawnRewardType = 4
-
-[node name="Office" type="Node2D"]
-script = ExtResource("1_og1es")
-Type = 6
-ActionPlans = [SubResource("Resource_6ta7i")]
+[node name="Supermarket" type="Node2D"]
+script = ExtResource("1_nvwvj")
+Type = 5
 
 [node name="Facade" type="Node2D" parent="."]
 position = Vector2(-33, -24)
 
 [node name="RoguelikeSheetTransparent17" type="Sprite2D" parent="Facade"]
-texture = ExtResource("3_6pq1s")
+texture = ExtResource("2_8w66r")
 region_enabled = true
 region_rect = Rect2(408, 255, 16, 16)
 
 [node name="RoguelikeSheetTransparent16" type="Sprite2D" parent="Facade"]
 position = Vector2(0, 16)
-texture = ExtResource("3_6pq1s")
+texture = ExtResource("2_8w66r")
 region_enabled = true
 region_rect = Rect2(408, 255, 16, 16)
 
 [node name="RoguelikeSheetTransparent18" type="Sprite2D" parent="Facade"]
 position = Vector2(16, 0)
-texture = ExtResource("3_6pq1s")
+texture = ExtResource("2_8w66r")
 region_enabled = true
 region_rect = Rect2(425, 255, 16, 16)
 
 [node name="RoguelikeSheetTransparent19" type="Sprite2D" parent="Facade"]
 position = Vector2(16, 16)
-texture = ExtResource("3_6pq1s")
+texture = ExtResource("2_8w66r")
 region_enabled = true
 region_rect = Rect2(425, 255, 16, 16)
 
 [node name="RoguelikeSheetTransparent20" type="Sprite2D" parent="Facade"]
 position = Vector2(32, 0)
-texture = ExtResource("3_6pq1s")
+texture = ExtResource("2_8w66r")
 region_enabled = true
 region_rect = Rect2(425, 255, 16, 16)
 
 [node name="RoguelikeSheetTransparent21" type="Sprite2D" parent="Facade"]
 position = Vector2(32, 16)
-texture = ExtResource("3_6pq1s")
+texture = ExtResource("2_8w66r")
 region_enabled = true
 region_rect = Rect2(425, 255, 16, 16)
 
 [node name="RoguelikeSheetTransparent22" type="Sprite2D" parent="Facade"]
 position = Vector2(48, 0)
-texture = ExtResource("3_6pq1s")
+texture = ExtResource("2_8w66r")
 region_enabled = true
 region_rect = Rect2(425, 255, 16, 16)
 
 [node name="RoguelikeSheetTransparent23" type="Sprite2D" parent="Facade"]
 position = Vector2(48, 16)
-texture = ExtResource("3_6pq1s")
+texture = ExtResource("2_8w66r")
 region_enabled = true
 region_rect = Rect2(425, 255, 16, 16)
 
 [node name="RoguelikeSheetTransparent24" type="Sprite2D" parent="Facade"]
 position = Vector2(64, 0)
-texture = ExtResource("3_6pq1s")
+texture = ExtResource("2_8w66r")
 region_enabled = true
 region_rect = Rect2(442, 255, 16, 16)
 
 [node name="RoguelikeSheetTransparent25" type="Sprite2D" parent="Facade"]
 position = Vector2(64, 16)
-texture = ExtResource("3_6pq1s")
+texture = ExtResource("2_8w66r")
 region_enabled = true
 region_rect = Rect2(442, 255, 16, 16)
 
@@ -84,91 +73,91 @@ region_rect = Rect2(442, 255, 16, 16)
 position = Vector2(-33, -24)
 
 [node name="RoguelikeSheetTransparent" type="Sprite2D" parent="Roof"]
-texture = ExtResource("3_6pq1s")
+texture = ExtResource("2_8w66r")
 region_enabled = true
 region_rect = Rect2(340, 391, 16, 16)
 
 [node name="RoguelikeSheetTransparent2" type="Sprite2D" parent="Roof"]
 position = Vector2(0, -16)
-texture = ExtResource("3_6pq1s")
+texture = ExtResource("2_8w66r")
 region_enabled = true
 region_rect = Rect2(340, 374, 16, 16)
 
 [node name="RoguelikeSheetTransparent3" type="Sprite2D" parent="Roof"]
 position = Vector2(0, -32)
-texture = ExtResource("3_6pq1s")
+texture = ExtResource("2_8w66r")
 region_enabled = true
 region_rect = Rect2(340, 357, 16, 16)
 
 [node name="RoguelikeSheetTransparent4" type="Sprite2D" parent="Roof"]
 position = Vector2(16, 0)
-texture = ExtResource("3_6pq1s")
+texture = ExtResource("2_8w66r")
 region_enabled = true
 region_rect = Rect2(374, 374, 16, 16)
 
 [node name="RoguelikeSheetTransparent5" type="Sprite2D" parent="Roof"]
 position = Vector2(16, -16)
-texture = ExtResource("3_6pq1s")
+texture = ExtResource("2_8w66r")
 region_enabled = true
 region_rect = Rect2(425, 374, 16, 16)
 
 [node name="RoguelikeSheetTransparent6" type="Sprite2D" parent="Roof"]
 position = Vector2(16, -32)
-texture = ExtResource("3_6pq1s")
+texture = ExtResource("2_8w66r")
 region_enabled = true
 region_rect = Rect2(425, 357, 16, 16)
 
 [node name="RoguelikeSheetTransparent10" type="Sprite2D" parent="Roof"]
 position = Vector2(32, 0)
-texture = ExtResource("3_6pq1s")
+texture = ExtResource("2_8w66r")
 region_enabled = true
 region_rect = Rect2(374, 374, 16, 16)
 
 [node name="RoguelikeSheetTransparent11" type="Sprite2D" parent="Roof"]
 position = Vector2(32, -16)
-texture = ExtResource("3_6pq1s")
+texture = ExtResource("2_8w66r")
 region_enabled = true
 region_rect = Rect2(425, 374, 16, 16)
 
 [node name="RoguelikeSheetTransparent12" type="Sprite2D" parent="Roof"]
 position = Vector2(32, -32)
-texture = ExtResource("3_6pq1s")
+texture = ExtResource("2_8w66r")
 region_enabled = true
 region_rect = Rect2(425, 357, 16, 16)
 
 [node name="RoguelikeSheetTransparent13" type="Sprite2D" parent="Roof"]
 position = Vector2(48, 0)
-texture = ExtResource("3_6pq1s")
+texture = ExtResource("2_8w66r")
 region_enabled = true
 region_rect = Rect2(374, 374, 16, 16)
 
 [node name="RoguelikeSheetTransparent14" type="Sprite2D" parent="Roof"]
 position = Vector2(48, -16)
-texture = ExtResource("3_6pq1s")
+texture = ExtResource("2_8w66r")
 region_enabled = true
 region_rect = Rect2(425, 374, 16, 16)
 
 [node name="RoguelikeSheetTransparent15" type="Sprite2D" parent="Roof"]
 position = Vector2(48, -32)
-texture = ExtResource("3_6pq1s")
+texture = ExtResource("2_8w66r")
 region_enabled = true
 region_rect = Rect2(425, 357, 16, 16)
 
 [node name="RoguelikeSheetTransparent7" type="Sprite2D" parent="Roof"]
 position = Vector2(64, 0)
-texture = ExtResource("3_6pq1s")
+texture = ExtResource("2_8w66r")
 region_enabled = true
 region_rect = Rect2(357, 391, 16, 16)
 
 [node name="RoguelikeSheetTransparent8" type="Sprite2D" parent="Roof"]
 position = Vector2(64, -16)
-texture = ExtResource("3_6pq1s")
+texture = ExtResource("2_8w66r")
 region_enabled = true
 region_rect = Rect2(357, 374, 16, 16)
 
 [node name="RoguelikeSheetTransparent9" type="Sprite2D" parent="Roof"]
 position = Vector2(64, -32)
-texture = ExtResource("3_6pq1s")
+texture = ExtResource("2_8w66r")
 region_enabled = true
 region_rect = Rect2(357, 357, 16, 16)
 
@@ -177,27 +166,27 @@ position = Vector2(-33, -24)
 
 [node name="RoguelikeSheetTransparent26" type="Sprite2D" parent="Details"]
 position = Vector2(32, 17)
-texture = ExtResource("3_6pq1s")
+texture = ExtResource("2_8w66r")
 region_enabled = true
 region_rect = Rect2(629, 35, 15, 15)
 
 [node name="RoguelikeSheetTransparent27" type="Sprite2D" parent="Details"]
 position = Vector2(14, 6)
-texture = ExtResource("3_6pq1s")
+texture = ExtResource("2_8w66r")
 region_enabled = true
 region_rect = Rect2(716, 70, 12, 12)
 
 [node name="RoguelikeSheetTransparent28" type="Sprite2D" parent="Details"]
 position = Vector2(51, 6)
-texture = ExtResource("3_6pq1s")
+texture = ExtResource("2_8w66r")
 region_enabled = true
 region_rect = Rect2(716, 70, 12, 12)
 
 [node name="Label" type="Label" parent="."]
-offset_left = -12.0
-offset_top = -25.0
-offset_right = 28.0
-offset_bottom = -2.0
+offset_left = -19.0
+offset_top = -45.0
+offset_right = 21.0
+offset_bottom = -22.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 8
-text = "Office"
+theme_override_font_sizes/font_size = 11
+text = "Market"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://q1ju54xhs2x4"]
+[gd_scene load_steps=11 format=3 uid="uid://q1ju54xhs2x4"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_cen3t"]
 [ext_resource type="PackedScene" uid="uid://catl8ykewblyf" path="res://scenes/entity.tscn" id="2_ytmld"]
@@ -7,7 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://8rrsemvrpncr" path="res://scenes/fridge.tscn" id="4_m4ddv"]
 [ext_resource type="PackedScene" uid="uid://dlhtr4u8rgpmm" path="res://scenes/table.tscn" id="5_n7c6k"]
 [ext_resource type="PackedScene" uid="uid://dn7pevwva7iml" path="res://scenes/chair.tscn" id="6_twp8x"]
-[ext_resource type="PackedScene" uid="uid://dc44fjb7edmjp" path="res://scenes/office.tscn" id="8_xmier"]
+[ext_resource type="PackedScene" uid="uid://boqcpysmhxy32" path="res://scenes/office.tscn" id="8_irxup"]
+[ext_resource type="PackedScene" uid="uid://dc44fjb7edmjp" path="res://scenes/supermarket.tscn" id="8_xmier"]
 [ext_resource type="Script" path="res://scripts/world_time.gd" id="9_c3vun"]
 
 [node name="Main" type="Node2D"]
@@ -16,25 +17,28 @@ script = ExtResource("1_cen3t")
 [node name="Entities" type="Node2D" parent="."]
 
 [node name="Bed" parent="Entities" instance=ExtResource("3_7gaav")]
-position = Vector2(208, 144)
+position = Vector2(208, 80)
 
 [node name="Kitchen" parent="Entities" instance=ExtResource("3_0mc40")]
-position = Vector2(272, 192)
+position = Vector2(224, 112)
 
 [node name="Fridge" parent="Entities" instance=ExtResource("4_m4ddv")]
-position = Vector2(288, 160)
+position = Vector2(240, 80)
 
 [node name="Table" parent="Entities" instance=ExtResource("5_n7c6k")]
-position = Vector2(272, 240)
+position = Vector2(224, 128)
 
 [node name="Chair" parent="Entities" instance=ExtResource("6_twp8x")]
-position = Vector2(288, 240)
+position = Vector2(240, 128)
+
+[node name="Supermarket" parent="Entities" instance=ExtResource("8_xmier")]
+position = Vector2(384, 128)
+
+[node name="Office" parent="Entities" instance=ExtResource("8_irxup")]
+position = Vector2(144, 240)
 
 [node name="NPCOfficeWorker" parent="Entities" instance=ExtResource("2_ytmld")]
 position = Vector2(96, 96)
-
-[node name="Office" parent="Entities" instance=ExtResource("8_xmier")]
-position = Vector2(384, 128)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(288, 160)
