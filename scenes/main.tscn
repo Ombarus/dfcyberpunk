@@ -24,6 +24,8 @@ position = Vector2(224, 112)
 
 [node name="Fridge" parent="Entities" instance=ExtResource("4_m4ddv")]
 position = Vector2(240, 80)
+ActionPlans = []
+AdMetaData = {}
 
 [node name="Table" parent="Entities" instance=ExtResource("5_n7c6k")]
 position = Vector2(224, 128)

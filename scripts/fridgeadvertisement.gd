@@ -51,7 +51,8 @@ func _ready() -> void:
 # Want to have somewhat dynamic plans.
 # This allow an Advertisement to recalculate reward based on who's asking
 func GetActionPlansFor(npc : Entity) -> Array:
-	if len(self.AdMetaData["inventory"]) < 1:
+	var num_foodstuff : int = len(self.AdMetaData["inventory"])
+	if num_foodstuff < 1:
 		return [self.ActionPlans[-1].duplicate()]
 
 	var nodes : Array = get_tree().get_nodes_in_group(str(Globals.AD_TYPE.Food))
@@ -62,5 +63,7 @@ func GetActionPlansFor(npc : Entity) -> Array:
 		var new_plan := plan.duplicate()
 		if new_plan.SpawnRewardType == Globals.AD_TYPE.Food:
 			new_plan.SatisfactionReward = new_plan.SatisfactionReward / (food_count + 1)
+		if new_plan.SpawnRewardType == Globals.AD_TYPE.Foodstuff:
+			new_plan.SatisfactionReward = new_plan.SatisfactionReward / (num_foodstuff + 1)
 		results.append(new_plan)
 	return results

@@ -59,6 +59,11 @@ var debugThoughtsEnergy : ProgressBar
 var debugThoughtsSatisfaction : ProgressBar
 var debugPlanScore : VBoxContainer
 
+class ActionStep:
+	var Name : String
+	var State : Globals.ACTION_STATE
+	var Metadata : Dictionary
+
 
 func _ready() -> void:
 	var target := Vector2(100, 100)
@@ -189,20 +194,20 @@ func Cook(delta : float, param : Dictionary, actionDepth : int) -> int:
 			var sati_reward : float = cur_plan.PlanMetaData.get("meal_sati", 0.0)
 			Needs.ApplyNeed(Globals.NEEDS.Satisfaction, sati_reward)
 			cur_plan.PlanMetaData["finished"] = true
+			var foodstuff : Advertisement
+			for i in inv:
+				var ad = (i as Advertisement)
+				if (i as Advertisement).Type == Globals.AD_TYPE.Foodstuff:
+					foodstuff = ad
+					break
+			inv.erase(foodstuff)
+			param["inventory"] = inv
 			return Globals.ACTION_STATE.Finished
 		
 	var ener := self.CookEnerSec * delta
 	if ener >= cook_left:
 		ener = cook_left
 		param["scene"] = cur_plan.SpawnReward
-		var foodstuff : Advertisement
-		for i in inv:
-			var ad = (i as Advertisement)
-			if (i as Advertisement).Type == Globals.AD_TYPE.Foodstuff:
-				foodstuff = ad
-				break
-		inv.erase(foodstuff)
-		param["inventory"] = inv
 		self.pushAction("Spawn", actionDepth)
 	Needs.ApplyNeed(Globals.NEEDS.Energy, -ener)
 	# Can't be bottered to redo the logic so just flip the sign
