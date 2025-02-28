@@ -6,9 +6,10 @@
 [sub_resource type="Resource" id="Resource_iyeqv"]
 script = ExtResource("2_den4j")
 ActionName = "SleepInBed"
-EnergyReward = 0.9
+EnergyReward = 0.7
 SatietyReward = 0.0
 SatisfactionReward = 0.0
+RichnessReward = 0.0
 SpawnRewardType = 0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0afvf"]

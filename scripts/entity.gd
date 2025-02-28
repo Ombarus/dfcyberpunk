@@ -240,9 +240,9 @@ func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 	
 	var fallback_sleep_plan := ActionPlan.new()
 	fallback_sleep_plan.ActionName = "SleepOnFloor"
-	fallback_sleep_plan.EnergyReward = 0.65
+	fallback_sleep_plan.EnergyReward = 0.01
 	random_goto_plan.SatietyReward = 0.0
-	fallback_sleep_plan.SatisfactionReward = -0.02
+	fallback_sleep_plan.SatisfactionReward = -0.2
 	
 	# Something like : [{name:"plan1", ad:<node>, score:123}, ...]
 	var collected_plans := []
