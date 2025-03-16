@@ -1,7 +1,7 @@
 # Godot 4+ specific ignores
 .godot/
 *tmp*
-/data/private
+/data
 *.png~
 *~
 *.exe
