@@ -23,6 +23,10 @@ Globals="*res://scripts/autoload/globals.gd"
 
 window/vsync/vsync_mode=0
 
+[filesystem]
+
+import/blender/enabled=false
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
