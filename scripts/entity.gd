@@ -115,7 +115,7 @@ func UpdateSatisfaction(delta : float) -> void:
 func WalkRandomly(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var target = param.get("target", null)
 	if target == null:
-		var view_size = get_viewport_rect().size / get_viewport().get_camera_2d().zoom
+		var view_size = self.get_tree().root.get_camera_3d().get_viewport_rect().size / get_viewport().get_camera_2d().zoom
 		var pos_x := randi_range(25, view_size.x - 25)
 		var pos_y := randi_range(10, view_size.y - 10)
 		target = Vector2(pos_x, pos_y)

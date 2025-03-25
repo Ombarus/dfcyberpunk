@@ -1,4 +1,4 @@
-extends Node3D
+extends CharacterBody3D
 
 @export var AnimToPlay : String = "DoorOpen"
 @export var Target : NodePath
@@ -9,17 +9,23 @@ extends Node3D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if not AnimToPlay.is_empty():
-		(get_node("AnimationPlayer") as AnimationPlayer).play(AnimToPlay)
+		(get_node("Peep12/AnimationPlayer") as AnimationPlayer).play(AnimToPlay)
 		
 	if t != null:
 		nav.target_position = t.position
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+		
 func _physics_process(delta: float) -> void:
 	if t == null:
 		return
 	var next = nav.get_next_path_position()
-	var dir = (next - self.position).normalized()
-	self.velocity = dir
-	self.position += dir * delta
 	
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+		
+	var dir = (next - self.position).normalized()
+	self.look_at(next)
+	
+	velocity = Vector3(dir.x, velocity.y, dir.z)
+
+	move_and_slide()
