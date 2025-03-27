@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://b4g0jq5gjevyt" path="res://data/models/WallPlainCorner.glb" id="6_hlr2k"]
 [ext_resource type="PackedScene" uid="uid://dfoq3bbbvu73t" path="res://data/models/CounterStove.glb" id="8_gcuqx"]
 [ext_resource type="PackedScene" uid="uid://dx04tuw180duu" path="res://data/models/FloorShinyTile.glb" id="8_yxcxy"]
-[ext_resource type="Script" path="res://scripts/npc3d.gd" id="9_0sq7r"]
 [ext_resource type="PackedScene" uid="uid://cjw522h2bqa21" path="res://data/models/CounterTop.glb" id="9_ldhes"]
 [ext_resource type="PackedScene" uid="uid://dqi7jqlxei607" path="res://data/models/Peep1.glb" id="10_4peve"]
 [ext_resource type="PackedScene" uid="uid://dxa7y04pf4x2c" path="res://scenes/wall_door_v2.tscn" id="10_age4m"]
@@ -18,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://bdqu256wx0f8i" path="res://data/models/DiningTable.glb" id="13_0islb"]
 [ext_resource type="Script" path="res://scripts/fridgeadvertisement.gd" id="13_8w0dg"]
 [ext_resource type="PackedScene" uid="uid://c41j6hl7oi0ll" path="res://data/models/FoldingChair.glb" id="14_rquro"]
+[ext_resource type="Script" path="res://scripts/entity.gd" id="18_vdyff"]
 [ext_resource type="PackedScene" uid="uid://b2gus2uh1sa5n" path="res://data/models/Bed.glb" id="18_w4c5x"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8ig1x"]
@@ -532,8 +532,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -4)
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="Dynamic"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, 4)
-script = ExtResource("9_0sq7r")
-AnimToPlay = "Walk"
+script = ExtResource("18_vdyff")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Dynamic/CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96, 0)

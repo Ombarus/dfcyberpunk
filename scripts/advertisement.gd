@@ -29,6 +29,7 @@ func GetActionPlansFor(npc : Entity) -> Array:
 
 func _ready() -> void:
 	self.add_to_group(str(self.Type))
+	self.add_to_group(Globals.AD_GROUP)
 	
 func _exit_tree() -> void:
 	self.remove_from_group(str(self.Type))

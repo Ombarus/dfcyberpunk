@@ -18,29 +18,35 @@ script = ExtResource("1_cen3t")
 
 [node name="Bed" parent="Entities" instance=ExtResource("3_7gaav")]
 position = Vector2(208, 80)
+script = null
 
 [node name="Kitchen" parent="Entities" instance=ExtResource("3_0mc40")]
 position = Vector2(224, 112)
+script = null
 
 [node name="Fridge" parent="Entities" instance=ExtResource("4_m4ddv")]
 position = Vector2(240, 80)
-ActionPlans = []
-AdMetaData = {}
+script = null
 
 [node name="Table" parent="Entities" instance=ExtResource("5_n7c6k")]
 position = Vector2(224, 128)
+script = null
 
 [node name="Chair" parent="Entities" instance=ExtResource("6_twp8x")]
 position = Vector2(240, 128)
+script = null
 
 [node name="Supermarket" parent="Entities" instance=ExtResource("8_xmier")]
 position = Vector2(384, 128)
+script = null
 
 [node name="Office" parent="Entities" instance=ExtResource("8_irxup")]
 position = Vector2(144, 240)
+script = null
 
 [node name="NPCOfficeWorker" parent="Entities" instance=ExtResource("2_ytmld")]
 position = Vector2(96, 96)
+script = null
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(288, 160)

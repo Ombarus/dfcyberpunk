@@ -1,5 +1,7 @@
 extends Node
 
+var AD_GROUP := "advertisements"
+
 enum ACTION_STATE {
 	Running,
 	Finished,

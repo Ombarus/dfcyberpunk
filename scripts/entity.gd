@@ -66,9 +66,7 @@ class ActionStep:
 
 
 func _ready() -> void:
-	var target := Vector2(100, 100)
-	self.curParam = {"target": target}
-	self.actionStack = ["Goto"]
+	self.actionStack = []
 	self.debugThoughtsEnergy = self.find_child("EnergyProgress", true, false) as ProgressBar
 	self.debugThoughtsSatiety = self.find_child("SatietyProgress", true, false) as ProgressBar
 	self.debugThoughtsSatisfaction = self.find_child("SatisfactionProgress", true, false) as ProgressBar
@@ -115,10 +113,8 @@ func UpdateSatisfaction(delta : float) -> void:
 func WalkRandomly(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var target = param.get("target", null)
 	if target == null:
-		var view_size = self.get_tree().root.get_camera_3d().get_viewport_rect().size / get_viewport().get_camera_2d().zoom
-		var pos_x := randi_range(25, view_size.x - 25)
-		var pos_y := randi_range(10, view_size.y - 10)
-		target = Vector2(pos_x, pos_y)
+		var nav := self.get_tree().root.find_child("NavigationRegion3D", true, false) as NavigationRegion3D
+		target = NavigationServer3D.map_get_random_point(nav.get_rid(), 0, true)
 		param["target"] = target
 	
 	if target == self.position:
@@ -129,19 +125,40 @@ func WalkRandomly(delta : float, param : Dictionary, actionDepth : int) -> int:
 	
 	return Globals.ACTION_STATE.Running
 
+func _physics_process(delta: float) -> void:
+	# Terrible hack to "cast" player object to CharacterBody3D
+	# Without having to make ALL Advertisement inherit from it
+	if "velocity" in self and self.velocity.length_squared() > 0.0001:
+		self.call("move_and_slide")
+		
+
 func Goto(delta : float, param : Dictionary, actionDepth : int) -> int:
-	var cur_pos := self.position
-	var dir := (param["target"] as Vector2) - cur_pos
-	var dir_norm = dir.normalized()
-	var move : Vector2 = dir_norm * self.MovePixSec * delta
-	var ret_val = Globals.ACTION_STATE.Running
-	if move.length_squared() > dir.length_squared():
-		move = dir
-		ret_val = Globals.ACTION_STATE.Finished
-	var energy : float = move.length() / self.MovePixSec * self.MoveEnerSec
-	self.position += move
+	# Maybe one day I can handle different type of movement. For now only accept
+	# CharacterBody3D movement
+	if not "velocity" in self:
+		return Globals.ACTION_STATE.Finished
+
+	var nav := self.find_child("NavigationAgent3D", true, false) as NavigationAgent3D
+	nav.target_position = param["target"] as Vector3
+	
+	var next = nav.get_next_path_position()
+	
+	# Add the gravity.
+	if not self.call("is_on_floor"):
+		self.velocity += self.call("get_gravity") * delta
+		
+	var dir = (next - self.position).normalized()
+	self.look_at(next)
+	
+	self.velocity = Vector3(dir.x, self.velocity.y, dir.z)
+	
+	if (self.position - nav.target_position).length_squared() < 0.001:
+		return Globals.ACTION_STATE.Finished
+		
+	var energy : float = self.MoveEnerSec * delta
 	Needs.ApplyNeed(Globals.NEEDS.Energy, -energy)
-	return ret_val
+	return Globals.ACTION_STATE.Running
+	
 
 func Eat(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var ret_val = Globals.ACTION_STATE.Running
@@ -257,7 +274,7 @@ func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 		"ad": self,
 		"score": Needs.GetRewardScoreFromPlan(fallback_sleep_plan)
 	})
-	for n in get_parent().get_children():
+	for n in get_tree().get_nodes_in_group(Globals.AD_GROUP):
 		var ad := n as Advertisement
 		# Only null (belong to no one) or belonging to me
 		if ad.BelongTo != null and ad.BelongTo != self:
@@ -413,7 +430,7 @@ func Receive(delta : float, param : Dictionary, actionDepth : int) -> int:
 	return Globals.ACTION_STATE.Finished
 
 func Spawn(delta : float, param : Dictionary, actionDepth : int) -> int:
-	var pos : Vector2 = self.position
+	var pos : Vector3 = self.position
 	var pack := param["scene"] as PackedScene
 	var n := pack.instantiate() as Advertisement
 	self.get_parent().add_child(n)
@@ -443,7 +460,7 @@ func Drop(delta : float, param : Dictionary, actionDepth : int) -> int:
 	inv.erase(item)
 	item.visible = true
 	item.BelongTo = null
-	var pos = self.position + Vector2(randi_range(-50.0, 50.0), randi_range(-50.0, 50.0))
+	var pos := self.position + Vector3(randi_range(-50.0, 50.0), self.position.y, randi_range(-50.0, 50.0))
 	item.position = pos
 	return Globals.ACTION_STATE.Finished
 	
