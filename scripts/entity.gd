@@ -58,6 +58,7 @@ var debugThoughtsSatiety : ProgressBar
 var debugThoughtsEnergy : ProgressBar
 var debugThoughtsSatisfaction : ProgressBar
 var debugPlanScore : VBoxContainer
+var debugThoughts : Control
 
 class ActionStep:
 	var Name : String
@@ -72,6 +73,7 @@ func _ready() -> void:
 	self.debugThoughtsSatisfaction = self.find_child("SatisfactionProgress", true, false) as ProgressBar
 	self.debugThoughtsAction = self.find_child("Action", true, false) as Label
 	self.debugPlanScore = self.find_child("PlanScore", true, false) as VBoxContainer
+	self.debugThoughts = self.find_child("NPCThoughts", true, false) as Control
 
 func _process(delta: float) -> void:
 	if self.actionStack.size() == 0:
@@ -99,6 +101,7 @@ func UpdateThoughts():
 			actions += "->"
 		actions += a
 	self.debugThoughtsAction.text = actions
+	self.debugThoughts.position = get_viewport().get_camera_3d().unproject_position(self.position)
 
 func UpdateSatiety(delta : float) -> void:
 	Needs.ApplyNeedOverTime(Globals.NEEDS.Satiety, -self.SatSec, delta)
@@ -117,7 +120,9 @@ func WalkRandomly(delta : float, param : Dictionary, actionDepth : int) -> int:
 		target = NavigationServer3D.map_get_random_point(nav.get_rid(), 0, true)
 		param["target"] = target
 	
-	if target == self.position:
+	var nav_agent := self.find_child("NavigationAgent3D", true, false) as NavigationAgent3D
+	nav_agent.target_position = param["target"] as Vector3
+	if nav_agent.is_target_reached():
 		param.erase("target")
 		return Globals.ACTION_STATE.Finished
 		
@@ -129,6 +134,9 @@ func _physics_process(delta: float) -> void:
 	# Terrible hack to "cast" player object to CharacterBody3D
 	# Without having to make ALL Advertisement inherit from it
 	if "velocity" in self and self.velocity.length_squared() > 0.0001:
+		# Add the gravity.
+		if not self.call("is_on_floor"):
+			self.velocity += self.call("get_gravity") * delta
 		self.call("move_and_slide")
 		
 
@@ -138,23 +146,23 @@ func Goto(delta : float, param : Dictionary, actionDepth : int) -> int:
 	if not "velocity" in self:
 		return Globals.ACTION_STATE.Finished
 
-	var nav := self.find_child("NavigationAgent3D", true, false) as NavigationAgent3D
-	nav.target_position = param["target"] as Vector3
+	var nav_agent := self.find_child("NavigationAgent3D", true, false) as NavigationAgent3D
+	nav_agent.target_position = param["target"] as Vector3
+	var next = nav_agent.get_next_path_position()
 	
-	var next = nav.get_next_path_position()
-	
-	# Add the gravity.
-	if not self.call("is_on_floor"):
-		self.velocity += self.call("get_gravity") * delta
-		
 	var dir = (next - self.position).normalized()
-	self.look_at(next)
+	self.look_at(next, Vector3.UP)
 	
 	self.velocity = Vector3(dir.x, self.velocity.y, dir.z)
+	var anim : AnimationPlayer = self.find_child("AnimationPlayer", true, false)
 	
-	if (self.position - nav.target_position).length_squared() < 0.001:
+	if (nav_agent.is_target_reached()):
+	#if (self.position - nav.target_position).length_squared() < 0.1:
+		anim.play("Idle")
+		self.velocity = Vector3.ZERO
 		return Globals.ACTION_STATE.Finished
-		
+	
+	anim.play("Walk")
 	var energy : float = self.MoveEnerSec * delta
 	Needs.ApplyNeed(Globals.NEEDS.Energy, -energy)
 	return Globals.ACTION_STATE.Running
