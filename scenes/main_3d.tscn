@@ -1,6 +1,7 @@
-[gd_scene load_steps=28 format=3 uid="uid://8qm8xqhjvjw5"]
+[gd_scene load_steps=32 format=3 uid="uid://8qm8xqhjvjw5"]
 
 [ext_resource type="PackedScene" uid="uid://ckkkaxossb5me" path="res://data/models/RoadCenter.glb" id="1_3innq"]
+[ext_resource type="Script" path="res://scripts/camera_3d.gd" id="1_v6ick"]
 [ext_resource type="PackedScene" uid="uid://d2ha23ap0m16j" path="res://data/models/RoadLeft.glb" id="2_sv3ae"]
 [ext_resource type="PackedScene" uid="uid://c48ee6yyy7eiu" path="res://data/models/SidewalkLeft.glb" id="3_4b6ik"]
 [ext_resource type="PackedScene" uid="uid://ciuheo5ao43vg" path="res://data/models/SidewalkCrackedLeft.glb" id="4_vig16"]
@@ -17,8 +18,10 @@
 [ext_resource type="PackedScene" uid="uid://bdqu256wx0f8i" path="res://data/models/DiningTable.glb" id="13_0islb"]
 [ext_resource type="Script" path="res://scripts/fridgeadvertisement.gd" id="13_8w0dg"]
 [ext_resource type="PackedScene" uid="uid://c41j6hl7oi0ll" path="res://data/models/FoldingChair.glb" id="14_rquro"]
+[ext_resource type="Script" path="res://scripts/advertisement.gd" id="18_h2cyc"]
 [ext_resource type="Script" path="res://scripts/entity.gd" id="18_vdyff"]
 [ext_resource type="PackedScene" uid="uid://b2gus2uh1sa5n" path="res://data/models/Bed.glb" id="18_w4c5x"]
+[ext_resource type="Script" path="res://scripts/actionplan.gd" id="19_eqqpn"]
 [ext_resource type="PackedScene" uid="uid://podwo6g81pr2" path="res://scenes/npc_thoughts.tscn" id="20_s180p"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8ig1x"]
@@ -52,16 +55,31 @@ ssao_enabled = true
 glow_enabled = true
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_0rtnp"]
-vertices = PackedVector3Array(-4.85, 0.390226, -3.5, -4.85, 0.390226, -2.5, -4.35, 0.390226, -2.25, 4.4, 0.390226, 3.75, 4.9, 0.390226, 3.5, 4.9, 0.390226, 2.5, 4.4, 0.390226, 2.25, 4.65, 0.390226, -13.5, -4.6, 0.390226, -13.5, -4.35, 0.390226, -3.75, -4.6, 0.390226, 7.5, 4.4, 0.390226, 7.5, -12.35, 0.390226, -1.25, -12.35, 0.390226, -0.5, -11.85, 0.390226, -0.5, -5.6, 0.390226, -3.75, -5.6, 0.390226, -2.25, -6.6, 0.390226, -4.5, -8.35, 0.390226, -4.5, -7.6, 0.390226, -2.75, -5.6, 0.390226, -7.25, -6.35, 0.390226, -7.25, -5.85, 0.390226, -5.75, -11.35, 0.390226, -4.5, -12.35, 0.390226, -4.25, -12.35, 0.390226, -2.75, -8.6, 0.390226, 0.25, -12.1, 0.640226, 1.25, -5.6, 0.390226, 1.25, -8.85, 0.390226, -6.25, -11.35, 0.390226, -6.25, -7.35, 0.390226, 0.25, -8.6, 0.390226, -1.25, 5.65, 0.390226, 3.75, 5.65, 0.390226, 2.25, 12.4, 0.390226, 7.25, 12.4, 0.390226, -1.25, 5.65, 0.390226, 7.25, 5.65, 0.390226, -1.25)
-polygons = [PackedInt32Array(0, 2, 1), PackedInt32Array(4, 3, 5), PackedInt32Array(5, 3, 6), PackedInt32Array(8, 7, 9), PackedInt32Array(9, 7, 6), PackedInt32Array(0, 9, 2), PackedInt32Array(2, 9, 6), PackedInt32Array(3, 11, 10), PackedInt32Array(3, 10, 6), PackedInt32Array(6, 10, 2), PackedInt32Array(14, 13, 12), PackedInt32Array(15, 0, 1), PackedInt32Array(1, 16, 15), PackedInt32Array(15, 16, 17), PackedInt32Array(17, 16, 19), PackedInt32Array(17, 19, 18), PackedInt32Array(22, 21, 20), PackedInt32Array(22, 20, 15), PackedInt32Array(17, 22, 15), PackedInt32Array(24, 23, 25), PackedInt32Array(25, 23, 18), PackedInt32Array(25, 18, 19), PackedInt32Array(14, 26, 27), PackedInt32Array(27, 26, 28), PackedInt32Array(30, 29, 23), PackedInt32Array(23, 29, 18), PackedInt32Array(19, 16, 31), PackedInt32Array(31, 16, 28), PackedInt32Array(12, 32, 14), PackedInt32Array(14, 32, 26), PackedInt32Array(28, 26, 31), PackedInt32Array(5, 34, 4), PackedInt32Array(4, 34, 33), PackedInt32Array(34, 36, 33), PackedInt32Array(33, 36, 35), PackedInt32Array(35, 37, 33), PackedInt32Array(34, 38, 36)]
+vertices = PackedVector3Array(-4.85, 0.390226, -3.25, -4.85, 0.390226, -2.75, -4.1, 0.390226, -2.25, 4.15, 0.390226, 2.25, -4.1, 0.390226, -3.75, 4.15, 0.390226, 3.75, 4.9, 0.390226, 3.25, 4.9, 0.390226, 2.75, -4.35, 0.390226, 7.25, 4.15, 0.390226, 7.25, 4.4, 0.390226, -13.25, -4.35, 0.390226, -13.25, -5.85, 0.390226, -3.75, -5.85, 0.390226, -5.5, -6.6, 0.390226, -4.25, -5.85, 0.390226, -2.25, -8.85, 0.390226, 0.25, -11.6, 0.390226, -0.5, -11.85, 0.640226, 1, -8.35, 0.390226, 0.75, -11.1, 0.390226, -4.5, -12.1, 0.390226, -4, -12.1, 0.390226, -3, -7.6, 0.390226, -3, -8.35, 0.390226, -4.25, -8.85, 0.390226, -4.75, -7.1, 0.390226, -2.5, -8.85, 0.390226, -6, -11.1, 0.390226, -6, -7.1, 0.390226, 0.25, -5.85, 0.390226, 1, -8.85, 0.390226, -1, -12.1, 0.390226, -1, 5.9, 0.390226, 3.75, 5.9, 0.390226, 2.25, 12.15, 0.390226, 7, 12.15, 0.390226, -1, 5.9, 0.390226, 7, 5.9, 0.390226, -1)
+polygons = [PackedInt32Array(0, 4, 1), PackedInt32Array(1, 4, 2), PackedInt32Array(2, 4, 3), PackedInt32Array(6, 5, 7), PackedInt32Array(7, 5, 3), PackedInt32Array(3, 5, 8), PackedInt32Array(3, 8, 2), PackedInt32Array(5, 9, 8), PackedInt32Array(11, 10, 4), PackedInt32Array(4, 10, 3), PackedInt32Array(14, 13, 12), PackedInt32Array(1, 15, 0), PackedInt32Array(0, 15, 12), PackedInt32Array(16, 19, 17), PackedInt32Array(17, 19, 18), PackedInt32Array(21, 20, 22), PackedInt32Array(22, 20, 25), PackedInt32Array(22, 25, 24), PackedInt32Array(22, 24, 23), PackedInt32Array(26, 23, 15), PackedInt32Array(15, 23, 12), PackedInt32Array(12, 23, 14), PackedInt32Array(14, 23, 24), PackedInt32Array(27, 25, 28), PackedInt32Array(28, 25, 20), PackedInt32Array(30, 19, 29), PackedInt32Array(30, 18, 19), PackedInt32Array(32, 31, 17), PackedInt32Array(17, 31, 16), PackedInt32Array(26, 15, 29), PackedInt32Array(29, 15, 30), PackedInt32Array(7, 34, 6), PackedInt32Array(6, 34, 33), PackedInt32Array(34, 36, 33), PackedInt32Array(33, 36, 35), PackedInt32Array(35, 37, 33), PackedInt32Array(34, 38, 36)]
+border_size = 0.5
+agent_radius = 0.75
+
+[sub_resource type="Resource" id="Resource_1xeal"]
+script = ExtResource("19_eqqpn")
+ActionName = "SleepInBed"
+EnergyReward = 0.8
+SatietyReward = 0.0
+SatisfactionReward = 0.1
+RichnessReward = 0.0
+SpawnRewardType = 0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bpfx1"]
+radius = 0.4
 
 [node name="Main3D" type="Node3D"]
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.976296, -0.185525, 0.111475, 0, 0.515038, 0.857167, -0.21644, -0.836849, 0.50283, -0.648, 8.239, 4.342)
+[node name="LookAt" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="LookAt"]
+transform = Transform3D(0.976296, -0.185525, 0.111475, 0, 0.515038, 0.857167, -0.21644, -0.836849, 0.50283, -0.433, 8.239, 6.422)
 current = true
+script = ExtResource("1_v6ick")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_pjfiq")
@@ -522,6 +540,8 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7, 0,
 
 [node name="Bed2" parent="Static/NavigationRegion3D/Furniture" instance=ExtResource("18_w4c5x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.546, 0.0889242, 0)
+script = ExtResource("18_h2cyc")
+ActionPlans = [SubResource("Resource_1xeal")]
 
 [node name="Dynamic" type="Node3D" parent="."]
 
@@ -533,6 +553,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -4)
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="Dynamic"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.921923, 4)
+floor_block_on_wall = false
 script = ExtResource("18_vdyff")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Dynamic/CharacterBody3D"]
@@ -543,8 +564,23 @@ shape = SubResource("CapsuleShape3D_bpfx1")
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="Dynamic/CharacterBody3D"]
+path_desired_distance = 0.25
+target_desired_distance = 0.5
+path_height_offset = 0.5
 debug_enabled = true
 
-[node name="NPCThoughts" parent="Dynamic/CharacterBody3D" instance=ExtResource("20_s180p")]
-offset_right = -880.0
-offset_bottom = -520.0
+[node name="CanvasLayer" type="CanvasLayer" parent="Dynamic/CharacterBody3D"]
+
+[node name="NPCThoughts" parent="Dynamic/CharacterBody3D/CanvasLayer" instance=ExtResource("20_s180p")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 448.0
+offset_bottom = 128.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Title" parent="Dynamic/CharacterBody3D/CanvasLayer/NPCThoughts/ColorRect/HBoxContainer/PlanScore" index="0"]
+custom_minimum_size = Vector2(250, 0)
+
+[editable path="Dynamic/CharacterBody3D/CanvasLayer/NPCThoughts"]

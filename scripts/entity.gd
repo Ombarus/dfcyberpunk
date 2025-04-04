@@ -115,14 +115,16 @@ func UpdateSatisfaction(delta : float) -> void:
 
 func WalkRandomly(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var target = param.get("target", null)
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	if target == null:
 		var nav := self.get_tree().root.find_child("NavigationRegion3D", true, false) as NavigationRegion3D
-		target = NavigationServer3D.map_get_random_point(nav.get_rid(), 0, true)
+		var nav_map := nav.get_navigation_map()
+		target = NavigationServer3D.map_get_random_point(nav_map, 1, true)
 		param["target"] = target
+		self.pushAction("Goto", actionDepth)
+		return Globals.ACTION_STATE.Running
 	
-	var nav_agent := self.find_child("NavigationAgent3D", true, false) as NavigationAgent3D
-	nav_agent.target_position = param["target"] as Vector3
-	if nav_agent.is_target_reached():
+	if is_top_of_stack:
 		param.erase("target")
 		return Globals.ACTION_STATE.Finished
 		
@@ -133,7 +135,7 @@ func WalkRandomly(delta : float, param : Dictionary, actionDepth : int) -> int:
 func _physics_process(delta: float) -> void:
 	# Terrible hack to "cast" player object to CharacterBody3D
 	# Without having to make ALL Advertisement inherit from it
-	if "velocity" in self and self.velocity.length_squared() > 0.0001:
+	if "velocity" in self:
 		# Add the gravity.
 		if not self.call("is_on_floor"):
 			self.velocity += self.call("get_gravity") * delta
@@ -148,10 +150,12 @@ func Goto(delta : float, param : Dictionary, actionDepth : int) -> int:
 
 	var nav_agent := self.find_child("NavigationAgent3D", true, false) as NavigationAgent3D
 	nav_agent.target_position = param["target"] as Vector3
-	var next = nav_agent.get_next_path_position()
+	var next := nav_agent.get_next_path_position()
 	
 	var dir = (next - self.position).normalized()
-	self.look_at(next, Vector3.UP)
+	var look_at_vec : Vector3 = next
+	look_at_vec.y = self.position.y
+	self.look_at(look_at_vec, Vector3.UP)
 	
 	self.velocity = Vector3(dir.x, self.velocity.y, dir.z)
 	var anim : AnimationPlayer = self.find_child("AnimationPlayer", true, false)
@@ -249,6 +253,20 @@ class Sorter:
 		if a[sort_key] > b[sort_key]:
 			return true
 		return false
+		
+func LoadWait(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var load_done : bool = param.get("load_done", false)
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	if load_done == true and is_top_of_stack:
+		return Globals.ACTION_STATE.Finished
+		
+	if is_top_of_stack:
+		param["wait"] = 1.0
+		param["load_done"] = true
+		
+	self.pushAction("Wait", actionDepth)
+	
+	return Globals.ACTION_STATE.Running
 
 func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
@@ -269,19 +287,34 @@ func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 	random_goto_plan.SatietyReward = 0.0
 	fallback_sleep_plan.SatisfactionReward = -0.2
 	
+	var wait_plan := ActionPlan.new()
+	wait_plan.ActionName = "LoadWait"
+	wait_plan.EnergyReward = 0.0
+	wait_plan.SatietyReward = 0.0
+	wait_plan.SatisfactionReward = 0.1
+		
+	
 	# Something like : [{name:"plan1", ad:<node>, score:123}, ...]
 	var collected_plans := []
 	# "Default" Plans when nothing better to do
-	collected_plans.append({
-		"plan": random_goto_plan,
-		"ad": self,
-		"score": Needs.GetRewardScoreFromPlan(random_goto_plan)
-	})
-	collected_plans.append({
-		"plan": fallback_sleep_plan,
-		"ad": self,
-		"score": Needs.GetRewardScoreFromPlan(fallback_sleep_plan)
-	})
+	if param.get("load_done", false) == false:
+		collected_plans.append({
+			"plan": wait_plan,
+			"ad": self,
+			"score": Needs.GetRewardScoreFromPlan(random_goto_plan)
+		})
+	else:
+		collected_plans.append({
+			"plan": random_goto_plan,
+			"ad": self,
+			"score": Needs.GetRewardScoreFromPlan(random_goto_plan)
+		})
+		collected_plans.append({
+			"plan": fallback_sleep_plan,
+			"ad": self,
+			"score": Needs.GetRewardScoreFromPlan(fallback_sleep_plan)
+		})
+		
 	for n in get_tree().get_nodes_in_group(Globals.AD_GROUP):
 		var ad := n as Advertisement
 		# Only null (belong to no one) or belonging to me
@@ -346,7 +379,7 @@ func UpdatePlanScoreDebug(collected_plans):
 		else:
 			color = "[color=red]"
 		l.text = color + p["plan"].ActionName + ": " + str(p["score"]) + "[/color]"
-		l.custom_minimum_size = Vector2(500, 20)
+		l.custom_minimum_size = Vector2(250, 20)
 		self.debugPlanScore.add_child(l)
 	
 func EatSelectedFood(delta : float, param : Dictionary, actionDepth : int) -> int:
@@ -478,6 +511,9 @@ func Wait(delta : float, param : Dictionary, actionDepth: int) -> int:
 	if wait_left <= 0.0:
 		return Globals.ACTION_STATE.Finished
 	param["wait"] = wait_left
+	var anim : AnimationPlayer = self.find_child("AnimationPlayer", true, false)
+	if anim != null:
+		anim.play("Idle")
 	return Globals.ACTION_STATE.Running
 	
 func SleepOnFloor(delta : float, param : Dictionary, actionDepth : int) -> int:
