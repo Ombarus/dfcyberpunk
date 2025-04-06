@@ -530,24 +530,93 @@ func SleepInBed(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var plan : ActionPlan = param.get("current_plan", null)
 	var bed : Advertisement = param.get("plan_ad", null)
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	var next_action := getCurAction(actionDepth+1) # return "" if top_of_stack
 
 	if bed == null:
 		return Globals.ACTION_STATE.Error
-		
-	if Needs.GetNeed(Globals.NEEDS.Energy) > 0.8 and is_top_of_stack:
+	
+	var playing_anim : String = getPlayingAnim()
+	
+	if (playing_anim != "Idle" and Needs.GetNeed(Globals.NEEDS.Energy) > 0.8 and is_top_of_stack) or (next_action == "WakeUpFromBed"):
+		self.pushAction("WakeUpFromBed", actionDepth)
+		return Globals.ACTION_STATE.Running
+	elif Needs.GetNeed(Globals.NEEDS.Energy) > 0.8 and is_top_of_stack:
 		bed.BelongTo = null
 		return Globals.ACTION_STATE.Finished
-	if self.position != bed.position:
+	
+	var dist_to_bed : float = (self.position - bed.position).length()
+	if dist_to_bed > 0.5:
 		param["target"] = bed.position
 		self.pushAction("Goto", actionDepth)
-	else:
-		if is_top_of_stack:
-			var base_sleep = plan.EnergyReward
-			var jitter = randf_range(-self.SleepJitter, self.SleepJitter)
-			var wake = clamp(Needs.GetNeed(Globals.NEEDS.Energy) + base_sleep + jitter, 0.0, 1.0)
-			param["wake"] = wake
-			bed.BelongTo = self
-		self.pushAction("Sleep", actionDepth)
+		return Globals.ACTION_STATE.Running
+		
+	if playing_anim != "SleepBedIdle":
+		self.pushAction("FallAsleepInBed", actionDepth)
+		return Globals.ACTION_STATE.Running
+
+	self.pushAction("Sleep", actionDepth)
+	return Globals.ACTION_STATE.Running
+	
+func FallAsleepInBed(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	var bed : Advertisement = param.get("plan_ad", null)
+	if is_top_of_stack:
+		if getPlayingAnim() == "SleepBed":
+			var anim : AnimationPlayer = self.find_child("AnimationPlayer", true, false)
+			anim.play("SleepBedIdle")
+			return Globals.ACTION_STATE.Finished
+		param["anim"] = "SleepBed"
+		param["anim_backward"] = true
+		param["anim_target"] = bed.position
+	self.pushAction("PlayAnim", actionDepth)
+	return Globals.ACTION_STATE.Running
+	
+func WakeUpFromBed(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	var bed : Advertisement = param.get("plan_ad", null)
+	if is_top_of_stack:
+		if getPlayingAnim() == "SleepBed":
+			var anim : AnimationPlayer = self.find_child("AnimationPlayer", true, false)
+			anim.play("Idle")
+			return Globals.ACTION_STATE.Finished
+		param["anim"] = "SleepBed"
+		param["anim_backward"] = false
+		param["anim_target"] = bed.position
+	self.pushAction("PlayAnim", actionDepth)
+	return Globals.ACTION_STATE.Running
+	
+func PlayAnim(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var anim_name : String = param["anim"]
+	var play_backward : bool = param["anim_backward"]
+	
+	var anim : AnimationPlayer = self.find_child("AnimationPlayer", true, false)
+	if anim != null and anim.current_animation != anim_name:
+		if play_backward:
+			anim.play_backwards(anim_name)
+		else:
+			anim.play(anim_name)
+		
+	var anim_length : float = anim.current_animation_length
+	var anim_time : float = anim.current_animation_position
+	if play_backward:
+		anim_time = anim_time * -1.0 + anim_length
+	
+	if "anim_target" in param:
+		var anim_target : Vector3 = param["anim_target"]
+		var npc_pos : Vector3 = self.position
+		if (anim_target - npc_pos).length_squared() > 0.01:
+			var diff : Vector3 = anim_target - npc_pos
+			var anim_left : float = anim_length - anim_time
+			self.position = lerp(npc_pos, anim_target, delta / anim_left)
+		else:
+			self.position = anim_target
+			
+	if anim_length == anim_time:
+		param.erase("anim")
+		param.erase("anim_backward")
+		param.erase("anim_target")
+		return Globals.ACTION_STATE.Finished
+
 	return Globals.ACTION_STATE.Running
 	
 func Sleep(delta : float, param : Dictionary, actionDepth : int) -> int:
@@ -684,3 +753,7 @@ func getFirstOf(t : Globals.AD_TYPE) -> Advertisement:
 		if n and n.BelongTo == null or n.BelongTo == self:
 			return n
 	return null
+
+func getPlayingAnim() -> String:
+	var anim : AnimationPlayer = self.find_child("AnimationPlayer", true, false)
+	return anim.current_animation
