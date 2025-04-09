@@ -555,13 +555,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -4)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.921923, 4)
 floor_block_on_wall = false
 script = ExtResource("18_vdyff")
+MovePixSec = 2.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Dynamic/CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96, 0)
 shape = SubResource("CapsuleShape3D_bpfx1")
 
 [node name="Peep1" parent="Dynamic/CharacterBody3D" instance=ExtResource("10_4peve")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="Dynamic/CharacterBody3D"]
 path_desired_distance = 0.25

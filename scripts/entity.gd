@@ -153,9 +153,13 @@ func Goto(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var next := nav_agent.get_next_path_position()
 	
 	var dir = (next - self.position).normalized()
+	dir *= self.MovePixSec
 	var look_at_vec : Vector3 = next
 	look_at_vec.y = self.position.y
 	self.look_at(look_at_vec, Vector3.UP)
+	# I might have made a mistake aligning the models to Y- in Blender
+	# Seems like it becomes z+ in Godot and look_at assume Z-?
+	self.rotate_y(deg_to_rad(180.0))
 	
 	self.velocity = Vector3(dir.x, self.velocity.y, dir.z)
 	var anim : AnimationPlayer = self.find_child("AnimationPlayer", true, false)
@@ -535,7 +539,7 @@ func SleepInBed(delta : float, param : Dictionary, actionDepth : int) -> int:
 	if bed == null:
 		return Globals.ACTION_STATE.Error
 	
-	var playing_anim : String = getPlayingAnim()
+	var playing_anim : String = getPlayingAnim(param)
 	
 	if (playing_anim != "Idle" and Needs.GetNeed(Globals.NEEDS.Energy) > 0.8 and is_top_of_stack) or (next_action == "WakeUpFromBed"):
 		self.pushAction("WakeUpFromBed", actionDepth)
@@ -551,9 +555,15 @@ func SleepInBed(delta : float, param : Dictionary, actionDepth : int) -> int:
 		return Globals.ACTION_STATE.Running
 		
 	if playing_anim != "SleepBedIdle":
+		bed.BelongTo = self
 		self.pushAction("FallAsleepInBed", actionDepth)
 		return Globals.ACTION_STATE.Running
 
+	if is_top_of_stack:
+		var base_sleep = plan.EnergyReward
+		var jitter = randf_range(-self.SleepJitter, self.SleepJitter)
+		var wake = clamp(Needs.GetNeed(Globals.NEEDS.Energy) + base_sleep + jitter, 0.0, 1.0)
+		param["wake"] = wake
 	self.pushAction("Sleep", actionDepth)
 	return Globals.ACTION_STATE.Running
 	
@@ -561,13 +571,14 @@ func FallAsleepInBed(delta : float, param : Dictionary, actionDepth : int) -> in
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	var bed : Advertisement = param.get("plan_ad", null)
 	if is_top_of_stack:
-		if getPlayingAnim() == "SleepBed":
+		# won't work, when anim is over, current_animation is  ""
+		if getPlayingAnim(param) == "SleepBed":
 			var anim : AnimationPlayer = self.find_child("AnimationPlayer", true, false)
 			anim.play("SleepBedIdle")
 			return Globals.ACTION_STATE.Finished
 		param["anim"] = "SleepBed"
 		param["anim_backward"] = true
-		param["anim_target"] = bed.position
+		param["anim_transform"] = bed.global_transform
 	self.pushAction("PlayAnim", actionDepth)
 	return Globals.ACTION_STATE.Running
 	
@@ -575,22 +586,24 @@ func WakeUpFromBed(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	var bed : Advertisement = param.get("plan_ad", null)
 	if is_top_of_stack:
-		if getPlayingAnim() == "SleepBed":
+		if getPlayingAnim(param) == "SleepBed":
 			var anim : AnimationPlayer = self.find_child("AnimationPlayer", true, false)
 			anim.play("Idle")
 			return Globals.ACTION_STATE.Finished
 		param["anim"] = "SleepBed"
 		param["anim_backward"] = false
-		param["anim_target"] = bed.position
+		param["anim_transform"] = bed.global_transform
 	self.pushAction("PlayAnim", actionDepth)
 	return Globals.ACTION_STATE.Running
 	
 func PlayAnim(delta : float, param : Dictionary, actionDepth : int) -> int:
-	var anim_name : String = param["anim"]
-	var play_backward : bool = param["anim_backward"]
+	var anim_name : String = param.get("anim", "")
+	var play_backward : bool = param.get("anim_backward", false)
 	
 	var anim : AnimationPlayer = self.find_child("AnimationPlayer", true, false)
-	if anim != null and anim.current_animation != anim_name:
+	if not anim_name.is_empty() and anim != null and anim.current_animation != anim_name:
+		param.erase("anim")
+		param["last_anim"] = anim_name
 		if play_backward:
 			anim.play_backwards(anim_name)
 		else:
@@ -601,20 +614,20 @@ func PlayAnim(delta : float, param : Dictionary, actionDepth : int) -> int:
 	if play_backward:
 		anim_time = anim_time * -1.0 + anim_length
 	
-	if "anim_target" in param:
-		var anim_target : Vector3 = param["anim_target"]
-		var npc_pos : Vector3 = self.position
-		if (anim_target - npc_pos).length_squared() > 0.01:
-			var diff : Vector3 = anim_target - npc_pos
-			var anim_left : float = anim_length - anim_time
-			self.position = lerp(npc_pos, anim_target, delta / anim_left)
+	if "anim_transform" in param:
+		var anim_transform : Transform3D = param["anim_transform"]
+		var npc_transform : Transform3D = self.global_transform
+		var anim_left : float = anim_length - anim_time
+		if anim_left < delta:
+			self.global_transform = anim_transform
 		else:
-			self.position = anim_target
-			
-	if anim_length == anim_time:
-		param.erase("anim")
+			var interpolated : Transform3D = anim_transform.interpolate_with(npc_transform, delta / anim_left)
+			self.global_transform = interpolated
+		
+	# in non-looping anim, current_animation is empty when done
+	if anim_length == anim_time or anim_name.is_empty():
 		param.erase("anim_backward")
-		param.erase("anim_target")
+		param.erase("anim_transform")
 		return Globals.ACTION_STATE.Finished
 
 	return Globals.ACTION_STATE.Running
@@ -754,6 +767,9 @@ func getFirstOf(t : Globals.AD_TYPE) -> Advertisement:
 			return n
 	return null
 
-func getPlayingAnim() -> String:
+func getPlayingAnim(param : Dictionary) -> String:
 	var anim : AnimationPlayer = self.find_child("AnimationPlayer", true, false)
-	return anim.current_animation
+	if anim != null and not anim.current_animation.is_empty():
+		return anim.current_animation
+		
+	return param.get("last_anim", "")
