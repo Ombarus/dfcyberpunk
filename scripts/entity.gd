@@ -139,6 +139,7 @@ func _physics_process(delta: float) -> void:
 		# Add the gravity.
 		if not self.call("is_on_floor"):
 			self.velocity += self.call("get_gravity") * delta
+		print(self.velocity)
 		self.call("move_and_slide")
 		
 
@@ -553,6 +554,8 @@ func SleepInBed(delta : float, param : Dictionary, actionDepth : int) -> int:
 		param["target"] = bed.position
 		self.pushAction("Goto", actionDepth)
 		return Globals.ACTION_STATE.Running
+	else:
+		self.velocity = Vector3.ZERO
 		
 	if playing_anim != "SleepBedIdle":
 		bed.BelongTo = self
