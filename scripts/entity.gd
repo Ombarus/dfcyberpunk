@@ -571,10 +571,10 @@ func FallAsleepInBed(delta : float, param : Dictionary, actionDepth : int) -> in
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	var bed : Advertisement = param.get("plan_ad", null)
 	if is_top_of_stack:
-		# won't work, when anim is over, current_animation is  ""
 		if getPlayingAnim(param) == "SleepBed":
 			var anim : AnimationPlayer = self.find_child("AnimationPlayer", true, false)
 			anim.play("SleepBedIdle")
+			param["last_anim"] = "SleepBedIdle"
 			return Globals.ACTION_STATE.Finished
 		param["anim"] = "SleepBed"
 		param["anim_backward"] = true
@@ -625,7 +625,7 @@ func PlayAnim(delta : float, param : Dictionary, actionDepth : int) -> int:
 			self.global_transform = interpolated
 		
 	# in non-looping anim, current_animation is empty when done
-	if anim_length == anim_time or anim_name.is_empty():
+	if anim_length == anim_time or anim.current_animation.is_empty():
 		param.erase("anim_backward")
 		param.erase("anim_transform")
 		return Globals.ACTION_STATE.Finished

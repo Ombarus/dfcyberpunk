@@ -555,7 +555,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -4)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.921923, 4)
 floor_block_on_wall = false
 script = ExtResource("18_vdyff")
-MovePixSec = 2.0
+MovePixSec = 1.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Dynamic/CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96, 0)
