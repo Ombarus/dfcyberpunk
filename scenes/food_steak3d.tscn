@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://clkiyxudpp1pk"]
+
+[ext_resource type="Script" path="res://scripts/advertisement.gd" id="1_1vxjt"]
+[ext_resource type="Script" path="res://scripts/actionplan.gd" id="2_3kpj4"]
+[ext_resource type="PackedScene" uid="uid://cq6ke36brbvj2" path="res://data/models/Steak.glb" id="3_0yqvc"]
+
+[sub_resource type="Resource" id="Resource_q3ka1"]
+script = ExtResource("2_3kpj4")
+ActionName = "EatSelectedFood"
+EnergyReward = 0.0
+SatietyReward = 0.6
+SatisfactionReward = 0.0
+RichnessReward = 0.0
+SpawnRewardType = 0
+
+[node name="Steak3D" type="Node3D"]
+script = ExtResource("1_1vxjt")
+Type = 1
+ActionPlans = [SubResource("Resource_q3ka1")]
+
+[node name="Steak2" parent="." instance=ExtResource("3_0yqvc")]

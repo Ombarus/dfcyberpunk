@@ -33,3 +33,4 @@ func _ready() -> void:
 	
 func _exit_tree() -> void:
 	self.remove_from_group(str(self.Type))
+	self.add_to_group(Globals.AD_GROUP)

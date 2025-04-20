@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3nn4sy70lp2v"]
+
+[ext_resource type="Script" path="res://scripts/advertisement.gd" id="1_n3yq4"]
+[ext_resource type="PackedScene" uid="uid://bvjpc2ufebfvv" path="res://data/models/Daikon.glb" id="2_pymtp"]
+
+[node name="Foodstuff3D" type="Node3D"]
+script = ExtResource("1_n3yq4")
+Type = 2
+
+[node name="Daikon2" parent="." instance=ExtResource("2_pymtp")]

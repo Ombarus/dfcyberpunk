@@ -320,20 +320,20 @@ func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 			"score": Needs.GetRewardScoreFromPlan(fallback_sleep_plan)
 		})
 		
-	for n in get_tree().get_nodes_in_group(Globals.AD_GROUP):
-		var ad := n as Advertisement
-		# Only null (belong to no one) or belonging to me
-		if ad.BelongTo != null and ad.BelongTo != self:
-			continue
-		var plans : Array = ad.GetActionPlansFor(self)
-		for i in plans:
-			var data = {
-				"plan": i,
-				"ad": ad,
-				"score": Needs.GetRewardScoreFromPlan(i as ActionPlan)
-			}
-			collected_plans.append(data)
-			
+		for n in get_tree().get_nodes_in_group(Globals.AD_GROUP):
+			var ad := n as Advertisement
+			# Only null (belong to no one) or belonging to me
+			if ad.BelongTo != null and ad.BelongTo != self:
+				continue
+			var plans : Array = ad.GetActionPlansFor(self)
+			for i in plans:
+				var data = {
+					"plan": i,
+					"ad": ad,
+					"score": Needs.GetRewardScoreFromPlan(i as ActionPlan)
+				}
+				collected_plans.append(data)
+				
 	var sorter := Sorter.new("score")
 	collected_plans.sort_custom(Callable(sorter, "sort_desc"))
 	

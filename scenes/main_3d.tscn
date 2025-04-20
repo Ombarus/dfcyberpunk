@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://8qm8xqhjvjw5"]
+[gd_scene load_steps=33 format=3 uid="uid://8qm8xqhjvjw5"]
 
 [ext_resource type="PackedScene" uid="uid://ckkkaxossb5me" path="res://data/models/RoadCenter.glb" id="1_3innq"]
 [ext_resource type="Script" path="res://scripts/camera_3d.gd" id="1_v6ick"]
@@ -22,6 +22,7 @@
 [ext_resource type="Script" path="res://scripts/entity.gd" id="18_vdyff"]
 [ext_resource type="PackedScene" uid="uid://b2gus2uh1sa5n" path="res://data/models/Bed.glb" id="18_w4c5x"]
 [ext_resource type="Script" path="res://scripts/actionplan.gd" id="19_eqqpn"]
+[ext_resource type="PackedScene" uid="uid://bxphuiqhnxg25" path="res://data/models/MarketStall.glb" id="20_diwbl"]
 [ext_resource type="PackedScene" uid="uid://podwo6g81pr2" path="res://scenes/npc_thoughts.tscn" id="20_s180p"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8ig1x"]
@@ -542,6 +543,23 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7, 0,
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.546, 0.0889242, 0)
 script = ExtResource("18_h2cyc")
 ActionPlans = [SubResource("Resource_1xeal")]
+
+[node name="MarketStall2" parent="Static/NavigationRegion3D/Furniture" instance=ExtResource("20_diwbl")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.73586, 0, -0.93152)
+
+[node name="MarketStall3" parent="Static/NavigationRegion3D/Furniture" instance=ExtResource("20_diwbl")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.73586, 0, -0.93152)
+script = ExtResource("18_h2cyc")
+Type = 5
+
+[node name="MarketStall4" parent="Static/NavigationRegion3D/Furniture" instance=ExtResource("20_diwbl")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 11.7359, 0, -0.93152)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Static"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 8.68225, 0.937806, -1.36158)
+spot_range = 1.688
+spot_attenuation = 0.24
+spot_angle = 65.64
 
 [node name="Dynamic" type="Node3D" parent="."]
 

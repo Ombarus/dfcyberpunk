@@ -3,6 +3,7 @@ extends Advertisement
 
 
 func _ready() -> void:
+	super._ready()
 	self.AdMetaData["inventory"] = []
 	
 	var spag_recipe := ActionPlan.new()
@@ -29,7 +30,7 @@ func _ready() -> void:
 	steak_recipe.SatietyReward = 0.18 # fake reward to encourage NPC to cook when hungry
 	steak_recipe.SatisfactionReward = 0.05
 	steak_recipe.RichnessReward = 0.0
-	steak_recipe.SpawnReward = preload("res://scenes/food_steak.tscn")
+	steak_recipe.SpawnReward = preload("res://scenes/food_steak3d.tscn")
 	steak_recipe.SpawnRewardType = Globals.AD_TYPE.Food
 	
 	var refill_fridge := ActionPlan.new()
@@ -38,12 +39,12 @@ func _ready() -> void:
 	refill_fridge.SatietyReward = 0.0
 	refill_fridge.SatisfactionReward = 0.2
 	refill_fridge.RichnessReward = -0.00005 # 50$ of 1M
-	refill_fridge.SpawnReward = preload("res://scenes/foodstuff.tscn")
+	refill_fridge.SpawnReward = preload("res://scenes/foodstuff3d.tscn")
 	refill_fridge.SpawnRewardType = Globals.AD_TYPE.Foodstuff
 	
 	self.ActionPlans = [
-		spag_recipe,
-		pie_recipe,
+		#spag_recipe,
+		#pie_recipe,
 		steak_recipe,
 		refill_fridge
 	]
