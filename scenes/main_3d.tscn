@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://8qm8xqhjvjw5"]
+[gd_scene load_steps=34 format=3 uid="uid://8qm8xqhjvjw5"]
 
 [ext_resource type="PackedScene" uid="uid://ckkkaxossb5me" path="res://data/models/RoadCenter.glb" id="1_3innq"]
 [ext_resource type="Script" path="res://scripts/camera_3d.gd" id="1_v6ick"]
@@ -24,6 +24,7 @@
 [ext_resource type="Script" path="res://scripts/actionplan.gd" id="19_eqqpn"]
 [ext_resource type="PackedScene" uid="uid://bxphuiqhnxg25" path="res://data/models/MarketStall.glb" id="20_diwbl"]
 [ext_resource type="PackedScene" uid="uid://podwo6g81pr2" path="res://scenes/npc_thoughts.tscn" id="20_s180p"]
+[ext_resource type="PackedScene" uid="uid://5ro7dre3s3qj" path="res://scenes/fridge2.tscn" id="21_rqupk"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8ig1x"]
 frequency = 0.002
@@ -527,8 +528,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12, 0
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12, 0, -7)
 
 [node name="Fridge2" parent="Static/NavigationRegion3D/Furniture" instance=ExtResource("12_s7tog")]
-transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -9, 0, -7)
-script = ExtResource("13_8w0dg")
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -9, 0, -15)
 
 [node name="DiningTable2" parent="Static/NavigationRegion3D/Furniture" instance=ExtResource("13_0islb")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 0, -7)
@@ -554,6 +554,10 @@ Type = 5
 
 [node name="MarketStall4" parent="Static/NavigationRegion3D/Furniture" instance=ExtResource("20_diwbl")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 11.7359, 0, -0.93152)
+
+[node name="Fridge" parent="Static/NavigationRegion3D/Furniture" instance=ExtResource("21_rqupk")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9, 0, -7)
+script = ExtResource("13_8w0dg")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Static"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 8.68225, 0.937806, -1.36158)

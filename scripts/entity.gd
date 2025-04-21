@@ -692,22 +692,93 @@ func RefillFridge(delta : float, param : Dictionary, actionDepth : int) -> int:
 		if (i as Advertisement).Type == Globals.AD_TYPE.Foodstuff:
 			foodstuff = ad
 			break
+			
+	if foodstuff == null:
+		self.pushAction("GoBuyFoodstuff", actionDepth)
+		return Globals.ACTION_STATE.Running
+		
+	if foodstuff != null and is_top_of_stack:
+		self.pushAction("GoDropFoodInFridge", actionDepth)
+		return Globals.ACTION_STATE.Running
 	
-	if foodstuff != null and self.position != fridge.position:
+	#if foodstuff != null and self.position != fridge.position:
+		#param["target"] = fridge.position
+		#self.pushAction("Goto", actionDepth)
+	#elif foodstuff == null and self.position != fridge.position and self.position != market.position:
+		#param["target"] = market.position
+		#self.pushAction("Goto", actionDepth)
+	#elif foodstuff != null and self.position == fridge.position:
+		#param["item"] = foodstuff
+		#param["receiver"] = fridge
+		#self.pushAction("Give", actionDepth)
+	#elif foodstuff == null and self.position == market.position:
+		#param["scene"] = plan.SpawnReward
+		#self.pushAction("Spawn", actionDepth)
+	#elif is_top_of_stack and self.position == fridge.position and foodstuff == null:
+		#return Globals.ACTION_STATE.Finished
+	return Globals.ACTION_STATE.Running
+	
+func GoDropFoodInFridge(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var fridge : Advertisement = param.get("plan_ad", null)
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	var inv : Array = param.get("inventory", [])
+	var foodstuff : Advertisement
+	for i in inv:
+		var ad = (i as Advertisement)
+		if ad.Type == Globals.AD_TYPE.Foodstuff:
+			foodstuff = ad
+			break
+			
+	if not isAtLocation(fridge.position):
 		param["target"] = fridge.position
 		self.pushAction("Goto", actionDepth)
-	elif foodstuff == null and self.position != fridge.position and self.position != market.position:
+		return Globals.ACTION_STATE.Running
+		
+	if isAtLocation(fridge.position):
+		var fridge_tree : AnimationTree = fridge.find_child("AnimationTree", true, false)
+		var fridge_state : AnimationNodeStateMachinePlayback = fridge_tree.get("parameters/playback")
+		var cur_anim = fridge_state.get_current_node()
+		if cur_anim != "FridgeOpen":
+			fridge_state.travel("FridgeOpen")
+		return Globals.ACTION_STATE.Running	
+	# Play fridge anim: OpenDoor
+	# "Give" (item (foodstuff), receiver (fridge))
+	# Play fridge anim: reverse OpenDoor
+	
+	
+	return Globals.ACTION_STATE.Running
+	
+func GoBuyFoodstuff(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var plan : ActionPlan = param.get("current_plan", null)
+	var market : Advertisement = getFirstOf(Globals.AD_TYPE.Market)
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	var target = param.get("target", null)
+	
+	if target == null and is_top_of_stack:
 		param["target"] = market.position
+		
+	if not isAtLocation(market.position):
 		self.pushAction("Goto", actionDepth)
-	elif foodstuff != null and self.position == fridge.position:
-		param["item"] = foodstuff
-		param["receiver"] = fridge
-		self.pushAction("Give", actionDepth)
-	elif foodstuff == null and self.position == market.position:
+		return Globals.ACTION_STATE.Running
+	
+	var inv : Array = param.get("inventory", [])
+	var foodstuff : Advertisement
+	for i in inv:
+		var ad = (i as Advertisement)
+		if ad.Type == Globals.AD_TYPE.Foodstuff:
+			foodstuff = ad
+			break
+			
+	if foodstuff == null:
 		param["scene"] = plan.SpawnReward
 		self.pushAction("Spawn", actionDepth)
-	elif is_top_of_stack and self.position == fridge.position and foodstuff == null:
+		return Globals.ACTION_STATE.Running
+	
+	if foodstuff != null and is_top_of_stack:
+		param.erase("target")
+		param.erase("scene")
 		return Globals.ACTION_STATE.Finished
+		
 	return Globals.ACTION_STATE.Running
 	
 func Give(delta : float, param : Dictionary, actionDepth : int) -> int:
@@ -769,10 +840,16 @@ func getFirstOf(t : Globals.AD_TYPE) -> Advertisement:
 		if n and n.BelongTo == null or n.BelongTo == self:
 			return n
 	return null
-
+	
 func getPlayingAnim(param : Dictionary) -> String:
 	var anim : AnimationPlayer = self.find_child("AnimationPlayer", true, false)
 	if anim != null and not anim.current_animation.is_empty():
 		return anim.current_animation
 		
 	return param.get("last_anim", "")
+
+func isAtLocation(loc : Vector3, min_dist : float = 1.0) -> bool:
+	var p : Vector3 = self.position
+	if p.distance_squared_to(loc) <= (min_dist * min_dist):
+		return true
+	return false

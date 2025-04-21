@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://5ro7dre3s3qj"]
+
+[ext_resource type="PackedScene" uid="uid://dn3vgfvhpivts" path="res://data/models/Fridge.glb" id="1_lcjlg"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yd5ib"]
+animation = &"FridgeOpen"
+play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ualqq"]
+animation = &"FridgeOpen"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6nxrx"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8ku38"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_gh8c7"]
+states/FridgeClose/node = SubResource("AnimationNodeAnimation_yd5ib")
+states/FridgeClose/position = Vector2(522, 167)
+states/FridgeOpen/node = SubResource("AnimationNodeAnimation_ualqq")
+states/FridgeOpen/position = Vector2(522, 68)
+states/Start/position = Vector2(263, 100)
+transitions = ["Start", "FridgeOpen", SubResource("AnimationNodeStateMachineTransition_6nxrx"), "Start", "FridgeClose", SubResource("AnimationNodeStateMachineTransition_8ku38")]
+
+[node name="Fridge" type="Node3D"]
+
+[node name="Fridge2" parent="." instance=ExtResource("1_lcjlg")]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Fridge2")
+tree_root = SubResource("AnimationNodeStateMachine_gh8c7")
+anim_player = NodePath("../Fridge2/AnimationPlayer")
+
+[editable path="Fridge2"]
