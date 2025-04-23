@@ -693,29 +693,17 @@ func RefillFridge(delta : float, param : Dictionary, actionDepth : int) -> int:
 			foodstuff = ad
 			break
 			
-	if foodstuff == null:
+	if foodstuff == null and not isAtLocation(fridge.position, 2.0):
 		self.pushAction("GoBuyFoodstuff", actionDepth)
 		return Globals.ACTION_STATE.Running
 		
 	if foodstuff != null and is_top_of_stack:
 		self.pushAction("GoDropFoodInFridge", actionDepth)
 		return Globals.ACTION_STATE.Running
+		
+	if foodstuff == null and isAtLocation(fridge.position, 2.0) and is_top_of_stack:
+		return Globals.ACTION_STATE.Finished
 	
-	#if foodstuff != null and self.position != fridge.position:
-		#param["target"] = fridge.position
-		#self.pushAction("Goto", actionDepth)
-	#elif foodstuff == null and self.position != fridge.position and self.position != market.position:
-		#param["target"] = market.position
-		#self.pushAction("Goto", actionDepth)
-	#elif foodstuff != null and self.position == fridge.position:
-		#param["item"] = foodstuff
-		#param["receiver"] = fridge
-		#self.pushAction("Give", actionDepth)
-	#elif foodstuff == null and self.position == market.position:
-		#param["scene"] = plan.SpawnReward
-		#self.pushAction("Spawn", actionDepth)
-	#elif is_top_of_stack and self.position == fridge.position and foodstuff == null:
-		#return Globals.ACTION_STATE.Finished
 	return Globals.ACTION_STATE.Running
 	
 func GoDropFoodInFridge(delta : float, param : Dictionary, actionDepth : int) -> int:
@@ -729,22 +717,46 @@ func GoDropFoodInFridge(delta : float, param : Dictionary, actionDepth : int) ->
 			foodstuff = ad
 			break
 			
-	if not isAtLocation(fridge.position):
+	if not isAtLocation(fridge.position, 2.0):
 		param["target"] = fridge.position
 		self.pushAction("Goto", actionDepth)
 		return Globals.ACTION_STATE.Running
 		
-	if isAtLocation(fridge.position):
-		var fridge_tree : AnimationTree = fridge.find_child("AnimationTree", true, false)
-		var fridge_state : AnimationNodeStateMachinePlayback = fridge_tree.get("parameters/playback")
-		var cur_anim = fridge_state.get_current_node()
-		if cur_anim != "FridgeOpen":
-			fridge_state.travel("FridgeOpen")
-		return Globals.ACTION_STATE.Running	
-	# Play fridge anim: OpenDoor
-	# "Give" (item (foodstuff), receiver (fridge))
-	# Play fridge anim: reverse OpenDoor
+	if isAtLocation(fridge.position, 2.0):
+		var cur_anim = animState(fridge)
+		if cur_anim != "FridgeOpen" or (cur_anim == "FridgeOpen" and isAnimPlaying(fridge)):
+			param["obj"] = fridge
+			param["anim"] = "FridgeOpen"
+			self.pushAction("TravelObjAnim", actionDepth)
+			return Globals.ACTION_STATE.Running	
+
+		if foodstuff != null:
+			param["item"] = foodstuff
+			param["receiver"] = fridge
+			self.pushAction("Give", actionDepth)
+			return Globals.ACTION_STATE.Running	
+			
+		if cur_anim != "FridgeClose" or (cur_anim == "FridgeClose" and isAnimPlaying(fridge)):
+			param["obj"] = fridge
+			param["anim"] = "FridgeClose"
+			self.pushAction("TravelObjAnim", actionDepth)
+			return Globals.ACTION_STATE.Running	
+			
+	return Globals.ACTION_STATE.Finished
 	
+func TravelObjAnim(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var obj : Node3D = param["obj"]
+	var state : String = param["anim"]
+	var obj_tree : AnimationTree = obj.find_child("AnimationTree", true, false)
+	var obj_state : AnimationNodeStateMachinePlayback = obj_tree.get("parameters/playback")
+	
+	if obj_state.get_current_node() != state:
+		obj_state.travel(state)
+		
+	if not obj_state.is_playing():
+		param.erase("obj")
+		param.erase("anim")
+		return Globals.ACTION_STATE.Finished
 	
 	return Globals.ACTION_STATE.Running
 	
@@ -850,6 +862,20 @@ func getPlayingAnim(param : Dictionary) -> String:
 
 func isAtLocation(loc : Vector3, min_dist : float = 1.0) -> bool:
 	var p : Vector3 = self.position
+	loc.y = 0
+	p.y = 0
 	if p.distance_squared_to(loc) <= (min_dist * min_dist):
 		return true
 	return false
+	
+func isAnimPlaying(obj : Node3D) -> bool:
+	var obj_tree : AnimationTree = obj.find_child("AnimationTree", true, false)
+	var obj_state : AnimationNodeStateMachinePlayback = obj_tree.get("parameters/playback")
+	return obj_state.is_playing()
+	
+func animState(obj : Node3D) -> String:
+	var obj_tree : AnimationTree = obj.find_child("AnimationTree", true, false)
+	var obj_state : AnimationNodeStateMachinePlayback = obj_tree.get("parameters/playback")
+	var cur_anim = obj_state.get_current_node()
+	return cur_anim
+	

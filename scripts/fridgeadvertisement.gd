@@ -1,7 +1,5 @@
 extends Advertisement
 
-
-
 func _ready() -> void:
 	super._ready()
 	self.AdMetaData["inventory"] = []

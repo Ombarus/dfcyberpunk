@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://8qm8xqhjvjw5"]
+[gd_scene load_steps=33 format=3 uid="uid://8qm8xqhjvjw5"]
 
 [ext_resource type="PackedScene" uid="uid://ckkkaxossb5me" path="res://data/models/RoadCenter.glb" id="1_3innq"]
 [ext_resource type="Script" path="res://scripts/camera_3d.gd" id="1_v6ick"]
@@ -16,7 +16,6 @@
 [ext_resource type="PackedScene" uid="uid://dasl5i3f01kdg" path="res://data/models/Cabinet.glb" id="11_yxcl1"]
 [ext_resource type="PackedScene" uid="uid://dn3vgfvhpivts" path="res://data/models/Fridge.glb" id="12_s7tog"]
 [ext_resource type="PackedScene" uid="uid://bdqu256wx0f8i" path="res://data/models/DiningTable.glb" id="13_0islb"]
-[ext_resource type="Script" path="res://scripts/fridgeadvertisement.gd" id="13_8w0dg"]
 [ext_resource type="PackedScene" uid="uid://c41j6hl7oi0ll" path="res://data/models/FoldingChair.glb" id="14_rquro"]
 [ext_resource type="Script" path="res://scripts/advertisement.gd" id="18_h2cyc"]
 [ext_resource type="Script" path="res://scripts/entity.gd" id="18_vdyff"]
@@ -557,7 +556,6 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 11.735
 
 [node name="Fridge" parent="Static/NavigationRegion3D/Furniture" instance=ExtResource("21_rqupk")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9, 0, -7)
-script = ExtResource("13_8w0dg")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Static"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 8.68225, 0.937806, -1.36158)
