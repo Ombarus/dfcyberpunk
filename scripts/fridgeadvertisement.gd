@@ -46,6 +46,7 @@ func _ready() -> void:
 		steak_recipe,
 		refill_fridge
 	]
+	
 
 # Want to have somewhat dynamic plans.
 # This allow an Advertisement to recalculate reward based on who's asking

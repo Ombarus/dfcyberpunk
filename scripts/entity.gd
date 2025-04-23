@@ -139,7 +139,6 @@ func _physics_process(delta: float) -> void:
 		# Add the gravity.
 		if not self.call("is_on_floor"):
 			self.velocity += self.call("get_gravity") * delta
-		print(self.velocity)
 		self.call("move_and_slide")
 		
 
@@ -716,6 +715,9 @@ func GoDropFoodInFridge(delta : float, param : Dictionary, actionDepth : int) ->
 		if ad.Type == Globals.AD_TYPE.Foodstuff:
 			foodstuff = ad
 			break
+		
+	#if not is_top_of_stack:
+		#return Globals.ACTION_STATE.Running
 			
 	if not isAtLocation(fridge.position, 2.0):
 		param["target"] = fridge.position
@@ -724,37 +726,41 @@ func GoDropFoodInFridge(delta : float, param : Dictionary, actionDepth : int) ->
 		
 	if isAtLocation(fridge.position, 2.0):
 		var cur_anim = animState(fridge)
-		if cur_anim != "FridgeOpen" or (cur_anim == "FridgeOpen" and isAnimPlaying(fridge)):
+		if cur_anim != "OpenIdle" and foodstuff != null:
 			param["obj"] = fridge
-			param["anim"] = "FridgeOpen"
+			param["start"] = "FridgeOpen"
+			param["end"] = "OpenIdle"
 			self.pushAction("TravelObjAnim", actionDepth)
-			return Globals.ACTION_STATE.Running	
+			return Globals.ACTION_STATE.Running
 
 		if foodstuff != null:
 			param["item"] = foodstuff
 			param["receiver"] = fridge
 			self.pushAction("Give", actionDepth)
-			return Globals.ACTION_STATE.Running	
+			return Globals.ACTION_STATE.Running
 			
-		if cur_anim != "FridgeClose" or (cur_anim == "FridgeClose" and isAnimPlaying(fridge)):
+		if cur_anim != "CloseIdle":
 			param["obj"] = fridge
-			param["anim"] = "FridgeClose"
+			param["start"] = "FridgeClose"
+			param["end"] = "CloseIdle"
 			self.pushAction("TravelObjAnim", actionDepth)
-			return Globals.ACTION_STATE.Running	
+			return Globals.ACTION_STATE.Running
 			
 	return Globals.ACTION_STATE.Finished
 	
 func TravelObjAnim(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var obj : Node3D = param["obj"]
-	var state : String = param["anim"]
+	var start_state : String = param["start"]
+	var end_state : String = param["end"]
 	var obj_tree : AnimationTree = obj.find_child("AnimationTree", true, false)
 	var obj_state : AnimationNodeStateMachinePlayback = obj_tree.get("parameters/playback")
 	
-	if obj_state.get_current_node() != state:
-		obj_state.travel(state)
+	if obj_state.get_current_node() != start_state and obj_state.get_current_node() != end_state:
+		obj_state.travel(start_state)
 		
-	if not obj_state.is_playing():
-		param.erase("obj")
+	if obj_state.get_current_node() == end_state:
+		param.erase("start")
+		param.erase("end")
 		param.erase("anim")
 		return Globals.ACTION_STATE.Finished
 	
