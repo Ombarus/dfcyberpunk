@@ -148,11 +148,17 @@ func Goto(delta : float, param : Dictionary, actionDepth : int) -> int:
 	if not "velocity" in self:
 		return Globals.ACTION_STATE.Finished
 
+	var precision : float = param.get("precision", 1.0)
 	var nav_agent := self.find_child("NavigationAgent3D", true, false) as NavigationAgent3D
 	nav_agent.target_position = param["target"] as Vector3
 	var next := nav_agent.get_next_path_position()
 	
 	var dir = (next - self.position).normalized()
+	# For some reason it's REALLY hard to keep the capsule properly
+	# aligned on the Y axis
+	# So just hack it if we run into problems
+	if abs(dir.y) > 0.8:
+		self.position.y = next.y
 	dir *= self.MovePixSec
 	var look_at_vec : Vector3 = next
 	look_at_vec.y = self.position.y
@@ -164,8 +170,7 @@ func Goto(delta : float, param : Dictionary, actionDepth : int) -> int:
 	self.velocity = Vector3(dir.x, self.velocity.y, dir.z)
 	var anim : AnimationPlayer = self.find_child("AnimationPlayer", true, false)
 	
-	if (nav_agent.is_target_reached()):
-	#if (self.position - nav.target_position).length_squared() < 0.1:
+	if nav_agent.is_target_reached() or isAtLocation(nav_agent.target_position, precision):
 		anim.play("Idle")
 		self.velocity = Vector3.ZERO
 		return Globals.ACTION_STATE.Finished
@@ -549,8 +554,9 @@ func SleepInBed(delta : float, param : Dictionary, actionDepth : int) -> int:
 		return Globals.ACTION_STATE.Finished
 	
 	var dist_to_bed : float = (self.position - bed.position).length()
-	if dist_to_bed > 0.5:
+	if not isAtLocation(bed.position, 0.5):
 		param["target"] = bed.position
+		param["precision"] = 0.5
 		self.pushAction("Goto", actionDepth)
 		return Globals.ACTION_STATE.Running
 	else:
@@ -716,11 +722,12 @@ func GoDropFoodInFridge(delta : float, param : Dictionary, actionDepth : int) ->
 			foodstuff = ad
 			break
 		
-	#if not is_top_of_stack:
-		#return Globals.ACTION_STATE.Running
+	if not is_top_of_stack:
+		return Globals.ACTION_STATE.Running
 			
-	if not isAtLocation(fridge.position, 2.0):
+	if not isAtLocation(fridge.position, 1.5):
 		param["target"] = fridge.position
+		param["precision"] = 1.5
 		self.pushAction("Goto", actionDepth)
 		return Globals.ACTION_STATE.Running
 		
