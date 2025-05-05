@@ -1,3 +1,5 @@
+https://youtu.be/PuLuwzgYB4g?si=GW89VsARHsRXArKh
+
 X Need a way to interrupt action with higher prio stuff? (like stop going somewhere if you're too hungry)
 	- All Actions in the stack get re-evaluated every frame. This allow any action to break and do something else (In that case, the whole stack get cut and reset)
 ~ Explore inter-entity interactions (ex: using item from kitchen to make food)

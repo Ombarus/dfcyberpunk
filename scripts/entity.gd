@@ -426,6 +426,144 @@ func EatSelectedFood(delta : float, param : Dictionary, actionDepth : int) -> in
 		self.pushAction("Pickup", actionDepth)
 
 	return Globals.ACTION_STATE.Running
+	
+func CookInKitchen2(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var kitchen : Advertisement = self.getFirstOf(Globals.AD_TYPE.Kitchen)
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	var plan : ActionPlan = param.get("current_plan", null)
+	var fridge : Advertisement = param.get("plan_ad", null)
+		
+	if not is_top_of_stack:
+		return Globals.ACTION_STATE.Running
+	
+	var inv : Array = param.get("inventory", [])
+	var foodstuff : Advertisement
+	var food : Advertisement
+	for i in inv:
+		var ad = (i as Advertisement)
+		if (i as Advertisement).Type == Globals.AD_TYPE.Foodstuff:
+			foodstuff = ad
+		if (i as Advertisement).Type == Globals.AD_TYPE.Food:
+			food = ad
+			
+	var kitchen_inv : Array = kitchen.AdMetaData.get("inventory", [])
+	var kitchen_foodstuff : Advertisement
+	for i in kitchen_inv:
+		var ad = (i as Advertisement)
+		if (i as Advertisement).Type == Globals.AD_TYPE.Foodstuff:
+			kitchen_foodstuff = ad
+			break
+		
+	# If food in inventory, drop in fridge
+	if food != null:
+		param["item"] = food
+		param["receiver"] = fridge
+		self.pushAction("GoDropFoodInFridge", actionDepth)
+		return Globals.ACTION_STATE.Running
+		
+	# If Foodstuff in inv, drop on kitchen counter
+	if foodstuff != null:
+		param["item"] = foodstuff
+		param["receiver"] = kitchen
+		# NOTE: Kitchen should display it's inventory on the counter!
+		self.pushAction("GoPutOnCounter", actionDepth)
+		return Globals.ACTION_STATE.Running
+		
+	# If Foodstuff on kitchen counter, Cook
+	if kitchen_foodstuff != null:
+		if is_top_of_stack:
+			plan.PlanMetaData["meal"] = plan.EnergyReward
+			plan.PlanMetaData["meal_sati"] = plan.SatisfactionReward
+		self.pushAction("Cook", actionDepth)
+		return Globals.ACTION_STATE.Running
+	
+	# If no foodstuff in inv, grab from fridge
+	if foodstuff == null:
+		param["item_type"] = Globals.AD_TYPE.Foodstuff
+		param["giver"] = fridge
+		self.pushAction("GoGetFromFridge", actionDepth)
+		return Globals.ACTION_STATE.Running
+	
+	return Globals.ACTION_STATE.Running
+	
+func GoPutOnCounter(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var foodstuff : Advertisement = param.get("item", null)
+	var kitchen : Advertisement = param["receiver"]
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	
+	var is_in_inventory : bool = false
+	var inv : Array = param.get("inventory", [])
+	for i in inv:
+		if i == foodstuff:
+			is_in_inventory = true
+			break
+	
+	if not isAtLocation(kitchen.position, 1.5):
+		param["target"] = kitchen.position
+		param["precision"] = 1.5
+		self.pushAction("Goto", actionDepth)
+		return Globals.ACTION_STATE.Running
+		
+	if isAtLocation(kitchen.position, 1.5):
+		if is_in_inventory:
+			self.pushAction("Give", actionDepth)
+			return Globals.ACTION_STATE.Running
+			
+		if not is_in_inventory:
+			# For now, assume kitchen counter can only have 1 item
+			foodstuff = kitchen.AdMetaData["inventory"][0]
+			foodstuff.visible = true
+			foodstuff.position = kitchen.position
+			foodstuff.position.y = Globals.DEFAULT_TABLE_HEIGHT
+			
+	
+	return Globals.ACTION_STATE.Finished
+	
+func GoGetFromFridge(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var item_type : Globals.AD_TYPE = param["item_type"]
+	var fridge : Advertisement = param["giver"]
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+		
+	if not is_top_of_stack:
+		return Globals.ACTION_STATE.Running
+		
+	var inv : Array = param.get("inventory", [])
+	var foodstuff : Advertisement
+	for i in inv:
+		var ad = (i as Advertisement)
+		if (i as Advertisement).Type == Globals.AD_TYPE.Foodstuff:
+			foodstuff = ad
+			break
+
+	if not isAtLocation(fridge.position, 1.5):
+		param["target"] = fridge.position
+		param["precision"] = 1.5
+		self.pushAction("Goto", actionDepth)
+		return Globals.ACTION_STATE.Running
+		
+	if isAtLocation(fridge.position, 1.5):
+		var cur_anim = animState(fridge)
+		if cur_anim != "OpenIdle" and foodstuff == null:
+			param["obj"] = fridge
+			param["start"] = "FridgeOpen"
+			param["end"] = "OpenIdle"
+			self.pushAction("TravelObjAnim", actionDepth)
+			return Globals.ACTION_STATE.Running
+
+		if foodstuff == null:
+			param["item_type"] = item_type
+			param["giver"] = fridge
+			self.pushAction("Receive", actionDepth)
+			return Globals.ACTION_STATE.Running
+			
+		if cur_anim != "CloseIdle":
+			param["obj"] = fridge
+			param["start"] = "FridgeClose"
+			param["end"] = "CloseIdle"
+			self.pushAction("TravelObjAnim", actionDepth)
+			return Globals.ACTION_STATE.Running
+			
+	return Globals.ACTION_STATE.Finished
 
 func CookInKitchen(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var kitchen : Advertisement = self.getFirstOf(Globals.AD_TYPE.Kitchen)
@@ -451,7 +589,7 @@ func CookInKitchen(delta : float, param : Dictionary, actionDepth : int) -> int:
 	elif foodstuff == null and self.position == fridge.position:
 		param["item_type"] = Globals.AD_TYPE.Foodstuff
 		param["giver"] = fridge
-		self.pushAction("Receive", actionDepth)		
+		self.pushAction("Receive", actionDepth)
 	elif foodstuff != null and self.position != kitchen.position:
 		param["target"] = kitchen.position
 		self.pushAction("Goto", actionDepth)
@@ -703,6 +841,8 @@ func RefillFridge(delta : float, param : Dictionary, actionDepth : int) -> int:
 		return Globals.ACTION_STATE.Running
 		
 	if foodstuff != null and is_top_of_stack:
+		param["item"] = foodstuff
+		param["receiver"] = fridge
 		self.pushAction("GoDropFoodInFridge", actionDepth)
 		return Globals.ACTION_STATE.Running
 		
@@ -712,15 +852,9 @@ func RefillFridge(delta : float, param : Dictionary, actionDepth : int) -> int:
 	return Globals.ACTION_STATE.Running
 	
 func GoDropFoodInFridge(delta : float, param : Dictionary, actionDepth : int) -> int:
-	var fridge : Advertisement = param.get("plan_ad", null)
+	var foodstuff : Advertisement = param.get("item", null)
+	var fridge : Advertisement = param["receiver"]
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
-	var inv : Array = param.get("inventory", [])
-	var foodstuff : Advertisement
-	for i in inv:
-		var ad = (i as Advertisement)
-		if ad.Type == Globals.AD_TYPE.Foodstuff:
-			foodstuff = ad
-			break
 		
 	if not is_top_of_stack:
 		return Globals.ACTION_STATE.Running
@@ -731,7 +865,7 @@ func GoDropFoodInFridge(delta : float, param : Dictionary, actionDepth : int) ->
 		self.pushAction("Goto", actionDepth)
 		return Globals.ACTION_STATE.Running
 		
-	if isAtLocation(fridge.position, 2.0):
+	if isAtLocation(fridge.position, 1.5):
 		var cur_anim = animState(fridge)
 		if cur_anim != "OpenIdle" and foodstuff != null:
 			param["obj"] = fridge
@@ -782,7 +916,7 @@ func GoBuyFoodstuff(delta : float, param : Dictionary, actionDepth : int) -> int
 	if target == null and is_top_of_stack:
 		param["target"] = market.position
 		
-	if not isAtLocation(market.position):
+	if not isAtLocation(market.position) or getCurAction(actionDepth+1) == "Goto":
 		self.pushAction("Goto", actionDepth)
 		return Globals.ACTION_STATE.Running
 	
@@ -793,8 +927,17 @@ func GoBuyFoodstuff(delta : float, param : Dictionary, actionDepth : int) -> int
 		if ad.Type == Globals.AD_TYPE.Foodstuff:
 			foodstuff = ad
 			break
-			
+	
 	if foodstuff == null:
+		# Only play it once, then move on
+		if is_top_of_stack and getPlayingAnim(param) != "Interact":
+			param["anim"] = "Interact"
+			param["anim_backward"] = false
+			self.pushAction("PlayAnim", actionDepth)
+			return Globals.ACTION_STATE.Running
+		if getCurAction(actionDepth+1) == "PlayAnim":
+			return Globals.ACTION_STATE.Running
+		
 		param["scene"] = plan.SpawnReward
 		self.pushAction("Spawn", actionDepth)
 		return Globals.ACTION_STATE.Running
@@ -812,6 +955,9 @@ func Give(delta : float, param : Dictionary, actionDepth : int) -> int:
 	
 	var inv : Array = param.get("inventory", [])
 	inv.erase(item)
+	param.erase("item")
+	if not "inventory" in receiver.AdMetaData:
+		receiver.AdMetaData["inventory"] = []
 	receiver.AdMetaData["inventory"].push_back(item)
 	param["inventory"] = inv
 		
@@ -880,11 +1026,6 @@ func isAtLocation(loc : Vector3, min_dist : float = 1.0) -> bool:
 	if p.distance_squared_to(loc) <= (min_dist * min_dist):
 		return true
 	return false
-	
-func isAnimPlaying(obj : Node3D) -> bool:
-	var obj_tree : AnimationTree = obj.find_child("AnimationTree", true, false)
-	var obj_state : AnimationNodeStateMachinePlayback = obj_tree.get("parameters/playback")
-	return obj_state.is_playing()
 	
 func animState(obj : Node3D) -> String:
 	var obj_tree : AnimationTree = obj.find_child("AnimationTree", true, false)

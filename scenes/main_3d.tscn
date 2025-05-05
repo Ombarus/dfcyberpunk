@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://8qm8xqhjvjw5"]
+[gd_scene load_steps=32 format=3 uid="uid://8qm8xqhjvjw5"]
 
 [ext_resource type="PackedScene" uid="uid://ckkkaxossb5me" path="res://data/models/RoadCenter.glb" id="1_3innq"]
 [ext_resource type="Script" path="res://scripts/camera_3d.gd" id="1_v6ick"]
@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://dxa7y04pf4x2c" path="res://scenes/wall_door_v2.tscn" id="10_age4m"]
 [ext_resource type="PackedScene" uid="uid://gygx3ldj1qis" path="res://data/models/CounterTopSink.glb" id="10_bt3yj"]
 [ext_resource type="PackedScene" uid="uid://dasl5i3f01kdg" path="res://data/models/Cabinet.glb" id="11_yxcl1"]
-[ext_resource type="PackedScene" uid="uid://dn3vgfvhpivts" path="res://data/models/Fridge.glb" id="12_s7tog"]
 [ext_resource type="PackedScene" uid="uid://bdqu256wx0f8i" path="res://data/models/DiningTable.glb" id="13_0islb"]
 [ext_resource type="PackedScene" uid="uid://c41j6hl7oi0ll" path="res://data/models/FoldingChair.glb" id="14_rquro"]
 [ext_resource type="Script" path="res://scripts/advertisement.gd" id="18_h2cyc"]
@@ -509,13 +508,15 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -10, 0
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -11, 0, -7)
 
 [node name="CounterTop3" parent="Static/NavigationRegion3D/Furniture" instance=ExtResource("9_ldhes")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 0, -7)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -11.5921, 0, -7)
 
 [node name="CounterTop4" parent="Static/NavigationRegion3D/Furniture" instance=ExtResource("9_ldhes")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12, 0, -6)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12, 0, -5.95547)
+script = ExtResource("18_h2cyc")
+Type = 3
 
 [node name="CounterTopSink2" parent="Static/NavigationRegion3D/Furniture" instance=ExtResource("10_bt3yj")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12, 0, -7)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12, 0, -6.95547)
 
 [node name="Cabinet2" parent="Static/NavigationRegion3D/Furniture" instance=ExtResource("11_yxcl1")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -11, 0, -7)
@@ -526,14 +527,13 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12, 0
 [node name="Cabinet4" parent="Static/NavigationRegion3D/Furniture" instance=ExtResource("11_yxcl1")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12, 0, -7)
 
-[node name="Fridge2" parent="Static/NavigationRegion3D/Furniture" instance=ExtResource("12_s7tog")]
-transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, -9, 0, -15)
-
 [node name="DiningTable2" parent="Static/NavigationRegion3D/Furniture" instance=ExtResource("13_0islb")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 0, -7)
 
 [node name="FoldingChair2" parent="Static/NavigationRegion3D/Furniture" instance=ExtResource("14_rquro")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -8, 0, -7)
+script = ExtResource("18_h2cyc")
+Type = 7
 
 [node name="FoldingChair3" parent="Static/NavigationRegion3D/Furniture" instance=ExtResource("14_rquro")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7, 0, -6)
@@ -541,6 +541,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7, 0,
 [node name="Bed2" parent="Static/NavigationRegion3D/Furniture" instance=ExtResource("18_w4c5x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.546, 0.0889242, 0)
 script = ExtResource("18_h2cyc")
+Type = 0
 ActionPlans = [SubResource("Resource_1xeal")]
 
 [node name="MarketStall2" parent="Static/NavigationRegion3D/Furniture" instance=ExtResource("20_diwbl")]

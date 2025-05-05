@@ -23,7 +23,7 @@ func _ready() -> void:
 	pie_recipe.SpawnRewardType = Globals.AD_TYPE.Food
 	
 	var steak_recipe := ActionPlan.new()
-	steak_recipe.ActionName = "CookInKitchen"
+	steak_recipe.ActionName = "CookInKitchen2"
 	steak_recipe.EnergyReward = -0.03
 	steak_recipe.SatietyReward = 0.18 # fake reward to encourage NPC to cook when hungry
 	steak_recipe.SatisfactionReward = 0.05

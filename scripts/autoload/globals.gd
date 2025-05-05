@@ -1,6 +1,7 @@
 extends Node
 
 var AD_GROUP := "advertisements"
+var DEFAULT_TABLE_HEIGHT := 0.73
 
 enum ACTION_STATE {
 	Running,
@@ -16,6 +17,7 @@ enum AD_TYPE {
 	Currency,
 	Market,
 	Office,
+	Chair,
 	Other
 }
 
