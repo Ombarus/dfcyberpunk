@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://8qm8xqhjvjw5"]
+[gd_scene load_steps=33 format=3 uid="uid://8qm8xqhjvjw5"]
 
 [ext_resource type="PackedScene" uid="uid://ckkkaxossb5me" path="res://data/models/RoadCenter.glb" id="1_3innq"]
 [ext_resource type="Script" path="res://scripts/camera_3d.gd" id="1_v6ick"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://bxphuiqhnxg25" path="res://data/models/MarketStall.glb" id="20_diwbl"]
 [ext_resource type="PackedScene" uid="uid://podwo6g81pr2" path="res://scenes/npc_thoughts.tscn" id="20_s180p"]
 [ext_resource type="PackedScene" uid="uid://5ro7dre3s3qj" path="res://scenes/fridge2.tscn" id="21_rqupk"]
+[ext_resource type="Script" path="res://scripts/sequencer.gd" id="22_0qn72"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8ig1x"]
 frequency = 0.002
@@ -577,6 +578,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.921923, 4)
 floor_block_on_wall = false
 script = ExtResource("18_vdyff")
 MovePixSec = 1.5
+
+[node name="Sequencer" type="Node" parent="Dynamic/CharacterBody3D"]
+script = ExtResource("22_0qn72")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Dynamic/CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.96, 0)

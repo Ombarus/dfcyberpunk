@@ -542,28 +542,22 @@ func GoGetFromFridge(delta : float, param : Dictionary, actionDepth : int) -> in
 		return Globals.ACTION_STATE.Running
 		
 	if isAtLocation(fridge.position, 1.5):
-		var cur_anim = animState(fridge)
-		if cur_anim != "OpenIdle" and foodstuff == null:
-			param["obj"] = fridge
-			param["start"] = "FridgeOpen"
-			param["end"] = "OpenIdle"
-			self.pushAction("TravelObjAnim", actionDepth)
+		var seq : Sequencer = get_node("Sequencer")
+		if seq.CurState() == seq.SEQ_STATE.IDLE:
+			seq.FridgeSequence(fridge)
 			return Globals.ACTION_STATE.Running
-
-		if foodstuff == null:
-			param["item_type"] = item_type
-			param["giver"] = fridge
-			self.pushAction("Receive", actionDepth)
-			return Globals.ACTION_STATE.Running
+		elif seq.CurState() == seq.SEQ_STATE.FINISHED:
+			seq.Reset()
+			return Globals.ACTION_STATE.Finished
+		else:
+			var anim : AnimationPlayer = fridge.find_child("AnimationPlayer", true, false)
+			if anim.current_animation == "FridgeOpen" and anim.current_animation_position >= anim.current_animation_length - 0.1 and foodstuff == null:
+				param["item_type"] = item_type
+				param["giver"] = fridge
+				self.pushAction("Receive", actionDepth)
+			seq.SetContinue()
 			
-		if cur_anim != "CloseIdle":
-			param["obj"] = fridge
-			param["start"] = "FridgeClose"
-			param["end"] = "CloseIdle"
-			self.pushAction("TravelObjAnim", actionDepth)
-			return Globals.ACTION_STATE.Running
-			
-	return Globals.ACTION_STATE.Finished
+	return Globals.ACTION_STATE.Running
 
 func CookInKitchen(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var kitchen : Advertisement = self.getFirstOf(Globals.AD_TYPE.Kitchen)
@@ -866,45 +860,21 @@ func GoDropFoodInFridge(delta : float, param : Dictionary, actionDepth : int) ->
 		return Globals.ACTION_STATE.Running
 		
 	if isAtLocation(fridge.position, 1.5):
-		var cur_anim = animState(fridge)
-		if cur_anim != "OpenIdle" and foodstuff != null:
-			param["obj"] = fridge
-			param["start"] = "FridgeOpen"
-			param["end"] = "OpenIdle"
-			self.pushAction("TravelObjAnim", actionDepth)
+		var seq : Sequencer = get_node("Sequencer")
+		if seq.CurState() == seq.SEQ_STATE.IDLE:
+			seq.FridgeSequence(fridge)
 			return Globals.ACTION_STATE.Running
-
-		if foodstuff != null:
-			param["item"] = foodstuff
-			param["receiver"] = fridge
-			self.pushAction("Give", actionDepth)
-			return Globals.ACTION_STATE.Running
+		elif seq.CurState() == seq.SEQ_STATE.FINISHED:
+			seq.Reset()
+			return Globals.ACTION_STATE.Finished
+		else:
+			var anim : AnimationPlayer = fridge.find_child("AnimationPlayer", true, false)
+			if anim.current_animation == "FridgeOpen" and anim.current_animation_position >= anim.current_animation_length - 0.1 and foodstuff != null:
+				param["item"] = foodstuff
+				param["receiver"] = fridge
+				self.pushAction("Give", actionDepth)
+			seq.SetContinue()
 			
-		if cur_anim != "CloseIdle":
-			param["obj"] = fridge
-			param["start"] = "FridgeClose"
-			param["end"] = "CloseIdle"
-			self.pushAction("TravelObjAnim", actionDepth)
-			return Globals.ACTION_STATE.Running
-			
-	return Globals.ACTION_STATE.Finished
-	
-func TravelObjAnim(delta : float, param : Dictionary, actionDepth : int) -> int:
-	var obj : Node3D = param["obj"]
-	var start_state : String = param["start"]
-	var end_state : String = param["end"]
-	var obj_tree : AnimationTree = obj.find_child("AnimationTree", true, false)
-	var obj_state : AnimationNodeStateMachinePlayback = obj_tree.get("parameters/playback")
-	
-	if obj_state.get_current_node() != start_state and obj_state.get_current_node() != end_state:
-		obj_state.travel(start_state)
-		
-	if obj_state.get_current_node() == end_state:
-		param.erase("start")
-		param.erase("end")
-		param.erase("anim")
-		return Globals.ACTION_STATE.Finished
-	
 	return Globals.ACTION_STATE.Running
 	
 func GoBuyFoodstuff(delta : float, param : Dictionary, actionDepth : int) -> int:
@@ -1027,9 +997,26 @@ func isAtLocation(loc : Vector3, min_dist : float = 1.0) -> bool:
 		return true
 	return false
 	
-func animState(obj : Node3D) -> String:
-	var obj_tree : AnimationTree = obj.find_child("AnimationTree", true, false)
-	var obj_state : AnimationNodeStateMachinePlayback = obj_tree.get("parameters/playback")
-	var cur_anim = obj_state.get_current_node()
-	return cur_anim
-	
+#func animState(obj : Node3D) -> String:
+	#var obj_tree : AnimationTree = obj.find_child("AnimationTree", true, false)
+	#var obj_state : AnimationNodeStateMachinePlayback = obj_tree.get("parameters/playback")
+	#var cur_anim = obj_state.get_current_node()
+	#return cur_anim
+	#
+#func TravelObjAnim(delta : float, param : Dictionary, actionDepth : int) -> int:
+	#var obj : Node3D = param["obj"]
+	#var start_state : String = param["start"]
+	#var end_state : String = param["end"]
+	#var obj_tree : AnimationTree = obj.find_child("AnimationTree", true, false)
+	#var obj_state : AnimationNodeStateMachinePlayback = obj_tree.get("parameters/playback")
+	#
+	#if obj_state.get_current_node() != start_state and obj_state.get_current_node() != end_state:
+		#obj_state.travel(start_state)
+		#
+	#if obj_state.get_current_node() == end_state:
+		#param.erase("start")
+		#param.erase("end")
+		#param.erase("anim")
+		#return Globals.ACTION_STATE.Finished
+	#
+	#return Globals.ACTION_STATE.Running
