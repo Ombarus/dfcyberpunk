@@ -18,6 +18,7 @@ enum AD_TYPE {
 	Market,
 	Office,
 	Chair,
+	Fridge,
 	Other
 }
 

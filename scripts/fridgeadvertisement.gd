@@ -5,7 +5,7 @@ func _ready() -> void:
 	self.AdMetaData["inventory"] = []
 	
 	var spag_recipe := ActionPlan.new()
-	spag_recipe.ActionName = "CookInKitchen"
+	spag_recipe.ActionName = "CookInKitchen2"
 	spag_recipe.EnergyReward = -0.05
 	spag_recipe.SatietyReward = 0.15 # fake reward to encourage NPC to cook when hungry
 	spag_recipe.SatisfactionReward = 0.05
@@ -14,7 +14,7 @@ func _ready() -> void:
 	spag_recipe.SpawnRewardType = Globals.AD_TYPE.Food
 	
 	var pie_recipe := ActionPlan.new()
-	pie_recipe.ActionName = "CookInKitchen"
+	pie_recipe.ActionName = "CookInKitchen2"
 	pie_recipe.EnergyReward = -0.045
 	pie_recipe.SatietyReward = 0.10 # fake reward to encourage NPC to cook when hungry
 	pie_recipe.SatisfactionReward = 0.08

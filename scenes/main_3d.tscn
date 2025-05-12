@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://8qm8xqhjvjw5"]
+[gd_scene load_steps=34 format=3 uid="uid://8qm8xqhjvjw5"]
 
 [ext_resource type="PackedScene" uid="uid://ckkkaxossb5me" path="res://data/models/RoadCenter.glb" id="1_3innq"]
 [ext_resource type="Script" path="res://scripts/camera_3d.gd" id="1_v6ick"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dqi7jqlxei607" path="res://data/models/Peep1.glb" id="10_4peve"]
 [ext_resource type="PackedScene" uid="uid://dxa7y04pf4x2c" path="res://scenes/wall_door_v2.tscn" id="10_age4m"]
 [ext_resource type="PackedScene" uid="uid://gygx3ldj1qis" path="res://data/models/CounterTopSink.glb" id="10_bt3yj"]
+[ext_resource type="Script" path="res://scripts/kitchenadvertisement.gd" id="11_dmnw3"]
 [ext_resource type="PackedScene" uid="uid://dasl5i3f01kdg" path="res://data/models/Cabinet.glb" id="11_yxcl1"]
 [ext_resource type="PackedScene" uid="uid://bdqu256wx0f8i" path="res://data/models/DiningTable.glb" id="13_0islb"]
 [ext_resource type="PackedScene" uid="uid://c41j6hl7oi0ll" path="res://data/models/FoldingChair.glb" id="14_rquro"]
@@ -513,7 +514,7 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -11.59
 
 [node name="CounterTop4" parent="Static/NavigationRegion3D/Furniture" instance=ExtResource("9_ldhes")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12, 0, -5.95547)
-script = ExtResource("18_h2cyc")
+script = ExtResource("11_dmnw3")
 Type = 3
 
 [node name="CounterTopSink2" parent="Static/NavigationRegion3D/Furniture" instance=ExtResource("10_bt3yj")]
@@ -558,6 +559,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 11.735
 
 [node name="Fridge" parent="Static/NavigationRegion3D/Furniture" instance=ExtResource("21_rqupk")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9, 0, -7)
+Type = 8
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Static"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 8.68225, 0.937806, -1.36158)
