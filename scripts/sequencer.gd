@@ -51,6 +51,14 @@ func FridgeSequence(fridge : Advertisement):
 	fridge_anim.play_backwards("FridgeOpen")
 	await player_anim.animation_finished
 	_seq_state = SEQ_STATE.FINISHED
+	
+func SimpleInteractSequence():
+	_seq_state = SEQ_STATE.RUNNING
+	_cur_seq = "SimpleInteractSequence"
+	var player_anim : AnimationPlayer = ParentEntity.find_child("AnimationPlayer", true, false)
+	player_anim.play("Interact")
+	await player_anim.animation_finished
+	_seq_state = SEQ_STATE.FINISHED
 
 # This assume we run Ai every frame.
 # Easy optim would be to have a "tick" event we can listen to

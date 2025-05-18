@@ -113,6 +113,41 @@ func UpdateSatisfaction(delta : float) -> void:
 ## ACTION FUNCTION
 ###################################################################################################
 
+func GoGetItemFromGeneric(delta :float, param : Dictionary, actionDepth : int) -> int:
+	var item : Advertisement = param["item"]
+	var container : Advertisement = param["giver"]
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	
+	if is_top_of_stack:
+		var inv : Array = param.get("inventory", [])
+		for i in inv:
+			var ad = (i as Advertisement)
+			if i == item:
+				var seq : Sequencer = get_node("Sequencer")
+				seq.Reset()
+				return Globals.ACTION_STATE.Finished
+	
+	if not self.isAtLocation(container.position, 1.5):
+		param["target"] = container.position
+		param["precision"] = 1.5
+		self.pushAction("Goto", actionDepth)
+		return Globals.ACTION_STATE.Running
+	else:
+		var seq : Sequencer = get_node("Sequencer")
+		if seq.CurState() == seq.SEQ_STATE.IDLE:
+			seq.SimpleInteractSequence()
+			return Globals.ACTION_STATE.Running
+		elif seq.CurState() == seq.SEQ_STATE.FINISHED:
+			param["item_type"] = item.Type
+			param["giver"] = container
+			self.pushAction("Receive", actionDepth)
+			return Globals.ACTION_STATE.Running
+		else:
+			return Globals.ACTION_STATE.Running
+		
+	return Globals.ACTION_STATE.Running
+	
+
 func WalkRandomly(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var target = param.get("target", null)
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
@@ -213,6 +248,7 @@ func Cook(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var cur_plan : ActionPlan = param["current_plan"]
 	var cook_left := cur_plan.PlanMetaData["meal"] as float
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	var anim : AnimationPlayer = self.find_child("AnimationPlayer", true, false)
 	# Should eventually be able to handle positive OR negative values
 	# For now, I know cooking should consume energy so it'll be negative
 	cook_left = abs(cook_left)
@@ -227,6 +263,7 @@ func Cook(delta : float, param : Dictionary, actionDepth : int) -> int:
 
 	if cook_left == 0:
 		var kitchen : Advertisement = self.getFirstOf(Globals.AD_TYPE.Kitchen)
+		anim.play("Idle")
 		if food_to_drop != null and is_top_of_stack:
 			var kitchen_inv : Array = kitchen.AdMetaData.get("inventory", [])
 			var foodstuff_used : Advertisement = null
@@ -249,6 +286,8 @@ func Cook(delta : float, param : Dictionary, actionDepth : int) -> int:
 			var sati_reward : float = cur_plan.PlanMetaData.get("meal_sati", 0.0)
 			Needs.ApplyNeed(Globals.NEEDS.Satisfaction, sati_reward)
 			return Globals.ACTION_STATE.Finished
+	else:
+		anim.play("Interact")
 		
 	var ener := self.CookEnerSec * delta
 	if ener >= cook_left:
@@ -407,6 +446,8 @@ func EatSelectedFood(delta : float, param : Dictionary, actionDepth : int) -> in
 	
 	if plan == null or food == null:
 		return Globals.ACTION_STATE.Finished
+		
+	var food_container = food.AdMetaData.get("container", null)
 	
 	var inv : Array = param.get("inventory", [])
 	var in_inventory := false
@@ -414,8 +455,35 @@ func EatSelectedFood(delta : float, param : Dictionary, actionDepth : int) -> in
 		if i == food:
 			in_inventory = true
 			break
-	
+			
+	if food_container != self and food_container != null:
+		param["item"] = food
+		param["giver"] = food_container
+		self.pushAction("GoGetItemFromGeneric", actionDepth)
+		return Globals.ACTION_STATE.Running
+		
+	if food_container == null:
+		if self.position != food.position:
+			param["target"] = food.position
+			self.pushAction("Goto", actionDepth)
+			return Globals.ACTION_STATE.Running
+		else:
+			param["item"] = food
+			self.pushAction("Pickup", actionDepth)
+			return Globals.ACTION_STATE.Running
+
 	if in_inventory == true:
+		var chair : Advertisement = self.getFirstOf(Globals.AD_TYPE.Chair)
+		if not self.isAtLocation(chair.position, 2.0):
+			param["target"] = chair.position
+			self.pushAction("Goto", actionDepth)
+			return Globals.ACTION_STATE.Running
+		else:
+			param["anim"] = "SitChair"
+			param["anim_transform"] = chair.global_transform
+			self.pushAction("PlayAnim", actionDepth)
+			return Globals.ACTION_STATE.Running
+
 		if is_top_of_stack:
 			var rewards := {
 				Globals.NEEDS.Satiety: plan.SatietyReward,
@@ -425,13 +493,6 @@ func EatSelectedFood(delta : float, param : Dictionary, actionDepth : int) -> in
 			param["food"] = rewards
 		self.pushAction("Eat", actionDepth)
 		return Globals.ACTION_STATE.Running
-	
-	if self.position != food.position:
-		param["target"] = food.position
-		self.pushAction("Goto", actionDepth)
-	else:
-		param["item"] = food
-		self.pushAction("Pickup", actionDepth)
 
 	return Globals.ACTION_STATE.Running
 	
@@ -578,6 +639,7 @@ func Receive(delta : float, param : Dictionary, actionDepth : int) -> int:
 			giver_inv.erase(ad)
 			param["inventory"] = receiver_inv
 			giver.AdMetaData["inventory"] = giver_inv
+			ad.AdMetaData["container"] = self
 			break
 		
 	return Globals.ACTION_STATE.Finished
@@ -596,12 +658,12 @@ func Spawn(delta : float, param : Dictionary, actionDepth : int) -> int:
 	return Globals.ACTION_STATE.Finished
 
 func Pickup(delta : float, param : Dictionary, actionDepth : int) -> int:
-	var item : Node2D = param["item"] as Node2D
+	var item : Advertisement = param["item"] as Advertisement
 	param.erase("item")
 	var inv : Array = param.get("inventory", [])
 	inv.push_back(item)
 	param["inventory"] = inv
-	#item.queue_free()
+	item.AdMetaData["container"] = self
 	item.visible = false
 	item.BelongTo = self
 	return Globals.ACTION_STATE.Finished
@@ -611,6 +673,7 @@ func Drop(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var item : Advertisement = param["item"] as Advertisement
 	param.erase("item")
 	inv.erase(item)
+	item.AdMetaData["container"] = null
 	item.visible = true
 	item.BelongTo = null
 	var pos := self.position + Vector3(randi_range(-50.0, 50.0), self.position.y, randi_range(-50.0, 50.0))
@@ -945,6 +1008,7 @@ func Give(delta : float, param : Dictionary, actionDepth : int) -> int:
 		receiver.AdMetaData["inventory"] = []
 	receiver.AdMetaData["inventory"].push_back(item)
 	param["inventory"] = inv
+	item.AdMetaData["container"] = receiver
 		
 	return Globals.ACTION_STATE.Finished
 	
