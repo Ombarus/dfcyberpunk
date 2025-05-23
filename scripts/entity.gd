@@ -443,6 +443,7 @@ func EatSelectedFood(delta : float, param : Dictionary, actionDepth : int) -> in
 	var food : Advertisement = param.get("plan_ad", null)
 	var left = param.get("food", null)
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	var table : Advertisement = self.getFirstOf(Globals.AD_TYPE.Table)
 	
 	if plan == null or food == null:
 		return Globals.ACTION_STATE.Finished
@@ -455,6 +456,32 @@ func EatSelectedFood(delta : float, param : Dictionary, actionDepth : int) -> in
 		if i == food:
 			in_inventory = true
 			break
+			
+	var table_inv : Array = table.AdMetaData.get("Inventory", [])
+	var in_table_inventory := false
+	for i in table_inv:
+		if i == food:
+			in_table_inventory = true
+			break
+	
+	# if in table inv: sit and eat
+	# if not: pickup, give to table, then sit and eat
+	if in_table_inventory:
+		var chair : Advertisement = self.getFirstOf(Globals.AD_TYPE.Chair)
+		if not self.isAtLocation(chair.position, 2.0):
+			param["target"] = chair.position
+			self.pushAction("Goto", actionDepth)
+			return Globals.ACTION_STATE.Running
+		else:
+			var seq : Sequencer = get_node("Sequencer")
+			if seq.CurState() == seq.SEQ_STATE.IDLE:
+				seq.SitOnChair(chair)
+				return Globals.ACTION_STATE.Running
+			elif seq.CurState() == seq.SEQ_STATE.FINISHED:
+				seq.Reset()
+			else:
+				seq.SetContinue()
+				return Globals.ACTION_STATE.Running
 			
 	if food_container != self and food_container != null:
 		param["item"] = food
@@ -473,15 +500,15 @@ func EatSelectedFood(delta : float, param : Dictionary, actionDepth : int) -> in
 			return Globals.ACTION_STATE.Running
 
 	if in_inventory == true:
-		var chair : Advertisement = self.getFirstOf(Globals.AD_TYPE.Chair)
-		if not self.isAtLocation(chair.position, 2.0):
-			param["target"] = chair.position
-			self.pushAction("Goto", actionDepth)
+		if self.isAtLocation(table.position, 1.5):
+			param["item"] = food
+			param["receiver"] = table
+			self.pushAction("Give", actionDepth)
 			return Globals.ACTION_STATE.Running
 		else:
-			param["anim"] = "SitChair"
-			param["anim_transform"] = chair.global_transform
-			self.pushAction("PlayAnim", actionDepth)
+			param["target"] = table.position
+			param["precision"] = 1.5
+			self.pushAction("Goto", actionDepth)
 			return Globals.ACTION_STATE.Running
 
 		if is_top_of_stack:

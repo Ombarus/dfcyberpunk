@@ -59,6 +59,23 @@ func SimpleInteractSequence():
 	player_anim.play("Interact")
 	await player_anim.animation_finished
 	_seq_state = SEQ_STATE.FINISHED
+	
+func SitOnChair(chair : Advertisement):
+	_seq_state = SEQ_STATE.RUNNING
+	_cur_seq = "SitAndPutOnTable"
+	var player_anim : AnimationPlayer = ParentEntity.find_child("AnimationPlayer", true, false)
+	player_anim.play("SitChair")
+	var tween = get_tree().create_tween()
+	tween.tween_property(ParentEntity,"global_transform", chair.global_transform, 1.0)
+	
+	await player_anim.animation_finished
+	if await make_sure_still_running() == false:
+		return
+
+	player_anim.play("SitChairIdle")
+	_seq_state = SEQ_STATE.FINISHED
+	
+	
 
 # This assume we run Ai every frame.
 # Easy optim would be to have a "tick" event we can listen to
