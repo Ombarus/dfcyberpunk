@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://8qm8xqhjvjw5"]
+[gd_scene load_steps=57 format=3 uid="uid://8qm8xqhjvjw5"]
 
 [ext_resource type="PackedScene" uid="uid://ckkkaxossb5me" path="res://data/models/RoadCenter.glb" id="1_3innq"]
 [ext_resource type="Script" path="res://scripts/camera_3d.gd" id="1_v6ick"]
@@ -73,6 +73,100 @@ SpawnRewardType = 0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bpfx1"]
 radius = 0.4
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qtky6"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3j7m1"]
+animation = &"Interact"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ep6lm"]
+animation = &"SitChair"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xdcs4"]
+animation = &"SitChairIdle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_twcae"]
+animation = &"SleepBed"
+play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_eh7d4"]
+animation = &"SleepBedIdle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xgqgw"]
+animation = &"SitChair"
+play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t25n4"]
+animation = &"SleepBed"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1dtf0"]
+animation = &"Walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qsww2"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y51r2"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rr0el"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jo7p6"]
+xfade_time = 0.1
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dndwq"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2pm1p"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mqkvg"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_attys"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4h8sh"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p85wi"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wj11f"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_05m1f"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0fb32"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_r6qwv"]
+states/End/position = Vector2(1229, 100)
+states/Idle/node = SubResource("AnimationNodeAnimation_qtky6")
+states/Idle/position = Vector2(78, 37)
+states/Interact/node = SubResource("AnimationNodeAnimation_3j7m1")
+states/Interact/position = Vector2(78, -76)
+states/SitChair/node = SubResource("AnimationNodeAnimation_ep6lm")
+states/SitChair/position = Vector2(276, -36)
+states/SitChairIdle/node = SubResource("AnimationNodeAnimation_xdcs4")
+states/SitChairIdle/position = Vector2(449, -36)
+states/SleepBed/node = SubResource("AnimationNodeAnimation_twcae")
+states/SleepBed/position = Vector2(276, 132)
+states/SleepBedIdle/node = SubResource("AnimationNodeAnimation_eh7d4")
+states/SleepBedIdle/position = Vector2(449, 132)
+states/StandChair/node = SubResource("AnimationNodeAnimation_xgqgw")
+states/StandChair/position = Vector2(621, -36)
+states/Start/position = Vector2(-110, 100)
+states/WakeBed/node = SubResource("AnimationNodeAnimation_t25n4")
+states/WakeBed/position = Vector2(621, 132)
+states/Walk/node = SubResource("AnimationNodeAnimation_1dtf0")
+states/Walk/position = Vector2(78, 184)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_qsww2"), "Idle", "Interact", SubResource("AnimationNodeStateMachineTransition_y51r2"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_rr0el"), "Interact", "Idle", SubResource("AnimationNodeStateMachineTransition_jo7p6"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_dndwq"), "Idle", "SitChair", SubResource("AnimationNodeStateMachineTransition_2pm1p"), "SitChair", "SitChairIdle", SubResource("AnimationNodeStateMachineTransition_mqkvg"), "Idle", "SleepBed", SubResource("AnimationNodeStateMachineTransition_attys"), "SleepBed", "SleepBedIdle", SubResource("AnimationNodeStateMachineTransition_4h8sh"), "SitChairIdle", "StandChair", SubResource("AnimationNodeStateMachineTransition_p85wi"), "StandChair", "Idle", SubResource("AnimationNodeStateMachineTransition_wj11f"), "SleepBedIdle", "WakeBed", SubResource("AnimationNodeStateMachineTransition_05m1f"), "WakeBed", "Idle", SubResource("AnimationNodeStateMachineTransition_0fb32")]
+graph_offset = Vector2(-368, -178)
 
 [node name="Main3D" type="Node3D"]
 
@@ -592,6 +686,43 @@ shape = SubResource("CapsuleShape3D_bpfx1")
 
 [node name="Peep1" parent="Dynamic/CharacterBody3D" instance=ExtResource("10_4peve")]
 
+[node name="Skeleton3D" parent="Dynamic/CharacterBody3D/Peep1/Peep1Armature" index="0"]
+bones/1/position = Vector3(-0.00127489, 0.823184, -0.000251797)
+bones/1/rotation = Quaternion(-0.000209762, -2.09945e-05, 0.00299972, 0.999995)
+bones/2/rotation = Quaternion(0.00351169, -0.0365505, -0.343088, 0.938585)
+bones/3/rotation = Quaternion(0.0357784, -0.0172868, -0.810649, 0.584182)
+bones/4/rotation = Quaternion(0.0266007, 0.00150517, -0.150694, 0.988221)
+bones/5/rotation = Quaternion(2.66207e-08, 8.65356e-08, 0.14307, 0.989713)
+bones/6/rotation = Quaternion(-1.7033e-08, 4.39079e-08, -0.149111, 0.988821)
+bones/7/position = Vector3(0.38683, 0.106901, 0.0703367)
+bones/8/rotation = Quaternion(-0.499582, -0.233152, 0.658396, -0.512419)
+bones/9/rotation = Quaternion(0.52, 0.0585313, -0.122401, 0.843322)
+bones/10/rotation = Quaternion(0.0534042, 0.0100826, -0.18313, 0.981585)
+bones/11/rotation = Quaternion(-0.0515415, -0.0465354, 0.610466, 0.788992)
+bones/12/position = Vector3(0.126022, -0.319229, 0.671016)
+bones/12/rotation = Quaternion(-0.64907, 0.263978, 0.66225, -0.265421)
+bones/13/rotation = Quaternion(-1.13687e-13, -9.09495e-13, -1.39698e-09, 1)
+bones/14/rotation = Quaternion(-1.13853e-13, 1.19208e-07, -1.39698e-09, 1)
+bones/15/position = Vector3(-0.109081, 0.460357, 6.17393e-08)
+bones/15/rotation = Quaternion(-2.49462e-07, -1.86198e-08, 0.335421, 0.942068)
+bones/16/rotation = Quaternion(0.030427, 0.0114148, 0.812114, 0.582593)
+bones/17/rotation = Quaternion(0.0321826, -0.00174731, 0.204895, 0.978253)
+bones/18/rotation = Quaternion(2.86083e-08, -7.92949e-08, -0.14307, 0.989713)
+bones/19/rotation = Quaternion(-1.55731e-08, -4.10977e-08, 0.149111, 0.988821)
+bones/20/position = Vector3(-0.370324, 0.104393, 0.0371683)
+bones/21/rotation = Quaternion(0.49897, -0.234465, 0.654204, 0.517757)
+bones/22/rotation = Quaternion(0.521254, -0.0579086, 0.122342, 0.842599)
+bones/23/rotation = Quaternion(0.055185, -0.00992354, 0.186433, 0.980866)
+bones/24/rotation = Quaternion(-0.0515415, 0.0465354, -0.610466, 0.788992)
+bones/25/position = Vector3(-0.126022, -0.319229, 0.671016)
+bones/26/position = Vector3(0.117189, 0.0969281, 0.0151976)
+bones/27/position = Vector3(-0.117189, 0.0969281, 0.0151976)
+
+[node name="AnimationTree" type="AnimationTree" parent="Dynamic/CharacterBody3D"]
+root_node = NodePath("../Peep1")
+tree_root = SubResource("AnimationNodeStateMachine_r6qwv")
+anim_player = NodePath("../Peep1/AnimationPlayer")
+
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="Dynamic/CharacterBody3D"]
 path_desired_distance = 0.25
 target_desired_distance = 0.5
@@ -612,4 +743,5 @@ grow_vertical = 1
 [node name="Title" parent="Dynamic/CharacterBody3D/CanvasLayer/NPCThoughts/ColorRect/HBoxContainer/PlanScore" index="0"]
 custom_minimum_size = Vector2(250, 0)
 
+[editable path="Dynamic/CharacterBody3D/Peep1"]
 [editable path="Dynamic/CharacterBody3D/CanvasLayer/NPCThoughts"]

@@ -1,9 +1,66 @@
-[gd_scene load_steps=3 format=3 uid="uid://5ro7dre3s3qj"]
+[gd_scene load_steps=13 format=3 uid="uid://5ro7dre3s3qj"]
 
 [ext_resource type="Script" path="res://scripts/fridgeadvertisement.gd" id="1_jo8es"]
 [ext_resource type="PackedScene" uid="uid://dn3vgfvhpivts" path="res://data/models/Fridge.glb" id="1_lcjlg"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_wsivx"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h2dhd"]
+animation = &"FridgeOpen"
+play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g53ur"]
+animation = &"FridgeOpen"
+use_custom_timeline = true
+timeline_length = 1.0
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_htvc3"]
+animation = &"FridgeOpen"
+use_custom_timeline = true
+timeline_length = 1.0
+stretch_time_scale = true
+start_offset = 1.0
+loop_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dfhn3"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pvryg"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7gt2y"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gc8c8"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kheum"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_crilj"]
+states/CloseIdle/node = SubResource("AnimationNodeStateMachine_wsivx")
+states/CloseIdle/position = Vector2(554, 116)
+states/FridgeClose/node = SubResource("AnimationNodeAnimation_h2dhd")
+states/FridgeClose/position = Vector2(392, 116)
+states/FridgeOpen/node = SubResource("AnimationNodeAnimation_g53ur")
+states/FridgeOpen/position = Vector2(392, -6)
+states/OpenIdle/node = SubResource("AnimationNodeAnimation_htvc3")
+states/OpenIdle/position = Vector2(554, -9)
+states/Start/position = Vector2(554, 232)
+transitions = ["FridgeOpen", "OpenIdle", SubResource("AnimationNodeStateMachineTransition_dfhn3"), "OpenIdle", "FridgeClose", SubResource("AnimationNodeStateMachineTransition_pvryg"), "FridgeClose", "CloseIdle", SubResource("AnimationNodeStateMachineTransition_7gt2y"), "CloseIdle", "FridgeOpen", SubResource("AnimationNodeStateMachineTransition_gc8c8"), "Start", "CloseIdle", SubResource("AnimationNodeStateMachineTransition_kheum")]
+graph_offset = Vector2(-457, -109)
 
 [node name="Fridge" type="Node3D"]
 script = ExtResource("1_jo8es")
 
 [node name="Fridge2" parent="." instance=ExtResource("1_lcjlg")]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Fridge2")
+tree_root = SubResource("AnimationNodeStateMachine_crilj")
+anim_player = NodePath("../Fridge2/AnimationPlayer")
+
+[editable path="Fridge2"]

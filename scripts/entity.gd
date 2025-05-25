@@ -1039,6 +1039,23 @@ func Give(delta : float, param : Dictionary, actionDepth : int) -> int:
 		
 	return Globals.ACTION_STATE.Finished
 	
+func TravelObjAnim(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var obj : Node3D = param["obj"]
+	var end_state : String = param["end"]
+	var obj_tree : AnimationTree = obj.find_child("AnimationTree", true, false)
+	var obj_state : AnimationNodeStateMachinePlayback = obj_tree.get("parameters/playback")
+	
+	if obj_state.get_current_node() != end_state:
+		obj_state.travel(end_state)
+		
+	if obj_state.get_current_node() == end_state:
+		param.erase("start")
+		param.erase("end")
+		param.erase("anim")
+		return Globals.ACTION_STATE.Finished
+	
+	return Globals.ACTION_STATE.Running
+	
 ###################################################################################################
 ## UTILITY FUNCTION
 ###################################################################################################
@@ -1103,26 +1120,23 @@ func isAtLocation(loc : Vector3, min_dist : float = 1.0) -> bool:
 		return true
 	return false
 	
-#func animState(obj : Node3D) -> String:
-	#var obj_tree : AnimationTree = obj.find_child("AnimationTree", true, false)
-	#var obj_state : AnimationNodeStateMachinePlayback = obj_tree.get("parameters/playback")
-	#var cur_anim = obj_state.get_current_node()
-	#return cur_anim
-	#
-#func TravelObjAnim(delta : float, param : Dictionary, actionDepth : int) -> int:
-	#var obj : Node3D = param["obj"]
-	#var start_state : String = param["start"]
-	#var end_state : String = param["end"]
-	#var obj_tree : AnimationTree = obj.find_child("AnimationTree", true, false)
-	#var obj_state : AnimationNodeStateMachinePlayback = obj_tree.get("parameters/playback")
-	#
-	#if obj_state.get_current_node() != start_state and obj_state.get_current_node() != end_state:
-		#obj_state.travel(start_state)
-		#
-	#if obj_state.get_current_node() == end_state:
-		#param.erase("start")
-		#param.erase("end")
-		#param.erase("anim")
-		#return Globals.ACTION_STATE.Finished
-	#
-	#return Globals.ACTION_STATE.Running
+func isTypeInInv(inv : Array, target : Globals.AD_TYPE) -> bool:
+	for i in inv:
+		if (i as Advertisement).Type == target:
+			return true
+	return false
+	
+func isItemInInv(inv : Array, target : Advertisement) -> bool:
+	for i in inv:
+		if (i as Advertisement) == target:
+			return true
+	return false
+	
+func animState(obj : Node3D) -> String:
+	var obj_tree : AnimationTree = obj.find_child("AnimationTree", true, false)
+	var obj_state : AnimationNodeStateMachinePlayback = obj_tree.get("parameters/playback")
+	var cur_anim = obj_state.get_current_node()
+	return cur_anim
+	
+func getContainer(obj : Advertisement) -> Advertisement:
+	return obj.AdMetaData.get("container", null)
