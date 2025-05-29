@@ -436,6 +436,7 @@ func Goto(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var nav_agent := self.find_child("NavigationAgent3D", true, false) as NavigationAgent3D
 	nav_agent.target_position = param["target"] as Vector3
 	var next := nav_agent.get_next_path_position()
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	
 	var dir = (next - self.position).normalized()
 	# For some reason it's REALLY hard to keep the capsule properly
@@ -446,20 +447,32 @@ func Goto(delta : float, param : Dictionary, actionDepth : int) -> int:
 	dir *= self.MovePixSec
 	var look_at_vec : Vector3 = next
 	look_at_vec.y = self.position.y
-	self.look_at(look_at_vec, Vector3.UP)
-	# I might have made a mistake aligning the models to Y- in Blender
-	# Seems like it becomes z+ in Godot and look_at assume Z-?
-	self.rotate_y(deg_to_rad(180.0))
-	
-	self.velocity = Vector3(dir.x, self.velocity.y, dir.z)
 	var anim : AnimationPlayer = self.find_child("AnimationPlayer", true, false)
 	
 	if nav_agent.is_target_reached() or isAtLocation(nav_agent.target_position, precision):
-		anim.play("Idle")
+		if is_top_of_stack:
+			param["obj"] = self
+			param["state"] = "Idle"
+		self.pushAction("TravelAnimState", actionDepth)
 		self.velocity = Vector3.ZERO
-		return Globals.ACTION_STATE.Finished
+		if self.animState(self) == "Idle" and is_top_of_stack:
+			return Globals.ACTION_STATE.Finished
+		else:
+			return Globals.ACTION_STATE.Running
 	
-	anim.play("Walk")
+	if self.animState(self) != "Walk" and is_top_of_stack:
+		param["obj"] = self
+		param["state"] = "Walk"
+		self.pushAction("TravelAnimState", actionDepth)
+	
+	# With state machine it might take time before we're in the "Walk" state
+	# So wait until we've reached "walk" state before setting velocity and rotation
+	if self.animState(self) == "Walk":
+		self.look_at(look_at_vec, Vector3.UP)
+		# I might have made a mistake aligning the models to Y- in Blender
+		# Seems like it becomes z+ in Godot and look_at assume Z-?
+		self.rotate_y(deg_to_rad(180.0))
+		self.velocity = Vector3(dir.x, self.velocity.y, dir.z)
 	var energy : float = self.MoveEnerSec * delta
 	Needs.ApplyNeed(Globals.NEEDS.Energy, -energy)
 	return Globals.ACTION_STATE.Running
@@ -531,14 +544,13 @@ func GoSleepInBed(delta : float, param : Dictionary, actionDepth : int) -> int:
 	return Globals.ACTION_STATE.Finished
 	
 func Sleep(delta : float, param : Dictionary, actionDepth : int) -> int:
-	var ret_val := Globals.ACTION_STATE.Running
 	var recover := self.SleepEnerSec * delta
 	var wake_ener : float = param["wake"] as float
 	if Needs.GetNeed(Globals.NEEDS.Energy) + recover > wake_ener:
 		Needs.SetNeed(Globals.NEEDS.Energy, wake_ener)
 		return Globals.ACTION_STATE.Finished
 	Needs.ApplyNeed(Globals.NEEDS.Energy, recover)
-	return ret_val
+	return Globals.ACTION_STATE.Running
 	
 ###################################################################################################
 ## ACTION FUNCTION (NEED REVISION)
@@ -908,75 +920,6 @@ func SleepOnFloor(delta : float, param : Dictionary, actionDepth : int) -> int:
 		self.pushAction("Sleep", actionDepth)
 	return Globals.ACTION_STATE.Running
 	
-func SleepInBed(delta : float, param : Dictionary, actionDepth : int) -> int:
-	var plan : ActionPlan = param.get("current_plan", null)
-	var bed : Advertisement = param.get("plan_ad", null)
-	var is_top_of_stack : bool = isTopOfStack(actionDepth)
-	var next_action := getCurAction(actionDepth+1) # return "" if top_of_stack
-
-	if bed == null:
-		return Globals.ACTION_STATE.Error
-	
-	var playing_anim : String = getPlayingAnim(param)
-	
-	if (playing_anim != "Idle" and Needs.GetNeed(Globals.NEEDS.Energy) > 0.8 and is_top_of_stack) or (next_action == "WakeUpFromBed"):
-		self.pushAction("WakeUpFromBed", actionDepth)
-		return Globals.ACTION_STATE.Running
-	elif Needs.GetNeed(Globals.NEEDS.Energy) > 0.8 and is_top_of_stack:
-		bed.BelongTo = null
-		return Globals.ACTION_STATE.Finished
-	
-	var dist_to_bed : float = (self.position - bed.position).length()
-	if not isAtLocation(bed.position, 0.5):
-		param["target"] = bed.position
-		param["precision"] = 0.5
-		self.pushAction("Goto", actionDepth)
-		return Globals.ACTION_STATE.Running
-	else:
-		self.velocity = Vector3.ZERO
-		
-	if playing_anim != "SleepBedIdle":
-		bed.BelongTo = self
-		self.pushAction("FallAsleepInBed", actionDepth)
-		return Globals.ACTION_STATE.Running
-
-	if is_top_of_stack:
-		var base_sleep = plan.EnergyReward
-		var jitter = randf_range(-self.SleepJitter, self.SleepJitter)
-		var wake = clamp(Needs.GetNeed(Globals.NEEDS.Energy) + base_sleep + jitter, 0.0, 1.0)
-		param["wake"] = wake
-	self.pushAction("Sleep", actionDepth)
-	return Globals.ACTION_STATE.Running
-	
-func FallAsleepInBed(delta : float, param : Dictionary, actionDepth : int) -> int:
-	var is_top_of_stack : bool = isTopOfStack(actionDepth)
-	var bed : Advertisement = param.get("plan_ad", null)
-	if is_top_of_stack:
-		if getPlayingAnim(param) == "SleepBed":
-			var anim : AnimationPlayer = self.find_child("AnimationPlayer", true, false)
-			anim.play("SleepBedIdle")
-			param["last_anim"] = "SleepBedIdle"
-			return Globals.ACTION_STATE.Finished
-		param["anim"] = "SleepBed"
-		param["anim_backward"] = true
-		param["anim_transform"] = bed.global_transform
-	self.pushAction("PlayAnim", actionDepth)
-	return Globals.ACTION_STATE.Running
-	
-func WakeUpFromBed(delta : float, param : Dictionary, actionDepth : int) -> int:
-	var is_top_of_stack : bool = isTopOfStack(actionDepth)
-	var bed : Advertisement = param.get("plan_ad", null)
-	if is_top_of_stack:
-		if getPlayingAnim(param) == "SleepBed":
-			var anim : AnimationPlayer = self.find_child("AnimationPlayer", true, false)
-			anim.play("Idle")
-			return Globals.ACTION_STATE.Finished
-		param["anim"] = "SleepBed"
-		param["anim_backward"] = false
-		param["anim_transform"] = bed.global_transform
-	self.pushAction("PlayAnim", actionDepth)
-	return Globals.ACTION_STATE.Running
-	
 func PlayAnim(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var anim_name : String = param.get("anim", "")
 	var play_backward : bool = param.get("anim_backward", false)
@@ -1011,41 +954,6 @@ func PlayAnim(delta : float, param : Dictionary, actionDepth : int) -> int:
 		param.erase("anim_transform")
 		return Globals.ACTION_STATE.Finished
 
-	return Globals.ACTION_STATE.Running
-	
-	
-func WorkInOffice(delta : float, param : Dictionary, actionDepth : int) -> int:
-	var plan : ActionPlan = param.get("current_plan", null)
-	var office : Advertisement = param.get("plan_ad", null)
-	if self.position != office.position:
-		param["target"] = office.position
-		self.pushAction("Goto", actionDepth)
-		return Globals.ACTION_STATE.Running
-	elif plan.PlanMetaData.get("finished", false) == true:
-		return Globals.ACTION_STATE.Finished
-	else:
-		self.pushAction("Work", actionDepth)
-	return Globals.ACTION_STATE.Running
-	
-func Work(delta : float, param : Dictionary, actionDepth : int) -> int:
-	var world_clock : WorldTime = %WorldTime
-	var normal_work_day_ticks : float = world_clock.GameHoursToGameTick(2.0)
-	var plan : ActionPlan = param.get("current_plan", null)
-	var work_time_left : float = plan.PlanMetaData.get("work_time", normal_work_day_ticks)
-	var work_time_delta = world_clock.RealSecondToGameTick(delta)
-	if work_time_left < work_time_delta:
-		work_time_delta = work_time_left
-	work_time_left -= work_time_delta
-	plan.PlanMetaData["work_time"] = work_time_left
-	
-	var energy_loss : float = plan.EnergyReward / normal_work_day_ticks * work_time_delta
-	Needs.ApplyNeed(Globals.NEEDS.Energy, energy_loss)
-	
-	if work_time_left <= 0.0:
-		Needs.ApplyNeed(Globals.NEEDS.Satisfaction, plan.SatisfactionReward)
-		plan.PlanMetaData["finished"] = true
-		return Globals.ACTION_STATE.Finished
-	
 	return Globals.ACTION_STATE.Running
 	
 func RefillFridge(delta : float, param : Dictionary, actionDepth : int) -> int:
@@ -1137,6 +1045,10 @@ func GoDropFoodInFridge(delta : float, param : Dictionary, actionDepth : int) ->
 		
 	if isAtLocation(fridge.position, 1.5):
 		var seq : Sequencer = get_node("Sequencer")
+		if not is_top_of_stack:
+			seq.SetContinue()
+			return Globals.ACTION_STATE.Running
+			
 		if seq.CurState() == seq.SEQ_STATE.IDLE:
 			seq.FridgeSequence(fridge)
 			return Globals.ACTION_STATE.Running
@@ -1144,8 +1056,8 @@ func GoDropFoodInFridge(delta : float, param : Dictionary, actionDepth : int) ->
 			seq.Reset()
 			return Globals.ACTION_STATE.Finished
 		else:
-			var anim : AnimationPlayer = fridge.find_child("AnimationPlayer", true, false)
-			if anim.current_animation == "FridgeOpen" and anim.current_animation_position >= anim.current_animation_length - 0.1 and foodstuff != null:
+			var cur_anim = self.animState(fridge)
+			if cur_anim == "OpenIdle" and foodstuff != null:
 				param["item"] = foodstuff
 				param["receiver"] = fridge
 				self.pushAction("Give", actionDepth)
@@ -1176,12 +1088,13 @@ func GoBuyFoodstuff(delta : float, param : Dictionary, actionDepth : int) -> int
 	
 	if foodstuff == null:
 		# Only play it once, then move on
-		if is_top_of_stack and getPlayingAnim(param) != "Interact":
-			param["anim"] = "Interact"
-			param["anim_backward"] = false
-			self.pushAction("PlayAnim", actionDepth)
+		var cur_anim = self.animState(self)
+		if is_top_of_stack and cur_anim != "Interact":
+			param["obj"] = self
+			param["state"] = "Interact"
+			self.pushAction("TravelAnimOneShot", actionDepth)
 			return Globals.ACTION_STATE.Running
-		if getCurAction(actionDepth+1) == "PlayAnim":
+		if getCurAction(actionDepth+1) == "TravelAnimOneShot":
 			return Globals.ACTION_STATE.Running
 		
 		param["scene"] = plan.SpawnReward

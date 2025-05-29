@@ -12,9 +12,13 @@ enum SEQ_STATE {
 
 var _seq_state : SEQ_STATE = SEQ_STATE.IDLE
 var _cur_seq : String = ""
+var _last_delta : float = 0.0
 
 func _ready() -> void:
 	pass
+	
+func _process(delta: float) -> void:
+	_last_delta = delta
 
 func SetContinue():
 	# Only set RUNNING if WAITING. This way I can call this every frame
@@ -35,46 +39,33 @@ func CurSequence() -> String:
 func FridgeSequence(fridge : Advertisement):
 	_seq_state = SEQ_STATE.RUNNING
 	_cur_seq = "FridgeSequence"
-	var fridge_anim : AnimationPlayer = fridge.find_child("AnimationPlayer", true, false)
-	var player_anim : AnimationPlayer = ParentEntity.find_child("AnimationPlayer", true, false)
 	
-	fridge_anim.play("FridgeOpen")
-	player_anim.play("Interact")
-	await player_anim.animation_finished
-	if await make_sure_still_running() == false:
-		return
-	player_anim.play("Interact")
-	await player_anim.animation_finished
-	if await make_sure_still_running() == false:
-		return
-	player_anim.play("Interact")
-	fridge_anim.play_backwards("FridgeOpen")
-	await player_anim.animation_finished
-	_seq_state = SEQ_STATE.FINISHED
+	var fridge_tree : AnimationTree = fridge.find_child("AnimationTree", true, false)
+	var fridge_state : AnimationNodeStateMachinePlayback = fridge_tree.get("parameters/playback")
+	var player_tree : AnimationTree = ParentEntity.find_child("AnimationTree", true, false)
+	var player_state : AnimationNodeStateMachinePlayback = player_tree.get("parameters/playback")
 	
-func SimpleInteractSequence():
-	_seq_state = SEQ_STATE.RUNNING
-	_cur_seq = "SimpleInteractSequence"
-	var player_anim : AnimationPlayer = ParentEntity.find_child("AnimationPlayer", true, false)
-	player_anim.play("Interact")
-	await player_anim.animation_finished
-	_seq_state = SEQ_STATE.FINISHED
-	
-func SitOnChair(chair : Advertisement):
-	_seq_state = SEQ_STATE.RUNNING
-	_cur_seq = "SitAndPutOnTable"
-	var player_anim : AnimationPlayer = ParentEntity.find_child("AnimationPlayer", true, false)
-	player_anim.play("SitChair")
-	var tween = get_tree().create_tween()
-	tween.tween_property(ParentEntity,"global_transform", chair.global_transform, 1.0)
-	
-	await player_anim.animation_finished
+	fridge_state.travel("OpenIdle")
+	player_state.travel("Interact")
+	await waitForState(fridge_state, "OpenIdle")
+	await waitForState(player_state, "Idle")
 	if await make_sure_still_running() == false:
 		return
 
-	player_anim.play("SitChairIdle")
+	fridge_state.travel("CloseIdle")
+	player_state.travel("Interact")
+	await waitForState(fridge_state, "CloseIdle")
 	_seq_state = SEQ_STATE.FINISHED
 	
+func waitForState(machine : AnimationNodeStateMachinePlayback, state : String):
+	var timeout := 10.0
+	while timeout > 0:
+		var cur_anim = machine.get_current_node()
+		timeout -= _last_delta
+		print("waitForState %s (%.3f) current: %s" % [state, timeout, cur_anim])
+		if cur_anim == state:
+			return
+		await get_tree().process_frame
 	
 
 # This assume we run Ai every frame.
