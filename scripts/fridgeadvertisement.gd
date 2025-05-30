@@ -10,7 +10,7 @@ func _ready() -> void:
 	spag_recipe.SatietyReward = 0.15 # fake reward to encourage NPC to cook when hungry
 	spag_recipe.SatisfactionReward = 0.05
 	spag_recipe.RichnessReward = 0.0
-	spag_recipe.SpawnReward = preload("res://scenes/food_spag.tscn")
+	#spag_recipe.SpawnReward = preload("res://scenes/food_spag.tscn")
 	spag_recipe.SpawnRewardType = Globals.AD_TYPE.Food
 	
 	var pie_recipe := ActionPlan.new()
@@ -19,7 +19,7 @@ func _ready() -> void:
 	pie_recipe.SatietyReward = 0.10 # fake reward to encourage NPC to cook when hungry
 	pie_recipe.SatisfactionReward = 0.08
 	pie_recipe.RichnessReward = 0.0
-	pie_recipe.SpawnReward = preload("res://scenes/food_pie.tscn")
+	#pie_recipe.SpawnReward = preload("res://scenes/food_pie.tscn")
 	pie_recipe.SpawnRewardType = Globals.AD_TYPE.Food
 	
 	var steak_recipe := ActionPlan.new()

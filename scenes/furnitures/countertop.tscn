@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3itb88kk1seo"]
+
+[ext_resource type="Script" path="res://scripts/kitchenadvertisement.gd" id="1_cdpyr"]
+[ext_resource type="PackedScene" uid="uid://cjw522h2bqa21" path="res://data/models/CounterTop.glb" id="2_ajbty"]
+
+[node name="Countertop" type="Node3D"]
+script = ExtResource("1_cdpyr")
+Type = 3
+
+[node name="CounterTop2" parent="." instance=ExtResource("2_ajbty")]
+
+[node name="Inventory01" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.354399, 0.914041, 0.193378)

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cg1wno6e4buvm"]
+
+[ext_resource type="Script" path="res://scripts/advertisement.gd" id="1_lrvjd"]
+[ext_resource type="PackedScene" uid="uid://bdqu256wx0f8i" path="res://data/models/DiningTable.glb" id="2_ptslm"]
+
+[node name="DiningTable" type="Node3D"]
+script = ExtResource("1_lrvjd")
+Type = 9
+
+[node name="DiningTable" parent="." instance=ExtResource("2_ptslm")]
+
+[node name="Inventory01" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.31368, 0.763035, 0.683781)
+
+[node name="Inventory02" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.436169, 0.763035, 0.323444)
