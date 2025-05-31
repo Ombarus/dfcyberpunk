@@ -62,7 +62,6 @@ func waitForState(machine : AnimationNodeStateMachinePlayback, state : String):
 	while timeout > 0:
 		var cur_anim = machine.get_current_node()
 		timeout -= _last_delta
-		print("waitForState %s (%.3f) current: %s" % [state, timeout, cur_anim])
 		if cur_anim == state:
 			return
 		await get_tree().process_frame

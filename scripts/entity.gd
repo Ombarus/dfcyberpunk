@@ -355,8 +355,6 @@ func Transfer(delta : float, param : Dictionary, actionDepth : int) -> int:
 	else:
 		to_inv = from.AdMetaData.get("inventory", [])
 		
-	var inv_slot : Node3D = to.find_child("Inventory01", true, false)
-	
 	if self.isItemInInv(from_inv, item) or not is_top_of_stack or seq.CurState() != seq.SEQ_STATE.IDLE:
 		var fridge : Advertisement = null
 		if to.Type == Globals.AD_TYPE.Fridge:
@@ -377,27 +375,53 @@ func Transfer(delta : float, param : Dictionary, actionDepth : int) -> int:
 			else:
 				var cur_anim = self.animState(fridge)
 				if cur_anim == "OpenIdle" and self.isItemInInv(from_inv, item):
-					from_inv.erase(item)
-					to_inv.push_back(item)
-					item.AdMetaData["container"] = to_inv
-					if inv_slot != null:
-						item.visible = true
-						item.global_transform = inv_slot.global_transform
+					toFromExchange(to, from, item, param)
 				seq.SetContinue()
 				return Globals.ACTION_STATE.Running
 		else:
 			#TODO: handle displaying in "inventoryXX" slots
 			self.travelAnimOneShot(self, "Interact")
-			from_inv.erase(item)
-			to_inv.push_back(item)
-			item.AdMetaData["container"] = to_inv
-			if inv_slot != null:
-				item.visible = true
-				item.global_transform = inv_slot.global_transform
+			toFromExchange(to, from, item, param)
 		
 		return Globals.ACTION_STATE.Running
 	
 	return Globals.ACTION_STATE.Finished
+
+# This could be much simpler if Entity used AdMetaData
+func toFromExchange(to : Advertisement, from : Advertisement, item : Advertisement, param : Dictionary):
+	var from_inv : Array
+	
+	if from == self:
+		from_inv = param.get("inventory", [])
+	else:
+		from_inv = from.AdMetaData.get("inventory", [])
+	
+	var to_inv : Array
+	if to == self:
+		to_inv = param.get("inventory", [])
+	else:
+		to_inv = from.AdMetaData.get("inventory", [])
+		
+	var inv_slot : Node3D = to.find_child("Inventory01", true, false)
+		
+	from_inv.erase(item)
+	to_inv.push_back(item)
+	item.AdMetaData["container"] = to
+	if inv_slot != null:
+		item.visible = true
+		item.global_transform = inv_slot.global_transform
+		
+	if from == self:
+		param["inventory"] = from_inv
+	else:
+		from.AdMetaData["inventory"] = from_inv
+		
+	if to == self:
+		item.BelongTo = self
+		param["inventory"] = to_inv # in case inventory wasn't init before
+	else:
+		item.BelongTo = null
+		to.AdMetaData["inventory"] = to_inv
 	
 func TravelAnimState(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var obj : Node3D = param["obj"]
@@ -537,7 +561,8 @@ func GoSleepInBed(delta : float, param : Dictionary, actionDepth : int) -> int:
 		param["precision"] = 0.5
 		self.pushAction("Goto", actionDepth)
 		return Globals.ACTION_STATE.Running
-		
+	
+	bed.BelongTo = self
 	var cur_state : String = self.animState(self)
 	if cur_state != "SleepBedIdle" and energy < 0.5: # 0.5 is arbitrary: just "we're tired"
 		param["obj"] = self
@@ -560,7 +585,8 @@ func GoSleepInBed(delta : float, param : Dictionary, actionDepth : int) -> int:
 		param["state"] = "Idle"
 		self.pushAction("TravelAnimState", actionDepth)
 		return Globals.ACTION_STATE.Running
-		
+	
+	bed.BelongTo = null
 	return Globals.ACTION_STATE.Finished
 	
 func Sleep(delta : float, param : Dictionary, actionDepth : int) -> int:
@@ -605,9 +631,9 @@ func CookInKitchen2(delta : float, param : Dictionary, actionDepth : int) -> int
 	
 	# 2. put on closest kitchen counter
 	if player_foodstuff != null:
-		if not self.isAtLocation(kitchen.position, 1.5):
+		if not self.isAtLocation(kitchen.position, 1.0):
 			param["target"] = kitchen.position
-			param["precision"] = 1.5
+			param["precision"] = 1.0
 			self.pushAction("Goto", actionDepth)
 			return Globals.ACTION_STATE.Running
 		else:
@@ -616,10 +642,46 @@ func CookInKitchen2(delta : float, param : Dictionary, actionDepth : int) -> int
 			param["to"] = kitchen
 			self.pushAction("Transfer", actionDepth)
 			return Globals.ACTION_STATE.Running
-			
+	
+	# 3. Cook
 	if kitchen_foodstuff != null:
-		self.travelAnimOneShot(self, "Interact")
-		pass
+		var cooking_left = kitchen_foodstuff.AdMetaData.get("cooking_left", 6.0)
+		cooking_left -= delta
+		kitchen_foodstuff.AdMetaData["cooking_left"] = cooking_left
+		if cooking_left > 0:
+			self.travelAnimOneShot(self, "Interact")
+		else:
+			param["scene"] = plan.SpawnReward
+			self.pushAction("Spawn", actionDepth)
+			kitchen_foodstuff.queue_free()
+			kitchen_foodstuff.visible = false
+			kitchen_inv.erase(kitchen_foodstuff)
+			kitchen.AdMetaData["inventory"] = kitchen_inv
+			return Globals.ACTION_STATE.Running
+	
+	# 4. Finished
+	if player_food != null:
+		return Globals.ACTION_STATE.Finished
+	
+	return Globals.ACTION_STATE.Running
+	
+func GoPutFoodInFridge(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var plan : ActionPlan = param.get("current_plan", null)
+	var item : Advertisement = param.get("plan_ad", null)
+	var fridge : Advertisement = self.getFirstOf(Globals.AD_TYPE.Fridge)
+	var container : Advertisement = item.AdMetaData.get("container", null)
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	
+	if not is_top_of_stack:
+		return Globals.ACTION_STATE.Running
+	
+	if container == self:
+		param["item"] = item
+		param["container"] = fridge
+		self.pushAction("GoDropItem", actionDepth)
+	else:
+		param["item"] = item
+		self.pushAction("GoGetItem", actionDepth)
 	
 	return Globals.ACTION_STATE.Running
 	
@@ -639,6 +701,7 @@ func Spawn(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var inv : Array = param.get("inventory", [])
 	inv.append(n)
 	param["inventory"] = inv
+	n.AdMetaData["container"] = self
 	return Globals.ACTION_STATE.Finished
 
 func SleepOnFloor(delta : float, param : Dictionary, actionDepth : int) -> int:
@@ -676,50 +739,6 @@ func RefillFridge(delta : float, param : Dictionary, actionDepth : int) -> int:
 		return Globals.ACTION_STATE.Running
 		
 	if foodstuff == null and isAtLocation(fridge.position, 2.0) and is_top_of_stack:
-		return Globals.ACTION_STATE.Finished
-	
-	return Globals.ACTION_STATE.Running
-	
-func PutFoodInFridge(delta : float, param : Dictionary, actionDepth : int) -> int:
-	var plan : ActionPlan = param.get("current_plan", null)
-	var kitchen : Advertisement = param.get("plan_ad", null)
-	var fridge : Advertisement = self.getFirstOf(Globals.AD_TYPE.Fridge)
-	var is_top_of_stack : bool = isTopOfStack(actionDepth)
-	
-	var kitchen_inv : Array = kitchen.AdMetaData.get("inventory", [])
-	var kitchen_food : Advertisement = null
-	for i in kitchen_inv:
-		if (i as Advertisement).Type == Globals.AD_TYPE.Food:
-			kitchen_food = i
-			break
-
-	var inv : Array = param.get("inventory", [])
-	var player_food : Advertisement
-	for i in inv:
-		var ad = (i as Advertisement)
-		if (i as Advertisement).Type == Globals.AD_TYPE.Foodstuff:
-			player_food = ad
-			break
-			
-	if kitchen_food != null and not self.isAtLocation(kitchen.position, 1.5):
-		param["target"] = kitchen.position
-		param["precision"] = 1.5
-		self.pushAction("Goto", actionDepth)
-		return Globals.ACTION_STATE.Running
-		
-	if kitchen_food != null and self.isAtLocation(kitchen.position, 1.5):
-		param["item_type"] = Globals.AD_TYPE.Food
-		param["giver"] = kitchen
-		self.pushAction("Receive", actionDepth)
-		return Globals.ACTION_STATE.Running
-	
-	if player_food != null:
-		param["item"] = player_food
-		param["receiver"] = fridge
-		self.pushAction("GoDropFoodInFridge", actionDepth)
-		return Globals.ACTION_STATE.Running
-		
-	if player_food == null and is_top_of_stack:
 		return Globals.ACTION_STATE.Finished
 	
 	return Globals.ACTION_STATE.Running
@@ -766,7 +785,7 @@ func GoBuyFoodstuff(delta : float, param : Dictionary, actionDepth : int) -> int
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	var target = param.get("target", null)
 	
-	if target == null and is_top_of_stack:
+	if is_top_of_stack:
 		param["target"] = market.position
 		
 	if not isAtLocation(market.position) or getCurAction(actionDepth+1) == "Goto":
@@ -783,6 +802,8 @@ func GoBuyFoodstuff(delta : float, param : Dictionary, actionDepth : int) -> int
 	
 	if foodstuff == null:
 		# Only play it once, then move on
+		# Right now this seem to happen too fast and we skip the animation?
+		# Maybe I should push a "Travel" action?
 		self.travelAnimOneShot(self, "Interact")
 		
 		param["scene"] = plan.SpawnReward
