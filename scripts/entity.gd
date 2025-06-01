@@ -685,6 +685,49 @@ func GoPutFoodInFridge(delta : float, param : Dictionary, actionDepth : int) -> 
 	
 	return Globals.ACTION_STATE.Running
 	
+func RefillFridge2(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var plan : ActionPlan = param.get("current_plan", null)
+	var fridge : Advertisement = param.get("plan_ad", null)
+	var market : Advertisement = self.getFirstOf(Globals.AD_TYPE.Market)
+	var player_inv : Array = param.get("inventory", [])
+	var fridge_inv : Array = fridge.AdMetaData.get("inventory", [])
+	var player_foodstuff : Advertisement = self.findItemInInv(player_inv, Globals.AD_TYPE.Foodstuff)
+	var fridge_foodstuff : Advertisement = self.findItemInInv(fridge_inv, Globals.AD_TYPE.Foodstuff)
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	
+	if not is_top_of_stack:
+		return Globals.ACTION_STATE.Running
+		
+	if fridge_foodstuff != null:
+		return Globals.ACTION_STATE.Finished
+		
+	if player_foodstuff == null and not self.isAtLocation(market.position):
+		param["target"] = market.position
+		param["precision"] = 0.5
+		self.pushAction("Goto", actionDepth)
+		return Globals.ACTION_STATE.Running
+		
+	if player_foodstuff == null and self.isAtLocation(market.position):
+		param["scene"] = plan.SpawnReward
+		self.travelAnimOneShot(self, "Interact")
+		self.pushAction("Spawn", actionDepth)
+		return Globals.ACTION_STATE.Running
+		
+	if player_foodstuff != null and not self.isAtLocation(fridge.position, 1.5):
+		param["target"] = fridge.position
+		param["precision"] = 1.5
+		self.pushAction("Goto", actionDepth)
+		return Globals.ACTION_STATE.Running
+		
+	if player_foodstuff != null and self.isAtLocation(fridge.position, 1.5):
+		param["item"] = player_foodstuff
+		param["from"] = self
+		param["to"] = fridge
+		self.pushAction("Transfer", actionDepth)
+		return Globals.ACTION_STATE.Running
+	
+	return Globals.ACTION_STATE.Running
+	
 ###################################################################################################
 ## ACTION FUNCTION (NEED REVISION)
 ###################################################################################################

@@ -5,6 +5,7 @@ var _put_in_fridge : ActionPlan
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	super._ready()
 	_eat_me = ActionPlan.new()
 	_eat_me.ActionName = "EatSelectedFood"
 	_eat_me.EnergyReward = 0.0
@@ -29,7 +30,7 @@ func _ready() -> void:
 func GetActionPlansFor(npc : Entity) -> Array:
 	var container : Advertisement = self.AdMetaData["container"]
 	var results := []
-	if container == null or container.type != Globals.AD_TYPE.Fridge:
+	if container == null or container.Type != Globals.AD_TYPE.Fridge:
 		results.append(_put_in_fridge.duplicate())
 		
 	results.append(_eat_me)

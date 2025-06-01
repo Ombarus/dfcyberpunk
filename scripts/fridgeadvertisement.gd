@@ -32,7 +32,7 @@ func _ready() -> void:
 	steak_recipe.SpawnRewardType = Globals.AD_TYPE.Food
 	
 	var refill_fridge := ActionPlan.new()
-	refill_fridge.ActionName = "RefillFridge"
+	refill_fridge.ActionName = "RefillFridge2"
 	refill_fridge.EnergyReward = -0.05
 	refill_fridge.SatietyReward = 0.0
 	refill_fridge.SatisfactionReward = 0.2
