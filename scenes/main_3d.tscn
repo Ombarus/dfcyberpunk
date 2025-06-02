@@ -57,8 +57,8 @@ ssao_enabled = true
 glow_enabled = true
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_0rtnp"]
-vertices = PackedVector3Array(-4.85, 0.390226, -3.25, -4.85, 0.390226, -2.75, -4.1, 0.390226, -2.25, 4.15, 0.390226, 2.25, -4.1, 0.390226, -3.75, 4.15, 0.390226, 3.75, 4.9, 0.390226, 3.25, 4.9, 0.390226, 2.75, -4.35, 0.390226, 7.25, 4.15, 0.390226, 7.25, 4.4, 0.390226, -13.25, -4.35, 0.390226, -13.25, -5.85, 0.390226, -3.75, -5.85, 0.390226, -5.5, -6.6, 0.390226, -4.25, -5.85, 0.390226, -2.25, -8.85, 0.390226, 0.25, -11.6, 0.390226, -0.5, -11.85, 0.640226, 1, -8.35, 0.390226, 0.75, -11.1, 0.390226, -4.5, -12.1, 0.390226, -4, -12.1, 0.390226, -3, -7.6, 0.390226, -3, -8.35, 0.390226, -4.25, -8.85, 0.390226, -4.75, -7.1, 0.390226, -2.5, -8.85, 0.390226, -6, -11.1, 0.390226, -6, -7.1, 0.390226, 0.25, -5.85, 0.390226, 1, -8.85, 0.390226, -1, -12.1, 0.390226, -1, 5.9, 0.390226, 3.75, 5.9, 0.390226, 2.25, 12.15, 0.390226, 7, 12.15, 0.390226, -1, 5.9, 0.390226, 7, 5.9, 0.390226, -1)
-polygons = [PackedInt32Array(0, 4, 1), PackedInt32Array(1, 4, 2), PackedInt32Array(2, 4, 3), PackedInt32Array(6, 5, 7), PackedInt32Array(7, 5, 3), PackedInt32Array(3, 5, 8), PackedInt32Array(3, 8, 2), PackedInt32Array(5, 9, 8), PackedInt32Array(11, 10, 4), PackedInt32Array(4, 10, 3), PackedInt32Array(14, 13, 12), PackedInt32Array(1, 15, 0), PackedInt32Array(0, 15, 12), PackedInt32Array(16, 19, 17), PackedInt32Array(17, 19, 18), PackedInt32Array(21, 20, 22), PackedInt32Array(22, 20, 25), PackedInt32Array(22, 25, 24), PackedInt32Array(22, 24, 23), PackedInt32Array(26, 23, 15), PackedInt32Array(15, 23, 12), PackedInt32Array(12, 23, 14), PackedInt32Array(14, 23, 24), PackedInt32Array(27, 25, 28), PackedInt32Array(28, 25, 20), PackedInt32Array(30, 19, 29), PackedInt32Array(30, 18, 19), PackedInt32Array(32, 31, 17), PackedInt32Array(17, 31, 16), PackedInt32Array(26, 15, 29), PackedInt32Array(29, 15, 30), PackedInt32Array(7, 34, 6), PackedInt32Array(6, 34, 33), PackedInt32Array(34, 36, 33), PackedInt32Array(33, 36, 35), PackedInt32Array(35, 37, 33), PackedInt32Array(34, 38, 36)]
+vertices = PackedVector3Array(-5.85, 0.390226, -7, -8.1, 0.390226, -7, -6.85, 0.390226, -6.75, -6.1, 0.390226, -6, 4.9, 0.390226, 3.25, 4.9, 0.390226, 2.75, 4.15, 0.390226, 2.25, -4.1, 0.390226, -2.25, -4.35, 0.390226, 7.25, 4.15, 0.390226, 3.75, -7.1, 0.390226, 0.5, -7.6, 0.390226, 1, -5.85, 0.390226, 1, 4.4, 0.390226, -13.25, -4.35, 0.390226, -13.25, -4.1, 0.390226, -3.75, -11.1, 0.390226, -4.5, -12.1, 0.390226, -4, -12.1, 0.390226, -3, -8.6, 0.390226, -3.25, -9.6, 0.390226, -4, -5.85, 0.390226, -3.75, -6.35, 0.390226, -3.75, 4.15, 0.390226, 7.25, -5.35, 0.390226, -3.25, -6.85, 0.390226, -3.25, -7.6, 0.390226, -3, -9.1, 0.390226, -6, -11.1, 0.390226, -6, -7.1, 0.390226, -2.5, -5.85, 0.390226, -2.25, -5.35, 0.390226, -2.75, -8.85, 0.390226, -1, -12.1, 0.390226, -1, -11.6, 0.390226, -0.5, -8.85, 0.390226, 0.5, -11.85, 0.640226, 1, -8.35, 0.390226, 1, 5.9, 0.390226, 3.75, 5.9, 0.390226, 2.25, 12.15, 0.390226, 7, 12.15, 0.390226, 0, 5.9, 0.390226, 0, 5.9, 0.390226, 7)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(3, 2, 0), PackedInt32Array(4, 9, 5), PackedInt32Array(5, 9, 6), PackedInt32Array(6, 9, 8), PackedInt32Array(6, 8, 7), PackedInt32Array(12, 11, 10), PackedInt32Array(14, 13, 15), PackedInt32Array(15, 13, 6), PackedInt32Array(17, 16, 18), PackedInt32Array(18, 16, 20), PackedInt32Array(18, 20, 19), PackedInt32Array(22, 3, 21), PackedInt32Array(21, 3, 0), PackedInt32Array(9, 23, 8), PackedInt32Array(21, 24, 22), PackedInt32Array(22, 24, 25), PackedInt32Array(25, 26, 19), PackedInt32Array(19, 26, 18), PackedInt32Array(16, 28, 20), PackedInt32Array(20, 28, 27), PackedInt32Array(26, 25, 29), PackedInt32Array(29, 25, 30), PackedInt32Array(30, 25, 31), PackedInt32Array(31, 25, 24), PackedInt32Array(24, 15, 31), PackedInt32Array(31, 15, 7), PackedInt32Array(29, 30, 10), PackedInt32Array(10, 30, 12), PackedInt32Array(6, 7, 15), PackedInt32Array(33, 32, 34), PackedInt32Array(34, 32, 35), PackedInt32Array(35, 37, 34), PackedInt32Array(34, 37, 36), PackedInt32Array(38, 4, 5), PackedInt32Array(5, 39, 38), PackedInt32Array(38, 39, 41), PackedInt32Array(38, 41, 40), PackedInt32Array(39, 42, 41), PackedInt32Array(40, 43, 38)]
 border_size = 0.5
 agent_radius = 0.75
 
@@ -622,15 +622,15 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12, 0
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12, 0, -7)
 
 [node name="DiningTable3" parent="Static/NavigationRegion3D/Furniture" instance=ExtResource("14_vxtuh")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 0, -7)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7.30496, 0, -5.93082)
 
 [node name="FoldingChair2" parent="Static/NavigationRegion3D/Furniture" instance=ExtResource("14_rquro")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -8, 0, -5.92937)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -8.30496, 0, -4.86019)
 script = ExtResource("18_h2cyc")
 Type = 7
 
 [node name="FoldingChair3" parent="Static/NavigationRegion3D/Furniture" instance=ExtResource("14_rquro")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7, 0, -6.29934)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.45283, 0, -5.03732)
 
 [node name="Bed2" parent="Static/NavigationRegion3D/Furniture" instance=ExtResource("18_w4c5x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.546, 0.0889242, 0)
@@ -683,17 +683,17 @@ shape = SubResource("CapsuleShape3D_bpfx1")
 [node name="Peep1" parent="Dynamic/CharacterBody3D" instance=ExtResource("10_4peve")]
 
 [node name="Skeleton3D" parent="Dynamic/CharacterBody3D/Peep1/Peep1Armature" index="0"]
-bones/1/position = Vector3(-0.000224439, 0.831152, -0.000104285)
-bones/1/rotation = Quaternion(0.000697318, 6.97928e-05, -0.00997207, 0.99995)
-bones/2/rotation = Quaternion(0.00339411, -0.0295186, -0.352771, 0.935238)
-bones/3/rotation = Quaternion(0.0285542, -0.0142026, -0.813324, 0.580936)
-bones/4/rotation = Quaternion(0.02095, 0.00115225, -0.150267, 0.988423)
+bones/1/position = Vector3(-7.25002e-06, 0.832636, -7.37855e-05)
+bones/1/rotation = Quaternion(0.000878012, 8.78781e-05, -0.0125561, 0.999921)
+bones/2/rotation = Quaternion(0.00335907, -0.0280972, -0.354953, 0.934456)
+bones/3/rotation = Quaternion(0.0271099, -0.0135703, -0.813734, 0.580446)
+bones/4/rotation = Quaternion(0.019756, 0.00107902, -0.149939, 0.988497)
 bones/5/rotation = Quaternion(2.66207e-08, 8.65356e-08, 0.14307, 0.989713)
 bones/6/rotation = Quaternion(-1.7033e-08, 4.39079e-08, -0.149111, 0.988821)
-bones/7/position = Vector3(0.378063, 0.0987803, 0.0559737)
-bones/8/rotation = Quaternion(-0.50925, -0.233276, 0.656362, -0.505406)
-bones/9/rotation = Quaternion(0.510274, 0.0628772, -0.122558, 0.848909)
-bones/10/rotation = Quaternion(0.0410209, 0.0111792, -0.160025, 0.986197)
+bones/7/position = Vector3(0.376269, 0.0971184, 0.0530342)
+bones/8/rotation = Quaternion(-0.511174, -0.233309, 0.655861, -0.504097)
+bones/9/rotation = Quaternion(0.508333, 0.063655, -0.122532, 0.850018)
+bones/10/rotation = Quaternion(0.038757, 0.011378, -0.155773, 0.986967)
 bones/11/rotation = Quaternion(-0.0515415, -0.0465354, 0.610466, 0.788992)
 bones/12/position = Vector3(0.126022, -0.319229, 0.671016)
 bones/12/rotation = Quaternion(-0.64907, 0.263978, 0.66225, -0.265421)
@@ -701,14 +701,14 @@ bones/13/rotation = Quaternion(-1.13687e-13, -9.09495e-13, -1.39698e-09, 1)
 bones/14/rotation = Quaternion(-1.13853e-13, 1.19208e-07, -1.39698e-09, 1)
 bones/15/position = Vector3(-0.109081, 0.460357, 6.17393e-08)
 bones/15/rotation = Quaternion(-2.49462e-07, -1.86198e-08, 0.335421, 0.942068)
-bones/16/rotation = Quaternion(0.0456325, 0.0176946, 0.815529, 0.576643)
-bones/17/rotation = Quaternion(0.0437476, -0.00257903, 0.189051, 0.980989)
+bones/16/rotation = Quaternion(0.0488602, 0.01909, 0.816375, 0.575136)
+bones/17/rotation = Quaternion(0.0456827, -0.00275361, 0.184977, 0.981677)
 bones/18/rotation = Quaternion(2.86083e-08, -7.92949e-08, -0.14307, 0.989713)
 bones/19/rotation = Quaternion(-1.55731e-08, -4.10977e-08, 0.149111, 0.988821)
-bones/20/position = Vector3(-0.369465, 0.104316, 0.0545581)
-bones/21/rotation = Quaternion(0.509914, -0.226746, 0.674406, 0.483477)
-bones/22/rotation = Quaternion(0.505947, -0.0646017, 0.122495, 0.851375)
-bones/23/rotation = Quaternion(0.0361312, -0.011608, 0.150836, 0.98783)
+bones/20/position = Vector3(-0.369294, 0.104313, 0.0580226)
+bones/21/rotation = Quaternion(0.512113, -0.224927, 0.678496, 0.476225)
+bones/22/rotation = Quaternion(0.502512, -0.0659294, 0.122419, 0.853316)
+bones/23/rotation = Quaternion(0.0323672, -0.0119367, 0.143745, 0.989013)
 bones/24/rotation = Quaternion(-0.0515415, 0.0465354, -0.610466, 0.788992)
 bones/25/position = Vector3(-0.126022, -0.319229, 0.671016)
 bones/26/position = Vector3(0.117189, 0.0969281, 0.0151976)

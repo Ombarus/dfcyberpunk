@@ -35,7 +35,7 @@ func _ready() -> void:
 	refill_fridge.ActionName = "RefillFridge2"
 	refill_fridge.EnergyReward = -0.05
 	refill_fridge.SatietyReward = 0.0
-	refill_fridge.SatisfactionReward = 0.2
+	refill_fridge.SatisfactionReward = 0.04
 	refill_fridge.RichnessReward = -0.00005 # 50$ of 1M
 	refill_fridge.SpawnReward = preload("res://scenes/foodstuff3d.tscn")
 	refill_fridge.SpawnRewardType = Globals.AD_TYPE.Foodstuff
@@ -62,7 +62,7 @@ func GetActionPlansFor(npc : Entity) -> Array:
 		var new_plan := plan.duplicate()
 		if new_plan.SpawnRewardType == Globals.AD_TYPE.Food:
 			new_plan.SatisfactionReward = new_plan.SatisfactionReward / (food_count + 1)
-		if new_plan.SpawnRewardType == Globals.AD_TYPE.Foodstuff:
+		if new_plan.SpawnRewardType == Globals.AD_TYPE.Foodstuff and num_foodstuff <= 0:
 			new_plan.SatisfactionReward = new_plan.SatisfactionReward / (num_foodstuff + 1)
 		results.append(new_plan)
 	return results

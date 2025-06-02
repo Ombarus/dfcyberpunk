@@ -498,6 +498,7 @@ func Goto(delta : float, param : Dictionary, actionDepth : int) -> int:
 			param["obj"] = self
 			param["state"] = "Idle"
 		self.pushAction("TravelAnimState", actionDepth)
+		self.position = nav_agent.target_position
 		self.velocity = Vector3.ZERO
 		if self.animState(self) == "Idle" and is_top_of_stack:
 			return Globals.ACTION_STATE.Finished
@@ -675,6 +676,9 @@ func GoPutFoodInFridge(delta : float, param : Dictionary, actionDepth : int) -> 
 	if not is_top_of_stack:
 		return Globals.ACTION_STATE.Running
 	
+	if container.Type == Globals.AD_TYPE.Fridge:
+		return Globals.ACTION_STATE.Finished
+	
 	if container == self:
 		param["item"] = item
 		param["container"] = fridge
@@ -728,10 +732,6 @@ func RefillFridge2(delta : float, param : Dictionary, actionDepth : int) -> int:
 	
 	return Globals.ACTION_STATE.Running
 	
-###################################################################################################
-## ACTION FUNCTION (NEED REVISION)
-###################################################################################################
-	
 
 func Spawn(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var pos : Vector3 = self.position
@@ -746,7 +746,82 @@ func Spawn(delta : float, param : Dictionary, actionDepth : int) -> int:
 	param["inventory"] = inv
 	n.AdMetaData["container"] = self
 	return Globals.ACTION_STATE.Finished
+	
+	
+func EatSelectedFood(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var plan : ActionPlan = param.get("current_plan", null)
+	var food : Advertisement = param.get("plan_ad", null)
+	var food_container : Advertisement = food.AdMetaData.get("container", null)
+	var player_inv : Array = param.get("inventory", [])
+	var player_food : Advertisement = self.findItemInInv(player_inv, Globals.AD_TYPE.Food)
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	var chair : Advertisement = self.getFirstOf(Globals.AD_TYPE.Chair)
+	var table : Advertisement = self.getFirstOf(Globals.AD_TYPE.Table)
+	var table_inv : Array = table.AdMetaData.get("inventory", [])
+	var table_food : Advertisement = self.findItemInInv(table_inv, Globals.AD_TYPE.Food)
+	var player_state : String = self.animState(self)
+	
+	if not is_top_of_stack:
+		return Globals.ACTION_STATE.Running
+	
+	if player_food == null and not self.isAtLocation(food_container.position, 1.0):
+		param["target"] = food_container.position
+		param["precision"] = 1.0
+		self.pushAction("Goto", actionDepth)
+		return Globals.ACTION_STATE.Running
+		
+	if player_food == null and self.isAtLocation(food_container.position, 1.0):
+		param["item"] = food
+		param["from"] = food_container
+		param["to"] = self
+		self.pushAction("Transfer", actionDepth)
+		return Globals.ACTION_STATE.Running
+		
+	if player_food != null and table_food == null and not self.isAtLocation(table.position, 1.0):
+		param["target"] = food_container.position
+		param["precision"] = 1.0
+		self.pushAction("Goto", actionDepth)
+		return Globals.ACTION_STATE.Running
+		
+	if player_food != null and table_food == null and self.isAtLocation(table.position, 1.0):
+		param["item"] = player_food
+		param["from"] = self
+		param["to"] = table
+		self.pushAction("Transfer", actionDepth)
+		return Globals.ACTION_STATE.Running
+		
+	if table_food != null and not self.isAtLocation(chair.position, 1.0):
+		param["target"] = chair.position
+		param["precision"] = 1.0
+		self.pushAction("Goto", actionDepth)
+		return Globals.ACTION_STATE.Running
+		
+	if table_food != null and self.isAtLocation(chair.position, 1.0) and player_state != "SitChairIdle":
+		param["obj"] = self
+		param["state"] = "SitChairIdle"
+		self.pushAction("TravelAnimState", actionDepth)
+		return Globals.ACTION_STATE.Running
+		
+	if table_food != null and player_state == "SitChairIdle":
+		var food_left = table_food.AdMetaData.get("food_left", 6.0)
+		food_left -= delta
+		table_food.AdMetaData["food_left"] = food_left
+		if food_left > 0:
+			#TODO: add sitting interact anim?
+			return Globals.ACTION_STATE.Running
+		else:
+			table_food.queue_free()
+			table_food.visible = false
+			table_inv.erase(table_food)
+			table.AdMetaData["inventory"] = table_inv
+			return Globals.ACTION_STATE.Finished
 
+	return Globals.ACTION_STATE.Finished
+	
+###################################################################################################
+## ACTION FUNCTION (NEED REVISION)
+###################################################################################################
+	
 func SleepOnFloor(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	if Needs.GetNeed(Globals.NEEDS.Energy) > 0.5 and is_top_of_stack:
@@ -757,141 +832,6 @@ func SleepOnFloor(delta : float, param : Dictionary, actionDepth : int) -> int:
 		self.pushAction("Sleep", actionDepth)
 	return Globals.ACTION_STATE.Running
 
-func RefillFridge(delta : float, param : Dictionary, actionDepth : int) -> int:
-	var plan : ActionPlan = param.get("current_plan", null)
-	var fridge : Advertisement = param.get("plan_ad", null)
-	var market : Advertisement = getFirstOf(Globals.AD_TYPE.Market)
-	var is_top_of_stack : bool = isTopOfStack(actionDepth)
-	
-	var inv : Array = param.get("inventory", [])
-	var foodstuff : Advertisement
-	for i in inv:
-		var ad = (i as Advertisement)
-		if (i as Advertisement).Type == Globals.AD_TYPE.Foodstuff:
-			foodstuff = ad
-			break
-			
-	if foodstuff == null and not isAtLocation(fridge.position, 2.0):
-		self.pushAction("GoBuyFoodstuff", actionDepth)
-		return Globals.ACTION_STATE.Running
-		
-	if foodstuff != null and is_top_of_stack:
-		param["item"] = foodstuff
-		param["receiver"] = fridge
-		self.pushAction("GoDropFoodInFridge", actionDepth)
-		return Globals.ACTION_STATE.Running
-		
-	if foodstuff == null and isAtLocation(fridge.position, 2.0) and is_top_of_stack:
-		return Globals.ACTION_STATE.Finished
-	
-	return Globals.ACTION_STATE.Running
-	
-func GoDropFoodInFridge(delta : float, param : Dictionary, actionDepth : int) -> int:
-	var foodstuff : Advertisement = param.get("item", null)
-	var fridge : Advertisement = param["receiver"]
-	var is_top_of_stack : bool = isTopOfStack(actionDepth)
-		
-	if not is_top_of_stack:
-		return Globals.ACTION_STATE.Running
-			
-	if not isAtLocation(fridge.position, 1.5):
-		param["target"] = fridge.position
-		param["precision"] = 1.5
-		self.pushAction("Goto", actionDepth)
-		return Globals.ACTION_STATE.Running
-		
-	if isAtLocation(fridge.position, 1.5):
-		var seq : Sequencer = get_node("Sequencer")
-		if not is_top_of_stack:
-			seq.SetContinue()
-			return Globals.ACTION_STATE.Running
-			
-		if seq.CurState() == seq.SEQ_STATE.IDLE:
-			seq.FridgeSequence(fridge)
-			return Globals.ACTION_STATE.Running
-		elif seq.CurState() == seq.SEQ_STATE.FINISHED:
-			seq.Reset()
-			return Globals.ACTION_STATE.Finished
-		else:
-			var cur_anim = self.animState(fridge)
-			if cur_anim == "OpenIdle" and foodstuff != null:
-				param["item"] = foodstuff
-				param["receiver"] = fridge
-				self.pushAction("Give", actionDepth)
-			seq.SetContinue()
-			
-	return Globals.ACTION_STATE.Running
-	
-func GoBuyFoodstuff(delta : float, param : Dictionary, actionDepth : int) -> int:
-	var plan : ActionPlan = param.get("current_plan", null)
-	var market : Advertisement = getFirstOf(Globals.AD_TYPE.Market)
-	var is_top_of_stack : bool = isTopOfStack(actionDepth)
-	var target = param.get("target", null)
-	
-	if is_top_of_stack:
-		param["target"] = market.position
-		
-	if not isAtLocation(market.position) or getCurAction(actionDepth+1) == "Goto":
-		self.pushAction("Goto", actionDepth)
-		return Globals.ACTION_STATE.Running
-	
-	var inv : Array = param.get("inventory", [])
-	var foodstuff : Advertisement
-	for i in inv:
-		var ad = (i as Advertisement)
-		if ad.Type == Globals.AD_TYPE.Foodstuff:
-			foodstuff = ad
-			break
-	
-	if foodstuff == null:
-		# Only play it once, then move on
-		# Right now this seem to happen too fast and we skip the animation?
-		# Maybe I should push a "Travel" action?
-		self.travelAnimOneShot(self, "Interact")
-		
-		param["scene"] = plan.SpawnReward
-		self.pushAction("Spawn", actionDepth)
-		return Globals.ACTION_STATE.Running
-	
-	if foodstuff != null and is_top_of_stack:
-		param.erase("target")
-		param.erase("scene")
-		return Globals.ACTION_STATE.Finished
-		
-	return Globals.ACTION_STATE.Running
-	
-func Give(delta : float, param : Dictionary, actionDepth : int) -> int:
-	var item : Advertisement = param["item"]
-	var receiver : Advertisement = param["receiver"]
-	
-	var inv : Array = param.get("inventory", [])
-	inv.erase(item)
-	param.erase("item")
-	if not "inventory" in receiver.AdMetaData:
-		receiver.AdMetaData["inventory"] = []
-	receiver.AdMetaData["inventory"].push_back(item)
-	param["inventory"] = inv
-	item.AdMetaData["container"] = receiver
-		
-	return Globals.ACTION_STATE.Finished
-	
-func Receive(delta : float, param : Dictionary, actionDepth : int) -> int:
-	var item_type : Globals.AD_TYPE = param["item_type"]
-	var giver : Advertisement = param["giver"]
-	var receiver_inv : Array = param.get("inventory", [])
-	var giver_inv : Array = giver.AdMetaData.get("inventory", [])
-	
-	for item in giver_inv:
-		var ad : Advertisement = item as Advertisement
-		if ad.Type == item_type:
-			receiver_inv.push_back(ad)
-			giver_inv.erase(ad)
-			param["inventory"] = receiver_inv
-			giver.AdMetaData["inventory"] = giver_inv
-			ad.AdMetaData["container"] = self
-			break
-		
-	return Globals.ACTION_STATE.Finished
 	
 ###################################################################################################
 ## UTILITY FUNCTION
