@@ -131,6 +131,23 @@ func _physics_process(delta: float) -> void:
 		# Add the gravity.
 		if not self.call("is_on_floor"):
 			self.velocity += self.call("get_gravity") * delta
+		
+		# NavMesh tend to get stuck on corners
+		# If we're colliding with a corner, get the normal and move a little
+		# away from it to let the navmesh recover
+		var largest_col := Vector3.ZERO
+		for i in self.call("get_slide_collision_count"):
+			var col : KinematicCollision3D = self.call("get_slide_collision", i)
+			var coldir : Vector3 = col.get_normal()
+			coldir.y = 0.0
+			var colsq : float = coldir.length_squared()
+			if colsq > 0.01 and colsq > largest_col.length_squared():
+				largest_col = coldir
+		
+		# If we're not trying to walk don't do anything weird (like colliding with a bed while sleeping!)
+		if largest_col.length_squared() > 0.01 and self.velocity.length_squared() > 0.01:
+			self.velocity += largest_col * self.MovePixSec
+			
 		self.call("move_and_slide")
 
 func UpdateThoughts():
@@ -498,7 +515,7 @@ func Goto(delta : float, param : Dictionary, actionDepth : int) -> int:
 			param["obj"] = self
 			param["state"] = "Idle"
 		self.pushAction("TravelAnimState", actionDepth)
-		self.position = nav_agent.target_position
+		#self.position = nav_agent.target_position
 		self.velocity = Vector3.ZERO
 		if self.animState(self) == "Idle" and is_top_of_stack:
 			return Globals.ACTION_STATE.Finished
@@ -705,13 +722,13 @@ func RefillFridge2(delta : float, param : Dictionary, actionDepth : int) -> int:
 	if fridge_foodstuff != null:
 		return Globals.ACTION_STATE.Finished
 		
-	if player_foodstuff == null and not self.isAtLocation(market.position):
+	if player_foodstuff == null and not self.isAtLocation(market.position, 1.0):
 		param["target"] = market.position
-		param["precision"] = 0.5
+		param["precision"] = 1.0
 		self.pushAction("Goto", actionDepth)
 		return Globals.ACTION_STATE.Running
 		
-	if player_foodstuff == null and self.isAtLocation(market.position):
+	if player_foodstuff == null and self.isAtLocation(market.position, 1.0):
 		param["scene"] = plan.SpawnReward
 		self.travelAnimOneShot(self, "Interact")
 		self.pushAction("Spawn", actionDepth)
