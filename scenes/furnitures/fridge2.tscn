@@ -63,4 +63,7 @@ root_node = NodePath("../Fridge2")
 tree_root = SubResource("AnimationNodeStateMachine_crilj")
 anim_player = NodePath("../Fridge2/AnimationPlayer")
 
+[node name="Interact01" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.485399, 0, 0.46001)
+
 [editable path="Fridge2"]

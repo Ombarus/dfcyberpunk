@@ -299,7 +299,7 @@ func GoGetItem(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var container : Advertisement = self.getContainer(item)
 	var precision := 0.5
 	if container != null:
-		target_pos = container.position
+		target_pos = self.getClosestInteract(container)
 		precision = 1.5
 		
 	if not isAtLocation(target_pos, precision):
@@ -333,7 +333,7 @@ func GoDropItem(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var target_pos = self.position
 	var precision := 0.0
 	if container != null:
-		target_pos = container.position
+		target_pos = self.getClosestInteract(container)
 		precision = 1.5
 		
 	if not isAtLocation(target_pos, precision):
@@ -574,8 +574,9 @@ func GoSleepInBed(delta : float, param : Dictionary, actionDepth : int) -> int:
 	if not is_top_of_stack:
 		return Globals.ACTION_STATE.Running
 		
-	if not self.isAtLocation(bed.position, 0.5):
-		param["target"] = bed.position
+	var bed_target : Vector3 = self.getClosestInteract(bed)
+	if not self.isAtLocation(bed_target, 0.5):
+		param["target"] = bed_target
 		param["precision"] = 0.5
 		self.pushAction("Goto", actionDepth)
 		return Globals.ACTION_STATE.Running
@@ -635,8 +636,9 @@ func CookInKitchen2(delta : float, param : Dictionary, actionDepth : int) -> int
 	
 	# 1. grab from fridge
 	if fridge_foodstuff != null:
-		if not self.isAtLocation(fridge.position, 1.5):
-			param["target"] = fridge.position
+		var fridge_target : Vector3 = self.getClosestInteract(fridge)
+		if not self.isAtLocation(fridge_target, 1.5):
+			param["target"] = fridge_target
 			param["precision"] = 1.5
 			self.pushAction("Goto", actionDepth)
 			return Globals.ACTION_STATE.Running
@@ -649,8 +651,9 @@ func CookInKitchen2(delta : float, param : Dictionary, actionDepth : int) -> int
 	
 	# 2. put on closest kitchen counter
 	if player_foodstuff != null:
-		if not self.isAtLocation(kitchen.position, 1.0):
-			param["target"] = kitchen.position
+		var kitchen_target = self.getClosestInteract(kitchen)
+		if not self.isAtLocation(kitchen_target, 1.0):
+			param["target"] = kitchen_target
 			param["precision"] = 1.0
 			self.pushAction("Goto", actionDepth)
 			return Globals.ACTION_STATE.Running
@@ -722,25 +725,27 @@ func RefillFridge2(delta : float, param : Dictionary, actionDepth : int) -> int:
 	if fridge_foodstuff != null:
 		return Globals.ACTION_STATE.Finished
 		
-	if player_foodstuff == null and not self.isAtLocation(market.position, 1.0):
-		param["target"] = market.position
+	var market_target = self.getClosestInteract(market)
+	if player_foodstuff == null and not self.isAtLocation(market_target, 1.0):
+		param["target"] = market_target
 		param["precision"] = 1.0
 		self.pushAction("Goto", actionDepth)
 		return Globals.ACTION_STATE.Running
 		
-	if player_foodstuff == null and self.isAtLocation(market.position, 1.0):
+	if player_foodstuff == null and self.isAtLocation(market_target, 1.0):
 		param["scene"] = plan.SpawnReward
 		self.travelAnimOneShot(self, "Interact")
 		self.pushAction("Spawn", actionDepth)
 		return Globals.ACTION_STATE.Running
 		
-	if player_foodstuff != null and not self.isAtLocation(fridge.position, 1.5):
-		param["target"] = fridge.position
+	var fridge_target = self.getClosestInteract(fridge)
+	if player_foodstuff != null and not self.isAtLocation(fridge_target, 1.5):
+		param["target"] = fridge_target
 		param["precision"] = 1.5
 		self.pushAction("Goto", actionDepth)
 		return Globals.ACTION_STATE.Running
 		
-	if player_foodstuff != null and self.isAtLocation(fridge.position, 1.5):
+	if player_foodstuff != null and self.isAtLocation(fridge_target, 1.5):
 		param["item"] = player_foodstuff
 		param["from"] = self
 		param["to"] = fridge
@@ -781,39 +786,42 @@ func EatSelectedFood(delta : float, param : Dictionary, actionDepth : int) -> in
 	if not is_top_of_stack:
 		return Globals.ACTION_STATE.Running
 	
-	if player_food == null and not self.isAtLocation(food_container.position, 1.0):
-		param["target"] = food_container.position
+	var container_target : Vector3 = self.getClosestInteract(food_container)
+	if table_food == null and player_food == null and not self.isAtLocation(container_target, 1.0):
+		param["target"] = container_target
 		param["precision"] = 1.0
 		self.pushAction("Goto", actionDepth)
 		return Globals.ACTION_STATE.Running
 		
-	if player_food == null and self.isAtLocation(food_container.position, 1.0):
+	if table_food == null and player_food == null and self.isAtLocation(container_target, 1.0):
 		param["item"] = food
 		param["from"] = food_container
 		param["to"] = self
 		self.pushAction("Transfer", actionDepth)
 		return Globals.ACTION_STATE.Running
 		
-	if player_food != null and table_food == null and not self.isAtLocation(table.position, 1.0):
-		param["target"] = food_container.position
+	var table_target = self.getClosestInteract(table)
+	if player_food != null and table_food == null and not self.isAtLocation(table_target, 1.0):
+		param["target"] = table_target
 		param["precision"] = 1.0
 		self.pushAction("Goto", actionDepth)
 		return Globals.ACTION_STATE.Running
 		
-	if player_food != null and table_food == null and self.isAtLocation(table.position, 1.0):
+	if player_food != null and table_food == null and self.isAtLocation(table_target, 1.0):
 		param["item"] = player_food
 		param["from"] = self
 		param["to"] = table
 		self.pushAction("Transfer", actionDepth)
 		return Globals.ACTION_STATE.Running
 		
-	if table_food != null and not self.isAtLocation(chair.position, 1.0):
-		param["target"] = chair.position
+	var chair_target = self.getClosestInteract(chair)
+	if table_food != null and not self.isAtLocation(chair_target, 1.0):
+		param["target"] = chair_target
 		param["precision"] = 1.0
 		self.pushAction("Goto", actionDepth)
 		return Globals.ACTION_STATE.Running
 		
-	if table_food != null and self.isAtLocation(chair.position, 1.0) and player_state != "SitChairIdle":
+	if table_food != null and self.isAtLocation(chair_target, 1.0) and player_state != "SitChairIdle":
 		param["obj"] = self
 		param["state"] = "SitChairIdle"
 		self.pushAction("TravelAnimState", actionDepth)
@@ -946,6 +954,17 @@ func travelAnimOneShot(obj : Node3D, target : String) -> void:
 	
 func getContainer(obj : Advertisement) -> Advertisement:
 	return obj.AdMetaData.get("container", null)
+	
+func getClosestInteract(obj : Node3D) -> Vector3:
+	var bestv : Vector3 = obj.global_position
+	var bestsq : float = (self.global_position - obj.global_position).length_squared()
+	for n in obj.get_children():
+		if n.name.contains("Interact"):
+			var distsq = (self.global_position - n.global_position).length_squared()
+			if distsq < bestsq:
+				bestsq = distsq
+				bestv = n.global_position
+	return bestv
 	
 class Sorter:
 	var sort_key

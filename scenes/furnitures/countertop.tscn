@@ -11,3 +11,6 @@ Type = 3
 
 [node name="Inventory01" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.354399, 0.914041, 0.193378)
+
+[node name="Interact01" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.383043, 0, -0.370178)
