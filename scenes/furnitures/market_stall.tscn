@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://8jhykbot46f7"]
+
+[ext_resource type="Script" path="res://scripts/advertisement.gd" id="1_kifax"]
+[ext_resource type="PackedScene" uid="uid://bxphuiqhnxg25" path="res://data/models/MarketStall.glb" id="2_bsb6u"]
+
+[node name="MarketStall" type="Node3D"]
+script = ExtResource("1_kifax")
+Type = 5
+
+[node name="MarketStall2" parent="." instance=ExtResource("2_bsb6u")]
+
+[node name="Interact01" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.499798, 0, 1.04814)

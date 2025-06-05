@@ -55,6 +55,7 @@ graph_offset = Vector2(-457, -109)
 
 [node name="Fridge" type="Node3D"]
 script = ExtResource("1_jo8es")
+Type = 8
 
 [node name="Fridge2" parent="." instance=ExtResource("1_lcjlg")]
 
@@ -64,6 +65,6 @@ tree_root = SubResource("AnimationNodeStateMachine_crilj")
 anim_player = NodePath("../Fridge2/AnimationPlayer")
 
 [node name="Interact01" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.485399, 0, 0.46001)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.485399, 0, 0.46001)
 
 [editable path="Fridge2"]
