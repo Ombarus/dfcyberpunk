@@ -37,39 +37,6 @@ class_name Entity
 # How to express preferences? ie: NPC like to eat healthy so he should get a bonus to cooking healthy food...
 #    but just from the needs/reward of the action plan we can't really tell
 
-# Actions To Review
-#GoGetItemFromGeneric
-#WalkRandomly
-#Goto
-#LoadWait
-#Default
-#EatSelectedFood
-#CookInKitchen2
-#GoPutOnCounter
-#GoGetFromFridge
-#Receive
-#Spawn
-#Pickup
-#Drop
-#Wait
-#SleepInBed
-#FallAsleepInBed
-#WakeUpFromBed
-#PlayAnim
-#Sleep
-#RefillFridge
-#PutFoodInFridge
-#GoDropFoodInFridge
-#GoBuyFoodstuff
-#Give
-#TravelObjAnim
-#
-#*Eat
-#*Cook
-#*SleepOnFloor
-#*WorkInOffice
-#*Work
-
 
 @export var MovePixSec : float = 100.0
 @export var MoveEnerSec : float = 0.01
@@ -131,10 +98,14 @@ func _physics_process(delta: float) -> void:
 		# Add the gravity.
 		var cur_anim = self.animState(self)
 		# Disable gravity when doing "special" animations (like sleeping or sitting)
-		if not self.call("is_on_floor") and cur_anim in ["Walk", "Idle"]:
+		if not self.call("is_on_floor"):
 			self.velocity += self.call("get_gravity") * delta
+		# A bit of a hack because sometime we abort "Walk" and don't reset velocity
+		if not cur_anim in ["Walk", "Idle"]:
+			(self.get_node("CollisionShape3D") as CollisionShape3D).disabled = true
+			self.velocity = Vector3.ZERO
 		else:
-			self.velocity.y = 0.0
+			(self.get_node("CollisionShape3D") as CollisionShape3D).disabled = false
 		
 		# NavMesh tend to get stuck on corners
 		# If we're colliding with a corner, get the normal and move a little
