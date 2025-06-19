@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://5ro7dre3s3qj"]
 
 [ext_resource type="Script" path="res://scripts/fridgeadvertisement.gd" id="1_jo8es"]
-[ext_resource type="PackedScene" uid="uid://dn3vgfvhpivts" path="res://data/models/Fridge.glb" id="1_lcjlg"]
+[ext_resource type="PackedScene" uid="uid://blbrln0ib5lvi" path="res://data/models/Fridge.glb" id="1_lcjlg"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_wsivx"]
 

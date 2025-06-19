@@ -508,7 +508,7 @@ func Goto(delta : float, param : Dictionary, actionDepth : int) -> int:
 		self.look_at(look_at_vec, Vector3.UP)
 		# I might have made a mistake aligning the models to Y- in Blender
 		# Seems like it becomes z+ in Godot and look_at assume Z-?
-		self.rotate_y(deg_to_rad(180.0))
+		#self.rotate_y(deg_to_rad(180.0))
 		self.velocity = Vector3(dir.x, self.velocity.y, dir.z)
 	var energy : float = self.MoveEnerSec * delta
 	Needs.ApplyNeed(Globals.NEEDS.Energy, -energy)
