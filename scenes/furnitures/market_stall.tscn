@@ -10,4 +10,4 @@ Type = 5
 [node name="MarketStall2" parent="." instance=ExtResource("2_bsb6u")]
 
 [node name="Interact01" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.71025, 0, 1.04814)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.722, 0, 1.048)
