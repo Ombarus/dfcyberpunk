@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://clkiyxudpp1pk"]
 
 [ext_resource type="Script" path="res://scripts/foodadvertisement.gd" id="1_ghkid"]
-[ext_resource type="PackedScene" uid="uid://cq6ke36brbvj2" path="res://data/models/Steak.glb" id="3_0yqvc"]
+[ext_resource type="PackedScene" uid="uid://wgk1iumisi77" path="res://data/models/Steak.glb" id="3_0yqvc"]
 
 [node name="Steak3D" type="Node3D"]
 script = ExtResource("1_ghkid")

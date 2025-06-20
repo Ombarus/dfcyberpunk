@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cg1wno6e4buvm"]
 
 [ext_resource type="Script" path="res://scripts/advertisement.gd" id="1_lrvjd"]
-[ext_resource type="PackedScene" uid="uid://bdqu256wx0f8i" path="res://data/models/DiningTable.glb" id="2_ptslm"]
+[ext_resource type="PackedScene" uid="uid://8cdau8y8sgy6" path="res://data/models/DiningTable.glb" id="2_ptslm"]
 
 [node name="DiningTable" type="Node3D"]
 script = ExtResource("1_lrvjd")
