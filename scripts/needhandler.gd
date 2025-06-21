@@ -32,3 +32,35 @@ func GetRewardScoreFromPlan(plan : ActionPlan) -> float:
 	score += plan.EnergyReward / max(CurrentNeeds[Globals.NEEDS.Energy], 0.0001)
 	score += plan.SatisfactionReward / max(CurrentNeeds[Globals.NEEDS.Satisfaction], 0.0001)
 	return score
+
+
+#Default
+#GoGetItem
+#GoDropItem
+#Transfer
+#toFromExchange
+#TravelAnimState
+#WalkRandomly
+#~Goto   ~~~~~
+#LoadWait
+#Wait
+#GoSleepInBed
+#*Sleep  *****
+#CookInKitchen2
+#GoPutFoodInFridge
+#RefilFridge2
+#Spawn
+#*EatSelectedFood ****
+#SleepOnFloor
+
+func ApplyNeedForAction(curAction : String, delta : float, param : Dictionary, curActionState : Globals.ACTION_STATE) -> void:
+	var plan : ActionPlan = param.get("current_plan", null)
+	for r in plan.ActualReward:
+		if curAction == r["Action"]:
+			if curActionState == r["State"]:
+				var mult := 1.0
+				if curActionState == Globals.ACTION_STATE.Running:
+					mult = delta
+				var rewards : Dictionary = r["Rewards"]
+				for need in rewards:
+					ApplyNeed(need, rewards[need] * mult)

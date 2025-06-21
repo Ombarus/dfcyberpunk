@@ -39,12 +39,7 @@ class_name Entity
 
 
 @export var MovePixSec : float = 100.0
-@export var MoveEnerSec : float = 0.01
-@export var EatUnitSec : float = 0.3334
-@export var CookEnerSec : float = 0.01
-@export var SleepEnerSec : float = 0.1
-@export var SatSec : float = 0.01 # consider 1 day = 100 seconds, 0.01 means 1 to 0 in 100 seconds
-@export var SatisSec : float = 0.01
+@export var SleepEnerSec : float = 0.1 # TODO: Get rid?
 @export var SleepJitter : float = 0.1 # Random variation in % (if bed give +0.9, this will add/remove 10% of 0.9)
 
 var Needs := NeedHandler.new()
@@ -82,14 +77,15 @@ func _process(delta: float) -> void:
 	# For loop was having issue with updating actionStack during loop
 	while i < self.actionStack.size():
 		var s = self.callv(self.actionStack[i], [delta, self.curParam, i])
+		self.Needs.ApplyNeedForAction(self.actionStack[i], delta, self.curParam, s)
 		
 		if (s == Globals.ACTION_STATE.Finished):
 			self.popAction(i)
 		i += 1
 	
 	UpdateThoughts()
-	UpdateSatiety(delta)
-	UpdateSatisfaction(delta)
+	#UpdateSatiety(delta)
+	#UpdateSatisfaction(delta)
 
 func _physics_process(delta: float) -> void:
 	# Terrible hack to "cast" player object to CharacterBody3D
@@ -136,12 +132,6 @@ func UpdateThoughts():
 		actions += a
 	self.debugThoughtsAction.text = actions
 	self.debugThoughts.position = get_viewport().get_camera_3d().unproject_position(self.position)
-
-func UpdateSatiety(delta : float) -> void:
-	Needs.ApplyNeedOverTime(Globals.NEEDS.Satiety, -self.SatSec, delta)
-	
-func UpdateSatisfaction(delta : float) -> void:
-	Needs.ApplyNeedOverTime(Globals.NEEDS.Satisfaction, -self.SatisSec, delta)
 	
 func UpdatePlanScoreDebug(collected_plans):
 	for c in self.debugPlanScore.get_children():
@@ -179,9 +169,9 @@ func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 		
 	var random_goto_plan := ActionPlan.new()
 	random_goto_plan.ActionName = "WalkRandomly"
-	random_goto_plan.EnergyReward = 0.0
+	random_goto_plan.EnergyReward = -0.05
 	random_goto_plan.SatietyReward = 0.0
-	random_goto_plan.SatisfactionReward = 0.08 # Slightly higher than making food when we have a lot of food
+	random_goto_plan.SatisfactionReward = 0.04 # Slightly higher than making food when we have a lot of food
 	
 	var fallback_sleep_plan := ActionPlan.new()
 	fallback_sleep_plan.ActionName = "SleepOnFloor"
@@ -510,8 +500,7 @@ func Goto(delta : float, param : Dictionary, actionDepth : int) -> int:
 		# Seems like it becomes z+ in Godot and look_at assume Z-?
 		#self.rotate_y(deg_to_rad(180.0))
 		self.velocity = Vector3(dir.x, self.velocity.y, dir.z)
-	var energy : float = self.MoveEnerSec * delta
-	Needs.ApplyNeed(Globals.NEEDS.Energy, -energy)
+
 	return Globals.ACTION_STATE.Running
 
 func LoadWait(delta : float, param : Dictionary, actionDepth : int) -> int:
@@ -589,7 +578,6 @@ func Sleep(delta : float, param : Dictionary, actionDepth : int) -> int:
 	if Needs.GetNeed(Globals.NEEDS.Energy) + recover > wake_ener:
 		Needs.SetNeed(Globals.NEEDS.Energy, wake_ener)
 		return Globals.ACTION_STATE.Finished
-	Needs.ApplyNeed(Globals.NEEDS.Energy, recover)
 	return Globals.ACTION_STATE.Running
 	
 func CookInKitchen2(delta : float, param : Dictionary, actionDepth : int) -> int:
@@ -746,6 +734,7 @@ func Spawn(delta : float, param : Dictionary, actionDepth : int) -> int:
 	
 	
 func EatSelectedFood(delta : float, param : Dictionary, actionDepth : int) -> int:
+	# We're eating the plan and plan_ad. When they're freed what should we do?
 	var plan : ActionPlan = param.get("current_plan", null)
 	var food : Advertisement = param.get("plan_ad", null)
 	var food_container : Advertisement = food.AdMetaData.get("container", null)
@@ -805,20 +794,28 @@ func EatSelectedFood(delta : float, param : Dictionary, actionDepth : int) -> in
 		return Globals.ACTION_STATE.Running
 		
 	if table_food != null and player_state == "SitChairIdle":
-		var food_left = table_food.AdMetaData.get("food_left", 6.0)
-		food_left -= delta
-		table_food.AdMetaData["food_left"] = food_left
-		if food_left > 0:
-			#TODO: add sitting interact anim?
-			return Globals.ACTION_STATE.Running
-		else:
-			table_food.queue_free()
-			table_food.visible = false
-			table_inv.erase(table_food)
-			table.AdMetaData["inventory"] = table_inv
-			return Globals.ACTION_STATE.Finished
+		self.pushAction("Eat", actionDepth)
+		return Globals.ACTION_STATE.Running
 
 	return Globals.ACTION_STATE.Finished
+
+func Eat(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var table : Advertisement = self.getFirstOf(Globals.AD_TYPE.Table)
+	var table_inv : Array = table.AdMetaData.get("inventory", [])
+	var table_food : Advertisement = self.findItemInInv(table_inv, Globals.AD_TYPE.Food)
+	# TODO: food_left should be determined by the food type
+	var food_left = table_food.AdMetaData.get("food_left", 6.0)
+	food_left -= delta
+	table_food.AdMetaData["food_left"] = food_left
+	if food_left > 0:
+		#TODO: add sitting interact anim?
+		return Globals.ACTION_STATE.Running
+	else:
+		table_food.queue_free()
+		table_food.visible = false
+		table_inv.erase(table_food)
+		table.AdMetaData["inventory"] = table_inv
+		return Globals.ACTION_STATE.Finished
 	
 ###################################################################################################
 ## ACTION FUNCTION (NEED REVISION)

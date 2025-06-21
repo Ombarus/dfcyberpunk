@@ -26,3 +26,50 @@ class_name ActionPlan
 # Execution state could be stuff like how much left there is to cook
 # If rewards were given, etc.
 var PlanMetaData : Dictionary = {}
+
+# Right now it's generic and cover all Actions
+# but the idea is to inventually be able to customize the Rewards by Ads
+# ie: Different food give more/less Satiety per second, bad job give less Richness, etc.
+var ActualReward := [
+	{
+		"Action": "Sleep",
+		"State": Globals.ACTION_STATE.Running,
+		# If running, need is /sec, if not then it's given whole on state transition
+		"Rewards": {Globals.NEEDS.Energy: 0.1}
+	},
+	{
+		"Action": "Sleep",
+		"State": Globals.ACTION_STATE.Finished,
+		"Rewards": {Globals.NEEDS.Satisfaction: 0.1}
+	},
+	{
+		"Action": "Eat",
+		"State": Globals.ACTION_STATE.Running,
+		"Rewards": {Globals.NEEDS.Satiety: 0.058} # Steak: 0.35 over 6 seconds
+	},
+	{
+		"Action": "Eat",
+		"State": Globals.ACTION_STATE.Finished,
+		"Rewards": {Globals.NEEDS.Satisfaction: 0.05}
+	},
+	{
+		"Action": "WalkRandomly",
+		"State": Globals.ACTION_STATE.Finished,
+		"Rewards": {Globals.NEEDS.Satisfaction: 0.04}
+	},
+	{
+		"Action": "RefillFridge2",
+		"State": Globals.ACTION_STATE.Finished,
+		"Rewards": {Globals.NEEDS.Satisfaction: 0.06}
+	},
+	{
+		"Action": "Default",
+		"State": Globals.ACTION_STATE.Running,
+		"Rewards": {Globals.NEEDS.Satiety: -0.01, Globals.NEEDS.Energy: -0.012, Globals.NEEDS.Satisfaction: -0.005} # consider 1 day = 100 seconds, 0.01 means 1 to 0 in 100 seconds
+	},
+	{
+		"Action": "SleepOnFloor",
+		"State": Globals.ACTION_STATE.Finished,
+		"Rewards": {Globals.NEEDS.Satisfaction: -0.2}
+	}
+]

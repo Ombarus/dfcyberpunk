@@ -34,8 +34,8 @@ func _ready() -> void:
 	var refill_fridge := ActionPlan.new()
 	refill_fridge.ActionName = "RefillFridge2"
 	refill_fridge.EnergyReward = -0.05
-	refill_fridge.SatietyReward = 0.0
-	refill_fridge.SatisfactionReward = 0.04
+	refill_fridge.SatietyReward = 0.01
+	refill_fridge.SatisfactionReward = 0.06
 	refill_fridge.RichnessReward = -0.00005 # 50$ of 1M
 	refill_fridge.SpawnReward = preload("res://scenes/foodstuff3d.tscn")
 	refill_fridge.SpawnRewardType = Globals.AD_TYPE.Foodstuff
