@@ -20,6 +20,7 @@ class_name ActionPlan
 # Not sure how to keep this generic for all the type of ads
 # Maybe a generic Dictionary or a list of "tags"
 @export var SpawnRewardType : Globals.AD_TYPE
+@export var SpawnRewardCount : int = 1
 
 # Current thinking is plans picked up by NPCs are duplicated
 # and we keep the current "execution state" of the plan in here
@@ -61,6 +62,11 @@ var ActualReward := [
 		"Action": "RefillFridge2",
 		"State": Globals.ACTION_STATE.Finished,
 		"Rewards": {Globals.NEEDS.Satisfaction: 0.06}
+	},
+	{
+		"Action": "CookInKitchen2",
+		"State": Globals.ACTION_STATE.Finished,
+		"Rewards": {Globals.NEEDS.Satisfaction: 0.05}
 	},
 	{
 		"Action": "Default",

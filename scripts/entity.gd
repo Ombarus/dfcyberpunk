@@ -319,7 +319,9 @@ func GoDropItem(delta : float, param : Dictionary, actionDepth : int) -> int:
 	return Globals.ACTION_STATE.Running
 	
 func Transfer(delta : float, param : Dictionary, actionDepth : int) -> int:
-	var item : Advertisement = param["item"]
+	var item = param["item"]
+	if item is Advertisement:
+		item = [item]
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	var from : Advertisement = param["from"]
 	var to : Advertisement = param["to"]
@@ -336,8 +338,9 @@ func Transfer(delta : float, param : Dictionary, actionDepth : int) -> int:
 		to_inv = param.get("inventory", [])
 	else:
 		to_inv = from.AdMetaData.get("inventory", [])
-		
-	if self.isItemInInv(from_inv, item) or not is_top_of_stack or seq.CurState() != seq.SEQ_STATE.IDLE:
+	
+	# We transfer everything at once so it's ok to just check item[0]
+	if self.isItemInInv(from_inv, item[0]) or not is_top_of_stack or seq.CurState() != seq.SEQ_STATE.IDLE:
 		var fridge : Advertisement = null
 		if to.Type == Globals.AD_TYPE.Fridge:
 			fridge = to
@@ -356,7 +359,7 @@ func Transfer(delta : float, param : Dictionary, actionDepth : int) -> int:
 				return Globals.ACTION_STATE.Finished
 			else:
 				var cur_anim = self.animState(fridge)
-				if cur_anim == "OpenIdle" and self.isItemInInv(from_inv, item):
+				if cur_anim == "OpenIdle" and self.isItemInInv(from_inv, item[0]):
 					toFromExchange(to, from, item, param)
 				seq.SetContinue()
 				return Globals.ACTION_STATE.Running
@@ -370,7 +373,7 @@ func Transfer(delta : float, param : Dictionary, actionDepth : int) -> int:
 	return Globals.ACTION_STATE.Finished
 
 # This could be much simpler if Entity used AdMetaData
-func toFromExchange(to : Advertisement, from : Advertisement, item : Advertisement, param : Dictionary):
+func toFromExchange(to : Advertisement, from : Advertisement, items : Array, param : Dictionary):
 	var from_inv : Array
 	
 	if from == self:
@@ -384,26 +387,29 @@ func toFromExchange(to : Advertisement, from : Advertisement, item : Advertiseme
 	else:
 		to_inv = from.AdMetaData.get("inventory", [])
 		
+	#TODO: handle multiple inventory slot
 	var inv_slot : Node3D = to.find_child("Inventory01", true, false)
-		
-	from_inv.erase(item)
-	to_inv.push_back(item)
-	item.AdMetaData["container"] = to
-	if inv_slot != null:
-		item.visible = true
-		item.global_transform = inv_slot.global_transform
-		
-	if from == self:
-		param["inventory"] = from_inv
-	else:
-		from.AdMetaData["inventory"] = from_inv
-		
-	if to == self:
-		item.BelongTo = self
-		param["inventory"] = to_inv # in case inventory wasn't init before
-	else:
-		item.BelongTo = null
-		to.AdMetaData["inventory"] = to_inv
+	
+	for item in items:
+		from_inv.erase(item)
+		to_inv.push_back(item)
+		item.AdMetaData["container"] = to
+		if inv_slot != null:
+			item.visible = true
+			item.global_transform = inv_slot.global_transform
+			inv_slot = null
+			
+		if from == self:
+			param["inventory"] = from_inv
+		else:
+			from.AdMetaData["inventory"] = from_inv
+			
+		if to == self:
+			item.BelongTo = self
+			param["inventory"] = to_inv # in case inventory wasn't init before
+		else:
+			item.BelongTo = null
+			to.AdMetaData["inventory"] = to_inv
 	
 func TravelAnimState(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var obj : Node3D = param["obj"]
@@ -678,7 +684,7 @@ func RefillFridge2(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var market : Advertisement = self.getFirstOf(Globals.AD_TYPE.Market)
 	var player_inv : Array = param.get("inventory", [])
 	var fridge_inv : Array = fridge.AdMetaData.get("inventory", [])
-	var player_foodstuff : Advertisement = self.findItemInInv(player_inv, Globals.AD_TYPE.Foodstuff)
+	var player_foodstuff : Array = self.findAllItemInInv(player_inv, Globals.AD_TYPE.Foodstuff)
 	var fridge_foodstuff : Advertisement = self.findItemInInv(fridge_inv, Globals.AD_TYPE.Foodstuff)
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	
@@ -689,26 +695,27 @@ func RefillFridge2(delta : float, param : Dictionary, actionDepth : int) -> int:
 		return Globals.ACTION_STATE.Finished
 		
 	var market_target = self.getClosestInteract(market)
-	if player_foodstuff == null and not self.isAtLocation(market_target, 0.5):
+	if player_foodstuff.size() == 0 and not self.isAtLocation(market_target, 0.5):
 		param["target"] = market_target
 		param["precision"] = 0.5
 		self.pushAction("Goto", actionDepth)
 		return Globals.ACTION_STATE.Running
 		
-	if player_foodstuff == null and self.isAtLocation(market_target, 0.5):
+	if player_foodstuff.size() == 0 and self.isAtLocation(market_target, 0.5):
 		param["scene"] = plan.SpawnReward
+		param["count"] = plan.SpawnRewardCount
 		self.travelAnimOneShot(self, "Interact")
 		self.pushAction("Spawn", actionDepth)
 		return Globals.ACTION_STATE.Running
 		
 	var fridge_target = self.getClosestInteract(fridge)
-	if player_foodstuff != null and not self.isAtLocation(fridge_target, 0.5):
+	if player_foodstuff.size() > 0 and not self.isAtLocation(fridge_target, 0.5):
 		param["target"] = fridge_target
 		param["precision"] = 0.5
 		self.pushAction("Goto", actionDepth)
 		return Globals.ACTION_STATE.Running
 		
-	if player_foodstuff != null and self.isAtLocation(fridge_target, 0.5):
+	if player_foodstuff.size() > 0 and self.isAtLocation(fridge_target, 0.5):
 		param["item"] = player_foodstuff
 		param["from"] = self
 		param["to"] = fridge
@@ -721,22 +728,25 @@ func RefillFridge2(delta : float, param : Dictionary, actionDepth : int) -> int:
 func Spawn(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var pos : Vector3 = self.position
 	var pack := param["scene"] as PackedScene
-	var n := pack.instantiate() as Advertisement
-	self.get_parent().add_child(n)
-	n.position = pos
-	n.BelongTo = self
-	n.visible = false
-	var inv : Array = param.get("inventory", [])
-	inv.append(n)
-	param["inventory"] = inv
-	n.AdMetaData["container"] = self
+	var count : int = param.get("count", 1)
+	for i in range(count):
+		var n := pack.instantiate() as Advertisement
+		self.get_parent().add_child(n)
+		n.position = pos
+		n.BelongTo = self
+		n.visible = false
+		var inv : Array = param.get("inventory", [])
+		inv.append(n)
+		param["inventory"] = inv
+		n.AdMetaData["container"] = self
 	return Globals.ACTION_STATE.Finished
 	
 	
 func EatSelectedFood(delta : float, param : Dictionary, actionDepth : int) -> int:
-	# We're eating the plan and plan_ad. When they're freed what should we do?
 	var plan : ActionPlan = param.get("current_plan", null)
 	var food : Advertisement = param.get("plan_ad", null)
+	if food == null:
+		return Globals.ACTION_STATE.Finished
 	var food_container : Advertisement = food.AdMetaData.get("container", null)
 	var player_inv : Array = param.get("inventory", [])
 	var player_food : Advertisement = self.findItemInInv(player_inv, Globals.AD_TYPE.Food)
@@ -811,6 +821,8 @@ func Eat(delta : float, param : Dictionary, actionDepth : int) -> int:
 		#TODO: add sitting interact anim?
 		return Globals.ACTION_STATE.Running
 	else:
+		if table_food == param.get("plan_ad", null):
+			param.erase("plan_ad")
 		table_food.queue_free()
 		table_food.visible = false
 		table_inv.erase(table_food)
@@ -914,6 +926,15 @@ func findItemInInv(inv : Array, target : Globals.AD_TYPE) -> Advertisement:
 		if ad.Type == target:
 			return ad
 	return null
+	
+func findAllItemInInv(inv : Array, target : Globals.AD_TYPE) -> Array:
+	var res := []
+	for i in inv:
+		var ad := i as Advertisement
+		if ad.Type == target:
+			res.push_back(ad)
+	
+	return res
 	
 func animState(obj : Node3D) -> String:
 	var obj_tree : AnimationTree = obj.find_child("AnimationTree", true, false)

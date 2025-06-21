@@ -1,6 +1,7 @@
-[gd_scene load_steps=57 format=3 uid="uid://8qm8xqhjvjw5"]
+[gd_scene load_steps=59 format=3 uid="uid://8qm8xqhjvjw5"]
 
 [ext_resource type="PackedScene" uid="uid://ckkkaxossb5me" path="res://data/models/RoadCenter.glb" id="1_3innq"]
+[ext_resource type="Script" path="res://scripts/world_clock.gd" id="1_ol7km"]
 [ext_resource type="Script" path="res://scripts/camera_3d.gd" id="1_v6ick"]
 [ext_resource type="PackedScene" uid="uid://d2ha23ap0m16j" path="res://data/models/RoadLeft.glb" id="2_sv3ae"]
 [ext_resource type="PackedScene" uid="uid://c48ee6yyy7eiu" path="res://data/models/SidewalkLeft.glb" id="3_4b6ik"]
@@ -25,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://8jhykbot46f7" path="res://scenes/furnitures/market_stall.tscn" id="20_v4mfw"]
 [ext_resource type="PackedScene" uid="uid://5ro7dre3s3qj" path="res://scenes/furnitures/fridge2.tscn" id="21_rqupk"]
 [ext_resource type="Script" path="res://scripts/sequencer.gd" id="22_0qn72"]
+[ext_resource type="PackedScene" uid="uid://c2hbs3xwqvwe3" path="res://scenes/hud.tscn" id="27_gevlh"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8ig1x"]
 frequency = 0.002
@@ -71,6 +73,7 @@ SatietyReward = 0.0
 SatisfactionReward = 0.1
 RichnessReward = 0.0
 SpawnRewardType = 0
+SpawnRewardCount = 1
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bpfx1"]
 radius = 0.4
@@ -170,6 +173,12 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(-443, -169)
 
 [node name="Main3D" type="Node3D"]
+
+[node name="Systems" type="Node" parent="."]
+
+[node name="WorldClock" type="Node" parent="Systems"]
+script = ExtResource("1_ol7km")
+DayLengthSec = 300.0
 
 [node name="LookAt" type="Node3D" parent="."]
 
@@ -1012,5 +1021,7 @@ grow_vertical = 1
 
 [node name="Title" parent="Dynamic/CharacterBody3D/CanvasLayer/NPCThoughts/ColorRect/HBoxContainer/PlanScore" index="0"]
 custom_minimum_size = Vector2(250, 0)
+
+[node name="HUD" parent="." instance=ExtResource("27_gevlh")]
 
 [editable path="Dynamic/CharacterBody3D/CanvasLayer/NPCThoughts"]

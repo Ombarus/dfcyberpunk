@@ -39,6 +39,7 @@ func _ready() -> void:
 	refill_fridge.RichnessReward = -0.00005 # 50$ of 1M
 	refill_fridge.SpawnReward = preload("res://scenes/foodstuff3d.tscn")
 	refill_fridge.SpawnRewardType = Globals.AD_TYPE.Foodstuff
+	refill_fridge.SpawnRewardCount = 5
 	
 	self.ActionPlans = [
 		#spag_recipe,
