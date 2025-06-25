@@ -1,0 +1,328 @@
+Video about Evolution of Empires. Could be applied to MegaCorpo role in my game? https://youtu.be/1p3tMNbFdCs?si=WC0MuaIHslsxAYyn
+
+# GTA+DF+Shadowrun
+Original 2d top-down GTA gameplay. (Think hotline miami?)
+
+City is procedurally generated and populated with "agents". The agents have goals and desires. They own stuff related to their goals and desires.
+
+Similar to DF. World might be destructible?
+
+The player can do pretty much anything. Kill people, steal cars, destroys buildings, etc. The idea is to make the agents stable enough that they recover and incorporate the players action in their life.
+
+Setting could be modern or cyberpunk
+
+## REF?
+- Check out Shadows of Doubt (2023 early access procedural crime solving game)
+
+## User Story
+1. Scheduler System collect agents with empty action queue
+2. Scheduler look at Agents needs and select a list of Advertisement from memory, it calculates the "score", sort them and pick one
+    1. Agent's memory contains list of recently seen Advertisement
+    2. Some Advertisement might be permanent "knowledge"
+    3. Advertisement in memory can be false. In which case they will be corrected after the agent realize it's mistake
+3. Scheduler ask Advertisement for Plan of Actions
+4. Advertisement generate a plan of action. ex:
+    1. Get in Car
+    2. Drive to Diner Parking
+    3. Walk inside Diner
+    4. Sit at table
+    5. Order food
+    6. Eat food
+    7. Pay for food
+    8. Done
+5. Plan of action can also have contingencies. (ex: You were interrupted and now food has spoiled so Throw it away instead of eating)
+6. Plan of action queues the first action
+7. Agent execute the action (play animation, play sounds, do pathfinding, etc.)
+8. When action is completed, Plan of action queues the next action
+9. Sheduler might sometimes re-evaluate agents with actions in the queue to check for interrupt (like a phone call or getting beaten in the street)
+
+## Goal
+I want to drop a bunch of assets (objects) with some characteristics:
+    - Hospital
+        - Cure Diseases
+        - Has Workers
+        - Receives Customers
+    - Gun Shop
+        - Receives Customers
+        - Sell Guns
+        - Sell Ammo
+    - Office Building
+    - Restaurants
+        - Is Owned
+        - Receives customers
+        - Makes food
+    - Tables
+        - Can hold objects
+    - Chairs
+        - Can sit
+    - Food
+        - Can be consumed
+    - Beds
+        - Can be slept in
+    - Appartments
+        - Is Owned
+    - Cars
+        - Can be driven
+    - Billboard
+    - Gun
+        - Does 10 damage
+        - Max Range 50m
+    - etc.
+
+Then I want to drop a bunch of assets (agents) with some characteristics:
+    - Skills
+        - Medecine 5
+    - Employed
+        - Work at Hospital X
+    - Owns
+        - Appartment Y
+    - Carries
+        - Stetoscope
+        - Gun
+
+The Agent-Need-Based-AI uses this information to manage NPCs, react to PC's actions and move the city development forward
+
+
+## User Story 2
+- 3 agents
+    - child
+    - teacher
+    - chef
+- 5 objects
+    - school
+    - chef/child home
+        - refrigerator (dispence unlimited food)
+    - restaurant
+    - teacher's home
+- teacher goes to school everyday
+- child goes to school everyday
+- chef goes to restaurant
+- child goes home after school (too young to go to restaurant)
+- teacher eat at restaurant
+- chef goes home, make food from refrigerator and child and chef eat
+- agents go to sleep in their home
+- repeat
+
+## Systems
+- Scheduler:
+    - Prioritize agents tasks
+    - Manage LODs of "consciousness"
+    - Tell agents when they need to update/run/change their goals
+    - Select from a list of advertised need-fulfilling actions
+        - winner-takes-all (top scoring action wins)
+        - Weighted-random (select one action from the top X)
+        - Other (based on personal preferences/gameplay overrides, etc.)
+- Advertisements
+    - Objects in the world can Advertise their Actions and Need fulfilment
+        - Billboard could advertise a restaurant (can fulfil eating and drinking needs)
+        - a Bar can advertise inhebrihation, fixer, relationship needs fulfilment
+        - An agent might "remember" advertisements from the past
+        - A relationship memory can "advertise" need fulfilment too?
+        - Permanent advertisement (AKA common knowledge). Everyone knows that you can get electronics at Samsung stores
+    - Objects can update their advertisement (example from book: Fridge advertises "make food" but then also "clean me" after a while and "fix me" if it breaks)
+        - While "Fix me" is nice. How do you define how important it is to fix the fridge instead of going to the restaurant every day since "fixing the fridge" doesn't directly translate to "eating need fulfilment"?
+    - An agent personality will modify the scores of adverstisement (so male adults are interested in red light advertisement but not female child, etc.)
+        - Not just modify score, maybe a quick binary filtering to avoid adding advertisement we know we're not going to do
+    - False advertising? (similar to how knowledge can be wrong? Especially important in an Cyberpunk universe)
+- Actions/activities/tasks:
+    - Things agents do to complete Goals/Dream/Needs
+    - ie:
+        - Walk to restaurant
+        - Pay at the restaurant
+        - Go to work
+        - Work
+        - Cook Diner
+        - Eat
+    - Complex chain of actions can be interrupted... maybe even resumed
+    - There is a complex m-to-n relationship between needs and actions. 
+    - Actions might depend on needs (Find a restaurant depends on hunger).
+    - Actions might depend on Actions (Pay after eating at a restaurant)
+    - Actions might create new actions or affect multiple needs (Hunting might be one move toward Eating but also fulfil need for adventure and hobby?)
+    - Maybe there are "meta" actions (actions that are list of actions)
+        - Actions to fullfil "eating" need: Walk to Restaurant, Drive to Restaurant, Make Diner, Buy Grocery and make diner, etc.
+        - If the Scheduler decide to go with the meta-action "Drive to Restaurant" then it schedules:
+            1. Pathfind to Car
+            2. Start Driving
+            3. Pathfind to Restaurant (randomly selected)
+            4. Sit at table
+            5. Order food
+            6. Eat food
+            7. Pay for food
+            8. Exit Restaurant
+            9. Scheduler needed
+        - Meta action might have complexity, so Drive to Restaurant fullfils several needs but it's "complexity" is quite high which might prevent the agent from selecting it
+            - It might have requirements too... like owning a car, and having enough money!
+- Agents:
+    - Description/Characteristics
+        - Intelligent
+        - Hands, Feet
+        - Hair Style
+        - Hair Color
+        - etc.?
+    - Inventory (could be items or places? (guns, food, appartment, company, etc?))
+    - Goals (ie: pathfinding, go to work, buy milk, etc.)
+    - Dreams/Desires (ie: wants a promotion, dream of a vacation in Haiwaii, dream of Chrome, etc.) (dreams and desires lead to Goals)
+    - Relationships (who you know, how well, could be decieved (like the player could lie about something and now the agent thinks the player knows x/y)
+        - include general knowledge?
+    - Personality
+        - Used as modifiers that can impact other aspect
+        - ex:
+            - Lazy make it harder for agents to achieve dream/desired
+            - Nervous make it harder to surprise them or sleep, etc.
+            - Charismatic make it easier to maintain and increase Relationships
+            - Schizophrenic insert random fake knowledge (I saw a unicorn in the street yesterday!)
+    - Skills?
+        - How precise should they be? Maybe there are lots of knowledge but not too precise?
+            - Firearms
+            - Electronics/Computer
+            - Medecine
+            - Fighting
+            - Swimming
+            - Educated (Reading, Math, Common Knowledge?)
+        - Specialization? (bonus to specific tasks?) (Hard to optain, related to a skill and you can only have one specialization per skill?)
+            - Glock 9mm
+            - AK-47
+            - Heart surgery
+            - Katana
+    - Memory of Advertisement
+- Non-Human Agents?
+    - Abilities?
+        - Hands (to use tools)
+        - Wings (to fly?)
+        - Palmed Feet (swim?)
+        - Claws (more unarmed damage?)
+    - What about human agents with augmentations? are they just "equipment"?
+        - Should non-human agents just have a list of "inate equipment"?
+        - Do human have "inate equipment"? (like all human agents can use computers but not animals?)
+- PCG
+    - City block generation (voronoi?)
+    - District (as biomes?)
+        - Rich
+        - Commercial
+        - Slums
+        - Asian
+        - Electronics
+        - Italian
+        - etc
+        - parks
+    - waveform collapse for building interiors?
+    - Climate, Temperature? (is it rainy all the time?)
+    - Would there be elevation? (mountains, fields, rivers, lakes?)
+    - DF worldgen in stages:
+        1. "field values" (elevation, rain, rivers, etc.) 
+        2. "derived values" (vegetation calculated from field values)
+        3. smoothing/erosion/cleanup (dry really small oceans, smooth plains, etc.)
+- Hiearchy
+    - Things will have to work on multiple level of abstraction
+    - For example we might update a megacorp stats without actually modeling all it's employees
+    - We update agents without knowing what they look like
+    - We "know" an agent is "home" in their "kitchen" but we haven't actually generated the whole building
+- Factions?
+    - Affects Trade, Diplomacy, Relationships (not sure how that would work, maybe corpos are faction?)
+- World Changes
+    - District reshape (rich neighborhood become slum, slum become middle-class, etc.)
+    - Corpo created/destroyed/bought, etc
+    - Building destroyed, built
+    - People move, change job, die, born, grow (baby, child, adult)
+    
+
+## RESOURCES
+- NPC using The Sims "Needs Based AI"
+    - https://www.reddit.com/r/gamedev/comments/29jtbg/creating_more_interesting_npc_villages_by/
+
+- Maslow's hierarchy:
+    - Phisiological Needs
+    - Safety Needs
+    - Belongingness and Love Needs
+    - Esteem Needs (reward)
+    - Need to Know and Understand
+    - Aesthetic Needs
+    - Self-Actualization
+    - Transcendence
+
+## NOTES
+- Proximity to other tasks might be important (eat, dress and shower in the morning because you're at home instead of going to work then going back to eat or something)
+
+- What does the main game loop in DF look like?
+In dwarf mode, say.  It starts with some announcement checks and considers autosaves, etc.  A lot of the rest doesn't happen every tick.  Every hundred ticks, for instance, it'll check job assignments and 'strange moods.'  Armies are moved on the world map.  Every hundred ticks (staggered from the job check), it handles job applications by dwarves, a kind of invisible auction that it uses to manage the various competing priorities.  Every ten ticks it advances the seasons, which actually does all kinds of things with the weather and map (both locally and in the world), and it also does a check for certain plot element advances (diplomats, sieges, etc.), and it checks whether your fort is still alive.
+
+Then it hits some things that it does every tick.  Fluids and other map tile information is advanced (though there are various optimizations here so that not every tile is necessarily checked every turn, and there are various flags so that entire sections of the map can be skipped if nothing has happened.)  Vermin running around are updated.  Other 'events' on the map, like active fires, are handled.
+
+If a flag is set, wounded/thirsty/hungry dwarves that can't care for themselves get an update, and every so often, dead dwarves 'think' about their burial arrangements so that jobs can be set.  Caged and chained creatures update their thoughts and situation periodically.
+
+Then creatures leave the map if they are set to at the edges.
+
+Every fifty ticks, staggered from other updates, all of the taverns, temples, libraries, etc. get their information updated.  Stockpiles, staggered on a different tick, also work this way.  Similarly with storage job creation, though that process is complicated with various optimizations and lengthening ping times and so forth, and it's still slow, since at some point, 50000+ boulders will cause trouble.
+
+Every thousand ticks, objects that have been marked for deletion and removed from the game are actually deleted and freed.  This happens more often with items, every fifty ticks, along with a building use check (mostly updates for wells and some other flags that often need checking.)
+
+We hit another every tick update at this point.  Projectiles are moved.  Activities (which range from dances to martial training to storytelling) get updated as needed.  Dwarves and other creatures decide on and advance their immediate actions (movement to an adjacent tile, working at a workshop, etc.) -- the bulk of their AI (outside of job selection) is here.
+
+Every hundred ticks, items are rotted.  Every tick, vegetation is advanced (though there are various staggers and flags here.)  Building states are updated every tick as needed, and minecarts are moved.  Hauling routes are advanced.  Temperature is updated (there are various optimization flags here, but this is still an unfortunately slow process.)
+
+Finally the camera is updated to follow the creature you are following, if any.
+
+## Agent Components
+{
+    "memory": [
+        {
+            "elapsed_since_last_seen": 0.0,
+            "cyber_object_ref": 123,
+            "tag": ["food", "entertainment"],
+            "corrected_needs": {
+                "health": -0.2,
+                "satiety": -0.3,
+                "drink": 0.3,
+                "cleanliness": -0.5
+            }
+        },
+        {
+            "elapsed_since_last_seen": 4.0,
+            "cyber_object_ref": 124,
+            "tag": ["clothing", "cleanliness"]
+        }
+    ],
+    "relationships": [
+        {
+            "elapsed_sine_last_seen": 0.0,
+            "agent_ref": 125,
+            "relationship": "friendly",
+        }
+    ],
+    "needs": {
+        "satiety": 1.0,
+        "health": 1.0,
+        "drink": 1.0,
+        "cleanliness": 1.0,
+        "safety":, 1.0,
+        "entertainment": 1.0
+    },
+    "inventory": {
+        "body": ["shirt", "bra"],
+        "right_hand": ["pistol"],
+        "left_hand": [],
+        "legs": ["trouser", "holster"],
+        "backback": ["screwdriver", "nails", "hankerchief", "tuna sandwich"]
+    }
+}
+
+## CyberObject Components
+{
+    "advertise": {
+        "satiety": 0.2,
+        "drink": 0.05,
+        "entertainment": 0.2
+    },
+    "reward": {
+        "satiety": 0.2,
+        "drink": 0.8,
+        "entertainment": -0.4
+        "health": -0.4
+    },
+    "tags": ["drivable", "reservation", "no_reservation"],
+    "open_hour": 1600,
+    "close_hour": 300,
+    "action_plan": "instance_of_godot_resource_that_defines_a_state_machine"
+}
+
+

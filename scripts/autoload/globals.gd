@@ -29,3 +29,9 @@ enum NEEDS {
 	Satisfaction,
 	Richness
 }
+
+enum SKILLS {
+	Cooking,
+	Fighting,
+	Driving
+}
