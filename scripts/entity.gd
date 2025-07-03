@@ -110,6 +110,10 @@ func _physics_process(delta: float) -> void:
 		for i in self.call("get_slide_collision_count"):
 			var col : KinematicCollision3D = self.call("get_slide_collision", i)
 			var coldir : Vector3 = col.get_normal()
+			var rad_wall : float = coldir.angle_to(Vector3.UP)
+			# Ignore anything that could be construed as a slope
+			if rad_wall < deg_to_rad(60):
+				continue
 			coldir.y = 0.0
 			var colsq : float = coldir.length_squared()
 			if colsq > 0.01 and colsq > largest_col.length_squared():
