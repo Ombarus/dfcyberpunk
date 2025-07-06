@@ -195,6 +195,7 @@ DayLengthSec = 300.0
 transform = Transform3D(0.976296, -0.185525, 0.111475, 0, 0.515038, 0.857167, -0.21644, -0.836849, 0.50283, -0.433, 8.239, 6.422)
 current = true
 script = ExtResource("1_v6ick")
+ZoomSpeed = 0.5
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_pjfiq")
