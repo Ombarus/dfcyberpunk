@@ -37,10 +37,11 @@ func _process(delta: float) -> void:
 		get_parent().global_transform.origin += pan * delta * PanSpeed
 		
 	if rot != 0.0:
-		get_parent().rotate(Vector3.UP, rot * delta * RotSpeed)
+		get_parent().rotate(Vector3.UP, rot * delta * RotSpeed)	
+	
 		
 		
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	var zoom : float = 0.0
 	if event.is_action("zoom_in"):
 		zoom -= 1.0
