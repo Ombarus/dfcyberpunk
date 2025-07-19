@@ -14,3 +14,10 @@ func _process(delta: float) -> void:
 
 	rect.material.set_shader_parameter("main", mainTex)
 	rect.material.set_shader_parameter("mask", maskTex)
+	
+	var area : Area3D = $MainViewport/LookAt/Camera3D/Area3D
+	var cols = area.get_overlapping_bodies()
+	for c in cols:
+		var m = c.get_parent()
+		if m is MeshInstance3D:
+			m.layers = 2
