@@ -59,12 +59,12 @@ fog_density = 10.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_rdpj8"]
 height = 6.58
-radius = 0.32
+radius = 4.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pgck1"]
 shader = ExtResource("10_aik02")
-shader_parameter/start_radius = 0.2
-shader_parameter/end_radius = 0.3
+shader_parameter/start_radius = 0.45
+shader_parameter/end_radius = 0.55
 
 [node name="TestViewportTrans" type="Node3D"]
 script = ExtResource("1_3dncs")
@@ -319,9 +319,9 @@ light_energy = 0.186
 shadow_enabled = true
 
 [node name="MainViewport" type="SubViewport" parent="."]
+handle_input_locally = false
 
 [node name="LookAt" type="Node3D" parent="MainViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
 
 [node name="Camera3D" type="Camera3D" parent="MainViewport/LookAt"]
 transform = Transform3D(1, 0, 0, 0, 0.905944, 0.423398, 0, -0.423398, 0.905944, 0, 6, 2.729)
@@ -337,9 +337,9 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 
 shape = SubResource("CylinderShape3D_rdpj8")
 
 [node name="MaskedViewport" type="SubViewport" parent="."]
+handle_input_locally = false
 
 [node name="LookAt" type="Node3D" parent="MaskedViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
 
 [node name="Camera3D" type="Camera3D" parent="MaskedViewport/LookAt"]
 transform = Transform3D(1, 0, 0, 0, 0.905944, 0.423398, 0, -0.423398, 0.905944, 0, 6, 2.729)

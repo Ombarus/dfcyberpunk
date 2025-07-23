@@ -49,7 +49,8 @@ func _input(event: InputEvent) -> void:
 		zoom += 1.0
 		
 	if abs(zoom) > 0.001:
+		var look_y = self.get_parent().global_transform.origin.y
 		var new_y = self.global_transform.origin.y + (zoom * ZoomSpeed)
-		new_y = clamp(new_y, 0.2, 28.0)
+		new_y = clamp(new_y, look_y + 0.2, look_y + 28.0)
 		self.global_transform.origin.y = new_y
 		self.look_at(get_parent().global_position)

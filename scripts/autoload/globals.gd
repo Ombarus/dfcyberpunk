@@ -35,3 +35,8 @@ enum SKILLS {
 	Fighting,
 	Driving
 }
+
+# To eventually help PCG most pieces should fit in a standard
+# grid. Right now I'm leaning toward 2x2x2m
+var FLOOR_HEIGHT : float = 3.0
+var FLOOR_WIDTH : float = 2.0
