@@ -607,37 +607,11 @@ func CookInKitchen2(delta : float, param : Dictionary, actionDepth : int) -> int
 	if not is_top_of_stack:
 		return Globals.ACTION_STATE.Running
 	
-	# 1. grab from fridge
-	if fridge_foodstuff != null:
-		var fridge_target : Vector3 = self.getClosestInteract(fridge)
-		if not self.isAtLocation(fridge_target, 0.5):
-			param["target"] = fridge_target
-			param["precision"] = 0.5
-			self.pushAction("Goto", actionDepth)
-			return Globals.ACTION_STATE.Running
-		else:
-			param["item"] = fridge_foodstuff
-			param["from"] = fridge
-			param["to"] = self
-			self.pushAction("Transfer", actionDepth)
-			return Globals.ACTION_STATE.Running
+	# 4. Finished
+	if player_food != null:
+		return Globals.ACTION_STATE.Finished
 	
-	# 2. put on closest kitchen counter
-	if player_foodstuff != null:
-		var kitchen_target = self.getClosestInteract(kitchen)
-		if not self.isAtLocation(kitchen_target, 0.5):
-			param["target"] = kitchen_target
-			param["precision"] = 0.5
-			self.pushAction("Goto", actionDepth)
-			return Globals.ACTION_STATE.Running
-		else:
-			param["item"] = player_foodstuff
-			param["from"] = self
-			param["to"] = kitchen
-			self.pushAction("Transfer", actionDepth)
-			return Globals.ACTION_STATE.Running
-	
-	# 3. Cook
+	# 3. Cook (prio over inv check)
 	if kitchen_foodstuff != null:
 		var cooking_left = kitchen_foodstuff.AdMetaData.get("cooking_left", 6.0)
 		cooking_left -= delta
@@ -653,9 +627,35 @@ func CookInKitchen2(delta : float, param : Dictionary, actionDepth : int) -> int
 			kitchen.AdMetaData["inventory"] = kitchen_inv
 			return Globals.ACTION_STATE.Running
 	
-	# 4. Finished
-	if player_food != null:
-		return Globals.ACTION_STATE.Finished
+	# 2. put on closest kitchen counter (prio over grab from fridge)
+	if player_foodstuff != null:
+		var kitchen_target = self.getClosestInteract(kitchen)
+		if not self.isAtLocation(kitchen_target, 0.5):
+			param["target"] = kitchen_target
+			param["precision"] = 0.5
+			self.pushAction("Goto", actionDepth)
+			return Globals.ACTION_STATE.Running
+		else:
+			param["item"] = player_foodstuff
+			param["from"] = self
+			param["to"] = kitchen
+			self.pushAction("Transfer", actionDepth)
+			return Globals.ACTION_STATE.Running
+	
+	# 1. grab from fridge
+	if fridge_foodstuff != null:
+		var fridge_target : Vector3 = self.getClosestInteract(fridge)
+		if not self.isAtLocation(fridge_target, 0.5):
+			param["target"] = fridge_target
+			param["precision"] = 0.5
+			self.pushAction("Goto", actionDepth)
+			return Globals.ACTION_STATE.Running
+		else:
+			param["item"] = fridge_foodstuff
+			param["from"] = fridge
+			param["to"] = self
+			self.pushAction("Transfer", actionDepth)
+			return Globals.ACTION_STATE.Running
 	
 	return Globals.ACTION_STATE.Running
 	
@@ -691,26 +691,39 @@ func RefillFridge2(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var player_foodstuff : Array = self.findAllItemInInv(player_inv, Globals.AD_TYPE.Foodstuff)
 	var fridge_foodstuff : Advertisement = self.findItemInInv(fridge_inv, Globals.AD_TYPE.Foodstuff)
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+		
+	var market_target = self.getClosestInteract(market)
+	if player_foodstuff.size() == 0 and self.isAtLocation(market_target, 0.5):
+		var seq : Sequencer = get_node("Sequencer")
+		if not is_top_of_stack:
+			seq.SetContinue()
+			return Globals.ACTION_STATE.Running
+		if seq.CurState() == seq.SEQ_STATE.IDLE:
+			seq.OneShotSequence("Interact")
+			return Globals.ACTION_STATE.Running
+		elif seq.CurState() == seq.SEQ_STATE.FINISHED:
+			seq.Reset()
+			param["scene"] = plan.SpawnReward
+			param["count"] = plan.SpawnRewardCount
+			self.pushAction("Spawn", actionDepth)
+		else:
+			seq.SetContinue()
+			return Globals.ACTION_STATE.Running
+		
+		return Globals.ACTION_STATE.Running
 	
 	if not is_top_of_stack:
 		return Globals.ACTION_STATE.Running
 		
 	if fridge_foodstuff != null:
 		return Globals.ACTION_STATE.Finished
-		
-	var market_target = self.getClosestInteract(market)
+			
 	if player_foodstuff.size() == 0 and not self.isAtLocation(market_target, 0.5):
 		param["target"] = market_target
 		param["precision"] = 0.5
 		self.pushAction("Goto", actionDepth)
 		return Globals.ACTION_STATE.Running
 		
-	if player_foodstuff.size() == 0 and self.isAtLocation(market_target, 0.5):
-		param["scene"] = plan.SpawnReward
-		param["count"] = plan.SpawnRewardCount
-		self.travelAnimOneShot(self, "Interact")
-		self.pushAction("Spawn", actionDepth)
-		return Globals.ACTION_STATE.Running
 		
 	var fridge_target = self.getClosestInteract(fridge)
 	if player_foodstuff.size() > 0 and not self.isAtLocation(fridge_target, 0.5):

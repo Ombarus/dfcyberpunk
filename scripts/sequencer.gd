@@ -57,6 +57,18 @@ func FridgeSequence(fridge : Advertisement):
 	await waitForState(fridge_state, "CloseIdle")
 	_seq_state = SEQ_STATE.FINISHED
 	
+func OneShotSequence(anim_name : String):
+	_seq_state = SEQ_STATE.RUNNING
+	_cur_seq = "OneShotSequence"
+	
+	var player_tree : AnimationTree = ParentEntity.find_child("AnimationTree", true, false)
+	var player_state : AnimationNodeStateMachinePlayback = player_tree.get("parameters/playback")
+	
+	player_state.travel(anim_name)
+	await waitForState(player_state, "Idle")
+		
+	_seq_state = SEQ_STATE.FINISHED
+	
 func waitForState(machine : AnimationNodeStateMachinePlayback, state : String):
 	var timeout := 10.0
 	while timeout > 0:

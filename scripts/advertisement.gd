@@ -12,6 +12,14 @@ class_name Advertisement
 
 @export var AdMetaData := {}
 
+# List of tags. Tags can have a "weight" so that
+# if multiple objects match a group of tags they can
+# be ordered from most prefered to less ideal
+# (ex: eating on a dining table is prefered but at worst we can eat on a office desk?)
+@export var TagMap := {
+	"advertisement": 1.0
+}
+
 # Want to have somewhat dynamic plans.
 # This allow an Advertisement to recalculate reward based on who's asking
 func GetActionPlansFor(npc : Entity) -> Array:

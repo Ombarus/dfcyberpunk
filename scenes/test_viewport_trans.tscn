@@ -63,8 +63,8 @@ radius = 4.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pgck1"]
 shader = ExtResource("10_aik02")
-shader_parameter/start_radius = 0.45
-shader_parameter/end_radius = 0.55
+shader_parameter/start_radius = 0.3
+shader_parameter/end_radius = 0.4
 
 [node name="TestViewportTrans" type="Node3D"]
 script = ExtResource("1_3dncs")
