@@ -84,8 +84,6 @@ func _process(delta: float) -> void:
 		i += 1
 	
 	UpdateThoughts()
-	#UpdateSatiety(delta)
-	#UpdateSatisfaction(delta)
 
 func _physics_process(delta: float) -> void:
 	# Terrible hack to "cast" player object to CharacterBody3D
@@ -618,8 +616,10 @@ func CookInKitchen2(delta : float, param : Dictionary, actionDepth : int) -> int
 		kitchen_foodstuff.AdMetaData["cooking_left"] = cooking_left
 		if cooking_left > 0:
 			self.travelAnimOneShot(self, "Interact")
+			return Globals.ACTION_STATE.Running
 		else:
 			param["scene"] = plan.SpawnReward
+			param["count"] = plan.SpawnRewardCount
 			self.pushAction("Spawn", actionDepth)
 			kitchen_foodstuff.queue_free()
 			kitchen_foodstuff.visible = false
