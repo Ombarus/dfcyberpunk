@@ -47,6 +47,7 @@ var Needs := NeedHandler.new()
 var curParam : Dictionary
 var actionStack : Array
 var lastAction : String
+var timeSystem : WorldClock
 
 var debugThoughtsAction : Label
 var debugThoughtsSatiety : ProgressBar
@@ -69,6 +70,7 @@ func _ready() -> void:
 	self.debugThoughtsAction = self.find_child("Action", true, false) as Label
 	self.debugPlanScore = self.find_child("PlanScore", true, false) as VBoxContainer
 	self.debugThoughts = self.find_child("NPCThoughts", true, false) as Control
+	self.timeSystem = self.get_tree().root.find_child("WorldClock", true, false)
 
 func _process(delta: float) -> void:
 	if self.actionStack.size() == 0:
@@ -845,6 +847,25 @@ func Eat(delta : float, param : Dictionary, actionDepth : int) -> int:
 		table_inv.erase(table_food)
 		table.AdMetaData["inventory"] = table_inv
 		return Globals.ACTION_STATE.Finished
+		
+func WorkAtBar(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	var plan : ActionPlan = param.get("current_plan", null)
+	var workplace : Advertisement = param.get("plan_ad", null)
+	var work_target : Vector3 = self.getClosestInteract(workplace)
+	
+	if not self.isAtLocation(work_target, 0.5):
+		param["target"] = work_target
+		param["precision"] = 0.5
+		self.pushAction("Goto", actionDepth)
+		return Globals.ACTION_STATE.Running
+	
+	var timestruct : Dictionary = self.timeSystem.CurDateTime
+	# outside of work hour, consider it "done"
+	if timestruct["hour"] >= 2 and timestruct["hour"] < 17:
+		return Globals.ACTION_STATE.Finished
+	
+	return Globals.ACTION_STATE.Running
 	
 ###################################################################################################
 ## ACTION FUNCTION (NEED REVISION)

@@ -4,7 +4,8 @@ class_name NeedHandler
 var CurrentNeeds := {
 	Globals.NEEDS.Satiety: 1.0,
 	Globals.NEEDS.Energy: 1.0,
-	Globals.NEEDS.Satisfaction: 0.5
+	Globals.NEEDS.Satisfaction: 0.5,
+	Globals.NEEDS.Richness: 0.00001
 }
 
 func Current(need : Globals.NEEDS) -> float:
@@ -31,6 +32,7 @@ func GetRewardScoreFromPlan(plan : ActionPlan) -> float:
 	score += plan.SatietyReward / max(CurrentNeeds[Globals.NEEDS.Satiety], 0.0001)
 	score += plan.EnergyReward / max(CurrentNeeds[Globals.NEEDS.Energy], 0.0001)
 	score += plan.SatisfactionReward / max(CurrentNeeds[Globals.NEEDS.Satisfaction], 0.0001)
+	score += plan.RichnessReward / max(CurrentNeeds[Globals.NEEDS.Richness], 0.0001)
 	return score
 
 
