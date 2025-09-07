@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://8qm8xqhjvjw5"]
+[gd_scene load_steps=71 format=3 uid="uid://8qm8xqhjvjw5"]
 
 [ext_resource type="PackedScene" uid="uid://ckkkaxossb5me" path="res://data/models/RoadCenter.glb" id="1_3innq"]
 [ext_resource type="Script" path="res://scripts/world_clock.gd" id="1_ol7km"]
@@ -33,6 +33,7 @@
 [ext_resource type="Script" path="res://scripts/sequencer.gd" id="22_0qn72"]
 [ext_resource type="PackedScene" uid="uid://kev47y2ajw15" path="res://data/models/StairMetalStraight.glb" id="22_16e3h"]
 [ext_resource type="PackedScene" uid="uid://ln6lc2c5xfy2" path="res://data/models/Cyberdeck.glb" id="23_fhg20"]
+[ext_resource type="PackedScene" uid="uid://l80yydvttwvv" path="res://data/models/ATM.glb" id="25_gbyio"]
 [ext_resource type="PackedScene" uid="uid://id35hle7aogd" path="res://data/models/BarCounterCorner.glb" id="25_xsb8j"]
 [ext_resource type="Script" path="res://scripts/ads/baradvertisement.gd" id="26_hvn03"]
 [ext_resource type="PackedScene" uid="uid://c2hbs3xwqvwe3" path="res://scenes/hud.tscn" id="27_gevlh"]
@@ -808,6 +809,11 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9.735
 [node name="MarketStall11" parent="Static/NavigationRegion3D/Market/Furniture" instance=ExtResource("20_v4mfw")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7.73586, 0, -2.06848)
 script = null
+
+[node name="ATM2" parent="Static/NavigationRegion3D/Market/Furniture" instance=ExtResource("25_gbyio")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -5.60772, 0, -0.428662)
+script = ExtResource("18_h2cyc")
+Type = 10
 
 [node name="Bar" type="Node3D" parent="Static/NavigationRegion3D"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -12)

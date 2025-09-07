@@ -51,19 +51,25 @@ func _ready() -> void:
 # Want to have somewhat dynamic plans.
 # This allow an Advertisement to recalculate reward based on who's asking
 func GetActionPlansFor(npc : Entity) -> Array:
-	var num_foodstuff : int = len(self.AdMetaData["inventory"])
-	if num_foodstuff < 1:
-		return [self.ActionPlans[-1].duplicate()]
-
-	var nodes : Array = get_tree().get_nodes_in_group(str(Globals.AD_TYPE.Food))
-	var food_count : int = nodes.size()
+	var num_foodstuff := 0
+	var num_food := 0
 	var results := []
+	var inv : Array = self.AdMetaData["inventory"]
+	for i in inv:
+		var ad := i as Advertisement
+		if ad.Type == Globals.AD_TYPE.Foodstuff:
+			num_foodstuff += 1
+		elif ad.Type == Globals.AD_TYPE.Food:
+			num_food += 1
+		
 	for i in ActionPlans:
 		var plan := i as ActionPlan
-		var new_plan := plan.duplicate()
-		if new_plan.SpawnRewardType == Globals.AD_TYPE.Food:
-			new_plan.SatisfactionReward = new_plan.SatisfactionReward / (food_count + 1)
-		if new_plan.SpawnRewardType == Globals.AD_TYPE.Foodstuff and num_foodstuff <= 0:
+		var new_plan := plan.duplicate() as ActionPlan
+		if new_plan.SpawnRewardType == Globals.AD_TYPE.Food and num_foodstuff > 0:
+			new_plan.SatisfactionReward = new_plan.SatisfactionReward / (num_food + 1)
+			results.append(new_plan)
+		elif new_plan.SpawnRewardType == Globals.AD_TYPE.Foodstuff:
 			new_plan.SatisfactionReward = new_plan.SatisfactionReward / (num_foodstuff + 1)
-		results.append(new_plan)
+			results.append(new_plan)
+
 	return results

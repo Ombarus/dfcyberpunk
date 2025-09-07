@@ -713,6 +713,14 @@ func RefillFridge2(delta : float, param : Dictionary, actionDepth : int) -> int:
 			return Globals.ACTION_STATE.Running
 		
 		return Globals.ACTION_STATE.Running
+		
+	#TODO: Add paiement
+	#1. (What is the condition for paiement?)
+	#0.5 Make it a sub action so I can assign it "Reward"
+	#2. Find ad of type "Cashing"
+	#3. Goto
+	#4. OneShotSeq(Interact)
+	#5
 	
 	if not is_top_of_stack:
 		return Globals.ACTION_STATE.Running
@@ -833,7 +841,7 @@ func Eat(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var table_inv : Array = table.AdMetaData.get("inventory", [])
 	var table_food : Advertisement = self.findItemInInv(table_inv, Globals.AD_TYPE.Food)
 	# TODO: food_left should be determined by the food type
-	var food_left = table_food.AdMetaData.get("food_left", 6.0)
+	var food_left = table_food.AdMetaData.get("food_left", 4.0)
 	food_left -= delta
 	table_food.AdMetaData["food_left"] = food_left
 	if food_left > 0:

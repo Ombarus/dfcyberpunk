@@ -9,7 +9,7 @@ func _ready() -> void:
 	_eat_me = ActionPlan.new()
 	_eat_me.ActionName = "EatSelectedFood"
 	_eat_me.EnergyReward = 0.0
-	_eat_me.SatietyReward = 0.35
+	_eat_me.SatietyReward = 0.6
 	_eat_me.SatisfactionReward = 0.05
 	_eat_me.RichnessReward = 0.0
 	

@@ -46,7 +46,7 @@ var ActualReward := [
 	{
 		"Action": "Eat",
 		"State": Globals.ACTION_STATE.Running,
-		"Rewards": {Globals.NEEDS.Satiety: 0.068} # Steak: 0.35 over 6 seconds
+		"Rewards": {Globals.NEEDS.Satiety: 0.15} # Steak: 0.6 over 4 seconds
 	},
 	{
 		"Action": "Eat",

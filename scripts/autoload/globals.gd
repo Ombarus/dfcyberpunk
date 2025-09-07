@@ -20,6 +20,7 @@ enum AD_TYPE {
 	Chair,
 	Fridge,
 	Table,
+	Cashing,
 	Other
 }
 

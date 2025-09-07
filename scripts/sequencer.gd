@@ -65,6 +65,7 @@ func OneShotSequence(anim_name : String):
 	var player_state : AnimationNodeStateMachinePlayback = player_tree.get("parameters/playback")
 	
 	player_state.travel(anim_name)
+	await waitForState(player_state, anim_name)
 	await waitForState(player_state, "Idle")
 		
 	_seq_state = SEQ_STATE.FINISHED
