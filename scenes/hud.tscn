@@ -20,3 +20,18 @@ offset_right = 240.0
 offset_bottom = 39.0
 text = "2035-01-01 00:00"
 script = ExtResource("1_3kiyp")
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -176.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 96.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Controls:
+ASDW: Pan Camera
+QE: Rotate Camera"

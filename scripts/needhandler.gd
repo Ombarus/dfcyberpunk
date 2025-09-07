@@ -2,10 +2,10 @@ extends Object
 class_name NeedHandler
 
 var CurrentNeeds := {
-	Globals.NEEDS.Satiety: 1.0,
+	Globals.NEEDS.Satiety: 0.5,
 	Globals.NEEDS.Energy: 1.0,
 	Globals.NEEDS.Satisfaction: 0.5,
-	Globals.NEEDS.Richness: 0.00001
+	Globals.NEEDS.Richness: 0.01
 }
 
 func Current(need : Globals.NEEDS) -> float:
@@ -29,10 +29,10 @@ func ApplyNeedOverTime(need : Globals.NEEDS, amount : float, delta : float) -> v
 
 func GetRewardScoreFromPlan(plan : ActionPlan) -> float:
 	var score := 0.0
-	score += plan.SatietyReward / max(CurrentNeeds[Globals.NEEDS.Satiety], 0.0001)
-	score += plan.EnergyReward / max(CurrentNeeds[Globals.NEEDS.Energy], 0.0001)
-	score += plan.SatisfactionReward / max(CurrentNeeds[Globals.NEEDS.Satisfaction], 0.0001)
-	score += plan.RichnessReward / max(CurrentNeeds[Globals.NEEDS.Richness], 0.0001)
+	score += plan.SatietyReward / max(CurrentNeeds[Globals.NEEDS.Satiety], 0.000001)
+	score += plan.EnergyReward / max(CurrentNeeds[Globals.NEEDS.Energy], 0.000001)
+	score += plan.SatisfactionReward / max(CurrentNeeds[Globals.NEEDS.Satisfaction], 0.000001)
+	score += plan.RichnessReward / max(CurrentNeeds[Globals.NEEDS.Richness], 0.000001)
 	return score
 
 

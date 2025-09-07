@@ -24,7 +24,7 @@ func _ready() -> void:
 	
 	var steak_recipe := ActionPlan.new()
 	steak_recipe.ActionName = "CookInKitchen2"
-	steak_recipe.EnergyReward = -0.03
+	steak_recipe.EnergyReward = 0.00
 	steak_recipe.SatietyReward = 0.18 # fake reward to encourage NPC to cook when hungry
 	steak_recipe.SatisfactionReward = 0.05
 	steak_recipe.RichnessReward = 0.0
@@ -33,7 +33,7 @@ func _ready() -> void:
 	
 	var refill_fridge := ActionPlan.new()
 	refill_fridge.ActionName = "RefillFridge2"
-	refill_fridge.EnergyReward = -0.05
+	refill_fridge.EnergyReward = 0.00
 	refill_fridge.SatietyReward = 0.01
 	refill_fridge.SatisfactionReward = 0.06
 	refill_fridge.RichnessReward = -0.00005 # 50$ of 1M

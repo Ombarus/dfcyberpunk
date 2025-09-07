@@ -175,7 +175,7 @@ func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 	random_goto_plan.ActionName = "WalkRandomly"
 	random_goto_plan.EnergyReward = -0.05
 	random_goto_plan.SatietyReward = 0.0
-	random_goto_plan.SatisfactionReward = 0.04 # Slightly higher than making food when we have a lot of food
+	random_goto_plan.SatisfactionReward = 0.02 # Slightly higher than making food when we have a lot of food
 	
 	var fallback_sleep_plan := ActionPlan.new()
 	fallback_sleep_plan.ActionName = "SleepOnFloor"
