@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2hbs3xwqvwe3"]
+[gd_scene load_steps=3 format=3 uid="uid://c2hbs3xwqvwe3"]
 
 [ext_resource type="Script" path="res://scripts/hud_clock.gd" id="1_3kiyp"]
+[ext_resource type="PackedScene" uid="uid://c6p1ojkslh4ss" path="res://scenes/attribute_panel.tscn" id="2_nk6ap"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
@@ -47,3 +49,14 @@ offset_top = -40.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "v0.0.1"
+
+[node name="AttributePanel" parent="CanvasLayer" instance=ExtResource("2_nk6ap")]
+visible = false
+custom_minimum_size = Vector2(100, 100)
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 640.0
+offset_bottom = 496.0
+grow_horizontal = 1
+grow_vertical = 1

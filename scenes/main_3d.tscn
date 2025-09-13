@@ -1238,6 +1238,7 @@ debug_enabled = true
 [node name="CanvasLayer" type="CanvasLayer" parent="Dynamic/CharacterBody3D"]
 
 [node name="NPCThoughts" parent="Dynamic/CharacterBody3D/CanvasLayer" instance=ExtResource("20_s180p")]
+visible = false
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0

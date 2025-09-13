@@ -54,3 +54,23 @@ func _input(event: InputEvent) -> void:
 		new_y = clamp(new_y, look_y + 0.2, look_y + 28.0)
 		self.global_transform.origin.y = new_y
 		self.look_at(get_parent().global_position)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.is_released() and event.button_index == MOUSE_BUTTON_LEFT:
+		var from = self.project_ray_origin(event.position)
+		var to = from + self.project_ray_normal(event.position) * 1000.0
+		var space_state = get_world_3d().direct_space_state
+		var query = PhysicsRayQueryParameters3D.create(from, to)
+		query.collision_mask = 1  # only layer 1
+
+		var result = space_state.intersect_ray(query)
+		if result:
+			var collider = result["collider"]
+			print("Hit node: ", collider.name)
+			var p = collider
+			while p != null:
+				if p is Advertisement:
+					Events.OnAdSelected.emit(p)
+					break
+				p = p.get_parent()
