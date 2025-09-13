@@ -53,8 +53,10 @@ var debugThoughtsAction : Label
 var debugThoughtsSatiety : ProgressBar
 var debugThoughtsEnergy : ProgressBar
 var debugThoughtsSatisfaction : ProgressBar
+var debugThoughtsRichness : ProgressBar
 var debugPlanScore : VBoxContainer
 var debugThoughts : Control
+var debugInventory : Control
 
 class ActionStep:
 	var Name : String
@@ -67,9 +69,11 @@ func _ready() -> void:
 	self.debugThoughtsEnergy = self.find_child("EnergyProgress", true, false) as ProgressBar
 	self.debugThoughtsSatiety = self.find_child("SatietyProgress", true, false) as ProgressBar
 	self.debugThoughtsSatisfaction = self.find_child("SatisfactionProgress", true, false) as ProgressBar
+	self.debugThoughtsRichness = self.find_child("RichnessProgress", true, false) as ProgressBar
 	self.debugThoughtsAction = self.find_child("Action", true, false) as Label
 	self.debugPlanScore = self.find_child("PlanScore", true, false) as VBoxContainer
 	self.debugThoughts = self.find_child("NPCThoughts", true, false) as Control
+	self.debugInventory = self.find_child("Inventory", true, false) as Control
 	self.timeSystem = self.get_tree().root.find_child("WorldClock", true, false)
 
 func _process(delta: float) -> void:
@@ -86,6 +90,30 @@ func _process(delta: float) -> void:
 		i += 1
 	
 	UpdateThoughts()
+	UpdateInventory()
+	
+func UpdateInventory():
+	var inv : Array = self.curParam.get("inventory", [])
+	var example : Control = self.debugInventory.get_child(0)
+	for i in range(inv.size()):
+		# +1 to skip example row
+		if i + 1 >= self.debugInventory.get_child_count():
+			var newInv = example.duplicate()
+			self.debugInventory.add_child(newInv)
+			newInv.visible = true
+		var invNode = self.debugInventory.get_child(i + 1)
+		var invNodeType : String = Globals.AD_TYPE.keys()[inv[i].Type]
+		var invLabel : Label = invNode.find_child("Item", true, false)
+		if invLabel.text != invNodeType:
+			invLabel.text = invNodeType
+	
+	if inv.size() + 1 < self.debugInventory.get_child_count():
+		for i in range(inv.size() + 1, self.debugInventory.get_child_count()):
+			var child_to_delete : Node = self.debugInventory.get_child(inv.size() + 1)
+			self.debugInventory.remove_child(child_to_delete)
+			child_to_delete.visible = false
+			child_to_delete.queue_free()
+	
 
 func _physics_process(delta: float) -> void:
 	# Terrible hack to "cast" player object to CharacterBody3D
@@ -129,6 +157,7 @@ func UpdateThoughts():
 	self.debugThoughtsEnergy.value = Needs.Current(Globals.NEEDS.Energy)
 	self.debugThoughtsSatiety.value = Needs.Current(Globals.NEEDS.Satiety)
 	self.debugThoughtsSatisfaction.value = Needs.Current(Globals.NEEDS.Satisfaction)
+	self.debugThoughtsRichness.value = Needs.Current(Globals.NEEDS.Richness)
 	var actions = ""
 	for a in actionStack:
 		if actions != "":
@@ -688,6 +717,8 @@ func RefillFridge2(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var plan : ActionPlan = param.get("current_plan", null)
 	var fridge : Advertisement = param.get("plan_ad", null)
 	var market : Advertisement = self.getFirstOf(Globals.AD_TYPE.Market)
+	var atm : Advertisement = self.getFirstOf(Globals.AD_TYPE.Cashing)
+	var atm_target = self.getClosestInteract(atm)
 	var player_inv : Array = param.get("inventory", [])
 	var fridge_inv : Array = fridge.AdMetaData.get("inventory", [])
 	var player_foodstuff : Array = self.findAllItemInInv(player_inv, Globals.AD_TYPE.Foodstuff)
@@ -714,26 +745,47 @@ func RefillFridge2(delta : float, param : Dictionary, actionDepth : int) -> int:
 		
 		return Globals.ACTION_STATE.Running
 		
-	#TODO: Add paiement
-	#1. (What is the condition for paiement?)
-	#0.5 Make it a sub action so I can assign it "Reward"
-	#2. Find ad of type "Cashing"
-	#3. Goto
-	#4. OneShotSeq(Interact)
-	#5
+	var to_pay = []
+	for f : Advertisement in player_foodstuff:
+		if not f.AdMetaData.get("paid", false):
+			to_pay.push_back(f)
+
+	if to_pay.size() > 0 and self.isAtLocation(atm_target, 0.5):
+		var seq : Sequencer = get_node("Sequencer")
+		if not is_top_of_stack:
+			seq.SetContinue()
+			return Globals.ACTION_STATE.Running
+		if seq.CurState() == seq.SEQ_STATE.IDLE:
+			seq.OneShotSequence("Interact")
+			return Globals.ACTION_STATE.Running
+		elif seq.CurState() == seq.SEQ_STATE.FINISHED:
+			seq.Reset()
+			for f : Advertisement in to_pay:
+				Needs.ApplyNeed(Globals.NEEDS.Richness, -0.00001) # 10 nuyen? (of 1M)
+				f.AdMetaData["paid"] = true
+		else:
+			seq.SetContinue()
+			return Globals.ACTION_STATE.Running
+		
+		return Globals.ACTION_STATE.Running
 	
 	if not is_top_of_stack:
 		return Globals.ACTION_STATE.Running
 		
 	if fridge_foodstuff != null:
 		return Globals.ACTION_STATE.Finished
-			
+		
+	if to_pay.size() > 0 and not self.isAtLocation(atm_target, 0.5):
+		param["target"] = atm_target
+		param["precision"] = 0.5
+		self.pushAction("Goto", actionDepth)
+		return Globals.ACTION_STATE.Running
+		
 	if player_foodstuff.size() == 0 and not self.isAtLocation(market_target, 0.5):
 		param["target"] = market_target
 		param["precision"] = 0.5
 		self.pushAction("Goto", actionDepth)
 		return Globals.ACTION_STATE.Running
-		
 		
 	var fridge_target = self.getClosestInteract(fridge)
 	if player_foodstuff.size() > 0 and not self.isAtLocation(fridge_target, 0.5):

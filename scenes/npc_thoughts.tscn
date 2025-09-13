@@ -43,7 +43,6 @@ layout_mode = 2
 
 [node name="Meters" type="VBoxContainer" parent="ColorRect/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="Energy" type="HBoxContainer" parent="ColorRect/HBoxContainer/VBoxContainer/Meters"]
 layout_mode = 2
@@ -86,6 +85,39 @@ layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
 value = 0.5
+
+[node name="Satisfaction2" type="HBoxContainer" parent="ColorRect/HBoxContainer/VBoxContainer/Meters"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ColorRect/HBoxContainer/VBoxContainer/Meters/Satisfaction2"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+text = "Richness : "
+
+[node name="RichnessProgress" type="ProgressBar" parent="ColorRect/HBoxContainer/VBoxContainer/Meters/Satisfaction2"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.0001
+value = 0.5
+
+[node name="Inventory" type="VBoxContainer" parent="ColorRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Example" type="HBoxContainer" parent="ColorRect/HBoxContainer/VBoxContainer/Inventory"]
+visible = false
+layout_mode = 2
+
+[node name="Item" type="Label" parent="ColorRect/HBoxContainer/VBoxContainer/Inventory/Example"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "FoodStuff"
+
+[node name="Count" type="Label" parent="ColorRect/HBoxContainer/VBoxContainer/Inventory/Example"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "1"
 
 [node name="VSeparator" type="VSeparator" parent="ColorRect/HBoxContainer"]
 layout_mode = 2

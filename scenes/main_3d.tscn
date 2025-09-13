@@ -216,7 +216,7 @@ shape = SubResource("SphereShape3D_hd65l")
 environment = SubResource("Environment_pjfiq")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, -0.863977, 0.503531, 0, -0.503531, -0.863977, 10.1197, 4.88909, -1.29089)
+transform = Transform3D(0.971108, -0.120163, -0.20618, 0.0225513, -0.813902, 0.580564, -0.237573, -0.56844, -0.787677, 10.1197, 4.88909, -1.29089)
 light_energy = 0.186
 shadow_enabled = true
 
@@ -1242,7 +1242,7 @@ anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_right = 448.0
-offset_bottom = 128.0
+offset_bottom = 160.0
 grow_horizontal = 1
 grow_vertical = 1
 
