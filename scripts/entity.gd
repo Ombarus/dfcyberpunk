@@ -48,15 +48,7 @@ var curParam : Dictionary
 var actionStack : Array
 var lastAction : String
 var timeSystem : WorldClock
-
-var debugThoughtsAction : Label
-var debugThoughtsSatiety : ProgressBar
-var debugThoughtsEnergy : ProgressBar
-var debugThoughtsSatisfaction : ProgressBar
-var debugThoughtsRichness : ProgressBar
-var debugPlanScore : VBoxContainer
-var debugThoughts : Control
-var debugInventory : Control
+var knownPlans : Array
 
 class ActionStep:
 	var Name : String
@@ -66,14 +58,6 @@ class ActionStep:
 
 func _ready() -> void:
 	self.actionStack = []
-	self.debugThoughtsEnergy = self.find_child("EnergyProgress", true, false) as ProgressBar
-	self.debugThoughtsSatiety = self.find_child("SatietyProgress", true, false) as ProgressBar
-	self.debugThoughtsSatisfaction = self.find_child("SatisfactionProgress", true, false) as ProgressBar
-	self.debugThoughtsRichness = self.find_child("RichnessProgress", true, false) as ProgressBar
-	self.debugThoughtsAction = self.find_child("Action", true, false) as Label
-	self.debugPlanScore = self.find_child("PlanScore", true, false) as VBoxContainer
-	self.debugThoughts = self.find_child("NPCThoughts", true, false) as Control
-	self.debugInventory = self.find_child("Inventory", true, false) as Control
 	self.timeSystem = self.get_tree().root.find_child("WorldClock", true, false)
 
 func _process(delta: float) -> void:
@@ -88,32 +72,6 @@ func _process(delta: float) -> void:
 		if (s == Globals.ACTION_STATE.Finished):
 			self.popAction(i)
 		i += 1
-	
-	UpdateThoughts()
-	UpdateInventory()
-	
-func UpdateInventory():
-	var inv : Array = self.curParam.get("inventory", [])
-	var example : Control = self.debugInventory.get_child(0)
-	for i in range(inv.size()):
-		# +1 to skip example row
-		if i + 1 >= self.debugInventory.get_child_count():
-			var newInv = example.duplicate()
-			self.debugInventory.add_child(newInv)
-			newInv.visible = true
-		var invNode = self.debugInventory.get_child(i + 1)
-		var invNodeType : String = Globals.AD_TYPE.keys()[inv[i].Type]
-		var invLabel : Label = invNode.find_child("Item", true, false)
-		if invLabel.text != invNodeType:
-			invLabel.text = invNodeType
-	
-	if inv.size() + 1 < self.debugInventory.get_child_count():
-		for i in range(inv.size() + 1, self.debugInventory.get_child_count()):
-			var child_to_delete : Node = self.debugInventory.get_child(inv.size() + 1)
-			self.debugInventory.remove_child(child_to_delete)
-			child_to_delete.visible = false
-			child_to_delete.queue_free()
-	
 
 func _physics_process(delta: float) -> void:
 	# Terrible hack to "cast" player object to CharacterBody3D
@@ -153,41 +111,6 @@ func _physics_process(delta: float) -> void:
 			
 		self.call("move_and_slide")
 
-func UpdateThoughts():
-	self.debugThoughtsEnergy.value = Needs.Current(Globals.NEEDS.Energy)
-	self.debugThoughtsSatiety.value = Needs.Current(Globals.NEEDS.Satiety)
-	self.debugThoughtsSatisfaction.value = Needs.Current(Globals.NEEDS.Satisfaction)
-	self.debugThoughtsRichness.value = Needs.Current(Globals.NEEDS.Richness)
-	var actions = ""
-	for a in actionStack:
-		if actions != "":
-			actions += "->"
-		actions += a
-	self.debugThoughtsAction.text = actions
-	self.debugThoughts.position = get_viewport().get_camera_3d().unproject_position(self.position)
-	
-func UpdatePlanScoreDebug(collected_plans):
-	for c in self.debugPlanScore.get_children():
-		if c.name != "Title":
-			c.queue_free()
-	var greened := false
-	for p in collected_plans:
-		var l : RichTextLabel = RichTextLabel.new()
-		l.bbcode_enabled = true
-		var color := "[color=white]"
-		var cur_plan := p["plan"] as ActionPlan
-		var planed_sat : float = cur_plan.SatietyReward + Needs.Current(Globals.NEEDS.Satiety)
-		var planed_sati : float = cur_plan.SatisfactionReward + Needs.Current(Globals.NEEDS.Satisfaction) 
-		var planed_ener : float = cur_plan.EnergyReward + Needs.Current(Globals.NEEDS.Energy)
-		if planed_sat < 1.0 and planed_sati < 1.0 and planed_ener < 1.0:
-			if greened == false:
-				color = "[color=green]"
-				greened = true
-		else:
-			color = "[color=red]"
-		l.text = color + p["plan"].ActionName + ": " + str(p["score"]) + "[/color]"
-		l.custom_minimum_size = Vector2(250, 20)
-		self.debugPlanScore.add_child(l)
 
 ###################################################################################################
 ## ACTION FUNCTION
@@ -257,7 +180,7 @@ func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var sorter := Sorter.new("score")
 	collected_plans.sort_custom(Callable(sorter, "sort_desc"))
 	
-	UpdatePlanScoreDebug(collected_plans)
+	self.knownPlans = collected_plans
 	
 	var best_action : Dictionary = {}
 	# Skip actions that would put the NPC at more than 100% of their need
@@ -291,7 +214,7 @@ func GoGetItem(delta : float, param : Dictionary, actionDepth : int) -> int:
 	#  Go to item pos, interact anim, transfer to inv
 	var item : Advertisement = param["item"]
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
-	var inv : Array = param.get("inventory", [])
+	var inv : Array = self.Inventory
 	
 	var target_pos : Vector3 = item.position
 	var container : Advertisement = self.getContainer(item)
@@ -326,7 +249,7 @@ func GoDropItem(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var item : Advertisement = param["item"]
 	var container : Advertisement = param.get("container", null)
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
-	var inv : Array = param.get("inventory", [])
+	var inv : Array = self.Inventory
 	
 	var target_pos = self.position
 	var precision := 0.0
@@ -360,17 +283,9 @@ func Transfer(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var to : Advertisement = param["to"]
 	var seq : Sequencer = get_node("Sequencer")
 	
-	var from_inv : Array
-	if from == self:
-		from_inv = param.get("inventory", [])
-	else:
-		from_inv = from.AdMetaData.get("inventory", [])
+	var from_inv : Array = from.Inventory
 	
-	var to_inv : Array
-	if to == self:
-		to_inv = param.get("inventory", [])
-	else:
-		to_inv = from.AdMetaData.get("inventory", [])
+	var to_inv : Array = to.Inventory
 	
 	# We transfer everything at once so it's ok to just check item[0]
 	if self.isItemInInv(from_inv, item[0]) or not is_top_of_stack or seq.CurState() != seq.SEQ_STATE.IDLE:
@@ -407,18 +322,9 @@ func Transfer(delta : float, param : Dictionary, actionDepth : int) -> int:
 
 # This could be much simpler if Entity used AdMetaData
 func toFromExchange(to : Advertisement, from : Advertisement, items : Array, param : Dictionary):
-	var from_inv : Array
+	var from_inv : Array = from.Inventory
 	
-	if from == self:
-		from_inv = param.get("inventory", [])
-	else:
-		from_inv = from.AdMetaData.get("inventory", [])
-	
-	var to_inv : Array
-	if to == self:
-		to_inv = param.get("inventory", [])
-	else:
-		to_inv = from.AdMetaData.get("inventory", [])
+	var to_inv : Array = to.Inventory
 		
 	#TODO: handle multiple inventory slot
 	var inv_slot : Node3D = to.find_child("Inventory01", true, false)
@@ -432,17 +338,13 @@ func toFromExchange(to : Advertisement, from : Advertisement, items : Array, par
 			item.global_transform = inv_slot.global_transform
 			inv_slot = null
 			
-		if from == self:
-			param["inventory"] = from_inv
-		else:
-			from.AdMetaData["inventory"] = from_inv
+		from.Inventory = from_inv
 			
 		if to == self:
 			item.BelongTo = self
-			param["inventory"] = to_inv # in case inventory wasn't init before
 		else:
 			item.BelongTo = null
-			to.AdMetaData["inventory"] = to_inv
+		to.Inventory = to_inv
 	
 func TravelAnimState(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var obj : Node3D = param["obj"]
@@ -624,9 +526,9 @@ func CookInKitchen2(delta : float, param : Dictionary, actionDepth : int) -> int
 	var fridge : Advertisement = param.get("plan_ad", null)
 	var kitchen : Advertisement = self.getFirstOf(Globals.AD_TYPE.Kitchen)
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
-	var fridge_inv : Array = fridge.AdMetaData.get("inventory", [])
-	var player_inv : Array = param.get("inventory", [])
-	var kitchen_inv : Array = kitchen.AdMetaData.get("inventory", [])
+	var fridge_inv : Array = fridge.Inventory
+	var player_inv : Array = self.Inventory
+	var kitchen_inv : Array = kitchen.Inventory
 	
 	var fridge_foodstuff : Advertisement = self.findItemInInv(fridge_inv, Globals.AD_TYPE.Foodstuff)
 	var player_foodstuff : Advertisement = self.findItemInInv(player_inv, Globals.AD_TYPE.Foodstuff)
@@ -655,7 +557,7 @@ func CookInKitchen2(delta : float, param : Dictionary, actionDepth : int) -> int
 			kitchen_foodstuff.queue_free()
 			kitchen_foodstuff.visible = false
 			kitchen_inv.erase(kitchen_foodstuff)
-			kitchen.AdMetaData["inventory"] = kitchen_inv
+			kitchen.Inventory = kitchen_inv
 			return Globals.ACTION_STATE.Running
 	
 	# 2. put on closest kitchen counter (prio over grab from fridge)
@@ -719,8 +621,8 @@ func RefillFridge2(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var market : Advertisement = self.getFirstOf(Globals.AD_TYPE.Market)
 	var atm : Advertisement = self.getFirstOf(Globals.AD_TYPE.Cashing)
 	var atm_target = self.getClosestInteract(atm)
-	var player_inv : Array = param.get("inventory", [])
-	var fridge_inv : Array = fridge.AdMetaData.get("inventory", [])
+	var player_inv : Array = self.Inventory
+	var fridge_inv : Array = fridge.Inventory
 	var player_foodstuff : Array = self.findAllItemInInv(player_inv, Globals.AD_TYPE.Foodstuff)
 	var fridge_foodstuff : Advertisement = self.findItemInInv(fridge_inv, Globals.AD_TYPE.Foodstuff)
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
@@ -814,9 +716,9 @@ func Spawn(delta : float, param : Dictionary, actionDepth : int) -> int:
 		n.position = pos
 		n.BelongTo = self
 		n.visible = false
-		var inv : Array = param.get("inventory", [])
+		var inv : Array = self.Inventory
 		inv.append(n)
-		param["inventory"] = inv
+		self.Inventory = inv
 		n.AdMetaData["container"] = self
 	return Globals.ACTION_STATE.Finished
 	
@@ -827,12 +729,12 @@ func EatSelectedFood(delta : float, param : Dictionary, actionDepth : int) -> in
 	if food == null:
 		return Globals.ACTION_STATE.Finished
 	var food_container : Advertisement = food.AdMetaData.get("container", null)
-	var player_inv : Array = param.get("inventory", [])
+	var player_inv : Array = self.Inventory
 	var player_food : Advertisement = self.findItemInInv(player_inv, Globals.AD_TYPE.Food)
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	var chair : Advertisement = self.getFirstOf(Globals.AD_TYPE.Chair)
 	var table : Advertisement = self.getFirstOf(Globals.AD_TYPE.Table)
-	var table_inv : Array = table.AdMetaData.get("inventory", [])
+	var table_inv : Array = table.Inventory
 	var table_food : Advertisement = self.findItemInInv(table_inv, Globals.AD_TYPE.Food)
 	var player_state : String = self.animState(self)
 	
@@ -890,7 +792,7 @@ func EatSelectedFood(delta : float, param : Dictionary, actionDepth : int) -> in
 
 func Eat(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var table : Advertisement = self.getFirstOf(Globals.AD_TYPE.Table)
-	var table_inv : Array = table.AdMetaData.get("inventory", [])
+	var table_inv : Array = table.Inventory
 	var table_food : Advertisement = self.findItemInInv(table_inv, Globals.AD_TYPE.Food)
 	# TODO: food_left should be determined by the food type
 	var food_left = table_food.AdMetaData.get("food_left", 4.0)
@@ -905,7 +807,7 @@ func Eat(delta : float, param : Dictionary, actionDepth : int) -> int:
 		table_food.queue_free()
 		table_food.visible = false
 		table_inv.erase(table_food)
-		table.AdMetaData["inventory"] = table_inv
+		table.Inventory = table_inv
 		return Globals.ACTION_STATE.Finished
 		
 func WorkAtBar(delta : float, param : Dictionary, actionDepth : int) -> int:

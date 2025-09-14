@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://8qm8xqhjvjw5"]
+[gd_scene load_steps=70 format=3 uid="uid://8qm8xqhjvjw5"]
 
 [ext_resource type="PackedScene" uid="uid://ckkkaxossb5me" path="res://data/models/RoadCenter.glb" id="1_3innq"]
 [ext_resource type="Script" path="res://scripts/world_clock.gd" id="1_ol7km"]
@@ -26,7 +26,6 @@
 [ext_resource type="Script" path="res://scripts/actionplan.gd" id="19_eqqpn"]
 [ext_resource type="PackedScene" uid="uid://hynuhd03snf0" path="res://data/models/SubwayTileFloorPattern1.glb" id="20_md71f"]
 [ext_resource type="PackedScene" uid="uid://dwioab6nppifj" path="res://data/models/BarCounter.glb" id="20_rxfgi"]
-[ext_resource type="PackedScene" uid="uid://podwo6g81pr2" path="res://scenes/npc_thoughts.tscn" id="20_s180p"]
 [ext_resource type="PackedScene" uid="uid://8jhykbot46f7" path="res://scenes/furnitures/market_stall.tscn" id="20_v4mfw"]
 [ext_resource type="PackedScene" uid="uid://5ro7dre3s3qj" path="res://scenes/furnitures/fridge2.tscn" id="21_rqupk"]
 [ext_resource type="PackedScene" uid="uid://bo3wse56jc5da" path="res://data/models/BarStool.glb" id="21_u8k05"]
@@ -1235,22 +1234,6 @@ target_desired_distance = 0.5
 path_height_offset = 0.25
 debug_enabled = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Dynamic/CharacterBody3D"]
-
-[node name="NPCThoughts" parent="Dynamic/CharacterBody3D/CanvasLayer" instance=ExtResource("20_s180p")]
-visible = false
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 448.0
-offset_bottom = 160.0
-grow_horizontal = 1
-grow_vertical = 1
-
-[node name="Title" parent="Dynamic/CharacterBody3D/CanvasLayer/NPCThoughts/ColorRect/HBoxContainer/PlanScore" index="0"]
-custom_minimum_size = Vector2(250, 0)
-
 [node name="HUD" parent="." instance=ExtResource("27_gevlh")]
 
 [editable path="Static/NavigationRegion3D/Sidewalk/PipeStraightGlow2"]
-[editable path="Dynamic/CharacterBody3D/CanvasLayer/NPCThoughts"]

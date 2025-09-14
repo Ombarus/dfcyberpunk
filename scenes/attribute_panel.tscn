@@ -32,20 +32,20 @@ offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Inventory" type="VBoxContainer" parent="HBoxContainer"]
+[node name="InventoryGroup" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="HBoxContainer/Inventory"]
+[node name="Label" type="Label" parent="HBoxContainer/InventoryGroup"]
 layout_mode = 2
 text = "Inventory:"
 
-[node name="ColorRect" type="ColorRect" parent="HBoxContainer/Inventory"]
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/InventoryGroup"]
 layout_mode = 2
 size_flags_vertical = 3
 color = Color(0.1037, 0.15232, 0.17, 0.552941)
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Inventory/ColorRect"]
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/InventoryGroup/ColorRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -58,11 +58,12 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Inventory/ColorRect/ScrollContainer"]
+[node name="Inventory" type="VBoxContainer" parent="HBoxContainer/InventoryGroup/ColorRect/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Example" type="Label" parent="HBoxContainer/Inventory/ColorRect/ScrollContainer/VBoxContainer"]
+[node name="Example" type="Label" parent="HBoxContainer/InventoryGroup/ColorRect/ScrollContainer/Inventory"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 6
 text = "Item 1"
@@ -116,7 +117,6 @@ value = 0.5
 layout_mode = 2
 
 [node name="PlansGroup" type="VBoxContainer" parent="HBoxContainer/Info"]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -143,10 +143,6 @@ offset_top = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/Info/PlansGroup/ColorRect/PlanScore"]
-layout_mode = 2
-text = "Bleh bleh bleh"
-
 [node name="AdPlans" type="VBoxContainer" parent="HBoxContainer/Info"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -169,7 +165,3 @@ offset_left = 10.0
 offset_top = 8.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Label" type="Label" parent="HBoxContainer/Info/AdPlans/ColorRect2/AdScore"]
-layout_mode = 2
-text = "Bleh bleh bleh"

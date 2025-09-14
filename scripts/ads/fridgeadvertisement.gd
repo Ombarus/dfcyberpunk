@@ -2,7 +2,6 @@ extends Advertisement
 
 func _ready() -> void:
 	super._ready()
-	self.AdMetaData["inventory"] = []
 	
 	var spag_recipe := ActionPlan.new()
 	spag_recipe.ActionName = "CookInKitchen2"
@@ -54,7 +53,7 @@ func GetActionPlansFor(npc : Entity) -> Array:
 	var num_foodstuff := 0
 	var num_food := 0
 	var results := []
-	var inv : Array = self.AdMetaData["inventory"]
+	var inv : Array = self.Inventory
 	for i in inv:
 		var ad := i as Advertisement
 		if ad.Type == Globals.AD_TYPE.Foodstuff:

@@ -71,7 +71,7 @@ var ActualReward := [
 	{
 		"Action": "Default",
 		"State": Globals.ACTION_STATE.Running,
-		"Rewards": {Globals.NEEDS.Satiety: -0.01, Globals.NEEDS.Energy: -0.012, Globals.NEEDS.Satisfaction: -0.005} # consider 1 day = 100 seconds, 0.01 means 1 to 0 in 100 seconds
+		"Rewards": {Globals.NEEDS.Satiety: -0.008, Globals.NEEDS.Energy: -0.006, Globals.NEEDS.Satisfaction: -0.005} # consider 1 day = 100 seconds, 0.01 means 1 to 0 in 100 seconds
 	},
 	{
 		"Action": "SleepOnFloor",

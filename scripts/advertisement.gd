@@ -12,6 +12,8 @@ class_name Advertisement
 
 @export var AdMetaData := {}
 
+@export var Inventory := []
+
 # List of tags. Tags can have a "weight" so that
 # if multiple objects match a group of tags they can
 # be ordered from most prefered to less ideal
