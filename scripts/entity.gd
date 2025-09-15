@@ -471,7 +471,6 @@ func GoSleepInBed(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var bed : Advertisement = param.get("plan_ad", null)
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	var energy : float = Needs.GetNeed(Globals.NEEDS.Energy)
-	#var next_action := getCurAction(actionDepth+1) # return "" if top_of_stack
 
 	if bed == null:
 		return Globals.ACTION_STATE.Error
@@ -486,7 +485,6 @@ func GoSleepInBed(delta : float, param : Dictionary, actionDepth : int) -> int:
 		self.pushAction("Goto", actionDepth)
 		return Globals.ACTION_STATE.Running
 	
-	bed.BelongTo = self
 	var cur_state : String = self.animState(self)
 	if cur_state != "SleepBedIdle" and energy < 0.5: # 0.5 is arbitrary: just "we're tired"
 		param["obj"] = self
@@ -510,7 +508,6 @@ func GoSleepInBed(delta : float, param : Dictionary, actionDepth : int) -> int:
 		self.pushAction("TravelAnimState", actionDepth)
 		return Globals.ACTION_STATE.Running
 	
-	bed.BelongTo = null
 	return Globals.ACTION_STATE.Finished
 	
 func Sleep(delta : float, param : Dictionary, actionDepth : int) -> int:
