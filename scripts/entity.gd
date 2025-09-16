@@ -809,7 +809,7 @@ func Eat(delta : float, param : Dictionary, actionDepth : int) -> int:
 		table.Inventory = table_inv
 		return Globals.ACTION_STATE.Finished
 		
-func WorkAtBar(delta : float, param : Dictionary, actionDepth : int) -> int:
+func WorkAtBarOld(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	var plan : ActionPlan = param.get("current_plan", null)
 	var workplace : Advertisement = param.get("plan_ad", null)
@@ -828,6 +828,37 @@ func WorkAtBar(delta : float, param : Dictionary, actionDepth : int) -> int:
 	
 	return Globals.ACTION_STATE.Running
 	
+func WorkAtBar(delta : float, param : Dictionary, actionDepth : int) -> int:
+	# Wait behind bar until work end
+	# If Empty food slot on counter
+	# CookInKitchen2
+	# Put Food on food slot on counter
+	# When work end, delete food from counter?
+	return Globals.ACTION_STATE.Running
+	
+func Deliver(delta : float, param : Dictionary, actionDepth : int) -> int:
+	# Get order origin, destination, type and qantity from params
+	# Go to Origin, transfer quantity to inv
+	# Go to destination, transfer quantity to destination
+	# done
+	return Globals.ACTION_STATE.Running
+	
+func EatAtBar(delta : float, param : Dictionary, actionDepth : int) -> int:
+	# Select empty bar stool
+	# Goto
+	# Sit
+	# Wait for food
+	# Eat food
+	# Pay (should I put ATM or just "magically" pay at counter?)
+	# Stand up
+	# Done
+	return Globals.ACTION_STATE.Running
+	
+func WorkAtShop(delta : float, param : Dictionary, actionDepth : int) -> int:
+	# Wander inside shop until end of shift
+	return Globals.ACTION_STATE.Running
+	
+
 ###################################################################################################
 ## ACTION FUNCTION (NEED REVISION)
 ###################################################################################################
