@@ -107,7 +107,9 @@ func _physics_process(delta: float) -> void:
 		
 		# If we're not trying to walk don't do anything weird (like colliding with a bed while sleeping!)
 		if largest_col.length_squared() > 0.01 and self.velocity.length_squared() > 0.01:
+			print("Collision Avoidance: %.3f" % [largest_col * self.MovePixSec])
 			self.velocity += largest_col * self.MovePixSec
+			pass
 			
 		self.call("move_and_slide")
 
