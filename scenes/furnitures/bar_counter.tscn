@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvkq8lvbuo3qx"]
+
+[ext_resource type="Script" path="res://scripts/advertisement.gd" id="1_3be0a"]
+[ext_resource type="PackedScene" uid="uid://dwioab6nppifj" path="res://data/models/BarCounter.glb" id="2_dxlpr"]
+
+[node name="BarCounter" type="Node3D"]
+script = ExtResource("1_3be0a")
+Type = 9
+
+[node name="BarCounter2" parent="." instance=ExtResource("2_dxlpr")]
+
+[node name="Inventory01" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.202304, 0.895554, 0.485419)
+
+[node name="Interact01" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.14318, 0, 0.643169)

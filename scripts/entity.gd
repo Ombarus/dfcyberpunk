@@ -47,7 +47,6 @@ var Needs := NeedHandler.new()
 var curParam : Dictionary
 var actionStack : Array
 var lastAction : String
-var timeSystem : WorldClock
 var knownPlans : Array
 
 class ActionStep:
@@ -57,6 +56,7 @@ class ActionStep:
 
 
 func _ready() -> void:
+	super._ready()
 	self.actionStack = []
 	self.timeSystem = self.get_tree().root.find_child("WorldClock", true, false)
 
@@ -107,7 +107,6 @@ func _physics_process(delta: float) -> void:
 		
 		# If we're not trying to walk don't do anything weird (like colliding with a bed while sleeping!)
 		if largest_col.length_squared() > 0.01 and self.velocity.length_squared() > 0.01:
-			print("Collision Avoidance: %.3f" % [largest_col * self.MovePixSec])
 			self.velocity += largest_col * self.MovePixSec
 			pass
 			
@@ -856,7 +855,21 @@ func EatAtBar(delta : float, param : Dictionary, actionDepth : int) -> int:
 	
 func WorkAtShop(delta : float, param : Dictionary, actionDepth : int) -> int:
 	# Wander inside shop until end of shift
-	return Globals.ACTION_STATE.Running
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	var plan : ActionPlan = param.get("current_plan", null)
+	if is_top_of_stack:
+		var workplace : Advertisement = param.get("plan_ad", null).get_parent()
+		var rand_node : Node3D = workplace.get_child(randi_range(0, workplace.get_child_count()))
+		if rand_node != null:
+			param["target"] = rand_node.position
+			param["precision"] = 0.5
+			self.pushAction("Goto", actionDepth)
+			
+	var cur_hour = self.timeSystem.CurDateTime["hour"]
+	if cur_hour > plan.EndTime:
+		return Globals.ACTION_STATE.Finished
+	else:
+		return Globals.ACTION_STATE.Running
 	
 
 ###################################################################################################

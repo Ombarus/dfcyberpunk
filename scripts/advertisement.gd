@@ -8,7 +8,7 @@ class_name Advertisement
 # Like Borrowed, Selling, etc.
 @export var BelongTo : Entity
 
-@export var ActionPlans : Array
+@export var ActionPlans : Array[ActionPlan]
 
 @export var AdMetaData := {}
 
@@ -22,6 +22,8 @@ class_name Advertisement
 	"advertisement": 1.0
 }
 
+var timeSystem : WorldClock
+
 # Want to have somewhat dynamic plans.
 # This allow an Advertisement to recalculate reward based on who's asking
 func GetActionPlansFor(npc : Entity) -> Array:
@@ -30,6 +32,11 @@ func GetActionPlansFor(npc : Entity) -> Array:
 	var results := []
 	for i in ActionPlans:
 		var plan := i as ActionPlan
+		if plan.StartHour >= 0:
+			# TODO: Consider when endHour is < than startHour we should continue over the next day
+			var cur_hour = self.timeSystem.CurDateTime["hour"]
+			if cur_hour < plan.StartHour or cur_hour >= plan.EndHour:
+				continue
 		var new_plan := plan.duplicate()
 		if new_plan.SpawnRewardType == Globals.AD_TYPE.Food:
 			new_plan.SatisfactionReward = new_plan.SatisfactionReward / (food_count + 1)
@@ -40,6 +47,7 @@ func GetActionPlansFor(npc : Entity) -> Array:
 func _ready() -> void:
 	self.add_to_group(str(self.Type))
 	self.add_to_group(Globals.AD_GROUP)
+	self.timeSystem = self.get_tree().root.find_child("WorldClock", true, false)
 	
 func _exit_tree() -> void:
 	self.remove_from_group(str(self.Type))

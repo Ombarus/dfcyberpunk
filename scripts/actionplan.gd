@@ -22,11 +22,10 @@ class_name ActionPlan
 @export var SpawnRewardType : Globals.AD_TYPE
 @export var SpawnRewardCount : int = 1
 
-# Current thinking is plans picked up by NPCs are duplicated
-# and we keep the current "execution state" of the plan in here
-# Execution state could be stuff like how much left there is to cook
-# If rewards were given, etc.
-var PlanMetaData : Dictionary = {}
+# This plan is only available between X and Y hours
+# I'll probably want to expand this for more complex schedules (like weekends?)
+@export var StartHour : int = -1
+@export var EndHour : int = -1
 
 # Right now it's generic and cover all Actions
 # but the idea is to inventually be able to customize the Rewards by Ads
