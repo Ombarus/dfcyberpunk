@@ -1,0 +1,130 @@
+[gd_scene load_steps=28 format=3 uid="uid://bxf2irwexmp4l"]
+
+[ext_resource type="Script" path="res://scripts/entity.gd" id="1_pri1f"]
+[ext_resource type="Script" path="res://scripts/sequencer.gd" id="2_wfdrl"]
+[ext_resource type="PackedScene" uid="uid://dhptuhiboscjt" path="res://data/models/Peep2.glb" id="3_rlo4e"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bpfx1"]
+radius = 0.4
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qtky6"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3j7m1"]
+animation = &"Interact"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ep6lm"]
+animation = &"SitChair"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xdcs4"]
+animation = &"SitChairIdle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_twcae"]
+animation = &"SleepBed"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_eh7d4"]
+animation = &"SleepBedIdle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xgqgw"]
+animation = &"SitChair"
+play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t25n4"]
+animation = &"SleepBed"
+play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1dtf0"]
+animation = &"Walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qsww2"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y51r2"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rr0el"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jo7p6"]
+xfade_time = 0.1
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dndwq"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2pm1p"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mqkvg"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_attys"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4h8sh"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p85wi"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wj11f"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_05m1f"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0fb32"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_r6qwv"]
+states/End/position = Vector2(1229, 100)
+states/Idle/node = SubResource("AnimationNodeAnimation_qtky6")
+states/Idle/position = Vector2(78, 37)
+states/Interact/node = SubResource("AnimationNodeAnimation_3j7m1")
+states/Interact/position = Vector2(78, -76)
+states/SitChair/node = SubResource("AnimationNodeAnimation_ep6lm")
+states/SitChair/position = Vector2(276, -36)
+states/SitChairIdle/node = SubResource("AnimationNodeAnimation_xdcs4")
+states/SitChairIdle/position = Vector2(449, -36)
+states/SleepBed/node = SubResource("AnimationNodeAnimation_twcae")
+states/SleepBed/position = Vector2(276, 132)
+states/SleepBedIdle/node = SubResource("AnimationNodeAnimation_eh7d4")
+states/SleepBedIdle/position = Vector2(449, 132)
+states/StandChair/node = SubResource("AnimationNodeAnimation_xgqgw")
+states/StandChair/position = Vector2(621, -36)
+states/Start/position = Vector2(-110, 100)
+states/WakeBed/node = SubResource("AnimationNodeAnimation_t25n4")
+states/WakeBed/position = Vector2(621, 132)
+states/Walk/node = SubResource("AnimationNodeAnimation_1dtf0")
+states/Walk/position = Vector2(78, 184)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_qsww2"), "Idle", "Interact", SubResource("AnimationNodeStateMachineTransition_y51r2"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_rr0el"), "Interact", "Idle", SubResource("AnimationNodeStateMachineTransition_jo7p6"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_dndwq"), "Idle", "SitChair", SubResource("AnimationNodeStateMachineTransition_2pm1p"), "SitChair", "SitChairIdle", SubResource("AnimationNodeStateMachineTransition_mqkvg"), "Idle", "SleepBed", SubResource("AnimationNodeStateMachineTransition_attys"), "SleepBed", "SleepBedIdle", SubResource("AnimationNodeStateMachineTransition_4h8sh"), "SitChairIdle", "StandChair", SubResource("AnimationNodeStateMachineTransition_p85wi"), "StandChair", "Idle", SubResource("AnimationNodeStateMachineTransition_wj11f"), "SleepBedIdle", "WakeBed", SubResource("AnimationNodeStateMachineTransition_05m1f"), "WakeBed", "Idle", SubResource("AnimationNodeStateMachineTransition_0fb32")]
+graph_offset = Vector2(-443, -169)
+
+[node name="Peep1" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.13031, 0.422798, -3.21431)
+floor_constant_speed = true
+floor_block_on_wall = false
+floor_max_angle = 1.0472
+script = ExtResource("1_pri1f")
+MovePixSec = 1.5
+
+[node name="Sequencer" type="Node" parent="."]
+script = ExtResource("2_wfdrl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.934854, 0)
+shape = SubResource("CapsuleShape3D_bpfx1")
+
+[node name="Peep2" parent="." instance=ExtResource("3_rlo4e")]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Peep2")
+tree_root = SubResource("AnimationNodeStateMachine_r6qwv")
+anim_player = NodePath("../Peep2/AnimationPlayer")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 0.25
+target_desired_distance = 0.5
+path_height_offset = 0.25
+debug_enabled = true

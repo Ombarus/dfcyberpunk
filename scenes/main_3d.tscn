@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://8qm8xqhjvjw5"]
+[gd_scene load_steps=47 format=3 uid="uid://8qm8xqhjvjw5"]
 
 [ext_resource type="PackedScene" uid="uid://ckkkaxossb5me" path="res://data/models/RoadCenter.glb" id="1_3innq"]
 [ext_resource type="Script" path="res://scripts/world_clock.gd" id="1_ol7km"]
@@ -37,6 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://dsgl0bqyjknb0" path="res://data/models/CardboardBox.glb" id="34_3ly04"]
 [ext_resource type="PackedScene" uid="uid://dl8g3bvfcpxj6" path="res://data/models/WallCornerGlow.glb" id="34_68mej"]
 [ext_resource type="PackedScene" uid="uid://do51rp00ju53t" path="res://scenes/peep.tscn" id="35_8tejs"]
+[ext_resource type="PackedScene" uid="uid://bxf2irwexmp4l" path="res://scenes/peep2.tscn" id="37_r45pj"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hd65l"]
 radius = 5.0
@@ -826,11 +827,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -8)
 
 [node name="Furniture" type="Node3D" parent="Static/NavigationRegion3D/Appartment2"]
 
-[node name="Bed3" parent="Static/NavigationRegion3D/Appartment2/Furniture" node_paths=PackedStringArray("BelongTo") instance=ExtResource("18_w4c5x")]
+[node name="Bed3" parent="Static/NavigationRegion3D/Appartment2/Furniture" instance=ExtResource("18_w4c5x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.105277, 0)
 script = ExtResource("18_h2cyc")
 Type = 0
-BelongTo = NodePath("../../../../../Dynamic/Peep2")
 ActionPlans = [SubResource("Resource_1xeal")]
 
 [node name="CounterStove2" parent="Static/NavigationRegion3D/Appartment2/Furniture" instance=ExtResource("8_gcuqx")]
@@ -842,9 +842,8 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -11, 0
 [node name="CounterTop3" parent="Static/NavigationRegion3D/Appartment2/Furniture" instance=ExtResource("9_ldhes")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -11.5921, 0, -7)
 
-[node name="Countertop" parent="Static/NavigationRegion3D/Appartment2/Furniture" node_paths=PackedStringArray("BelongTo") instance=ExtResource("11_xrdbt")]
+[node name="Countertop" parent="Static/NavigationRegion3D/Appartment2/Furniture" instance=ExtResource("11_xrdbt")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12, 0, -5.95547)
-BelongTo = NodePath("../../../../../Dynamic/Peep2")
 
 [node name="CounterTopSink2" parent="Static/NavigationRegion3D/Appartment2/Furniture" instance=ExtResource("10_bt3yj")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12, 0, -6.95547)
@@ -858,22 +857,19 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12, 0
 [node name="Cabinet4" parent="Static/NavigationRegion3D/Appartment2/Furniture" instance=ExtResource("11_yxcl1")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12, 0, -7)
 
-[node name="DiningTable3" parent="Static/NavigationRegion3D/Appartment2/Furniture" node_paths=PackedStringArray("BelongTo") instance=ExtResource("14_vxtuh")]
+[node name="DiningTable3" parent="Static/NavigationRegion3D/Appartment2/Furniture" instance=ExtResource("14_vxtuh")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7.18901, 0, -5.93082)
-BelongTo = NodePath("../../../../../Dynamic/Peep2")
 
-[node name="FoldingChair2" parent="Static/NavigationRegion3D/Appartment2/Furniture" node_paths=PackedStringArray("BelongTo") instance=ExtResource("14_rquro")]
+[node name="FoldingChair2" parent="Static/NavigationRegion3D/Appartment2/Furniture" instance=ExtResource("14_rquro")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -8.18901, 0, -4.86019)
 script = ExtResource("18_h2cyc")
 Type = 7
-BelongTo = NodePath("../../../../../Dynamic/Peep2")
 
 [node name="FoldingChair3" parent="Static/NavigationRegion3D/Appartment2/Furniture" instance=ExtResource("14_rquro")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.33688, 0, -5.03732)
 
-[node name="Fridge" parent="Static/NavigationRegion3D/Appartment2/Furniture" node_paths=PackedStringArray("BelongTo") instance=ExtResource("21_rqupk")]
+[node name="Fridge" parent="Static/NavigationRegion3D/Appartment2/Furniture" instance=ExtResource("21_rqupk")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9, 0, -7)
-BelongTo = NodePath("../../../../../Dynamic/Peep2")
 
 [node name="Cyberdeck2" parent="Static/NavigationRegion3D/Appartment2/Furniture" instance=ExtResource("23_fhg20")]
 transform = Transform3D(0.87061, 0, 0.491973, 0, 1, 0, -0.491973, 0, 0.87061, -7.44327, 0.768183, -5)
@@ -1927,8 +1923,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -16)
 
 [node name="Peep1" parent="Dynamic" instance=ExtResource("35_8tejs")]
 
-[node name="Peep2" parent="Dynamic" instance=ExtResource("35_8tejs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.13031, 3.4228, -3.21431)
+[node name="Peep2" parent="Dynamic" instance=ExtResource("37_r45pj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.78338, 3.76063, -3.11407)
 
 [node name="Peep3" parent="Dynamic" instance=ExtResource("35_8tejs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.13031, 7.4228, -3.21431)
