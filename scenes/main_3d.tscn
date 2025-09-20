@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://8qm8xqhjvjw5"]
+[gd_scene load_steps=56 format=3 uid="uid://8qm8xqhjvjw5"]
 
 [ext_resource type="PackedScene" uid="uid://ckkkaxossb5me" path="res://data/models/RoadCenter.glb" id="1_3innq"]
 [ext_resource type="Script" path="res://scripts/world_clock.gd" id="1_ol7km"]
@@ -29,6 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://bo3wse56jc5da" path="res://data/models/BarStool.glb" id="21_u8k05"]
 [ext_resource type="PackedScene" uid="uid://kev47y2ajw15" path="res://data/models/StairMetalStraight.glb" id="22_16e3h"]
 [ext_resource type="PackedScene" uid="uid://ln6lc2c5xfy2" path="res://data/models/Cyberdeck.glb" id="23_fhg20"]
+[ext_resource type="PackedScene" uid="uid://bgjv6oc3ao6u3" path="res://data/models/WallPlainWindow.glb" id="25_7uu6l"]
 [ext_resource type="PackedScene" uid="uid://l80yydvttwvv" path="res://data/models/ATM.glb" id="25_gbyio"]
 [ext_resource type="PackedScene" uid="uid://id35hle7aogd" path="res://data/models/BarCounterCorner.glb" id="25_xsb8j"]
 [ext_resource type="PackedScene" uid="uid://c2hbs3xwqvwe3" path="res://scenes/hud.tscn" id="27_gevlh"]
@@ -38,6 +39,7 @@
 [ext_resource type="PackedScene" uid="uid://dsgl0bqyjknb0" path="res://data/models/CardboardBox.glb" id="34_3ly04"]
 [ext_resource type="PackedScene" uid="uid://dl8g3bvfcpxj6" path="res://data/models/WallCornerGlow.glb" id="34_68mej"]
 [ext_resource type="PackedScene" uid="uid://do51rp00ju53t" path="res://scenes/peep.tscn" id="35_8tejs"]
+[ext_resource type="PackedScene" uid="uid://cpih5xw0mdmnv" path="res://data/models/BeamRust.glb" id="37_bxe1p"]
 [ext_resource type="PackedScene" uid="uid://bxf2irwexmp4l" path="res://scenes/peep2.tscn" id="37_r45pj"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hd65l"]
@@ -574,6 +576,63 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 3.0237, 4)
 
 [node name="Appartment1" type="Node3D" parent="Static/NavigationRegion3D"]
 
+[node name="BeamRust2" parent="Static/NavigationRegion3D/Appartment1" instance=ExtResource("37_bxe1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75955, 3, -2)
+
+[node name="BeamRust3" parent="Static/NavigationRegion3D/Appartment1" instance=ExtResource("37_bxe1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75955, 3, 0)
+
+[node name="BeamRust4" parent="Static/NavigationRegion3D/Appartment1" instance=ExtResource("37_bxe1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75955, 3, 2)
+
+[node name="BeamRust5" parent="Static/NavigationRegion3D/Appartment1" instance=ExtResource("37_bxe1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75955, 3, -4)
+
+[node name="BeamRust6" parent="Static/NavigationRegion3D/Appartment1" instance=ExtResource("37_bxe1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75955, 3, -6)
+
+[node name="BeamRust7" parent="Static/NavigationRegion3D/Appartment1" instance=ExtResource("37_bxe1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75955, 3, -8)
+
+[node name="BeamRust8" parent="Static/NavigationRegion3D/Appartment1" instance=ExtResource("37_bxe1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75955, 6, -8)
+
+[node name="BeamRust14" parent="Static/NavigationRegion3D/Appartment1" instance=ExtResource("37_bxe1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75955, 6, -10)
+
+[node name="BeamRust15" parent="Static/NavigationRegion3D/Appartment1" instance=ExtResource("37_bxe1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75955, 6, -12)
+
+[node name="BeamRust16" parent="Static/NavigationRegion3D/Appartment1" instance=ExtResource("37_bxe1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75955, 6, -14)
+
+[node name="BeamRust17" parent="Static/NavigationRegion3D/Appartment1" instance=ExtResource("37_bxe1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75955, 6, -16)
+
+[node name="BeamRust18" parent="Static/NavigationRegion3D/Appartment1" instance=ExtResource("37_bxe1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75955, 6, -18)
+
+[node name="BeamRust19" parent="Static/NavigationRegion3D/Appartment1" instance=ExtResource("37_bxe1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75955, 6, -20)
+
+[node name="BeamRust20" parent="Static/NavigationRegion3D/Appartment1" instance=ExtResource("37_bxe1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75955, 6, -22)
+
+[node name="BeamRust9" parent="Static/NavigationRegion3D/Appartment1" instance=ExtResource("37_bxe1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75955, 6, -6)
+
+[node name="BeamRust10" parent="Static/NavigationRegion3D/Appartment1" instance=ExtResource("37_bxe1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75955, 6, -4)
+
+[node name="BeamRust11" parent="Static/NavigationRegion3D/Appartment1" instance=ExtResource("37_bxe1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75955, 6, -2)
+
+[node name="BeamRust12" parent="Static/NavigationRegion3D/Appartment1" instance=ExtResource("37_bxe1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75955, 6, 0)
+
+[node name="BeamRust13" parent="Static/NavigationRegion3D/Appartment1" instance=ExtResource("37_bxe1p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75955, 6, 2)
+
 [node name="WallPlain2" parent="Static/NavigationRegion3D/Appartment1" instance=ExtResource("5_86ea2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -2)
 
@@ -731,7 +790,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.105277, 0)
 script = ExtResource("18_h2cyc")
 Type = 0
 BelongTo = NodePath("../../../../../Dynamic/Peep1")
-ActionPlans = [SubResource("Resource_1xeal")]
+ActionPlans = Array[ExtResource("19_eqqpn")]([SubResource("Resource_1xeal")])
 
 [node name="CounterStove2" parent="Static/NavigationRegion3D/Appartment1/Furniture" instance=ExtResource("8_gcuqx")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -10, 0, -7)
@@ -781,7 +840,7 @@ transform = Transform3D(0.87061, 0, 0.491973, 0, 1, 0, -0.491973, 0, 0.87061, -7
 [node name="Appartment2" type="Node3D" parent="Static/NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 
-[node name="WallPlain2" parent="Static/NavigationRegion3D/Appartment2" instance=ExtResource("5_86ea2")]
+[node name="WallPlainWindow" parent="Static/NavigationRegion3D/Appartment2" instance=ExtResource("25_7uu6l")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -2)
 
 [node name="WallPlain3" parent="Static/NavigationRegion3D/Appartment2" instance=ExtResource("5_86ea2")]
@@ -911,7 +970,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.105277, 0)
 script = ExtResource("18_h2cyc")
 Type = 0
 BelongTo = NodePath("../../../../../Dynamic/Peep2")
-ActionPlans = [SubResource("Resource_1xeal")]
+ActionPlans = Array[ExtResource("19_eqqpn")]([SubResource("Resource_1xeal")])
 
 [node name="CounterStove2" parent="Static/NavigationRegion3D/Appartment2/Furniture" instance=ExtResource("8_gcuqx")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -10, 0, -7)
@@ -1079,7 +1138,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.105277, 0)
 script = ExtResource("18_h2cyc")
 Type = 0
 BelongTo = NodePath("../../../../../Dynamic/Peep3")
-ActionPlans = [SubResource("Resource_1xeal")]
+ActionPlans = Array[ExtResource("19_eqqpn")]([SubResource("Resource_1xeal")])
 
 [node name="CounterStove2" parent="Static/NavigationRegion3D/Appartment3/Furniture" instance=ExtResource("8_gcuqx")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -10, 0, -7)
@@ -1358,7 +1417,7 @@ transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -9.48581
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -9.48581, 0, -5)
 script = ExtResource("18_h2cyc")
 BelongTo = NodePath("../../../../../Dynamic/Peep3")
-ActionPlans = [SubResource("Resource_gasln")]
+ActionPlans = Array[ExtResource("19_eqqpn")]([SubResource("Resource_gasln")])
 
 [node name="CounterTop10" parent="Static/NavigationRegion3D/Bar/Furniture" instance=ExtResource("9_ldhes")]
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -9.48581, 0, -4)
