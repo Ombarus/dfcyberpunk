@@ -344,7 +344,8 @@ func toFromExchange(to : Advertisement, from : Advertisement, items : Array, par
 		if to == self:
 			item.BelongTo = self
 		else:
-			item.BelongTo = null
+			# If container belong to someone, then content should also belong to that NPC
+			item.BelongTo = to.BelongTo
 		to.Inventory = to_inv
 	
 func TravelAnimState(delta : float, param : Dictionary, actionDepth : int) -> int:
