@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://8qm8xqhjvjw5"]
+[gd_scene load_steps=55 format=3 uid="uid://8qm8xqhjvjw5"]
 
 [ext_resource type="PackedScene" uid="uid://ckkkaxossb5me" path="res://data/models/RoadCenter.glb" id="1_3innq"]
 [ext_resource type="Script" path="res://scripts/world_clock.gd" id="1_ol7km"]
@@ -104,19 +104,6 @@ SpawnRewardCount = 1
 StartHour = -1
 EndHour = -1
 
-[sub_resource type="Resource" id="Resource_b2ma2"]
-script = ExtResource("19_eqqpn")
-ActionName = "Deliver"
-EnergyReward = 0.0
-SatietyReward = 0.0
-SatisfactionReward = 0.5
-RichnessReward = 0.0002
-SpawnReward = ExtResource("32_47l66")
-SpawnRewardType = 2
-SpawnRewardCount = 20
-StartHour = 6
-EndHour = 9
-
 [sub_resource type="Resource" id="Resource_25o7w"]
 script = ExtResource("19_eqqpn")
 ActionName = "WorkAtShop"
@@ -165,16 +152,16 @@ SpawnRewardCount = 1
 StartHour = 17
 EndHour = 23
 
-[sub_resource type="Resource" id="Resource_nxvi4"]
+[sub_resource type="Resource" id="Resource_7qhr0"]
 script = ExtResource("19_eqqpn")
 ActionName = "Deliver"
 EnergyReward = 0.0
 SatietyReward = 0.0
-SatisfactionReward = 0.5
-RichnessReward = 0.0002
+SatisfactionReward = 0.7
+RichnessReward = 0.0004
 SpawnReward = ExtResource("32_47l66")
 SpawnRewardType = 2
-SpawnRewardCount = 5
+SpawnRewardCount = 10
 StartHour = 6
 EndHour = 9
 
@@ -1291,7 +1278,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 0)
 
 [node name="MarketStall5" parent="Static/NavigationRegion3D/Market/Furniture" instance=ExtResource("20_v4mfw")]
 transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -9.73586, 0, 0.931519)
-ActionPlans = Array[ExtResource("19_eqqpn")]([SubResource("Resource_b2ma2")])
 
 [node name="MarketStall7" parent="Static/NavigationRegion3D/Market/Furniture" instance=ExtResource("20_v4mfw")]
 transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -7.73586, 0, 0.931519)
@@ -1476,7 +1462,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.248, 0, -2)
 [node name="FridgeBar" parent="Static/NavigationRegion3D/Bar/Furniture" instance=ExtResource("21_rqupk")]
 transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, -9.36003, 0, -8)
 script = ExtResource("18_h2cyc")
-ActionPlans = Array[ExtResource("19_eqqpn")]([SubResource("Resource_nxvi4")])
+AdMetaData = {
+"targets": [NodePath("."), null]
+}
 
 [node name="Warehouse" type="Node3D" parent="Static/NavigationRegion3D"]
 
@@ -1576,8 +1564,14 @@ transform = Transform3D(0.894683, 0, -0.446702, 0, 1, 0, 0.446702, 0, 0.894683, 
 [node name="CardboardBox17" parent="Static/NavigationRegion3D/Warehouse" instance=ExtResource("34_3ly04")]
 transform = Transform3D(0.401082, 0, 0.916042, 0, 1, 0, -0.916042, 0, 0.401082, -9.46498, 0.197635, -17.1418)
 
-[node name="CardboardBox18" parent="Static/NavigationRegion3D/Warehouse" instance=ExtResource("34_3ly04")]
+[node name="CardboardBox18" parent="Static/NavigationRegion3D/Warehouse" node_paths=PackedStringArray("BelongTo") instance=ExtResource("34_3ly04")]
 transform = Transform3D(0.894683, 0, -0.446702, 0, 1, 0, 0.446702, 0, 0.894683, -8.99707, 0.197635, -15.7181)
+script = ExtResource("18_h2cyc")
+BelongTo = NodePath("../../../../Dynamic/Peep2")
+ActionPlans = Array[ExtResource("19_eqqpn")]([SubResource("Resource_7qhr0")])
+AdMetaData = {
+"targets": [NodePath("../../Market/Furniture/MarketStall5"), NodePath("../../Bar/Furniture/FridgeBar")]
+}
 
 [node name="CardboardBox19" parent="Static/NavigationRegion3D/Warehouse" instance=ExtResource("34_3ly04")]
 transform = Transform3D(0.894683, 0, -0.446702, 0, 1, 0, 0.446702, 0, 0.894683, -9.99068, 0.197635, -16.2142)

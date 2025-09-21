@@ -829,6 +829,7 @@ func WorkAtBarOld(delta : float, param : Dictionary, actionDepth : int) -> int:
 	return Globals.ACTION_STATE.Running
 	
 func WorkAtBar(delta : float, param : Dictionary, actionDepth : int) -> int:
+	
 	# Wait behind bar until work end
 	# If Empty food slot on counter
 	# CookInKitchen2
@@ -837,6 +838,62 @@ func WorkAtBar(delta : float, param : Dictionary, actionDepth : int) -> int:
 	return Globals.ACTION_STATE.Running
 	
 func Deliver(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	var plan : ActionPlan = param.get("current_plan", null)
+	var workplace : Advertisement = param.get("plan_ad", null)
+	var workplace_target = self.getClosestInteract(workplace)
+	var targets : Array = workplace.AdMetaData.get("targets", [])
+	var max_items_per_target : int = plan.SpawnRewardCount
+	var item_spawn : PackedScene = plan.SpawnReward
+	
+	var total_needed : int = 0
+	for t in targets:
+		var container := t as Advertisement
+		var all_items : Array = findAllItemInInv(container.Inventory, plan.SpawnRewardType)
+		total_needed = max_items_per_target - all_items.size()
+	
+	var current_in_inv : Array = findAllItemInInv(self.Inventory, plan.SpawnRewardType)
+	if current_in_inv.size() < total_needed:
+		if self.isAtLocation(workplace_target, 0.5):
+			var seq : Sequencer = get_node("Sequencer")
+			if not is_top_of_stack:
+				seq.SetContinue()
+				return Globals.ACTION_STATE.Running
+			if seq.CurState() == seq.SEQ_STATE.IDLE:
+				seq.OneShotSequence("Interact")
+				return Globals.ACTION_STATE.Running
+			elif seq.CurState() == seq.SEQ_STATE.FINISHED:
+				seq.Reset()
+				param["scene"] = plan.SpawnReward
+				param["count"] = total_needed - current_in_inv.size()
+				self.pushAction("Spawn", actionDepth)
+			else:
+				seq.SetContinue()
+				return Globals.ACTION_STATE.Running
+			
+			return Globals.ACTION_STATE.Running
+		
+	if not is_top_of_stack:
+		return Globals.ACTION_STATE.Running
+	
+	if total_needed <= 0:
+		return Globals.ACTION_STATE.Finished
+		
+	if current_in_inv.size() < total_needed and not self.isAtLocation(workplace_target, 0.5):
+		param["target"] = workplace_target
+		param["precision"] = 0.5
+		self.pushAction("Goto", actionDepth)
+		return Globals.ACTION_STATE.Running
+		
+	for t in targets:
+		var container := t as Advertisement
+		var all_items : Array = findAllItemInInv(container.Inventory, plan.SpawnRewardType)
+		var needed_for_this : int = max_items_per_target - all_items.size()
+		if needed_for_this > 0:
+			param["item"] = current_in_inv.slice(0, needed_for_this)
+			param["container"] = container
+			self.pushAction("GoDropItem", actionDepth)
+	
 	# Get order origin, destination, type and qantity from params
 	# Go to Origin, transfer quantity to inv
 	# Go to destination, transfer quantity to destination
@@ -859,7 +916,7 @@ func WorkAtShop(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	var plan : ActionPlan = param.get("current_plan", null)
 	if is_top_of_stack:
-		var workplace : Advertisement = param.get("plan_ad", null).get_parent()
+		var workplace : Node = param.get("plan_ad", null).get_parent()
 		var rand_node : Node3D = workplace.get_child(randi_range(0, workplace.get_child_count()))
 		if rand_node != null:
 			param["target"] = rand_node.position
