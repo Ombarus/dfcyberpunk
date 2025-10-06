@@ -3,8 +3,8 @@ class_name NeedHandler
 
 var CurrentNeeds := {
 	Globals.NEEDS.Satiety: 1.0,
-	Globals.NEEDS.Energy: 0.3,
-	Globals.NEEDS.Satisfaction: 0.5,
+	Globals.NEEDS.Energy: 0.8,
+	Globals.NEEDS.Satisfaction: 0.3,
 	Globals.NEEDS.Richness: 0.01
 }
 

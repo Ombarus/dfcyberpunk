@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://8qm8xqhjvjw5"]
+[gd_scene load_steps=59 format=3 uid="uid://8qm8xqhjvjw5"]
 
 [ext_resource type="PackedScene" uid="uid://ckkkaxossb5me" path="res://data/models/RoadCenter.glb" id="1_3innq"]
 [ext_resource type="Script" path="res://scripts/world_clock.gd" id="1_ol7km"]
@@ -40,7 +40,9 @@
 [ext_resource type="PackedScene" uid="uid://dl8g3bvfcpxj6" path="res://data/models/WallCornerGlow.glb" id="34_68mej"]
 [ext_resource type="PackedScene" uid="uid://do51rp00ju53t" path="res://scenes/peep.tscn" id="35_8tejs"]
 [ext_resource type="PackedScene" uid="uid://cpih5xw0mdmnv" path="res://data/models/BeamRust.glb" id="37_bxe1p"]
+[ext_resource type="Shader" path="res://data/textures/signs.gdshader" id="37_n86uy"]
 [ext_resource type="PackedScene" uid="uid://bxf2irwexmp4l" path="res://scenes/peep2.tscn" id="37_r45pj"]
+[ext_resource type="Texture2D" uid="uid://blvkum6gok5tw" path="res://data/textures/signs.png" id="38_7hk0u"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hd65l"]
 radius = 5.0
@@ -164,6 +166,27 @@ SpawnRewardType = 2
 SpawnRewardCount = 10
 StartHour = 6
 EndHour = 9
+
+[sub_resource type="QuadMesh" id="QuadMesh_yiu1m"]
+size = Vector2(1, 0.3)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1ltbf"]
+render_priority = 0
+shader = ExtResource("37_n86uy")
+shader_parameter/uv_scale = Vector2(0.339595, 0.086445)
+shader_parameter/uv_offset = Vector2(0.06538, 0.02873)
+shader_parameter/fg_color = Color(1, 1, 1, 1)
+shader_parameter/bg_color = Color(0.74, 0, 0.0863334, 1)
+shader_parameter/edge_width = 0.09
+shader_parameter/noise_scale = 17.038
+shader_parameter/noise_amount = 0.115
+shader_parameter/feather = 0.049
+shader_parameter/seed = 0.0
+shader_parameter/fiber_strength = 0.55
+shader_parameter/fiber_scale = 120.0
+shader_parameter/rim_color = Color(0, 0, 0, 1)
+shader_parameter/mix_texture = 1.0
+shader_parameter/base = ExtResource("38_7hk0u")
 
 [node name="Main3D" type="Node3D"]
 
@@ -2037,6 +2060,12 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 8.6822
 spot_range = 1.688
 spot_attenuation = 0.24
 spot_angle = 65.64
+
+[node name="HanaYoriDango" type="MeshInstance3D" parent="Static"]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, -4.86375, 1.66976, 8.21565e-15)
+mesh = SubResource("QuadMesh_yiu1m")
+skeleton = NodePath("../NavigationRegion3D")
+surface_material_override/0 = SubResource("ShaderMaterial_1ltbf")
 
 [node name="WallCornerGlow2" parent="Static" instance=ExtResource("34_68mej")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -8)

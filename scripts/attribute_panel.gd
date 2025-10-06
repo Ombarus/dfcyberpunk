@@ -61,6 +61,8 @@ func _process(delta: float) -> void:
 			self.inventoryContainer.remove_child(child_to_delete)
 			child_to_delete.visible = false
 			child_to_delete.queue_free()
+			
+	$HBoxContainer/Info/Name.text = "Name: " + objRef.name
 	
 	if is_entity:
 		var ent := objRef as Entity

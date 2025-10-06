@@ -247,7 +247,7 @@ func GoDropItem(delta : float, param : Dictionary, actionDepth : int) -> int:
 	#  Go to container, transfer from inv to container. if fridge, play more complex anim
 	# If no container
 	#  Drop on floor at cur position
-	var item : Advertisement = param["item"]
+	var item = param["item"]
 	var container : Advertisement = param.get("container", null)
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	var inv : Array = self.Inventory
@@ -264,8 +264,17 @@ func GoDropItem(delta : float, param : Dictionary, actionDepth : int) -> int:
 		self.pushAction("Goto", actionDepth)
 		return Globals.ACTION_STATE.Running
 		
-	if not self.isItemInInv(inv, item) and is_top_of_stack:
-		return Globals.ACTION_STATE.Finished
+	if is_top_of_stack:
+		if item is Advertisement:
+			if not self.isItemInInv(inv, item):
+				return Globals.ACTION_STATE.Finished
+		else:
+			var all_done = true
+			for o in item:
+				if self.isItemInInv(inv, o):
+					all_done = false
+			if all_done:
+				return Globals.ACTION_STATE.Finished
 		
 	#TODO: handle NOT container case (just drop)
 	param["item"] = item
@@ -848,7 +857,7 @@ func Deliver(delta : float, param : Dictionary, actionDepth : int) -> int:
 	
 	var total_needed : int = 0
 	for t in targets:
-		var container := t as Advertisement
+		var container := workplace.get_node(t) as Advertisement
 		var all_items : Array = findAllItemInInv(container.Inventory, plan.SpawnRewardType)
 		total_needed = max_items_per_target - all_items.size()
 	
@@ -886,7 +895,7 @@ func Deliver(delta : float, param : Dictionary, actionDepth : int) -> int:
 		return Globals.ACTION_STATE.Running
 		
 	for t in targets:
-		var container := t as Advertisement
+		var container := workplace.get_node(t) as Advertisement
 		var all_items : Array = findAllItemInInv(container.Inventory, plan.SpawnRewardType)
 		var needed_for_this : int = max_items_per_target - all_items.size()
 		if needed_for_this > 0:
@@ -924,7 +933,7 @@ func WorkAtShop(delta : float, param : Dictionary, actionDepth : int) -> int:
 			self.pushAction("Goto", actionDepth)
 			
 	var cur_hour = self.timeSystem.CurDateTime["hour"]
-	if cur_hour > plan.EndTime:
+	if cur_hour > plan.EndHour:
 		return Globals.ACTION_STATE.Finished
 	else:
 		return Globals.ACTION_STATE.Running
