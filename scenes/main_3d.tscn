@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://8qm8xqhjvjw5"]
+[gd_scene load_steps=57 format=3 uid="uid://8qm8xqhjvjw5"]
 
 [ext_resource type="PackedScene" uid="uid://ckkkaxossb5me" path="res://data/models/RoadCenter.glb" id="1_3innq"]
 [ext_resource type="Script" path="res://scripts/world_clock.gd" id="1_ol7km"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://dd58fgth8ulcm" path="res://data/models/Cabinet.glb" id="11_yxcl1"]
 [ext_resource type="PackedScene" uid="uid://jlqi2unu5r2u" path="res://data/models/FoldingChair.glb" id="14_rquro"]
 [ext_resource type="PackedScene" uid="uid://cg1wno6e4buvm" path="res://scenes/furnitures/dining_table.tscn" id="14_vxtuh"]
+[ext_resource type="Resource" uid="uid://c8welbjb3gx5" path="res://data/plans/GoSleepInBed.tres" id="17_jwjil"]
 [ext_resource type="Script" path="res://scripts/advertisement.gd" id="18_h2cyc"]
 [ext_resource type="PackedScene" uid="uid://b8d03nd1hnoh5" path="res://data/models/Bed.glb" id="18_w4c5x"]
 [ext_resource type="Script" path="res://scripts/actionplan.gd" id="19_eqqpn"]
@@ -34,15 +35,18 @@
 [ext_resource type="PackedScene" uid="uid://id35hle7aogd" path="res://data/models/BarCounterCorner.glb" id="25_xsb8j"]
 [ext_resource type="PackedScene" uid="uid://c2hbs3xwqvwe3" path="res://scenes/hud.tscn" id="27_gevlh"]
 [ext_resource type="PackedScene" uid="uid://bvkq8lvbuo3qx" path="res://scenes/furnitures/bar_counter.tscn" id="28_xfj8p"]
-[ext_resource type="PackedScene" uid="uid://c3nn4sy70lp2v" path="res://scenes/foodstuff3d.tscn" id="32_47l66"]
+[ext_resource type="Resource" uid="uid://t5hyfuswvklx" path="res://data/plans/WorkAtShop.tres" id="29_xbe48"]
+[ext_resource type="Resource" uid="uid://dt8ry2d6mjb41" path="res://data/plans/WorkAtBar.tres" id="32_vmu4w"]
 [ext_resource type="PackedScene" uid="uid://dtqtrmwnsnfos" path="res://data/models/WoodPalette.glb" id="33_86e6f"]
 [ext_resource type="PackedScene" uid="uid://dsgl0bqyjknb0" path="res://data/models/CardboardBox.glb" id="34_3ly04"]
 [ext_resource type="PackedScene" uid="uid://dl8g3bvfcpxj6" path="res://data/models/WallCornerGlow.glb" id="34_68mej"]
 [ext_resource type="PackedScene" uid="uid://do51rp00ju53t" path="res://scenes/peep.tscn" id="35_8tejs"]
+[ext_resource type="Resource" uid="uid://dflpomvuewv38" path="res://data/plans/EatAtBar.tres" id="36_s6x1v"]
 [ext_resource type="PackedScene" uid="uid://cpih5xw0mdmnv" path="res://data/models/BeamRust.glb" id="37_bxe1p"]
 [ext_resource type="Shader" path="res://data/textures/signs.gdshader" id="37_n86uy"]
 [ext_resource type="PackedScene" uid="uid://bxf2irwexmp4l" path="res://scenes/peep2.tscn" id="37_r45pj"]
 [ext_resource type="Texture2D" uid="uid://blvkum6gok5tw" path="res://data/textures/signs.png" id="38_7hk0u"]
+[ext_resource type="Resource" uid="uid://bljsbake813dw" path="res://data/plans/Deliver.tres" id="40_ryype"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hd65l"]
 radius = 5.0
@@ -94,79 +98,6 @@ agent_radius = 0.3
 agent_max_climb = 0.3
 agent_max_slope = 55.0
 
-[sub_resource type="Resource" id="Resource_1xeal"]
-script = ExtResource("19_eqqpn")
-ActionName = "GoSleepInBed"
-EnergyReward = 0.8
-SatietyReward = 0.0
-SatisfactionReward = 0.1
-RichnessReward = 0.0
-SpawnRewardType = 0
-SpawnRewardCount = 1
-StartHour = -1
-EndHour = -1
-
-[sub_resource type="Resource" id="Resource_25o7w"]
-script = ExtResource("19_eqqpn")
-ActionName = "WorkAtShop"
-EnergyReward = 0.0
-SatietyReward = 0.0
-SatisfactionReward = 0.7
-RichnessReward = 0.0002
-SpawnRewardType = 0
-SpawnRewardCount = 1
-StartHour = 9
-EndHour = 18
-
-[sub_resource type="Resource" id="Resource_gasln"]
-script = ExtResource("19_eqqpn")
-ActionName = "WorkAtBar"
-EnergyReward = 0.0
-SatietyReward = 0.0
-SatisfactionReward = 0.5
-RichnessReward = 0.0004
-SpawnRewardType = 0
-SpawnRewardCount = 1
-StartHour = 16
-EndHour = 23
-
-[sub_resource type="Resource" id="Resource_ffpxq"]
-script = ExtResource("19_eqqpn")
-ActionName = "EatAtbar"
-EnergyReward = 0.1
-SatietyReward = 0.7
-SatisfactionReward = 0.2
-RichnessReward = -5e-05
-SpawnRewardType = 0
-SpawnRewardCount = 1
-StartHour = 17
-EndHour = 23
-
-[sub_resource type="Resource" id="Resource_pgybj"]
-script = ExtResource("19_eqqpn")
-ActionName = "EatAtbar"
-EnergyReward = 0.1
-SatietyReward = 0.7
-SatisfactionReward = 0.2
-RichnessReward = -5e-05
-SpawnRewardType = 0
-SpawnRewardCount = 1
-StartHour = 17
-EndHour = 23
-
-[sub_resource type="Resource" id="Resource_7qhr0"]
-script = ExtResource("19_eqqpn")
-ActionName = "Deliver"
-EnergyReward = 0.0
-SatietyReward = 0.0
-SatisfactionReward = 0.7
-RichnessReward = 0.0004
-SpawnReward = ExtResource("32_47l66")
-SpawnRewardType = 2
-SpawnRewardCount = 10
-StartHour = 6
-EndHour = 9
-
 [sub_resource type="QuadMesh" id="QuadMesh_yiu1m"]
 size = Vector2(1, 0.3)
 
@@ -194,7 +125,6 @@ shader_parameter/base = ExtResource("38_7hk0u")
 
 [node name="WorldClock" type="Node" parent="Systems"]
 script = ExtResource("1_ol7km")
-DayLengthSec = 300.0
 
 [node name="LookAt" type="Node3D" parent="."]
 
@@ -800,7 +730,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.105277, 0)
 script = ExtResource("18_h2cyc")
 Type = 0
 BelongTo = NodePath("../../../../../Dynamic/Peep1")
-ActionPlans = Array[ExtResource("19_eqqpn")]([SubResource("Resource_1xeal")])
+ActionPlans = Array[ExtResource("19_eqqpn")]([ExtResource("17_jwjil")])
 
 [node name="CounterStove2" parent="Static/NavigationRegion3D/Appartment1/Furniture" instance=ExtResource("8_gcuqx")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -10, 0, -7)
@@ -980,7 +910,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.105277, 0)
 script = ExtResource("18_h2cyc")
 Type = 0
 BelongTo = NodePath("../../../../../Dynamic/Peep2")
-ActionPlans = Array[ExtResource("19_eqqpn")]([SubResource("Resource_1xeal")])
+ActionPlans = Array[ExtResource("19_eqqpn")]([ExtResource("17_jwjil")])
 
 [node name="CounterStove2" parent="Static/NavigationRegion3D/Appartment2/Furniture" instance=ExtResource("8_gcuqx")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -10, 0, -7)
@@ -1148,7 +1078,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.105277, 0)
 script = ExtResource("18_h2cyc")
 Type = 0
 BelongTo = NodePath("../../../../../Dynamic/Peep3")
-ActionPlans = Array[ExtResource("19_eqqpn")]([SubResource("Resource_1xeal")])
+ActionPlans = Array[ExtResource("19_eqqpn")]([ExtResource("17_jwjil")])
 
 [node name="CounterStove2" parent="Static/NavigationRegion3D/Appartment3/Furniture" instance=ExtResource("8_gcuqx")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -10, 0, -7)
@@ -1324,7 +1254,7 @@ script = null
 [node name="MarketStall8" parent="Static/NavigationRegion3D/Market/Furniture" node_paths=PackedStringArray("BelongTo") instance=ExtResource("20_v4mfw")]
 transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -9.73586, 0, -4.06848)
 BelongTo = NodePath("../../../../../Dynamic/Peep1")
-ActionPlans = Array[ExtResource("19_eqqpn")]([SubResource("Resource_25o7w")])
+ActionPlans = Array[ExtResource("19_eqqpn")]([ExtResource("29_xbe48")])
 
 [node name="MarketStall10" parent="Static/NavigationRegion3D/Market/Furniture" instance=ExtResource("20_v4mfw")]
 transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -11.7359, 0, -4.06848)
@@ -1426,7 +1356,7 @@ transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -9.48581
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -9.48581, 0, -5)
 script = ExtResource("18_h2cyc")
 BelongTo = NodePath("../../../../../Dynamic/Peep3")
-ActionPlans = Array[ExtResource("19_eqqpn")]([SubResource("Resource_gasln")])
+ActionPlans = Array[ExtResource("19_eqqpn")]([ExtResource("32_vmu4w")])
 
 [node name="CounterTop10" parent="Static/NavigationRegion3D/Bar/Furniture" instance=ExtResource("9_ldhes")]
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -9.48581, 0, -4)
@@ -1468,13 +1398,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.24774, 0, -7)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.00737, 0.158913, -3)
 script = ExtResource("18_h2cyc")
 Type = 7
-ActionPlans = Array[ExtResource("19_eqqpn")]([SubResource("Resource_ffpxq")])
+ActionPlans = Array[ExtResource("19_eqqpn")]([ExtResource("36_s6x1v")])
 
 [node name="BarStool3" parent="Static/NavigationRegion3D/Bar/Furniture" instance=ExtResource("21_u8k05")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.00737, 0.158913, -4)
 script = ExtResource("18_h2cyc")
 Type = 7
-ActionPlans = Array[ExtResource("19_eqqpn")]([SubResource("Resource_pgybj")])
+ActionPlans = Array[ExtResource("19_eqqpn")]([ExtResource("36_s6x1v")])
 
 [node name="BarStool4" parent="Static/NavigationRegion3D/Bar/Furniture" instance=ExtResource("21_u8k05")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.00737, 0.158913, -5)
@@ -1591,7 +1521,7 @@ transform = Transform3D(0.401082, 0, 0.916042, 0, 1, 0, -0.916042, 0, 0.401082, 
 transform = Transform3D(0.894683, 0, -0.446702, 0, 1, 0, 0.446702, 0, 0.894683, -8.99707, 0.197635, -15.7181)
 script = ExtResource("18_h2cyc")
 BelongTo = NodePath("../../../../Dynamic/Peep2")
-ActionPlans = Array[ExtResource("19_eqqpn")]([SubResource("Resource_7qhr0")])
+ActionPlans = Array[ExtResource("19_eqqpn")]([ExtResource("40_ryype")])
 AdMetaData = {
 "targets": [NodePath("../../Market/Furniture/MarketStall5"), NodePath("../../Bar/Furniture/FridgeBar")]
 }

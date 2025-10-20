@@ -9,15 +9,15 @@ func _ready() -> void:
 	_eat_me = ActionPlan.new()
 	_eat_me.ActionName = "EatSelectedFood"
 	_eat_me.EnergyReward = 0.0
-	_eat_me.SatietyReward = 0.6
-	_eat_me.SatisfactionReward = 0.05
+	_eat_me.SatietyReward = Globals.REWARD_BASE[Globals.NEEDS.Satiety][Globals.GRADE.Big]
+	_eat_me.SatisfactionReward = Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Small]
 	_eat_me.RichnessReward = 0.0
 	
 	_put_in_fridge = ActionPlan.new()
 	_put_in_fridge.ActionName = "GoPutFoodInFridge"
 	_put_in_fridge.EnergyReward = 0.0
 	_put_in_fridge.SatietyReward = 0.0
-	_put_in_fridge.SatisfactionReward = 0.5
+	_put_in_fridge.SatisfactionReward = 0.2 # Fake?
 	_put_in_fridge.RichnessReward = 0.0
 	
 	self.ActionPlans = [

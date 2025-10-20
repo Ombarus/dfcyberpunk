@@ -35,51 +35,79 @@ var ActualReward := [
 		"Action": "Sleep",
 		"State": Globals.ACTION_STATE.Running,
 		# If running, need is /sec, if not then it's given whole on state transition
-		"Rewards": {Globals.NEEDS.Energy: 0.1}
+		"Rewards": {Globals.NEEDS.Energy: Globals.REWARD_BASE[Globals.NEEDS.Energy][Globals.GRADE.VBig] / Globals.DAY_LENGTH_SEC}
 	},
 	{
-		"Action": "Sleep",
+		"Action": "GoSleepInBed",
 		"State": Globals.ACTION_STATE.Finished,
-		"Rewards": {Globals.NEEDS.Satisfaction: 0.1}
+		"Rewards": {Globals.NEEDS.Satisfaction: Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Small]}
 	},
 	{
 		"Action": "Eat",
 		"State": Globals.ACTION_STATE.Running,
-		"Rewards": {Globals.NEEDS.Satiety: 0.15} # Steak: 0.6 over 4 seconds
+		"Rewards": {Globals.NEEDS.Satiety: Globals.REWARD_BASE[Globals.NEEDS.Satiety][Globals.GRADE.Big] / 4.0} # Steak: Big over 4 seconds (currently hardcoded)
 	},
 	{
 		"Action": "Eat",
 		"State": Globals.ACTION_STATE.Finished,
-		"Rewards": {Globals.NEEDS.Satisfaction: 0.05}
+		"Rewards": {Globals.NEEDS.Satisfaction: Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Small]}
+	},
+	{
+		"Action": "EatAtBar",
+		"State": Globals.ACTION_STATE.Finished,
+		"Rewards": {Globals.NEEDS.Energy: Globals.REWARD_BASE[Globals.NEEDS.Energy][Globals.GRADE.VSmall]}
 	},
 	{
 		"Action": "WalkRandomly",
 		"State": Globals.ACTION_STATE.Finished,
-		"Rewards": {Globals.NEEDS.Satisfaction: 0.04}
+		"Rewards": {Globals.NEEDS.Satisfaction: Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Small]}
 	},
 	{
 		"Action": "RefillFridge2",
 		"State": Globals.ACTION_STATE.Finished,
-		"Rewards": {Globals.NEEDS.Satisfaction: 0.06}
+		"Rewards": {
+			Globals.NEEDS.Satisfaction: Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Small],
+			Globals.NEEDS.Richness: -Globals.REWARD_BASE[Globals.NEEDS.Richness][Globals.GRADE.VSmall]
+		}
 	},
 	{
 		"Action": "CookInKitchen2",
 		"State": Globals.ACTION_STATE.Finished,
-		"Rewards": {Globals.NEEDS.Satisfaction: 0.05}
+		"Rewards": {Globals.NEEDS.Satisfaction: Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Small]}
 	},
 	{
 		"Action": "Default",
 		"State": Globals.ACTION_STATE.Running,
-		"Rewards": {Globals.NEEDS.Satiety: -0.008, Globals.NEEDS.Energy: -0.006, Globals.NEEDS.Satisfaction: -0.005} # consider 1 day = 100 seconds, 0.01 means 1 to 0 in 100 seconds
+		# Satiety 0.72 / day, Energy 0.54 / day, Satisfaction 0.45 / day
+		"Rewards": {Globals.NEEDS.Satiety: -0.0008, Globals.NEEDS.Energy: -0.0006, Globals.NEEDS.Satisfaction: -0.0005} # consider 1 day = 900 seconds, 0.00111 means 1 to 0 in 100 seconds
 	},
 	{
 		"Action": "SleepOnFloor",
 		"State": Globals.ACTION_STATE.Finished,
-		"Rewards": {Globals.NEEDS.Satisfaction: -0.2}
+		"Rewards": {Globals.NEEDS.Satisfaction: -Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Medium]}
 	},
 	{
 		"Action": "WorkAtBar",
 		"State": Globals.ACTION_STATE.Finished,
-		"Rewards": {Globals.NEEDS.Satisfaction: 0.4, Globals.NEEDS.Richness: 0.00015}
+		"Rewards": {
+			Globals.NEEDS.Satisfaction: Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Big],
+			Globals.NEEDS.Richness: Globals.REWARD_BASE[Globals.NEEDS.Richness][Globals.GRADE.Small]
+		}
+	},
+	{
+		"Action": "WorkAtShop",
+		"State": Globals.ACTION_STATE.Finished,
+		"Rewards": {
+			Globals.NEEDS.Satisfaction: Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Big],
+			Globals.NEEDS.Richness: Globals.REWARD_BASE[Globals.NEEDS.Richness][Globals.GRADE.Small]
+		}
+	},
+	{
+		"Action": "Deliver",
+		"State": Globals.ACTION_STATE.Finished,
+		"Rewards": {
+			Globals.NEEDS.Satisfaction: Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Big],
+			Globals.NEEDS.Richness: Globals.REWARD_BASE[Globals.NEEDS.Richness][Globals.GRADE.Small] * 2.0 # Currently 2 delivery hardcoded
+		}
 	}
 ]

@@ -25,7 +25,7 @@ func _ready() -> void:
 	steak_recipe.ActionName = "CookInKitchen2"
 	steak_recipe.EnergyReward = 0.00
 	steak_recipe.SatietyReward = 0.18 # fake reward to encourage NPC to cook when hungry
-	steak_recipe.SatisfactionReward = 0.05
+	steak_recipe.SatisfactionReward = Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Small]
 	steak_recipe.RichnessReward = 0.0
 	steak_recipe.SpawnReward = preload("res://scenes/food_steak3d.tscn")
 	steak_recipe.SpawnRewardType = Globals.AD_TYPE.Food
@@ -34,8 +34,8 @@ func _ready() -> void:
 	refill_fridge.ActionName = "RefillFridge2"
 	refill_fridge.EnergyReward = 0.00
 	refill_fridge.SatietyReward = 0.01
-	refill_fridge.SatisfactionReward = 0.06
-	refill_fridge.RichnessReward = -0.00005 # 50$ of 1M
+	refill_fridge.SatisfactionReward = Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Small]
+	refill_fridge.RichnessReward = -Globals.REWARD_BASE[Globals.NEEDS.Richness][Globals.GRADE.VSmall]
 	refill_fridge.SpawnReward = preload("res://scenes/foodstuff3d.tscn")
 	refill_fridge.SpawnRewardType = Globals.AD_TYPE.Foodstuff
 	refill_fridge.SpawnRewardCount = 5

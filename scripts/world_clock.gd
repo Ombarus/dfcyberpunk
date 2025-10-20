@@ -1,11 +1,9 @@
 extends Node
 class_name WorldClock
 
-const SECOND_IN_DAY : int = 86400
-const SECOND_IN_HOUR : int = 3600
-const SECOND_IN_MINUTE : int = 60
-
-@export var DayLengthSec : float = 100.0
+const SECOND_IN_DAY : float = 86400.0
+const SECOND_IN_HOUR : float = 3600.0
+const SECOND_IN_MINUTE : float = 60.0
 
 @export var CurDateTime := {
 	"year": 2035,
@@ -27,7 +25,7 @@ func _process(delta: float) -> void:
 	# depending on the FPS, even if time moves faster in-game, it's possible one frame is
 	# less than "one game second" so we need to keep track of fractions even if unixTime
 	# is only second precision
-	var world_sec : float = delta * (86400.0 / DayLengthSec) + frac
+	var world_sec : float = delta * (SECOND_IN_DAY / Globals.DAY_LENGTH_SEC) + frac
 	var whole_sec = floor(world_sec)
 	frac = world_sec - whole_sec
 	self.unixTime += whole_sec
