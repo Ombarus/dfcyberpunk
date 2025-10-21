@@ -1,3 +1,5 @@
+Behavior Trees (Unity?) https://youtu.be/PuLuwzgYB4g?si=GW89VsARHsRXArKh (Probably won't use but has some good concepts like parallel tasks, conditions, failures, etc.)
+
 Video about Evolution of Empires. Could be applied to MegaCorpo role in my game? https://youtu.be/1p3tMNbFdCs?si=WC0MuaIHslsxAYyn
 
 # GTA+DF+Shadowrun

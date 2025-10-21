@@ -1252,7 +1252,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.735
 script = null
 
 [node name="MarketStall8" parent="Static/NavigationRegion3D/Market/Furniture" node_paths=PackedStringArray("BelongTo") instance=ExtResource("20_v4mfw")]
-transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -9.73586, 0, -4.06848)
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -9.73428, 0.00262523, -4.06772)
 BelongTo = NodePath("../../../../../Dynamic/Peep1")
 ActionPlans = Array[ExtResource("19_eqqpn")]([ExtResource("29_xbe48")])
 

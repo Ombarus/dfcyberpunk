@@ -17,7 +17,7 @@ func _ready() -> void:
 	_put_in_fridge.ActionName = "GoPutFoodInFridge"
 	_put_in_fridge.EnergyReward = 0.0
 	_put_in_fridge.SatietyReward = 0.0
-	_put_in_fridge.SatisfactionReward = 0.2 # Fake?
+	_put_in_fridge.SatisfactionReward = Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Small] # Fake?
 	_put_in_fridge.RichnessReward = 0.0
 	
 	self.ActionPlans = [

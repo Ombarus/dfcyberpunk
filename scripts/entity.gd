@@ -126,22 +126,28 @@ func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 		
 	var random_goto_plan := ActionPlan.new()
 	random_goto_plan.ActionName = "WalkRandomly"
-	random_goto_plan.EnergyReward = -0.05
+	random_goto_plan.EnergyReward = 0.0
 	random_goto_plan.SatietyReward = 0.0
-	random_goto_plan.SatisfactionReward = 0.02 # Slightly higher than making food when we have a lot of food
+	random_goto_plan.SatisfactionReward = Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.VSmall]
 	
 	var fallback_sleep_plan := ActionPlan.new()
 	fallback_sleep_plan.ActionName = "SleepOnFloor"
-	fallback_sleep_plan.EnergyReward = 0.01
+	fallback_sleep_plan.EnergyReward = Globals.REWARD_BASE[Globals.NEEDS.Energy][Globals.GRADE.VSmall] # Slightly faked to lower priority
 	random_goto_plan.SatietyReward = 0.0
-	fallback_sleep_plan.SatisfactionReward = -0.2
+	fallback_sleep_plan.SatisfactionReward = -Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Big]
 	
 	var wait_plan := ActionPlan.new()
 	wait_plan.ActionName = "LoadWait"
-	wait_plan.EnergyReward = 0.0
-	wait_plan.SatietyReward = 0.0
-	wait_plan.SatisfactionReward = 0.1
-		
+	wait_plan.EnergyReward = 0.0000001
+	wait_plan.SatietyReward = 0.0000001
+	wait_plan.SatisfactionReward = 0.0000001
+	
+	# Fallback if absolutely nothing to do and all needs are fullfilled. Trying to avoid getting in a weird state
+	var idle_plan := ActionPlan.new()
+	idle_plan.ActionName = "IdleWait"
+	idle_plan.EnergyReward = 0.0000001
+	idle_plan.SatietyReward = 0.0000001
+	idle_plan.SatisfactionReward = 0.0000001
 	
 	# Something like : [{name:"plan1", ad:<node>, score:123}, ...]
 	var collected_plans := []
@@ -150,7 +156,7 @@ func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 		collected_plans.append({
 			"plan": wait_plan,
 			"ad": self,
-			"score": Needs.GetRewardScoreFromPlan(random_goto_plan)
+			"score": Needs.GetRewardScoreFromPlan(wait_plan)
 		})
 	else:
 		collected_plans.append({
@@ -162,6 +168,12 @@ func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 			"plan": fallback_sleep_plan,
 			"ad": self,
 			"score": Needs.GetRewardScoreFromPlan(fallback_sleep_plan)
+		})
+		# Make sure we always have something to do (walkRandomly reward is sometime too high?)
+		collected_plans.append({
+			"plan": idle_plan,
+			"ad": self,
+			"score": Needs.GetRewardScoreFromPlan(idle_plan)
 		})
 		
 		for n in get_tree().get_nodes_in_group(Globals.AD_GROUP):
@@ -453,6 +465,20 @@ func Goto(delta : float, param : Dictionary, actionDepth : int) -> int:
 		#self.rotate_y(deg_to_rad(180.0))
 		self.velocity = Vector3(dir.x, self.velocity.y, dir.z)
 
+	return Globals.ACTION_STATE.Running
+
+func IdleWait(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	var wait_left : float = param.get("wait")
+	if is_top_of_stack and wait_left <= 0.0:
+		param.erase("wait")
+		return Globals.ACTION_STATE.Finished
+		
+	if is_top_of_stack:
+		param["wait"] = 5.0
+		
+	self.pushAction("Wait", actionDepth)
+	
 	return Globals.ACTION_STATE.Running
 
 func LoadWait(delta : float, param : Dictionary, actionDepth : int) -> int:
@@ -859,7 +885,7 @@ func Deliver(delta : float, param : Dictionary, actionDepth : int) -> int:
 	for t in targets:
 		var container := workplace.get_node(t) as Advertisement
 		var all_items : Array = findAllItemInInv(container.Inventory, plan.SpawnRewardType)
-		total_needed = max_items_per_target - all_items.size()
+		total_needed += max_items_per_target - all_items.size()
 	
 	var current_in_inv : Array = findAllItemInInv(self.Inventory, plan.SpawnRewardType)
 	if current_in_inv.size() < total_needed:
@@ -928,8 +954,8 @@ func WorkAtShop(delta : float, param : Dictionary, actionDepth : int) -> int:
 		var workplace : Node = param.get("plan_ad", null).get_parent()
 		var rand_node : Node3D = workplace.get_child(randi_range(0, workplace.get_child_count()))
 		if rand_node != null:
-			param["target"] = rand_node.position
-			param["precision"] = 0.5
+			param["target"] = rand_node.global_position
+			param["precision"] = 1.0
 			self.pushAction("Goto", actionDepth)
 			
 	var cur_hour = self.timeSystem.CurDateTime["hour"]

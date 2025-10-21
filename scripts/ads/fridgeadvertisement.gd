@@ -24,7 +24,7 @@ func _ready() -> void:
 	var steak_recipe := ActionPlan.new()
 	steak_recipe.ActionName = "CookInKitchen2"
 	steak_recipe.EnergyReward = 0.00
-	steak_recipe.SatietyReward = 0.18 # fake reward to encourage NPC to cook when hungry
+	steak_recipe.SatietyReward = 0.01 # fake reward to encourage NPC to cook when hungry
 	steak_recipe.SatisfactionReward = Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Small]
 	steak_recipe.RichnessReward = 0.0
 	steak_recipe.SpawnReward = preload("res://scenes/food_steak3d.tscn")

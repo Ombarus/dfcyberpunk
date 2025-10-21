@@ -1,0 +1,54 @@
+https://youtu.be/PuLuwzgYB4g?si=GW89VsARHsRXArKh
+
+
+- FIX: Delivery doesn't do multiple stop like it's supposed to
+- FIX? If the AI has nothing better to do it might re-trigger the same action even though it's already "done"... finishing it instantly and restarting every frame. Can I stop the AI from re-running a "already" finished task because it has nothing better to do?
+- FIX: WorkInShop doesn't seem to select the right random path location
+- DESIGN: ProcGen (Maybe prefab buildings "grid" placed randomly?) (Need to research how to make it look more organic, maybe "neighborhood" attributes to create "biomes"?)
+- Allow Default Action to jump to a new action if score is more than x% of current action
+- Design new Jobs
+  ~ Cook in a restaurant kitchen (Basic Boilerplate, need expension)
+  ~ Waiter in a restaurant (Basic Boilerplate, need expension)
+  - Doc (AI can be "sick"?) (cyberdoc, AI might need implant for work?)
+  - Security guard (might require cyberware implants?)
+- Bring back Skill system from initial proto (ie: AI can only perform certain plans if it has the skill)
+  - Cooking skill
+  - Driving skill
+  - Medical skill
+  - Electronic skill (for cyberdoc and maybe matrix stuff later?)
+- DESIGN: I have Mutliple Floors and a prototype transparency but it doesn't work great.
+- Implement vision and memory (IA should see ads and remember them (this will limit the scope of ActionPlans to consider))
+- MegaCorpo?
+  - Each MegaCorpo produces certain essentials
+    - Medicine
+    - Weapons
+    - Furniture
+    - Security
+  - Each MegaCorpo has an ecosystem
+    - Own large buildings
+    - Own Security forces (need employee)
+    - Has a single CEO
+    - Has Scientist (valuable resource for shadowruns)
+- Can I standardize coefficients (player base + item bonus + moods + environ + tool quality + exp + ???) (ex: fast sleeper in a good bed in a lavish bedroom in a quiet neibhorhood)
+  - Can later tie into goals and dreams (a person with insomnia would invest in good pillows and bedroom furnitures to gain better bonuses)
+- DESIGN: Save/Load
+  - Need to get rid of Nodes Ref in data
+
+
+==============================================
+============= DONE ===========================
+==============================================
+
+X Delivery Driver (deliver food from restaurant but also deliver foodstuff to market, medecine and electronics to doc and cyberdocs?)
+X Add camera zoom
+X Test Second floor and design transparency (ie: walls and ceiling should disapear when looking inside a building)
+X Generic way to apply rewards? How do I distinguish between reward-over-time and instant? (ie: cooking takes energy over several minutes but satisfaction is applied at the end in one shot)
+X Fix multiple foodstuff transfer crash
+~ Improve "Item finding". When looking for a table it should be one in your appartment (owned?). (Using "Owned" and Hiearchy for now (look at sibling to find "closeby" objects first))
+X Need a way to interrupt action with higher prio stuff? (like stop going somewhere if you're too hungry)
+	X All Actions in the stack get re-evaluated every frame. This allow any action to break and do something else (In that case, the whole stack get cut and reset)
+X Explore inter-entity interactions (ex: using item from kitchen to make food)
+	X Have fridge that provide recipes for player to make. Need to dig deeper into how entities update themselves and share more information
+		X Advertisement provide actionplan, but what about other important properties (like how much a job pays, what ingredients are necessary for a recipe, etc.)
+X Develop inventory (is inventory an entity? can it take actions? (rot?) how do npc interact with it?)
+	X For now, inventory contains Nodes so I can access propriety like position, export vars, etc.

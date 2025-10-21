@@ -109,5 +109,12 @@ var ActualReward := [
 			Globals.NEEDS.Satisfaction: Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Big],
 			Globals.NEEDS.Richness: Globals.REWARD_BASE[Globals.NEEDS.Richness][Globals.GRADE.Small] * 2.0 # Currently 2 delivery hardcoded
 		}
+	},
+	{
+		"Action": "WalkRandomly",
+		"State": Globals.ACTION_STATE.Running,
+		"Rewards": {
+			Globals.NEEDS.Satisfaction: Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.VSmall] / 20.0 # arbitrary VSmall reward every 20 seconds of walking (~32min gametime?)
+		}
 	}
 ]
