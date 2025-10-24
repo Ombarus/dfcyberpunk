@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://8qm8xqhjvjw5"]
+[gd_scene load_steps=60 format=3 uid="uid://8qm8xqhjvjw5"]
 
 [ext_resource type="PackedScene" uid="uid://ckkkaxossb5me" path="res://data/models/RoadCenter.glb" id="1_3innq"]
 [ext_resource type="Script" path="res://scripts/world_clock.gd" id="1_ol7km"]
@@ -48,6 +48,7 @@
 [ext_resource type="PackedScene" uid="uid://bxf2irwexmp4l" path="res://scenes/peep2.tscn" id="37_r45pj"]
 [ext_resource type="Texture2D" uid="uid://blvkum6gok5tw" path="res://data/textures/signs.png" id="38_7hk0u"]
 [ext_resource type="Resource" uid="uid://bljsbake813dw" path="res://data/plans/Deliver.tres" id="40_ryype"]
+[ext_resource type="PackedScene" uid="uid://c3nn4sy70lp2v" path="res://scenes/foodstuff3d.tscn" id="40_yotxp"]
 [ext_resource type="PackedScene" uid="uid://cq5toniusvnen" path="res://data/models/Lampost.glb" id="41_87j0d"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hd65l"]
@@ -127,6 +128,14 @@ shader_parameter/base = ExtResource("38_7hk0u")
 
 [node name="WorldClock" type="Node" parent="Systems"]
 script = ExtResource("1_ol7km")
+CurDateTime = {
+"day": 1,
+"hour": 17,
+"minute": 0,
+"month": 1,
+"second": 0,
+"year": 2035
+}
 
 [node name="LookAt" type="Node3D" parent="."]
 
@@ -596,6 +605,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75955, 6, 0)
 
 [node name="BeamRust13" parent="Static/NavigationRegion3D/Appartment1" instance=ExtResource("37_bxe1p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75955, 6, 2)
+
+[node name="BeamRust21" parent="Static/NavigationRegion3D/Appartment1" instance=ExtResource("37_bxe1p")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.58174, 6, 4)
+
+[node name="BeamRust22" parent="Static/NavigationRegion3D/Appartment1" instance=ExtResource("37_bxe1p")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6.54821, 6, 4)
 
 [node name="WallPlain2" parent="Static/NavigationRegion3D/Appartment1" instance=ExtResource("5_86ea2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -2)
@@ -1382,11 +1397,13 @@ transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -9.48581
 [node name="CounterTop8" parent="Static/NavigationRegion3D/Bar/Furniture" instance=ExtResource("9_ldhes")]
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -9.48581, 0, -6)
 
-[node name="CounterTop9" parent="Static/NavigationRegion3D/Bar/Furniture" node_paths=PackedStringArray("BelongTo") instance=ExtResource("9_ldhes")]
+[node name="CountertopReal" parent="Static/NavigationRegion3D/Bar/Furniture" node_paths=PackedStringArray("BelongTo") instance=ExtResource("11_xrdbt")]
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -9.48581, 0, -5)
-script = ExtResource("18_h2cyc")
 BelongTo = NodePath("../../../../../Dynamic/Peep3")
 ActionPlans = Array[ExtResource("19_eqqpn")]([ExtResource("32_vmu4w")])
+AdMetaData = {
+"targets": [NodePath("../BarCounter7"), NodePath("../BarCounter4")]
+}
 
 [node name="CounterTop10" parent="Static/NavigationRegion3D/Bar/Furniture" instance=ExtResource("9_ldhes")]
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -9.48581, 0, -4)
@@ -1425,13 +1442,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.24774, 0, -6)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.24774, 0, -7)
 
 [node name="BarStool2" parent="Static/NavigationRegion3D/Bar/Furniture" instance=ExtResource("21_u8k05")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.00737, 0.158913, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.00737, 0.158913, -2.7344)
 script = ExtResource("18_h2cyc")
 Type = 7
 ActionPlans = Array[ExtResource("19_eqqpn")]([ExtResource("36_s6x1v")])
 
 [node name="BarStool3" parent="Static/NavigationRegion3D/Bar/Furniture" instance=ExtResource("21_u8k05")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.00737, 0.158913, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.00737, 0.158913, -3.7344)
 script = ExtResource("18_h2cyc")
 Type = 7
 ActionPlans = Array[ExtResource("19_eqqpn")]([ExtResource("36_s6x1v")])
@@ -1445,9 +1462,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.248, 0, -2)
 [node name="FridgeBar" parent="Static/NavigationRegion3D/Bar/Furniture" instance=ExtResource("21_rqupk")]
 transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, -9.36003, 0, -8)
 script = ExtResource("18_h2cyc")
-AdMetaData = {
-"targets": [NodePath("."), null]
-}
+
+[node name="Foodstuff3D" parent="Static/NavigationRegion3D/Bar/Furniture/FridgeBar" instance=ExtResource("40_yotxp")]
+transform = Transform3D(-1, 0, -8.74232e-08, 0, 1, 0, 8.74232e-08, 0, -1, 0.683561, 0.0131083, 0.570921)
+visible = false
+
+[node name="Foodstuff3D2" parent="Static/NavigationRegion3D/Bar/Furniture/FridgeBar" instance=ExtResource("40_yotxp")]
+transform = Transform3D(-1, 0, -8.74232e-08, 0, 1, 0, 8.74232e-08, 0, -1, 0.683561, 0.0131083, 0.570921)
+visible = false
+
+[node name="Foodstuff3D3" parent="Static/NavigationRegion3D/Bar/Furniture/FridgeBar" instance=ExtResource("40_yotxp")]
+transform = Transform3D(-1, 0, -8.74232e-08, 0, 1, 0, 8.74232e-08, 0, -1, 0.683561, 0.0131083, 0.570921)
+visible = false
 
 [node name="Warehouse" type="Node3D" parent="Static/NavigationRegion3D"]
 
@@ -1563,7 +1589,7 @@ transform = Transform3D(0.894683, 0, -0.446702, 0, 1, 0, 0.446702, 0, 0.894683, 
 transform = Transform3D(0.894683, 0, -0.446702, 0, 1, 0, 0.446702, 0, 0.894683, -9.52924, 0.197635, -17.1384)
 
 [node name="CardboardBox21" parent="Static/NavigationRegion3D/Warehouse" instance=ExtResource("34_3ly04")]
-transform = Transform3D(-0.446176, 0, -0.894945, 0, 1, 0, 0.894945, 0, -0.446176, -9.84963, 1.21747, -15.2741)
+transform = Transform3D(-0.446176, 0, -0.894945, 0, 1, 0, 0.894945, 0, -0.446176, -9.84425, 1.21747, -15.2833)
 
 [node name="WoodPalette6" parent="Static/NavigationRegion3D/Warehouse" instance=ExtResource("33_86e6f")]
 transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -13.4048, 0.0131073, -17.5357)

@@ -558,7 +558,7 @@ func Sleep(delta : float, param : Dictionary, actionDepth : int) -> int:
 func CookInKitchen2(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var plan : ActionPlan = param.get("current_plan", null)
 	var fridge : Advertisement = param.get("plan_ad", null)
-	var kitchen : Advertisement = self.getFirstOf(Globals.AD_TYPE.Kitchen)
+	var kitchen : Advertisement = self.getFirstOfTree(Globals.AD_TYPE.Kitchen, fridge)
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	var fridge_inv : Array = fridge.Inventory
 	var player_inv : Array = self.Inventory
@@ -844,32 +844,49 @@ func Eat(delta : float, param : Dictionary, actionDepth : int) -> int:
 		table.Inventory = table_inv
 		return Globals.ACTION_STATE.Finished
 		
-func WorkAtBarOld(delta : float, param : Dictionary, actionDepth : int) -> int:
+func WorkAtBar(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	var plan : ActionPlan = param.get("current_plan", null)
 	var workplace : Advertisement = param.get("plan_ad", null)
-	var work_target : Vector3 = self.getClosestInteract(workplace)
+	var fridge : Advertisement = getFirstOfTree(Globals.AD_TYPE.Fridge, workplace, 1)
+	var seatings : Array = workplace.AdMetaData.get("targets", [])
 	
-	if not self.isAtLocation(work_target, 0.5):
-		param["target"] = work_target
-		param["precision"] = 0.5
-		self.pushAction("Goto", actionDepth)
+	if not is_top_of_stack:
 		return Globals.ACTION_STATE.Running
-	
-	var timestruct : Dictionary = self.timeSystem.CurDateTime
-	# outside of work hour, consider it "done"
-	if timestruct["hour"] >= 2 and timestruct["hour"] < 17:
+		
+	var cur_hour = self.timeSystem.CurDateTime["hour"]
+	if cur_hour > plan.EndHour:
 		return Globals.ACTION_STATE.Finished
 	
-	return Globals.ACTION_STATE.Running
+	var prep_food : Advertisement = self.findItemInInv(self.Inventory, Globals.AD_TYPE.Food)
+	if prep_food == null:
+		var steak_recipe := ActionPlan.new()
+		steak_recipe.ActionName = "CookInKitchen2"
+		steak_recipe.SpawnReward = preload("res://scenes/food_steak3d.tscn")
+		steak_recipe.SpawnRewardType = Globals.AD_TYPE.Food
+		param["work_plan"] = plan
+		param["work_ad"] = workplace
+		param["current_plan"] = steak_recipe
+		param["plan_ad"] = fridge
+		self.pushAction("CookInKitchen2", actionDepth)
+		return Globals.ACTION_STATE.Running
+	else:
+		plan = param.get("work_plan", plan)
+		param["current_plan"] = plan
+		workplace = param.get("work_ad", workplace)
+		param["plan_ad"] = workplace
+		param.erase("work_plan")
+		param.erase("work_ad")
 	
-func WorkAtBar(delta : float, param : Dictionary, actionDepth : int) -> int:
+	for s in seatings:
+		var seat := workplace.get_node(s) as Advertisement
+		var food = self.findItemInInv(seat.Inventory, Globals.AD_TYPE.Food)
+		if food == null:
+			param["item"] = prep_food
+			param["container"] = seat
+			self.pushAction("GoDropItem", actionDepth)
+			return Globals.ACTION_STATE.Running
 	
-	# Wait behind bar until work end
-	# If Empty food slot on counter
-	# CookInKitchen2
-	# Put Food on food slot on counter
-	# When work end, delete food from counter?
 	return Globals.ACTION_STATE.Running
 	
 func Deliver(delta : float, param : Dictionary, actionDepth : int) -> int:
@@ -929,10 +946,6 @@ func Deliver(delta : float, param : Dictionary, actionDepth : int) -> int:
 			param["container"] = container
 			self.pushAction("GoDropItem", actionDepth)
 	
-	# Get order origin, destination, type and qantity from params
-	# Go to Origin, transfer quantity to inv
-	# Go to destination, transfer quantity to destination
-	# done
 	return Globals.ACTION_STATE.Running
 	
 func EatAtBar(delta : float, param : Dictionary, actionDepth : int) -> int:
@@ -1027,6 +1040,35 @@ func getFirstOf(t : Globals.AD_TYPE) -> Advertisement:
 		n = n as Advertisement
 		if n and n.BelongTo == null or n.BelongTo == self:
 			return n
+	return null
+	
+func getFirstOfTree(t : Globals.AD_TYPE, root : Node, max_parent : int = 1, orig : Node = null) -> Advertisement:
+	var r_ad := root as Advertisement
+	if r_ad != null and r_ad.Type == t and (r_ad.BelongTo == null or r_ad.BelongTo == self):
+		return r_ad
+		
+	for c in root.get_children():
+		if c == orig:
+			continue
+		var a = c as Advertisement
+		if a != null and a.Type == t and (a.BelongTo == null or a.BelongTo == self):
+			return a
+		if c.get_child_count() > 0:
+			var obj : Advertisement = getFirstOfTree(t, c, 0)
+			if obj != null:
+				return obj
+
+	var prevp : Node = root
+	var p : Node = root.get_parent()
+	var parent_count := 0
+	while p != null and parent_count < max_parent:
+		parent_count += 1
+		var obj : Advertisement = getFirstOfTree(t, p, 0, prevp)
+		if obj != null:
+			return obj
+		prevp = p
+		p = p.get_parent()
+		
 	return null
 	
 func getPlayingAnim(param : Dictionary) -> String:

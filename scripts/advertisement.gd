@@ -49,6 +49,16 @@ func _ready() -> void:
 	self.add_to_group(Globals.AD_GROUP)
 	self.timeSystem = self.get_tree().root.find_child("WorldClock", true, false)
 	
+	# Bit of a hack so I can start with items already in the inventory
+	# Might want to add a boolean to stop this behavior for special cases?
+	for n : Node in self.get_children():
+		var item := n as Advertisement
+		if item == null:
+			continue
+		self.Inventory.push_back(item)
+		item.visible = false
+		item.AdMetaData["container"] = self
+	
 func _exit_tree() -> void:
 	self.remove_from_group(str(self.Type))
 	self.add_to_group(Globals.AD_GROUP)
