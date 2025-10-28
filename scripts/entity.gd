@@ -825,7 +825,9 @@ func EatSelectedFood(delta : float, param : Dictionary, actionDepth : int) -> in
 	return Globals.ACTION_STATE.Finished
 
 func Eat(delta : float, param : Dictionary, actionDepth : int) -> int:
-	var table : Advertisement = self.getFirstOf(Globals.AD_TYPE.Table)
+	var ad : Advertisement = param.get("plan_ad", null)
+	# Normally 1 level, but using 2 just to be safe since this is pretty generic action
+	var table : Advertisement = self.getFirstOfTree(Globals.AD_TYPE.Table, ad, 2)
 	var table_inv : Array = table.Inventory
 	var table_food : Advertisement = self.findItemInInv(table_inv, Globals.AD_TYPE.Food)
 	# TODO: food_left should be determined by the food type
@@ -853,10 +855,6 @@ func WorkAtBar(delta : float, param : Dictionary, actionDepth : int) -> int:
 	
 	if not is_top_of_stack:
 		return Globals.ACTION_STATE.Running
-		
-	var cur_hour = self.timeSystem.CurDateTime["hour"]
-	if cur_hour > plan.EndHour:
-		return Globals.ACTION_STATE.Finished
 	
 	var prep_food : Advertisement = self.findItemInInv(self.Inventory, Globals.AD_TYPE.Food)
 	if prep_food == null:
@@ -877,6 +875,11 @@ func WorkAtBar(delta : float, param : Dictionary, actionDepth : int) -> int:
 		param["plan_ad"] = workplace
 		param.erase("work_plan")
 		param.erase("work_ad")
+	
+	# make sure we restored the WorkAtBar plan before checking EndHour
+	var cur_hour = self.timeSystem.CurDateTime["hour"]
+	if cur_hour > plan.EndHour:
+		return Globals.ACTION_STATE.Finished
 	
 	for s in seatings:
 		var seat := workplace.get_node(s) as Advertisement
@@ -949,14 +952,52 @@ func Deliver(delta : float, param : Dictionary, actionDepth : int) -> int:
 	return Globals.ACTION_STATE.Running
 	
 func EatAtBar(delta : float, param : Dictionary, actionDepth : int) -> int:
-	# Select empty bar stool
-	# Goto
-	# Sit
-	# Wait for food
-	# Eat food
-	# Pay (should I put ATM or just "magically" pay at counter?)
-	# Stand up
-	# Done
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	var plan : ActionPlan = param.get("current_plan", null)
+	var empty_chair : Advertisement = param.get("plan_ad", null)
+	
+	if not is_top_of_stack:
+		return Globals.ACTION_STATE.Running
+
+	var table : Advertisement = self.getFirstOfTree(Globals.AD_TYPE.Table, empty_chair, 1)
+	var chair_target : Vector3 = self.getClosestInteract(empty_chair)
+	
+	var cur_hour = self.timeSystem.CurDateTime["hour"]
+	if cur_hour > plan.EndHour:
+		# This is going to be a problem if action is aborted
+		if empty_chair.BelongTo == self:
+			empty_chair.BelongTo = null
+		return Globals.ACTION_STATE.Finished
+	
+	if not self.isAtLocation(chair_target, 1.0):
+		param["target"] = chair_target
+		param["precision"] = 1.0
+		self.pushAction("Goto", actionDepth)
+		return Globals.ACTION_STATE.Running
+		
+	var player_state : String = self.animState(self)
+	if self.isAtLocation(chair_target, 1.0) and player_state != "SitChairIdle":
+		param["obj"] = self
+		param["state"] = "SitChairIdle"
+		param["anim_transform"] = empty_chair.global_transform
+		param["interpolate_time"] = 0.5
+		# This is going to be a problem if action is aborted
+		empty_chair.BelongTo = self
+		self.pushAction("TravelAnimState", actionDepth)
+		return Globals.ACTION_STATE.Running
+
+	var table_food : Advertisement = self.findItemInInv(table.Inventory, Globals.AD_TYPE.Food)
+	if table_food != null and player_state == "SitChairIdle":
+		# Eat finds it's own food in the player's inventory. Need to somehow make it pick up the food on the counter in front of him
+		self.pushAction("Eat", actionDepth)
+		return Globals.ACTION_STATE.Running
+		
+	var sat : float = self.Needs.Current(Globals.NEEDS.Satiety)
+	if player_state == "SitChairIdle" and sat + plan.SatietyReward > 1.0:
+		empty_chair.BelongTo = null
+		return Globals.ACTION_STATE.Finished
+
+	# Default is to wait for food if it's not on the table
 	return Globals.ACTION_STATE.Running
 	
 func WorkAtShop(delta : float, param : Dictionary, actionDepth : int) -> int:

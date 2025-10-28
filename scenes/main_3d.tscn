@@ -1428,9 +1428,23 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9.332
 
 [node name="BarCounter7" parent="Static/NavigationRegion3D/Bar/Furniture" instance=ExtResource("28_xfj8p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.24774, 0, -3)
+PickupChildren = false
+
+[node name="BarStool2" parent="Static/NavigationRegion3D/Bar/Furniture/BarCounter7" instance=ExtResource("21_u8k05")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24037, 0.158913, 0.265599)
+script = ExtResource("18_h2cyc")
+Type = 7
+ActionPlans = Array[ExtResource("19_eqqpn")]([ExtResource("36_s6x1v")])
 
 [node name="BarCounter4" parent="Static/NavigationRegion3D/Bar/Furniture" instance=ExtResource("28_xfj8p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.24774, 0, -4)
+PickupChildren = false
+
+[node name="BarStool3" parent="Static/NavigationRegion3D/Bar/Furniture/BarCounter4" instance=ExtResource("21_u8k05")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.240369, 0.158913, 0.265599)
+script = ExtResource("18_h2cyc")
+Type = 7
+ActionPlans = Array[ExtResource("19_eqqpn")]([ExtResource("36_s6x1v")])
 
 [node name="BarCounter2" parent="Static/NavigationRegion3D/Bar/Furniture" instance=ExtResource("28_xfj8p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.24774, 0, -5)
@@ -1440,18 +1454,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.24774, 0, -6)
 
 [node name="BarCounter6" parent="Static/NavigationRegion3D/Bar/Furniture" instance=ExtResource("20_rxfgi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.24774, 0, -7)
-
-[node name="BarStool2" parent="Static/NavigationRegion3D/Bar/Furniture" instance=ExtResource("21_u8k05")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.00737, 0.158913, -2.7344)
-script = ExtResource("18_h2cyc")
-Type = 7
-ActionPlans = Array[ExtResource("19_eqqpn")]([ExtResource("36_s6x1v")])
-
-[node name="BarStool3" parent="Static/NavigationRegion3D/Bar/Furniture" instance=ExtResource("21_u8k05")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.00737, 0.158913, -3.7344)
-script = ExtResource("18_h2cyc")
-Type = 7
-ActionPlans = Array[ExtResource("19_eqqpn")]([ExtResource("36_s6x1v")])
 
 [node name="BarStool4" parent="Static/NavigationRegion3D/Bar/Furniture" instance=ExtResource("21_u8k05")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.00737, 0.158913, -5)

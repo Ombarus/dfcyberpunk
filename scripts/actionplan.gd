@@ -55,7 +55,10 @@ var ActualReward := [
 	{
 		"Action": "EatAtBar",
 		"State": Globals.ACTION_STATE.Finished,
-		"Rewards": {Globals.NEEDS.Energy: Globals.REWARD_BASE[Globals.NEEDS.Energy][Globals.GRADE.VSmall]}
+		"Rewards": {
+			Globals.NEEDS.Energy: Globals.REWARD_BASE[Globals.NEEDS.Energy][Globals.GRADE.VSmall],
+			Globals.NEEDS.Richness: -Globals.REWARD_BASE[Globals.NEEDS.Richness][Globals.GRADE.VSmall]
+		}
 	},
 	{
 		"Action": "WalkRandomly",
