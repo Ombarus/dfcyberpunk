@@ -112,10 +112,23 @@ layout_mode = 2
 text = "Energy : "
 
 [node name="Progress" type="ProgressBar" parent="HBoxContainer/Info/NeedsGroup/NeedList/Need"]
+custom_minimum_size = Vector2(0, 27)
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
 value = 0.5
+show_percentage = false
+
+[node name="Label" type="Label" parent="HBoxContainer/Info/NeedsGroup/NeedList/Need/Progress"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "50 %"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="HBoxContainer/Info"]
 layout_mode = 2

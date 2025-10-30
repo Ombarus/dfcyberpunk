@@ -74,7 +74,11 @@ func _process(delta: float) -> void:
 		self.currentAction.text = actions
 		
 		for k in self.needMap:
-			self.needMap[k].get_node("Progress").value = ent.Needs.GetNeed(k)
+			var p : ProgressBar = self.needMap[k].get_node("Progress")
+			var v : float = ent.Needs.GetNeed(k)
+			p.value = v
+			p.get_node("Label").text = "%0.3f%%" % [v * 100.0]
+			
 			
 		var greened := false
 		for c in self.entityPlans.get_children():
