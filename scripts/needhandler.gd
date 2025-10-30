@@ -2,7 +2,7 @@ extends Object
 class_name NeedHandler
 
 var CurrentNeeds := {
-	Globals.NEEDS.Satiety: 0.8,
+	Globals.NEEDS.Satiety: 0.38,
 	Globals.NEEDS.Energy: 0.8,
 	Globals.NEEDS.Satisfaction: 0.3,
 	Globals.NEEDS.Richness: 0.01

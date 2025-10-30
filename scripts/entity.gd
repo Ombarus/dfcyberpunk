@@ -860,7 +860,7 @@ func WorkAtBar(delta : float, param : Dictionary, actionDepth : int) -> int:
 	if prep_food == null:
 		var steak_recipe := ActionPlan.new()
 		steak_recipe.ActionName = "CookInKitchen2"
-		steak_recipe.SpawnReward = preload("res://scenes/food_steak3d.tscn")
+		steak_recipe.SpawnReward = preload("res://scenes/food_steak3d_resto.tscn")
 		steak_recipe.SpawnRewardType = Globals.AD_TYPE.Food
 		param["work_plan"] = plan
 		param["work_ad"] = workplace

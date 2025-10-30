@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://2884eyb3j1j6"]
+
+[ext_resource type="Script" path="res://scripts/advertisement.gd" id="1_xuy4l"]
+[ext_resource type="PackedScene" uid="uid://wgk1iumisi77" path="res://data/models/Steak.glb" id="2_gjoqe"]
+
+[node name="Steak3D" type="Node3D"]
+script = ExtResource("1_xuy4l")
+Type = 1
+
+[node name="Steak2" parent="." instance=ExtResource("2_gjoqe")]

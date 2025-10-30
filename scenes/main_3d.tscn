@@ -76,14 +76,22 @@ sky_material = SubResource("ProceduralSkyMaterial_j87tq")
 
 [sub_resource type="Environment" id="Environment_pjfiq"]
 background_mode = 2
+background_energy_multiplier = 0.0
 sky = SubResource("Sky_4e05h")
-ambient_light_source = 3
-ambient_light_sky_contribution = 0.12
-tonemap_mode = 2
+ambient_light_source = 1
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.0
+reflected_light_source = 1
+tonemap_mode = 3
 ssr_enabled = true
 ssao_enabled = true
+ssao_intensity = 5.22
 sdfgi_enabled = true
+sdfgi_use_occlusion = true
 sdfgi_read_sky_light = false
+sdfgi_min_cell_size = 0.732422
+sdfgi_y_scale = 0
+sdfgi_energy = 0.5
 glow_enabled = true
 fog_enabled = true
 fog_mode = 1
@@ -156,6 +164,7 @@ environment = SubResource("Environment_pjfiq")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
 transform = Transform3D(0.971108, -0.120163, -0.20618, 0.0225513, -0.813902, 0.580564, -0.237573, -0.56844, -0.787677, 10.1197, 4.88909, -1.29089)
+light_color = Color(0.576384, 0.669329, 0.737235, 1)
 light_energy = 0.186
 shadow_enabled = true
 
@@ -526,7 +535,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 3.0237, 2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 3.0237, 4)
 
 [node name="Lampost2" parent="Static/NavigationRegion3D/Sidewalk" instance=ExtResource("41_87j0d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1898, 0, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1898, 0.00613093, 1)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Static/NavigationRegion3D/Sidewalk/Lampost2"]
 transform = Transform3D(0.965926, 1.13133e-08, -0.258819, 0.258819, -4.2222e-08, 0.965926, 0, -1, -4.37114e-08, 1.1523, 5.92392, 0)
@@ -1317,6 +1326,20 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -5.607
 script = ExtResource("18_h2cyc")
 Type = 10
 
+[node name="Ambiance" type="Node3D" parent="Static/NavigationRegion3D/Market"]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Static/NavigationRegion3D/Market/Ambiance"]
+transform = Transform3D(-1, -7.29123e-08, 4.82343e-08, 0, 0.551736, 0.834019, -8.74228e-08, 0.834019, -0.551736, -8.78543, 2.30691, 0.353888)
+spot_range = 11.002
+spot_attenuation = 0.24
+spot_angle = 66.71
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Static/NavigationRegion3D/Market/Ambiance"]
+transform = Transform3D(-1, -7.29123e-08, 4.82343e-08, 0, 0.551736, 0.834019, -8.74228e-08, 0.834019, -0.551736, -8.78543, 2.30691, -5.46541)
+spot_range = 11.002
+spot_attenuation = 0.24
+spot_angle = 66.71
+
 [node name="Bar" type="Node3D" parent="Static/NavigationRegion3D"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -12)
 
@@ -1431,7 +1454,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.24774, 0, -3)
 PickupChildren = false
 
 [node name="BarStool2" parent="Static/NavigationRegion3D/Bar/Furniture/BarCounter7" instance=ExtResource("21_u8k05")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24037, 0.158913, 0.265599)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.24037, 0.158913, 0.776608)
 script = ExtResource("18_h2cyc")
 Type = 7
 ActionPlans = Array[ExtResource("19_eqqpn")]([ExtResource("36_s6x1v")])
@@ -1441,7 +1464,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.24774, 0, -4)
 PickupChildren = false
 
 [node name="BarStool3" parent="Static/NavigationRegion3D/Bar/Furniture/BarCounter4" instance=ExtResource("21_u8k05")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.240369, 0.158913, 0.265599)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.240368, 0.158913, 0.687993)
 script = ExtResource("18_h2cyc")
 Type = 7
 ActionPlans = Array[ExtResource("19_eqqpn")]([ExtResource("36_s6x1v")])
@@ -1476,6 +1499,44 @@ visible = false
 [node name="Foodstuff3D3" parent="Static/NavigationRegion3D/Bar/Furniture/FridgeBar" instance=ExtResource("40_yotxp")]
 transform = Transform3D(-1, 0, -8.74232e-08, 0, 1, 0, 8.74232e-08, 0, -1, 0.683561, 0.0131083, 0.570921)
 visible = false
+
+[node name="Ambiance" type="Node3D" parent="Static/NavigationRegion3D/Bar"]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Static/NavigationRegion3D/Bar/Ambiance"]
+transform = Transform3D(0.961375, 9.9454e-08, -0.275243, 0.275243, -4.2023e-08, 0.961375, 8.40461e-08, -1, -6.77739e-08, -8.06114, 3.08498, -0.402272)
+light_color = Color(0.5504, 0.6794, 0.86, 1)
+light_energy = 2.136
+spot_angle = 57.78
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Static/NavigationRegion3D/Bar/Ambiance"]
+transform = Transform3D(1, 8.74228e-08, 8.74228e-08, -8.74228e-08, -4.37114e-08, 1, 8.74228e-08, -1, -4.37114e-08, -7.64401, 1.93943, -2.40227)
+light_energy = 0.68
+spot_range = 2.975
+spot_angle = 35.41
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Static/NavigationRegion3D/Bar/Ambiance"]
+transform = Transform3D(1, 8.74228e-08, 8.74228e-08, -8.74228e-08, -4.37114e-08, 1, 8.74228e-08, -1, -4.37114e-08, -7.62166, 1.93943, -3.40227)
+light_energy = 0.68
+spot_range = 2.975
+spot_angle = 35.41
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Static/NavigationRegion3D/Bar/Ambiance"]
+transform = Transform3D(1, 8.74228e-08, 8.74228e-08, -8.74228e-08, -4.37114e-08, 1, 8.74228e-08, -1, -4.37114e-08, -7.62166, 1.93943, -4.40227)
+light_energy = 0.68
+spot_range = 2.975
+spot_angle = 35.41
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="Static/NavigationRegion3D/Bar/Ambiance"]
+transform = Transform3D(1, 8.74228e-08, 8.74228e-08, -8.74228e-08, -4.37114e-08, 1, 8.74228e-08, -1, -4.37114e-08, -7.62166, 1.93943, -5.40227)
+light_energy = 0.68
+spot_range = 2.975
+spot_angle = 35.41
+
+[node name="SpotLight3D6" type="SpotLight3D" parent="Static/NavigationRegion3D/Bar/Ambiance"]
+transform = Transform3D(1, 8.74228e-08, 8.74228e-08, -8.74228e-08, -4.37114e-08, 1, 8.74228e-08, -1, -4.37114e-08, -9.52549, 1.32919, -4.69451)
+spot_range = 3.448
+spot_attenuation = -0.3
+spot_angle = 85.47
 
 [node name="Warehouse" type="Node3D" parent="Static/NavigationRegion3D"]
 
@@ -2042,12 +2103,6 @@ transform = Transform3D(0.994371, 0, 0.105954, 0, 1, 0, -0.105954, 0, 0.994371, 
 
 [node name="CardboardBox62" parent="Static/NavigationRegion3D/Warehouse" instance=ExtResource("34_3ly04")]
 transform = Transform3D(0.994371, 0, 0.105954, 0, 1, 0, -0.105954, 0, 0.994371, -17.6645, 1, -12.2847)
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Static"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 8.68225, 0.937806, -1.36158)
-spot_range = 1.688
-spot_attenuation = 0.24
-spot_angle = 65.64
 
 [node name="HanaYoriDango" type="MeshInstance3D" parent="Static"]
 transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, -4.86375, 1.66976, 8.21565e-15)
