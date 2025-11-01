@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://8qm8xqhjvjw5"]
+[gd_scene load_steps=63 format=3 uid="uid://8qm8xqhjvjw5"]
 
 [ext_resource type="PackedScene" uid="uid://ckkkaxossb5me" path="res://data/models/RoadCenter.glb" id="1_3innq"]
 [ext_resource type="Script" path="res://scripts/world_clock.gd" id="1_ol7km"]
@@ -17,6 +17,9 @@
 [ext_resource type="PackedScene" uid="uid://2fxlpxw67krr" path="res://data/models/CounterTopSink.glb" id="10_bt3yj"]
 [ext_resource type="PackedScene" uid="uid://d3itb88kk1seo" path="res://scenes/furnitures/countertop.tscn" id="11_xrdbt"]
 [ext_resource type="PackedScene" uid="uid://dd58fgth8ulcm" path="res://data/models/Cabinet.glb" id="11_yxcl1"]
+[ext_resource type="PackedScene" uid="uid://c3xmuyxm5hok6" path="res://data/models/GarbageBagWhite.glb" id="12_0nsk4"]
+[ext_resource type="PackedScene" uid="uid://db1hje305dbyi" path="res://data/models/GarbageBagBlack.glb" id="13_fam4y"]
+[ext_resource type="PackedScene" uid="uid://cpxf338d3bsa6" path="res://data/models/Barrel.glb" id="14_08h8q"]
 [ext_resource type="PackedScene" uid="uid://jlqi2unu5r2u" path="res://data/models/FoldingChair.glb" id="14_rquro"]
 [ext_resource type="PackedScene" uid="uid://cg1wno6e4buvm" path="res://scenes/furnitures/dining_table.tscn" id="14_vxtuh"]
 [ext_resource type="Resource" uid="uid://c8welbjb3gx5" path="res://data/plans/GoSleepInBed.tres" id="17_jwjil"]
@@ -555,6 +558,44 @@ light_energy = 6.018
 spot_range = 10.461
 spot_angle = 41.81
 spot_angle_attenuation = 1.86607
+
+[node name="Furniture" type="Node3D" parent="Static/NavigationRegion3D/Sidewalk"]
+
+[node name="GarbageBagWhite2" parent="Static/NavigationRegion3D/Sidewalk/Furniture" instance=ExtResource("12_0nsk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.49004, 0.0646605, -3.61207)
+
+[node name="GarbageBagWhite3" parent="Static/NavigationRegion3D/Sidewalk/Furniture" instance=ExtResource("12_0nsk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.16673, 0.0646605, -3.05412)
+
+[node name="GarbageBagWhite4" parent="Static/NavigationRegion3D/Sidewalk/Furniture" instance=ExtResource("12_0nsk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.32095, 0.0646605, -3.63753)
+
+[node name="GarbageBagBlack" parent="Static/NavigationRegion3D/Sidewalk/Furniture" instance=ExtResource("13_fam4y")]
+transform = Transform3D(0.331875, 0.136902, -0.933336, -0.0409667, 0.990571, 0.13073, 0.942433, -0.00515036, 0.334354, 5.96962, -0.030228, -3.59274)
+
+[node name="GarbageBagBlack2" parent="Static/NavigationRegion3D/Sidewalk/Furniture" instance=ExtResource("13_fam4y")]
+transform = Transform3D(0.929767, -0.368148, 0, 0.346916, 0.876145, 0.334693, -0.123217, -0.311187, 0.942327, 6.70041, -0.057268, -3.43748)
+
+[node name="GarbageBagWhite5" parent="Static/NavigationRegion3D/Sidewalk/Furniture" instance=ExtResource("12_0nsk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.38484, 0.0646605, 6.61149)
+
+[node name="GarbageBagWhite6" parent="Static/NavigationRegion3D/Sidewalk/Furniture" instance=ExtResource("12_0nsk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.70815, 0.0646605, 7.16945)
+
+[node name="GarbageBagWhite7" parent="Static/NavigationRegion3D/Sidewalk/Furniture" instance=ExtResource("12_0nsk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.55394, 0.542123, 6.58603)
+
+[node name="GarbageBagBlack3" parent="Static/NavigationRegion3D/Sidewalk/Furniture" instance=ExtResource("13_fam4y")]
+transform = Transform3D(0.331875, 0.136902, -0.933336, -0.0409667, 0.990571, 0.13073, 0.942433, -0.00515036, 0.334354, -5.90526, -0.030228, 6.63082)
+
+[node name="GarbageBagBlack4" parent="Static/NavigationRegion3D/Sidewalk/Furniture" instance=ExtResource("13_fam4y")]
+transform = Transform3D(0.929767, -0.368148, 0, 0.346916, 0.876145, 0.334693, -0.123217, -0.311187, 0.942327, -5.17447, -0.057268, 6.78609)
+
+[node name="Barrel2" parent="Static/NavigationRegion3D/Sidewalk/Furniture" instance=ExtResource("14_08h8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.12464, -4.76837e-07, 6.48312)
+
+[node name="Barrel3" parent="Static/NavigationRegion3D/Sidewalk/Furniture" instance=ExtResource("14_08h8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.56395, -4.76837e-07, -3.30996)
 
 [node name="Appartment1" type="Node3D" parent="Static/NavigationRegion3D"]
 
