@@ -1010,7 +1010,7 @@ func WorkAtShop(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var plan : ActionPlan = param.get("current_plan", null)
 	if is_top_of_stack:
 		var workplace : Node = param.get("plan_ad", null).get_parent()
-		var rand_node : Node3D = workplace.get_child(randi_range(0, workplace.get_child_count()))
+		var rand_node : Node3D = workplace.get_child(randi_range(0, workplace.get_child_count()-1))
 		if rand_node != null:
 			param["target"] = rand_node.global_position
 			param["precision"] = 1.0

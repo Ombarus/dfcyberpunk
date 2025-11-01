@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cin1g2cw48i5m"]
+
+[ext_resource type="Script" path="res://scripts/ads/foodadvertisement.gd" id="1_wudr0"]
+[ext_resource type="PackedScene" uid="uid://cy3icakm46ose" path="res://data/models/Pie.glb" id="2_2r6gq"]
+
+[node name="Pie3D" type="Node3D"]
+script = ExtResource("1_wudr0")
+override_satiety = 0.4
+override_satisfaction = 0.02
+Type = 1
+
+[node name="Pie2" parent="." instance=ExtResource("2_2r6gq")]
