@@ -1011,6 +1011,23 @@ BelongTo = NodePath("../../../../../Dynamic/Peep2")
 [node name="Cyberdeck2" parent="Static/NavigationRegion3D/Appartment2/Furniture" instance=ExtResource("23_fhg20")]
 transform = Transform3D(0.87061, 0, 0.491973, 0, 1, 0, -0.491973, 0, 0.87061, -7.44327, 0.768183, -5)
 
+[node name="Ambience2" type="Node3D" parent="Static/NavigationRegion3D/Appartment2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.997, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Static/NavigationRegion3D/Appartment2/Ambience2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -8.91577, 3.69501, -4.54812)
+light_color = Color(0.698605, 0.679232, 0.790147, 1)
+light_energy = 2.325
+spot_range = 78.698
+spot_angle = 73.76
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Static/NavigationRegion3D/Appartment2/Ambience2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -10.0944, 3.69501, -1.17937)
+light_color = Color(0.698605, 0.679232, 0.790147, 1)
+light_energy = 2.325
+spot_range = 78.698
+spot_angle = 73.76
+
 [node name="Appartment3" type="Node3D" parent="Static/NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
 
@@ -1178,6 +1195,22 @@ BelongTo = NodePath("../../../../../Dynamic/Peep3")
 
 [node name="Cyberdeck2" parent="Static/NavigationRegion3D/Appartment3/Furniture" instance=ExtResource("23_fhg20")]
 transform = Transform3D(0.87061, 0, 0.491973, 0, 1, 0, -0.491973, 0, 0.87061, -7.44327, 0.768183, -5)
+
+[node name="Ambience" type="Node3D" parent="Static/NavigationRegion3D/Appartment3"]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Static/NavigationRegion3D/Appartment3/Ambience"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -8.91577, 3.69501, -4.54812)
+light_color = Color(0.698605, 0.679232, 0.790147, 1)
+light_energy = 2.325
+spot_range = 78.698
+spot_angle = 73.76
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Static/NavigationRegion3D/Appartment3/Ambience"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -10.0944, 3.69501, -1.17937)
+light_color = Color(0.698605, 0.679232, 0.790147, 1)
+light_energy = 2.325
+spot_range = 78.698
+spot_angle = 73.76
 
 [node name="Market" type="Node3D" parent="Static/NavigationRegion3D"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)

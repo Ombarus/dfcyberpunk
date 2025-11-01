@@ -334,12 +334,16 @@ func Transfer(delta : float, param : Dictionary, actionDepth : int) -> int:
 				seq.SetContinue()
 				return Globals.ACTION_STATE.Running
 		else:
-			#TODO: handle displaying in "inventoryXX" slots
-			self.travelAnimOneShot(self, "Interact")
-			toFromExchange(to, from, item, param)
-		
-		return Globals.ACTION_STATE.Running
-	
+			if seq.CurState() == seq.SEQ_STATE.IDLE:
+				seq.OneShotSequence("Interact")
+				return Globals.ACTION_STATE.Running
+			elif seq.CurState() == seq.SEQ_STATE.FINISHED:
+				seq.Reset()
+				toFromExchange(to, from, item, param)
+			else:
+				seq.SetContinue()
+				return Globals.ACTION_STATE.Running
+
 	return Globals.ACTION_STATE.Finished
 
 # This could be much simpler if Entity used AdMetaData
