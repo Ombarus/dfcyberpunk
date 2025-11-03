@@ -51,7 +51,8 @@ enum GRADE {
 	Big,
 	Medium,
 	Small,
-	VSmall
+	VSmall,
+	Unset # backward compat
 }
 
 # Values are Daily or by action

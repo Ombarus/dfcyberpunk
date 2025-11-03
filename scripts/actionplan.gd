@@ -7,6 +7,15 @@ class_name ActionPlan
 @export var SatisfactionReward : float
 @export var RichnessReward : float
 
+@export var NewEnergyReward := Globals.GRADE.Unset
+@export var EnergyAdjustPer := 1.0
+@export var NewSatietyReward := Globals.GRADE.Unset
+@export var SatietyAdjustPer := 1.0
+@export var NewSatisfactionReward := Globals.GRADE.Unset
+@export var SatisfactionAdjustPer := 1.0
+@export var NewRichnessReward := Globals.GRADE.Unset
+@export var RichnessAdjustPer := 1.0
+
 # This SpawnReward might not be necessary, maybe this
 # should be part of the ActionName
 # (ie: ActionName is "CookSpaghetti" and the stats for making spaghetti is in the action)
@@ -26,6 +35,29 @@ class_name ActionPlan
 # I'll probably want to expand this for more complex schedules (like weekends?)
 @export var StartHour : int = -1
 @export var EndHour : int = -1
+
+func GetExpectedReward(need : Globals.NEEDS) -> float:
+	if need == Globals.NEEDS.Energy:
+		if NewEnergyReward == Globals.GRADE.Unset:
+			return EnergyReward
+		else:
+			return NewEnergyReward * EnergyAdjustPer
+	if need == Globals.NEEDS.Satiety:
+		if NewSatietyReward == Globals.GRADE.Unset:
+			return SatietyReward
+		else:
+			return NewSatietyReward * SatietyAdjustPer
+	if need == Globals.NEEDS.Satisfaction:
+		if NewSatisfactionReward == Globals.GRADE.Unset:
+			return SatisfactionReward
+		else:
+			return NewSatisfactionReward * SatisfactionAdjustPer
+	if need == Globals.NEEDS.Richness:
+		if NewRichnessReward == Globals.GRADE.Unset:
+			return RichnessReward
+		else:
+			return NewRichnessReward * RichnessAdjustPer
+	return 0.0
 
 # Right now it's generic and cover all Actions
 # but the idea is to inventually be able to customize the Rewards by Ads

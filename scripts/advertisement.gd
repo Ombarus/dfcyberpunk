@@ -60,6 +60,15 @@ func _ready() -> void:
 			item.visible = false
 			item.AdMetaData["container"] = self
 	
+	for a in ActionPlans:
+		for data in a.ActualReward:
+			if data["Action"] == "Eat" and data["State"] == Globals.ACTION_STATE.Running:
+				var satiety_before = data["Rewards"][Globals.NEEDS.Satiety]
+				print("%s: Satiety Before %.5f" % [self.name, satiety_before])
+			if data["Action"] == "Eat" and data["State"] == Globals.ACTION_STATE.Finished:
+				var satisfaction_before = data["Rewards"][Globals.NEEDS.Satisfaction]
+				print("%s: Satisfaction Before %.5f" % [self.name, satisfaction_before])
+	
 func _exit_tree() -> void:
 	self.remove_from_group(str(self.Type))
 	self.add_to_group(Globals.AD_GROUP)

@@ -203,9 +203,9 @@ func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 	for data in collected_plans:
 		best_action = data
 		var cur_plan := data["plan"] as ActionPlan
-		var planed_sat : float = cur_plan.SatietyReward + Needs.Current(Globals.NEEDS.Satiety)
-		var planed_sati : float = cur_plan.SatisfactionReward + Needs.Current(Globals.NEEDS.Satisfaction) 
-		var planed_ener : float = cur_plan.EnergyReward + Needs.Current(Globals.NEEDS.Energy)
+		var planed_sat : float = cur_plan.GetExpectedReward(Globals.NEEDS.Satiety) + Needs.Current(Globals.NEEDS.Satiety)
+		var planed_sati : float = cur_plan.GetExpectedReward(Globals.NEEDS.Satisfaction) + Needs.Current(Globals.NEEDS.Satisfaction) 
+		var planed_ener : float = cur_plan.GetExpectedReward(Globals.NEEDS.Energy) + Needs.Current(Globals.NEEDS.Energy)
 		
 		if planed_sat < 1.0 and planed_sati < 1.0 and planed_ener < 1.0:
 			break
@@ -997,7 +997,7 @@ func EatAtBar(delta : float, param : Dictionary, actionDepth : int) -> int:
 		return Globals.ACTION_STATE.Running
 		
 	var sat : float = self.Needs.Current(Globals.NEEDS.Satiety)
-	if player_state == "SitChairIdle" and sat + plan.SatietyReward > 1.0:
+	if player_state == "SitChairIdle" and sat + plan.GetExpectedReward(Globals.NEEDS.Satiety) > 1.0:
 		empty_chair.BelongTo = null
 		return Globals.ACTION_STATE.Finished
 

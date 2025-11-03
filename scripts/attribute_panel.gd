@@ -89,9 +89,9 @@ func _process(delta: float) -> void:
 			var l : RichTextLabel = RichTextLabel.new()
 			l.bbcode_enabled = true
 			var color := "[color=white]"
-			var planed_sat : float = plan.SatietyReward + ent.Needs.Current(Globals.NEEDS.Satiety)
-			var planed_sati : float = plan.SatisfactionReward + ent.Needs.Current(Globals.NEEDS.Satisfaction) 
-			var planed_ener : float = plan.EnergyReward + ent.Needs.Current(Globals.NEEDS.Energy)
+			var planed_sat : float = plan.GetExpectedReward(Globals.NEEDS.Satiety) + ent.Needs.Current(Globals.NEEDS.Satiety)
+			var planed_sati : float = plan.GetExpectedReward(Globals.NEEDS.Satisfaction) + ent.Needs.Current(Globals.NEEDS.Satisfaction) 
+			var planed_ener : float = plan.GetExpectedReward(Globals.NEEDS.Energy) + ent.Needs.Current(Globals.NEEDS.Energy)
 			if planed_sat < 1.0 and planed_sati < 1.0 and planed_ener < 1.0:
 				if greened == false:
 					color = "[color=green]"

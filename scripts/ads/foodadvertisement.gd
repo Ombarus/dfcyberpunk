@@ -27,6 +27,18 @@ func _ready() -> void:
 		_eat_me,
 		_put_in_fridge
 	]
+	
+	for data in _eat_me.ActualReward:
+		if data["Action"] == "Eat" and data["State"] == Globals.ACTION_STATE.Running:
+			var satiety_before = data["Rewards"][Globals.NEEDS.Satiety]
+			print("%s: Satiety Before %.5f" % [self.name, satiety_before])
+			data["Rewards"][Globals.NEEDS.Satiety] = override_satiety / 4.0
+			print("%s: Satiety After %.5f" % [self.name, data["Rewards"][Globals.NEEDS.Satiety]])
+		if data["Action"] == "Eat" and data["State"] == Globals.ACTION_STATE.Finished:
+			var satisfaction_before = data["Rewards"][Globals.NEEDS.Satisfaction]
+			print("%s: Satisfaction Before %.5f" % [self.name, satisfaction_before])
+			data["Rewards"][Globals.NEEDS.Satisfaction] = override_satisfaction
+			print("%s: Satisfaction After %.5f" % [self.name, data["Rewards"][Globals.NEEDS.Satisfaction]])
 
 # Want to have somewhat dynamic plans.
 # This allow an Advertisement to recalculate reward based on who's asking

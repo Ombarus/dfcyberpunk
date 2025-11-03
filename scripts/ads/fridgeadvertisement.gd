@@ -70,13 +70,13 @@ func GetActionPlansFor(npc : Entity) -> Array:
 		var new_plan := plan.duplicate() as ActionPlan
 		if new_plan.SpawnRewardType == Globals.AD_TYPE.Food and num_foodstuff > 0:
 			# Square it so it's not linear, we REALLY don't want more than 2 meals (but 1 * 1 still = 1 so doesn't change the reward for the first meal)
-			new_plan.SatisfactionReward = new_plan.SatisfactionReward / ((num_food + 1) * (num_food + 1))
-			new_plan.SatietyReward = new_plan.SatietyReward / ((num_food + 1) * (num_food + 1))
+			new_plan.SatisfactionReward = new_plan.GetExpectedReward(Globals.NEEDS.Satisfaction) / ((num_food + 1) * (num_food + 1))
+			new_plan.SatietyReward = new_plan.GetExpectedReward(Globals.NEEDS.Satiety) / ((num_food + 1) * (num_food + 1))
 			results.append(new_plan)
 		 # BUG: RefillFridge2 only work if the fridge doesn't have foodstuff in it
 		elif new_plan.SpawnRewardType == Globals.AD_TYPE.Foodstuff and num_foodstuff == 0:
 			# Square it so it's not linear, we REALLY don't want more than 2 meals (but 1 * 1 still = 1 so doesn't change the reward for the first meal)
-			new_plan.SatisfactionReward = new_plan.SatisfactionReward / ((num_foodstuff + 1) * (num_foodstuff + 1))
+			new_plan.SatisfactionReward = new_plan.GetExpectedReward(Globals.NEEDS.Satisfaction) / ((num_foodstuff + 1) * (num_foodstuff + 1))
 			results.append(new_plan)
 
 	return results
