@@ -6,39 +6,41 @@ func _ready() -> void:
 	# Very filling but not as satisfying
 	var spag_recipe := ActionPlan.new()
 	spag_recipe.ActionName = "CookInKitchen2"
-	spag_recipe.EnergyReward = 0.0
-	spag_recipe.SatietyReward = 0.011 # fake reward to encourage NPC to cook when hungry
-	spag_recipe.SatisfactionReward = Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Small] * 0.9 # - 10%
-	spag_recipe.RichnessReward = 0.0
+	spag_recipe.NewSatietyReward = Globals.GRADE.VSmall # fake reward to encourage NPC to cook when hungry
+	spag_recipe.SatietyAdjustPer = 1.1
+	spag_recipe.NewSatisfactionReward = Globals.GRADE.Small
+	spag_recipe.SatisfactionAdjustPer = 0.9
 	spag_recipe.SpawnReward = preload("res://scenes/food_spaghetti3d.tscn")
 	spag_recipe.SpawnRewardType = Globals.AD_TYPE.Food
 	
 	# Not very filling, but increase sati
 	var pie_recipe := ActionPlan.new()
 	pie_recipe.ActionName = "CookInKitchen2"
-	pie_recipe.EnergyReward = 0.0
-	pie_recipe.SatietyReward = 0.005 # fake reward to encourage NPC to cook when hungry
-	pie_recipe.SatisfactionReward = Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Small] * 1.5 # + 50%
-	pie_recipe.RichnessReward = 0.0
+	pie_recipe.NewSatietyReward = Globals.GRADE.VSmall # fake reward to encourage NPC to cook when hungry
+	pie_recipe.SatietyAdjustPer = 0.5
+	pie_recipe.NewSatisfactionReward = Globals.GRADE.Small
+	pie_recipe.SatisfactionAdjustPer = 1.5
 	pie_recipe.SpawnReward = preload("res://scenes/food_pie3d.tscn")
 	pie_recipe.SpawnRewardType = Globals.AD_TYPE.Food
 	
 	# half/half
 	var steak_recipe := ActionPlan.new()
 	steak_recipe.ActionName = "CookInKitchen2"
-	steak_recipe.EnergyReward = 0.00
-	steak_recipe.SatietyReward = 0.01 # fake reward to encourage NPC to cook when hungry
-	steak_recipe.SatisfactionReward = Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Small]
-	steak_recipe.RichnessReward = 0.0
+	steak_recipe.NewSatietyReward = Globals.GRADE.VSmall # fake reward to encourage NPC to cook when hungry
+	steak_recipe.SatietyAdjustPer = 1.0
+	steak_recipe.NewSatisfactionReward = Globals.GRADE.Small
+	steak_recipe.SatisfactionAdjustPer = 1.0
 	steak_recipe.SpawnReward = preload("res://scenes/food_steak3d.tscn")
 	steak_recipe.SpawnRewardType = Globals.AD_TYPE.Food
 	
 	var refill_fridge := ActionPlan.new()
 	refill_fridge.ActionName = "RefillFridge2"
-	refill_fridge.EnergyReward = 0.00
-	refill_fridge.SatietyReward = 0.01
-	refill_fridge.SatisfactionReward = Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Small]
-	refill_fridge.RichnessReward = -Globals.REWARD_BASE[Globals.NEEDS.Richness][Globals.GRADE.VSmall]
+	refill_fridge.NewSatietyReward = Globals.GRADE.VSmall # fake reward to encourage NPC to cook when hungry
+	refill_fridge.SatietyAdjustPer = 1.0
+	refill_fridge.NewSatisfactionReward = Globals.GRADE.Small
+	refill_fridge.SatisfactionAdjustPer = 1.0
+	refill_fridge.NewRichnessReward = Globals.GRADE.VSmall
+	refill_fridge.RichnessAdjustPer = -1.0
 	refill_fridge.SpawnReward = preload("res://scenes/foodstuff3d.tscn")
 	refill_fridge.SpawnRewardType = Globals.AD_TYPE.Foodstuff
 	refill_fridge.SpawnRewardCount = 5
@@ -70,13 +72,13 @@ func GetActionPlansFor(npc : Entity) -> Array:
 		var new_plan := plan.duplicate() as ActionPlan
 		if new_plan.SpawnRewardType == Globals.AD_TYPE.Food and num_foodstuff > 0:
 			# Square it so it's not linear, we REALLY don't want more than 2 meals (but 1 * 1 still = 1 so doesn't change the reward for the first meal)
-			new_plan.SatisfactionReward = new_plan.GetExpectedReward(Globals.NEEDS.Satisfaction) / ((num_food + 1) * (num_food + 1))
-			new_plan.SatietyReward = new_plan.GetExpectedReward(Globals.NEEDS.Satiety) / ((num_food + 1) * (num_food + 1))
+			new_plan.SatisfactionAdjustPer = new_plan.SatisfactionAdjustPer / ((num_food + 1) * (num_food + 1))
+			new_plan.SatietyAdjustPer = new_plan.SatietyAdjustPer / ((num_food + 1) * (num_food + 1))
 			results.append(new_plan)
-		 # BUG: RefillFridge2 only work if the fridge doesn't have foodstuff in it
+		# BUG: RefillFridge2 only work if the fridge doesn't have foodstuff in it 
 		elif new_plan.SpawnRewardType == Globals.AD_TYPE.Foodstuff and num_foodstuff == 0:
 			# Square it so it's not linear, we REALLY don't want more than 2 meals (but 1 * 1 still = 1 so doesn't change the reward for the first meal)
-			new_plan.SatisfactionReward = new_plan.GetExpectedReward(Globals.NEEDS.Satisfaction) / ((num_foodstuff + 1) * (num_foodstuff + 1))
+			new_plan.SatisfactionAdjustPer = new_plan.SatisfactionAdjustPer / ((num_food + 1) * (num_food + 1))
 			results.append(new_plan)
 
 	return results

@@ -69,7 +69,8 @@ func _process(delta: float) -> void:
 		var s = self.callv(self.actionStack[i], [delta, self.curParam, i])
 		self.Needs.ApplyNeedForAction(self.actionStack[i], delta, self.curParam, s)
 		
-		if (s == Globals.ACTION_STATE.Finished):
+		# Error prevents giving reward but like Finished re-trigger evaluation of parent action
+		if (s == Globals.ACTION_STATE.Finished or s == Globals.ACTION_STATE.Error):
 			self.popAction(i)
 		i += 1
 
@@ -126,28 +127,26 @@ func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 		
 	var random_goto_plan := ActionPlan.new()
 	random_goto_plan.ActionName = "WalkRandomly"
-	random_goto_plan.EnergyReward = 0.0
-	random_goto_plan.SatietyReward = 0.0
-	random_goto_plan.SatisfactionReward = Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.VSmall]
+	random_goto_plan.NewSatisfactionReward = Globals.GRADE.VSmall
 	
 	var fallback_sleep_plan := ActionPlan.new()
 	fallback_sleep_plan.ActionName = "SleepOnFloor"
-	fallback_sleep_plan.EnergyReward = Globals.REWARD_BASE[Globals.NEEDS.Energy][Globals.GRADE.VSmall] # Slightly faked to lower priority
-	random_goto_plan.SatietyReward = 0.0
-	fallback_sleep_plan.SatisfactionReward = -Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Big]
+	fallback_sleep_plan.NewEnergyReward = Globals.GRADE.VSmall # Slightly faked to lower priority
+	fallback_sleep_plan.NewSatisfactionReward = Globals.GRADE.Big
+	fallback_sleep_plan.SatisfactionAdjustPer = -1.0
 	
 	var wait_plan := ActionPlan.new()
 	wait_plan.ActionName = "LoadWait"
-	wait_plan.EnergyReward = 0.0000001
-	wait_plan.SatietyReward = 0.0000001
-	wait_plan.SatisfactionReward = 0.0000001
+	wait_plan._energyReward = 0.0000001
+	wait_plan._satietyReward = 0.0000001
+	wait_plan._satisfactionReward = 0.0000001
 	
 	# Fallback if absolutely nothing to do and all needs are fullfilled. Trying to avoid getting in a weird state
 	var idle_plan := ActionPlan.new()
 	idle_plan.ActionName = "IdleWait"
-	idle_plan.EnergyReward = 0.0000001
-	idle_plan.SatietyReward = 0.0000001
-	idle_plan.SatisfactionReward = 0.0000001
+	idle_plan._energyReward = 0.0000001
+	idle_plan._satietyReward = 0.0000001
+	idle_plan._satisfactionReward = 0.0000001
 	
 	# Something like : [{name:"plan1", ad:<node>, score:123}, ...]
 	var collected_plans := []
@@ -959,6 +958,10 @@ func EatAtBar(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	var plan : ActionPlan = param.get("current_plan", null)
 	var empty_chair : Advertisement = param.get("plan_ad", null)
+	
+	# Someone else got to the chair before us!
+	if empty_chair.BelongTo != null and empty_chair.BelongTo != self:
+		return Globals.ACTION_STATE.Error
 	
 	if not is_top_of_stack:
 		return Globals.ACTION_STATE.Running

@@ -3,6 +3,11 @@ extends Advertisement
 @export var override_satiety : float = 0.6
 @export var override_satisfaction :float = 0.01
 
+@export var override_satiety_grade := Globals.GRADE.Big
+@export var override_satiety_per := 1.0
+@export var override_satisfaction_grade := Globals.GRADE.Small
+@export var override_satisfaction_per := 1.0
+
 var _eat_me : ActionPlan
 var _put_in_fridge : ActionPlan
 
@@ -18,10 +23,7 @@ func _ready() -> void:
 	
 	_put_in_fridge = ActionPlan.new()
 	_put_in_fridge.ActionName = "GoPutFoodInFridge"
-	_put_in_fridge.EnergyReward = 0.0
-	_put_in_fridge.SatietyReward = 0.0
-	_put_in_fridge.SatisfactionReward = Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Medium] # Fake?
-	_put_in_fridge.RichnessReward = 0.0
+	_put_in_fridge.NewSatisfactionReward = Globals.GRADE.Medium # Fake?
 	
 	self.ActionPlans = [
 		_eat_me,
@@ -32,11 +34,13 @@ func _ready() -> void:
 		if data["Action"] == "Eat" and data["State"] == Globals.ACTION_STATE.Running:
 			var satiety_before = data["Rewards"][Globals.NEEDS.Satiety]
 			print("%s: Satiety Before %.5f" % [self.name, satiety_before])
+			#NOTE: I don't know if I'm working with a copy or a static array here. I need to validate it's only changing the copy
 			data["Rewards"][Globals.NEEDS.Satiety] = override_satiety / 4.0
 			print("%s: Satiety After %.5f" % [self.name, data["Rewards"][Globals.NEEDS.Satiety]])
 		if data["Action"] == "Eat" and data["State"] == Globals.ACTION_STATE.Finished:
 			var satisfaction_before = data["Rewards"][Globals.NEEDS.Satisfaction]
 			print("%s: Satisfaction Before %.5f" % [self.name, satisfaction_before])
+			#NOTE: I don't know if I'm working with a copy or a static array here. I need to validate it's only changing the copy
 			data["Rewards"][Globals.NEEDS.Satisfaction] = override_satisfaction
 			print("%s: Satisfaction After %.5f" % [self.name, data["Rewards"][Globals.NEEDS.Satisfaction]])
 

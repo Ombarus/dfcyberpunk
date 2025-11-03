@@ -2,10 +2,10 @@ extends Resource
 class_name ActionPlan
 
 @export var ActionName : String
-@export var EnergyReward : float
-@export var SatietyReward : float
-@export var SatisfactionReward : float
-@export var RichnessReward : float
+var _energyReward : float
+var _satietyReward : float
+var _satisfactionReward : float
+var _richnessReward : float
 
 @export var NewEnergyReward := Globals.GRADE.Unset
 @export var EnergyAdjustPer := 1.0
@@ -39,24 +39,24 @@ class_name ActionPlan
 func GetExpectedReward(need : Globals.NEEDS) -> float:
 	if need == Globals.NEEDS.Energy:
 		if NewEnergyReward == Globals.GRADE.Unset:
-			return EnergyReward
+			return _energyReward
 		else:
-			return NewEnergyReward * EnergyAdjustPer
+			return Globals.REWARD_BASE[Globals.NEEDS.Energy][NewEnergyReward] * EnergyAdjustPer
 	if need == Globals.NEEDS.Satiety:
 		if NewSatietyReward == Globals.GRADE.Unset:
-			return SatietyReward
+			return _satietyReward
 		else:
-			return NewSatietyReward * SatietyAdjustPer
+			return Globals.REWARD_BASE[Globals.NEEDS.Satiety][NewSatietyReward] * SatietyAdjustPer
 	if need == Globals.NEEDS.Satisfaction:
 		if NewSatisfactionReward == Globals.GRADE.Unset:
-			return SatisfactionReward
+			return _satisfactionReward
 		else:
-			return NewSatisfactionReward * SatisfactionAdjustPer
+			return Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][NewSatisfactionReward] * SatisfactionAdjustPer
 	if need == Globals.NEEDS.Richness:
 		if NewRichnessReward == Globals.GRADE.Unset:
-			return RichnessReward
+			return _richnessReward
 		else:
-			return NewRichnessReward * RichnessAdjustPer
+			return Globals.REWARD_BASE[Globals.NEEDS.Richness][NewRichnessReward] * RichnessAdjustPer
 	return 0.0
 
 # Right now it's generic and cover all Actions

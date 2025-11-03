@@ -7,6 +7,8 @@
 script = ExtResource("1_4enej")
 override_satiety = 0.8
 override_satisfaction = 0.007
+override_satiety_per = 1.333
+override_satisfaction_per = 0.7
 Type = 1
 
 [node name="Spaghetti2" parent="." instance=ExtResource("2_56s35")]

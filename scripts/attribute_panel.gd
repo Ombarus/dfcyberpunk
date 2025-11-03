@@ -79,7 +79,6 @@ func _process(delta: float) -> void:
 			p.value = v
 			p.get_node("Label").text = "%0.3f%%" % [v * 100.0]
 			
-			
 		var greened := false
 		for c in self.entityPlans.get_children():
 			c.queue_free()
@@ -100,6 +99,13 @@ func _process(delta: float) -> void:
 				color = "[color=red]"
 			l.text = color + plan.ActionName + ": " + str(score) + "[/color]"
 			l.custom_minimum_size = Vector2(250, 20)
+			l.tooltip_text = "Food: %.4f\nJoy: %.4f\nEner: %.4f\nRich: %.4f" % [
+				plan.GetExpectedReward(Globals.NEEDS.Satiety),
+				plan.GetExpectedReward(Globals.NEEDS.Satisfaction),
+				plan.GetExpectedReward(Globals.NEEDS.Energy),
+				plan.GetExpectedReward(Globals.NEEDS.Richness)
+			]
+			l.mouse_filter = Control.MOUSE_FILTER_STOP
 			self.entityPlans.add_child(l)
 	else:
 		var belongNode : Label = self.adInfo.get_node("BelongTo")

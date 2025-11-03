@@ -9,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_7epo4")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -18,6 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.341176, 0.501961, 0.560784, 0.505882)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -148,6 +150,7 @@ text = "Plan Scores:"
 [node name="ColorRect" type="ColorRect" parent="HBoxContainer/Info/PlansGroup"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 color = Color(0.101961, 0.152941, 0.168627, 0.552941)
 
 [node name="PlanScore" type="VBoxContainer" parent="HBoxContainer/Info/PlansGroup/ColorRect"]

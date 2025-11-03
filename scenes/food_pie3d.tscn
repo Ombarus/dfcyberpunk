@@ -7,6 +7,8 @@
 script = ExtResource("1_wudr0")
 override_satiety = 0.4
 override_satisfaction = 0.02
+override_satiety_per = 0.75
+override_satisfaction_per = 2.0
 Type = 1
 
 [node name="Pie2" parent="." instance=ExtResource("2_2r6gq")]

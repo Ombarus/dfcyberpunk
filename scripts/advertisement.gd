@@ -39,8 +39,6 @@ func GetActionPlansFor(npc : Entity) -> Array:
 			if cur_hour < plan.StartHour or cur_hour >= plan.EndHour:
 				continue
 		var new_plan := plan.duplicate()
-		if new_plan.SpawnRewardType == Globals.AD_TYPE.Food:
-			new_plan.SatisfactionReward = new_plan.SatisfactionReward / (food_count + 1)
 		results.append(new_plan)
 	return results
 	
