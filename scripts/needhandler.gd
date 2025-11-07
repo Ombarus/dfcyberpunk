@@ -5,7 +5,7 @@ var CurrentNeeds := {
 	Globals.NEEDS.Satiety: 0.38,
 	Globals.NEEDS.Energy: 0.8,
 	Globals.NEEDS.Satisfaction: 0.3,
-	Globals.NEEDS.Richness: 0.01
+	Globals.NEEDS.Wealth: 0.01
 }
 
 func Current(need : Globals.NEEDS) -> float:
@@ -32,7 +32,7 @@ func GetRewardScoreFromPlan(plan : ActionPlan) -> float:
 	score += plan.GetExpectedReward(Globals.NEEDS.Satiety) / max(CurrentNeeds[Globals.NEEDS.Satiety], 0.000001)
 	score += plan.GetExpectedReward(Globals.NEEDS.Energy) / max(CurrentNeeds[Globals.NEEDS.Energy], 0.000001)
 	score += plan.GetExpectedReward(Globals.NEEDS.Satisfaction) / max(CurrentNeeds[Globals.NEEDS.Satisfaction], 0.000001)
-	score += plan.GetExpectedReward(Globals.NEEDS.Richness) / max(CurrentNeeds[Globals.NEEDS.Richness], 0.000001)
+	score += plan.GetExpectedReward(Globals.NEEDS.Wealth) / max(CurrentNeeds[Globals.NEEDS.Wealth], 0.000001)
 	return score
 
 

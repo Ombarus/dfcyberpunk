@@ -19,7 +19,7 @@ func _ready() -> void:
 	_eat_me.EnergyReward = 0.0
 	_eat_me.SatietyReward = override_satiety
 	_eat_me.SatisfactionReward = override_satisfaction
-	_eat_me.RichnessReward = 0.0
+	_eat_me.WealthReward = 0.0
 	
 	_put_in_fridge = ActionPlan.new()
 	_put_in_fridge.ActionName = "GoPutFoodInFridge"

@@ -103,7 +103,7 @@ func _process(delta: float) -> void:
 				plan.GetExpectedReward(Globals.NEEDS.Satiety),
 				plan.GetExpectedReward(Globals.NEEDS.Satisfaction),
 				plan.GetExpectedReward(Globals.NEEDS.Energy),
-				plan.GetExpectedReward(Globals.NEEDS.Richness)
+				plan.GetExpectedReward(Globals.NEEDS.Wealth)
 			]
 			l.mouse_filter = Control.MOUSE_FILTER_STOP
 			self.entityPlans.add_child(l)

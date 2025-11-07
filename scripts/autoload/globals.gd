@@ -29,7 +29,7 @@ enum NEEDS {
 	Satiety,
 	Energy,
 	Satisfaction,
-	Richness
+	Wealth
 }
 
 enum SKILLS {
@@ -79,7 +79,7 @@ var REWARD_BASE := {
 		GRADE.Small: 0.01,
 		GRADE.VSmall: 0.001
 	},
-	NEEDS.Richness: {
+	NEEDS.Wealth: {
 		GRADE.VBig: 0.1, # ~100 000$
 		GRADE.Big: 0.01, # ~10 000$
 		GRADE.Medium: 0.001, # ~1 000$

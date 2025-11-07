@@ -5,7 +5,7 @@ class_name ActionPlan
 var _energyReward : float
 var _satietyReward : float
 var _satisfactionReward : float
-var _richnessReward : float
+var _wealthReward : float
 
 @export var NewEnergyReward := Globals.GRADE.Unset
 @export var EnergyAdjustPer := 1.0
@@ -13,8 +13,8 @@ var _richnessReward : float
 @export var SatietyAdjustPer := 1.0
 @export var NewSatisfactionReward := Globals.GRADE.Unset
 @export var SatisfactionAdjustPer := 1.0
-@export var NewRichnessReward := Globals.GRADE.Unset
-@export var RichnessAdjustPer := 1.0
+@export var NewWealthReward := Globals.GRADE.Unset
+@export var WealthAdjustPer := 1.0
 
 # This SpawnReward might not be necessary, maybe this
 # should be part of the ActionName
@@ -52,16 +52,16 @@ func GetExpectedReward(need : Globals.NEEDS) -> float:
 			return _satisfactionReward
 		else:
 			return Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][NewSatisfactionReward] * SatisfactionAdjustPer
-	if need == Globals.NEEDS.Richness:
-		if NewRichnessReward == Globals.GRADE.Unset:
-			return _richnessReward
+	if need == Globals.NEEDS.Wealth:
+		if NewWealthReward == Globals.GRADE.Unset:
+			return _wealthReward
 		else:
-			return Globals.REWARD_BASE[Globals.NEEDS.Richness][NewRichnessReward] * RichnessAdjustPer
+			return Globals.REWARD_BASE[Globals.NEEDS.Wealth][NewWealthReward] * WealthAdjustPer
 	return 0.0
 
 # Right now it's generic and cover all Actions
 # but the idea is to inventually be able to customize the Rewards by Ads
-# ie: Different food give more/less Satiety per second, bad job give less Richness, etc.
+# ie: Different food give more/less Satiety per second, bad job give less Wealth, etc.
 var ActualReward := [
 	{
 		"Action": "Sleep",
@@ -89,7 +89,7 @@ var ActualReward := [
 		"State": Globals.ACTION_STATE.Finished,
 		"Rewards": {
 			Globals.NEEDS.Energy: Globals.REWARD_BASE[Globals.NEEDS.Energy][Globals.GRADE.VSmall],
-			Globals.NEEDS.Richness: -Globals.REWARD_BASE[Globals.NEEDS.Richness][Globals.GRADE.VSmall]
+			Globals.NEEDS.Wealth: -Globals.REWARD_BASE[Globals.NEEDS.Wealth][Globals.GRADE.VSmall]
 		}
 	},
 	{
@@ -102,7 +102,7 @@ var ActualReward := [
 		"State": Globals.ACTION_STATE.Finished,
 		"Rewards": {
 			Globals.NEEDS.Satisfaction: Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Small],
-			Globals.NEEDS.Richness: -Globals.REWARD_BASE[Globals.NEEDS.Richness][Globals.GRADE.VSmall]
+			Globals.NEEDS.Wealth: -Globals.REWARD_BASE[Globals.NEEDS.Wealth][Globals.GRADE.VSmall]
 		}
 	},
 	{
@@ -126,7 +126,7 @@ var ActualReward := [
 		"State": Globals.ACTION_STATE.Finished,
 		"Rewards": {
 			Globals.NEEDS.Satisfaction: Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Big],
-			Globals.NEEDS.Richness: Globals.REWARD_BASE[Globals.NEEDS.Richness][Globals.GRADE.Small]
+			Globals.NEEDS.Wealth: Globals.REWARD_BASE[Globals.NEEDS.Wealth][Globals.GRADE.Small]
 		}
 	},
 	{
@@ -134,7 +134,7 @@ var ActualReward := [
 		"State": Globals.ACTION_STATE.Finished,
 		"Rewards": {
 			Globals.NEEDS.Satisfaction: Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Big],
-			Globals.NEEDS.Richness: Globals.REWARD_BASE[Globals.NEEDS.Richness][Globals.GRADE.Small]
+			Globals.NEEDS.Wealth: Globals.REWARD_BASE[Globals.NEEDS.Wealth][Globals.GRADE.Small]
 		}
 	},
 	{
@@ -142,7 +142,7 @@ var ActualReward := [
 		"State": Globals.ACTION_STATE.Finished,
 		"Rewards": {
 			Globals.NEEDS.Satisfaction: Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Big],
-			Globals.NEEDS.Richness: Globals.REWARD_BASE[Globals.NEEDS.Richness][Globals.GRADE.Small] * 2.0 # Currently 2 delivery hardcoded
+			Globals.NEEDS.Wealth: Globals.REWARD_BASE[Globals.NEEDS.Wealth][Globals.GRADE.Small] * 2.0 # Currently 2 delivery hardcoded
 		}
 	},
 	{

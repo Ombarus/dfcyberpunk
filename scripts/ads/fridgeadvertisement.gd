@@ -39,8 +39,8 @@ func _ready() -> void:
 	refill_fridge.SatietyAdjustPer = 1.0
 	refill_fridge.NewSatisfactionReward = Globals.GRADE.Small
 	refill_fridge.SatisfactionAdjustPer = 1.0
-	refill_fridge.NewRichnessReward = Globals.GRADE.VSmall
-	refill_fridge.RichnessAdjustPer = -1.0
+	refill_fridge.NewWealthReward = Globals.GRADE.VSmall
+	refill_fridge.WealthAdjustPer = -1.0
 	refill_fridge.SpawnReward = preload("res://scenes/foodstuff3d.tscn")
 	refill_fridge.SpawnRewardType = Globals.AD_TYPE.Foodstuff
 	refill_fridge.SpawnRewardCount = 5

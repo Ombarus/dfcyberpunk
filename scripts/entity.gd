@@ -700,7 +700,7 @@ func RefillFridge2(delta : float, param : Dictionary, actionDepth : int) -> int:
 		elif seq.CurState() == seq.SEQ_STATE.FINISHED:
 			seq.Reset()
 			for f : Advertisement in to_pay:
-				Needs.ApplyNeed(Globals.NEEDS.Richness, -0.00001) # 10 nuyen? (of 1M)
+				Needs.ApplyNeed(Globals.NEEDS.Wealth, -0.00001) # 10 nuyen? (of 1M)
 				f.AdMetaData["paid"] = true
 		else:
 			seq.SetContinue()
