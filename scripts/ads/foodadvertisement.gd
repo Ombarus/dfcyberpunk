@@ -16,10 +16,12 @@ func _ready() -> void:
 	super._ready()
 	_eat_me = ActionPlan.new()
 	_eat_me.ActionName = "EatSelectedFood"
-	_eat_me.EnergyReward = 0.0
-	_eat_me.SatietyReward = override_satiety
-	_eat_me.SatisfactionReward = override_satisfaction
-	_eat_me.WealthReward = 0.0
+	_eat_me._satietyReward = override_satiety
+	_eat_me._satisfactionReward = override_satisfaction
+	_eat_me.NewSatietyReward = override_satiety_grade
+	_eat_me.SatietyAdjustPer = override_satiety_per
+	_eat_me.NewSatisfactionReward = override_satisfaction_grade
+	_eat_me.SatisfactionAdjustPer = override_satisfaction_per
 	
 	_put_in_fridge = ActionPlan.new()
 	_put_in_fridge.ActionName = "GoPutFoodInFridge"
@@ -35,13 +37,19 @@ func _ready() -> void:
 			var satiety_before = data["Rewards"][Globals.NEEDS.Satiety]
 			print("%s: Satiety Before %.5f" % [self.name, satiety_before])
 			#NOTE: I don't know if I'm working with a copy or a static array here. I need to validate it's only changing the copy
-			data["Rewards"][Globals.NEEDS.Satiety] = override_satiety / 4.0
+			if override_satiety_grade == Globals.GRADE.Unset:
+				data["Rewards"][Globals.NEEDS.Satiety] = override_satiety / 4.0
+			else:
+				data["Rewards"][Globals.NEEDS.Satiety] = Globals.REWARD_BASE[Globals.NEEDS.Satiety][override_satiety_grade] * override_satiety_per
 			print("%s: Satiety After %.5f" % [self.name, data["Rewards"][Globals.NEEDS.Satiety]])
 		if data["Action"] == "Eat" and data["State"] == Globals.ACTION_STATE.Finished:
 			var satisfaction_before = data["Rewards"][Globals.NEEDS.Satisfaction]
 			print("%s: Satisfaction Before %.5f" % [self.name, satisfaction_before])
 			#NOTE: I don't know if I'm working with a copy or a static array here. I need to validate it's only changing the copy
-			data["Rewards"][Globals.NEEDS.Satisfaction] = override_satisfaction
+			if override_satisfaction_grade == Globals.GRADE.Unset:
+				data["Rewards"][Globals.NEEDS.Satisfaction] = override_satisfaction
+			else:
+				data["Rewards"][Globals.NEEDS.Satisfaction] = Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][override_satisfaction_grade] * override_satisfaction_per
 			print("%s: Satisfaction After %.5f" % [self.name, data["Rewards"][Globals.NEEDS.Satisfaction]])
 
 # Want to have somewhat dynamic plans.

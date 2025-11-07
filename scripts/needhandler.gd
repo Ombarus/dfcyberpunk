@@ -5,7 +5,13 @@ var CurrentNeeds := {
 	Globals.NEEDS.Satiety: 0.38,
 	Globals.NEEDS.Energy: 0.8,
 	Globals.NEEDS.Satisfaction: 0.3,
-	Globals.NEEDS.Wealth: 0.01
+	Globals.NEEDS.Wealth: 0.01,
+	Globals.NEEDS.Health: 1.0,
+	Globals.NEEDS.Humanity: 1.0,
+	Globals.NEEDS.Joy: 0.5,
+	Globals.NEEDS.Security: 0.5,
+	Globals.NEEDS.Curiosity: 0.5,
+	Globals.NEEDS.Comfort: 0.5
 }
 
 func Current(need : Globals.NEEDS) -> float:
@@ -29,10 +35,8 @@ func ApplyNeedOverTime(need : Globals.NEEDS, amount : float, delta : float) -> v
 
 func GetRewardScoreFromPlan(plan : ActionPlan) -> float:
 	var score := 0.0
-	score += plan.GetExpectedReward(Globals.NEEDS.Satiety) / max(CurrentNeeds[Globals.NEEDS.Satiety], 0.000001)
-	score += plan.GetExpectedReward(Globals.NEEDS.Energy) / max(CurrentNeeds[Globals.NEEDS.Energy], 0.000001)
-	score += plan.GetExpectedReward(Globals.NEEDS.Satisfaction) / max(CurrentNeeds[Globals.NEEDS.Satisfaction], 0.000001)
-	score += plan.GetExpectedReward(Globals.NEEDS.Wealth) / max(CurrentNeeds[Globals.NEEDS.Wealth], 0.000001)
+	for need_type in Globals.NEEDS.values():
+		score += plan.GetExpectedReward(need_type) / max(CurrentNeeds[need_type], 0.000001)
 	return score
 
 

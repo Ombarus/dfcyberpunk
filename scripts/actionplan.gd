@@ -2,10 +2,18 @@ extends Resource
 class_name ActionPlan
 
 @export var ActionName : String
+# This is the remnant of deprecation. I initially set the float value directly
+# I've kept it as a fallback if I ever need to set a specific value
 var _energyReward : float
 var _satietyReward : float
 var _satisfactionReward : float
 var _wealthReward : float
+var _healthReward : float
+var _humanityReward : float
+var _joyReward : float
+var _securityReward : float
+var _curiosityReward : float
+var _comfortReward : float
 
 @export var NewEnergyReward := Globals.GRADE.Unset
 @export var EnergyAdjustPer := 1.0
@@ -15,6 +23,19 @@ var _wealthReward : float
 @export var SatisfactionAdjustPer := 1.0
 @export var NewWealthReward := Globals.GRADE.Unset
 @export var WealthAdjustPer := 1.0
+
+@export var HealthReward := Globals.GRADE.Unset
+@export var HealthAdjustPer := 1.0
+@export var HumanityReward := Globals.GRADE.Unset
+@export var HumanityAdjustPer := 1.0
+@export var JoyReward := Globals.GRADE.Unset
+@export var JoyAdjustPer := 1.0
+@export var SecurityReward := Globals.GRADE.Unset
+@export var SecurityAdjustPer := 1.0
+@export var CuriosityReward := Globals.GRADE.Unset
+@export var CuriosityAdjustPer := 1.0
+@export var ComfortReward := Globals.GRADE.Unset
+@export var ComfortAdjustPer := 1.0
 
 # This SpawnReward might not be necessary, maybe this
 # should be part of the ActionName
@@ -57,6 +78,38 @@ func GetExpectedReward(need : Globals.NEEDS) -> float:
 			return _wealthReward
 		else:
 			return Globals.REWARD_BASE[Globals.NEEDS.Wealth][NewWealthReward] * WealthAdjustPer
+	if need == Globals.NEEDS.Health:
+		if HealthReward == Globals.GRADE.Unset:
+			return _healthReward
+		else:
+			return Globals.REWARD_BASE[Globals.NEEDS.Health][HealthReward] * HealthAdjustPer
+	if need == Globals.NEEDS.Humanity:
+		if HumanityReward == Globals.GRADE.Unset:
+			return _humanityReward
+		else:
+			return Globals.REWARD_BASE[Globals.NEEDS.Humanity][HumanityReward] * HumanityAdjustPer
+	if need == Globals.NEEDS.Joy:
+		if JoyReward == Globals.GRADE.Unset:
+			return _joyReward
+		else:
+			return Globals.REWARD_BASE[Globals.NEEDS.Joy][JoyReward] * JoyAdjustPer
+	if need == Globals.NEEDS.Security:
+		if SecurityReward == Globals.GRADE.Unset:
+			return _securityReward
+		else:
+			return Globals.REWARD_BASE[Globals.NEEDS.Security][SecurityReward] * SecurityAdjustPer
+	if need == Globals.NEEDS.Curiosity:
+		if CuriosityReward == Globals.GRADE.Unset:
+			return _curiosityReward
+		else:
+			return Globals.REWARD_BASE[Globals.NEEDS.Curiosity][CuriosityReward] * CuriosityAdjustPer
+	if need == Globals.NEEDS.Comfort:
+		if ComfortReward == Globals.GRADE.Unset:
+			return _comfortReward
+		else:
+			return Globals.REWARD_BASE[Globals.NEEDS.Comfort][ComfortReward] * ComfortAdjustPer
+			
+			
 	return 0.0
 
 # Right now it's generic and cover all Actions
@@ -114,7 +167,14 @@ var ActualReward := [
 		"Action": "Default",
 		"State": Globals.ACTION_STATE.Running,
 		# Satiety 0.72 / day, Energy 0.54 / day, Satisfaction 0.45 / day
-		"Rewards": {Globals.NEEDS.Satiety: -0.0008, Globals.NEEDS.Energy: -0.0006, Globals.NEEDS.Satisfaction: -0.0005} # consider 1 day = 900 seconds, 0.00111 means 1 to 0 in 100 seconds
+		 # consider 1 day = 900 seconds, 0.00111 means 1 to 0 in 100 seconds
+		"Rewards": {
+			Globals.NEEDS.Satiety: -0.0008,
+			Globals.NEEDS.Energy: -0.0006,
+			Globals.NEEDS.Satisfaction: -0.0005,
+			Globals.NEEDS.Joy: -0.0005,
+			Globals.NEEDS.Curiosity: -0.00005 # Will really depend on the personality
+		}
 	},
 	{
 		"Action": "SleepOnFloor",
