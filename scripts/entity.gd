@@ -1024,6 +1024,32 @@ func WorkAtShop(delta : float, param : Dictionary, actionDepth : int) -> int:
 		return Globals.ACTION_STATE.Finished
 	else:
 		return Globals.ACTION_STATE.Running
+		
+func ManageFactory(delta : float, param : Dictionary, actionDepth : int) -> int:
+	# 1. Get a list of Things that need worker (Maybe link the plans like I did for deliveries)
+	# 2. Post an ActionPlan "JobOffer" on the desk
+	# 3. Wait for someone to come into the office (Area3D?)
+	# 4. Create ActionPlan "WorkOnMcGuffin" attach to one of the Things that need worker
+	# 5. Set Owner to whoever is in the Area3D
+	# 6. (optional, make sure skills match)
+	return Globals.ACTION_STATE.Running
+	
+func JobOffer(delta : float, param : Dictionary, actionDepth : int) -> int:
+	# 1. Go to desk
+	# 2. "chat" with CEO
+	# 3. Done
+	return Globals.ACTION_STATE.Running
+	
+func WorkOnMcGuffin(delta : float, param : Dictionary, actionDepth : int) -> int:
+	# 1. Go to mcguffin
+	# 2. Interact with it (several seconds?)
+	# 3. Spawn McGuffin in inv
+	# 4. Bring to McGuffin2
+	# 5. Drop McGuffin into McGuffin2
+	# 6. Repeat
+	# 7. At the end, spawn foodstuff
+	# 8. (Foodstuff should be delivered to Warehouse?)
+	return Globals.ACTION_STATE.Running
 	
 
 ###################################################################################################
