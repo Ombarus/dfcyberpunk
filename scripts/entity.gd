@@ -1026,8 +1026,59 @@ func WorkAtShop(delta : float, param : Dictionary, actionDepth : int) -> int:
 		return Globals.ACTION_STATE.Running
 		
 func ManageFactory(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	var plan : ActionPlan = param.get("current_plan", null)
+	var chair : Advertisement = param.get("plan_ad", null)
+	var player_state : String = self.animState(self)
+	
+	if not is_top_of_stack:
+		return Globals.ACTION_STATE.Running
+		
+	var cur_hour = self.timeSystem.CurDateTime["hour"]
+	if cur_hour > plan.EndHour:
+		return Globals.ACTION_STATE.Finished
+		
+	var table : Advertisement = self.getFirstOfTree(Globals.AD_TYPE.Table, chair)
+	# Already waiting for job applicant
+	if not table.ActionPlans.is_empty():
+		return Globals.ACTION_STATE.Running
+	
+	# 0. Sit in office chair
+	var chair_target = self.getClosestInteract(chair)
+	if not self.isAtLocation(chair_target, 1.0):
+		param["target"] = chair_target
+		param["precision"] = 1.0
+		self.pushAction("Goto", actionDepth)
+		return Globals.ACTION_STATE.Running
+		
+	if self.isAtLocation(chair_target, 1.0) and player_state != "SitChairIdle":
+		param["obj"] = self
+		param["state"] = "SitChairIdle"
+		param["anim_transform"] = chair.global_transform
+		param["interpolate_time"] = 0.5
+		self.pushAction("TravelAnimState", actionDepth)
+		return Globals.ACTION_STATE.Running
+		
 	# 1. Get a list of Things that need worker (Maybe link the plans like I did for deliveries)
+	var next_job : Advertisement = null
+	if player_state == "SitChairIdle":
+		var job_offers_path : Array[NodePath] = chair.AdMetaData.get("job_offers", [])
+		var job_offers : Array[Advertisement] = []
+		for p in job_offers_path:
+			job_offers.push_back(get_node(p) as Advertisement)
+		for job in job_offers:
+			if job.ActionPlans.is_empty():
+				next_job = job
+				break
+		
+	 # Nothing to do, just wait until end of work day. Ain't that nice.
+	if next_job == null:
+		return Globals.ACTION_STATE.Running
+	
 	# 2. Post an ActionPlan "JobOffer" on the desk
+	var jobOfferPlan : ActionPlan = load("res://data/plans/JobOffer.tres")
+	table.ActionPlans.push_back(jobOfferPlan)
+	
 	# 3. Wait for someone to come into the office (Area3D?)
 	# 4. Create ActionPlan "WorkOnMcGuffin" attach to one of the Things that need worker
 	# 5. Set Owner to whoever is in the Area3D

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8v4svwjlvi4k"]
+
+[ext_resource type="Script" path="res://scripts/advertisement.gd" id="1_fjotk"]
+[ext_resource type="PackedScene" uid="uid://dyvooh011kse" path="res://data/models/Blender.glb" id="2_vtkgy"]
+
+[node name="Blender" type="Node3D"]
+script = ExtResource("1_fjotk")
+TagMap = {
+"advertisement": 1.0,
+"step2": 1.0
+}
+
+[node name="Blender" parent="." instance=ExtResource("2_vtkgy")]

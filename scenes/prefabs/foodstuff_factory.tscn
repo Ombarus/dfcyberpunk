@@ -1,7 +1,5 @@
-[gd_scene load_steps=34 format=3 uid="uid://bbmkd6vm8huo"]
+[gd_scene load_steps=35 format=3 uid="uid://bbmkd6vm8huo"]
 
-[ext_resource type="PackedScene" uid="uid://dyvooh011kse" path="res://data/models/Blender.glb" id="1_j5yhx"]
-[ext_resource type="PackedScene" uid="uid://d3ie0vi8yvdx8" path="res://data/models/IndustrialMixer.glb" id="2_bao7q"]
 [ext_resource type="PackedScene" uid="uid://chjfk0exg7m7y" path="res://data/models/RoadBlank.glb" id="3_fkanh"]
 [ext_resource type="PackedScene" uid="uid://ckkkaxossb5me" path="res://data/models/RoadCenter.glb" id="4_cfdis"]
 [ext_resource type="PackedScene" uid="uid://c48ee6yyy7eiu" path="res://data/models/SidewalkLeft.glb" id="5_r5srt"]
@@ -16,8 +14,10 @@
 [ext_resource type="PackedScene" uid="uid://dxa7y04pf4x2c" path="res://scenes/furnitures/wall_door_v2.tscn" id="10_djmj4"]
 [ext_resource type="PackedScene" uid="uid://kev47y2ajw15" path="res://data/models/StairMetalStraight.glb" id="11_7nnbr"]
 [ext_resource type="PackedScene" uid="uid://bm31ysxugbyy6" path="res://data/models/SkyScraperColumn.glb" id="11_bem1f"]
-[ext_resource type="PackedScene" uid="uid://cc7eh3gatv1vh" path="res://data/models/KrillVat.glb" id="12_xjkqt"]
+[ext_resource type="PackedScene" uid="uid://tev7wogaiq8h" path="res://scenes/furnitures/industrial_mixer.tscn" id="11_lsovj"]
+[ext_resource type="PackedScene" uid="uid://c8v4svwjlvi4k" path="res://scenes/furnitures/blender.tscn" id="12_pjlw6"]
 [ext_resource type="PackedScene" uid="uid://cpih5xw0mdmnv" path="res://data/models/BeamRust.glb" id="13_xoqtk"]
+[ext_resource type="PackedScene" uid="uid://c7envvfjad00v" path="res://scenes/furnitures/krill_vat.tscn" id="14_ic3ji"]
 [ext_resource type="PackedScene" uid="uid://cpxf338d3bsa6" path="res://data/models/Barrel.glb" id="15_u46ng"]
 [ext_resource type="PackedScene" uid="uid://dsgl0bqyjknb0" path="res://data/models/CardboardBox.glb" id="16_6tugh"]
 [ext_resource type="PackedScene" uid="uid://dj4rqpj6x5uct" path="res://data/models/PottedPlant.glb" id="17_cit6j"]
@@ -33,6 +33,7 @@
 [ext_resource type="Script" path="res://scripts/actionplan.gd" id="29_fvj6m"]
 [ext_resource type="PackedScene" uid="uid://do51rp00ju53t" path="res://scenes/peep.tscn" id="30_1ax7e"]
 [ext_resource type="Resource" uid="uid://dtqpy7077a4qm" path="res://data/plans/ManageFactory.tres" id="30_wfrj8"]
+[ext_resource type="Environment" uid="uid://cspehjk1qfofp" path="res://data/main_environment.tres" id="34_ac6f8"]
 
 [node name="FoodstuffFactory" type="Node3D"]
 
@@ -1168,16 +1169,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -32)
 [node name="SidewalkLeft49" parent="NorthBuilding/Floor2" instance=ExtResource("5_r5srt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -32)
 
-[node name="IndustrialMixer2" parent="NorthBuilding" instance=ExtResource("2_bao7q")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.68715, -0.1, -23.2189)
+[node name="IndustrialMixer3" parent="NorthBuilding" instance=ExtResource("11_lsovj")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.68715, 0.00758757, -23.2189)
 
-[node name="IndustrialMixer3" parent="NorthBuilding" instance=ExtResource("2_bao7q")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.68715, -0.1, -30.2189)
+[node name="IndustrialMixer4" parent="NorthBuilding" instance=ExtResource("11_lsovj")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.68715, -0.0100728, -30.2189)
 
-[node name="Blender" parent="NorthBuilding" instance=ExtResource("1_j5yhx")]
+[node name="Blender3" parent="NorthBuilding" instance=ExtResource("12_pjlw6")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2.80607, -0.0648576, -20.4667)
 
-[node name="Blender2" parent="NorthBuilding" instance=ExtResource("1_j5yhx")]
+[node name="Blender" parent="NorthBuilding" instance=ExtResource("12_pjlw6")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2.80607, -0.0656818, -25.4667)
 
 [node name="StairMetalStraight2" parent="NorthBuilding" instance=ExtResource("11_7nnbr")]
@@ -1186,28 +1187,28 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -32)
 [node name="StairMetalStraight3" parent="NorthBuilding" instance=ExtResource("11_7nnbr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3, -32)
 
-[node name="KrillVat2" parent="NorthBuilding" instance=ExtResource("12_xjkqt")]
+[node name="KrillVat10" parent="NorthBuilding" instance=ExtResource("14_ic3ji")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 6, -28)
 
-[node name="KrillVat3" parent="NorthBuilding" instance=ExtResource("12_xjkqt")]
+[node name="KrillVat11" parent="NorthBuilding" instance=ExtResource("14_ic3ji")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 6, -25)
 
-[node name="KrillVat4" parent="NorthBuilding" instance=ExtResource("12_xjkqt")]
+[node name="KrillVat12" parent="NorthBuilding" instance=ExtResource("14_ic3ji")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 6, -25)
 
-[node name="KrillVat5" parent="NorthBuilding" instance=ExtResource("12_xjkqt")]
+[node name="KrillVat13" parent="NorthBuilding" instance=ExtResource("14_ic3ji")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 6, -28)
 
-[node name="KrillVat6" parent="NorthBuilding" instance=ExtResource("12_xjkqt")]
+[node name="KrillVat14" parent="NorthBuilding" instance=ExtResource("14_ic3ji")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -28)
 
-[node name="KrillVat7" parent="NorthBuilding" instance=ExtResource("12_xjkqt")]
+[node name="KrillVat15" parent="NorthBuilding" instance=ExtResource("14_ic3ji")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -25)
 
-[node name="KrillVat8" parent="NorthBuilding" instance=ExtResource("12_xjkqt")]
+[node name="KrillVat16" parent="NorthBuilding" instance=ExtResource("14_ic3ji")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 6, -25)
 
-[node name="KrillVat9" parent="NorthBuilding" instance=ExtResource("12_xjkqt")]
+[node name="KrillVat17" parent="NorthBuilding" instance=ExtResource("14_ic3ji")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 6, -28)
 
 [node name="Barrel2" parent="NorthBuilding" instance=ExtResource("15_u46ng")]
@@ -1234,6 +1235,8 @@ transform = Transform3D(0.852316, 0, -0.523027, 0, 1, 0, 0.523027, 0, 0.852316, 
 [node name="SpotLight3D2" type="SpotLight3D" parent="NorthBuilding"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -4.81626, 5.54716, -24.5384)
 light_color = Color(0.920466, 0.877113, 0.62165, 1)
+shadow_enabled = true
+shadow_opacity = 0.65
 spot_range = 15.723
 spot_attenuation = 0.35
 spot_angle = 63.63
@@ -1242,6 +1245,8 @@ spot_angle_attenuation = 0.233259
 [node name="SpotLight3D3" type="SpotLight3D" parent="NorthBuilding"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 7.18374, 5.54716, -24.5384)
 light_color = Color(0.920466, 0.877113, 0.62165, 1)
+shadow_enabled = true
+shadow_opacity = 0.65
 spot_range = 15.723
 spot_attenuation = 0.35
 spot_angle = 63.63
@@ -2480,6 +2485,11 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -11.62
 
 [node name="Desk3" parent="WestBuilding/Floor4" instance=ExtResource("23_5kipy")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -11.6214, 0, -10)
+script = ExtResource("28_1iib3")
+Type = 9
+
+[node name="Interact01" type="Node3D" parent="WestBuilding/Floor4/Desk3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.65404)
 
 [node name="DiningTable2" parent="WestBuilding/Floor4" instance=ExtResource("27_jhlmd")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -13, 0, -6)
@@ -2511,12 +2521,18 @@ script = ExtResource("28_1iib3")
 Type = 7
 BelongTo = NodePath("../../../CEO")
 ActionPlans = Array[ExtResource("29_fvj6m")]([ExtResource("30_wfrj8")])
+AdMetaData = {
+"job_offers": [NodePath("../../../NorthBuilding/KrillVat10"), NodePath("../../../NorthBuilding/KrillVat11"), NodePath("../../../NorthBuilding/KrillVat12"), NodePath("../../../NorthBuilding/KrillVat13"), NodePath("../../../NorthBuilding/KrillVat14"), NodePath("../../../NorthBuilding/KrillVat15")]
+}
 
 [node name="Cyberdeck2" parent="WestBuilding/Floor4" instance=ExtResource("24_7mwym")]
-transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -11.6932, 0.73, -10.6225)
+transform = Transform3D(1, 0, -2.08616e-07, 0, 1, 0, 2.08616e-07, 0, 1, -11.7253, 0.73, -10.1381)
 
 [node name="Cyberdeck3" parent="WestBuilding/Floor4" instance=ExtResource("24_7mwym")]
-transform = Transform3D(0.815759, 0, 0.578391, 0, 1, 0, -0.578391, 0, 0.815759, -11.9123, 0.73, -9.45965)
+transform = Transform3D(0.815759, 0, 0.578391, 0, 1, 0, -0.578391, 0, 0.815759, -11.922, 0.73, -9.74207)
+
+[node name="Cyberdeck4" parent="WestBuilding/Floor4" instance=ExtResource("24_7mwym")]
+transform = Transform3D(0.769817, 0, -0.638264, 0, 1, 0, 0.638264, 0, 0.769817, -11.7439, 0.73, -10.4532)
 
 [node name="SidewalkLeft75" parent="WestBuilding" instance=ExtResource("5_r5srt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 15, -16)
@@ -2639,8 +2655,9 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -19, 1
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -15, 15, -8)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="WestBuilding"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -14.8163, 5.71876, -9.53844)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -14.8163, 5.71876, -8.45867)
 light_color = Color(0.920466, 0.877113, 0.62165, 1)
+shadow_enabled = true
 spot_range = 11.694
 spot_attenuation = 0.35
 spot_angle = 74.04
@@ -2649,6 +2666,7 @@ spot_angle_attenuation = 0.420448
 [node name="SpotLight3D2" type="SpotLight3D" parent="WestBuilding"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -14.8163, 11.5842, -9.53844)
 light_color = Color(0.920466, 0.877113, 0.62165, 1)
+shadow_enabled = true
 spot_range = 11.694
 spot_attenuation = 0.35
 spot_angle = 74.04
@@ -2669,3 +2687,6 @@ omni_attenuation = 0.555
 
 [node name="CEO" parent="." instance=ExtResource("30_1ax7e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.8606, 9.71419, -12.7696)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("34_ac6f8")

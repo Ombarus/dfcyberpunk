@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://tev7wogaiq8h"]
+
+[ext_resource type="Script" path="res://scripts/advertisement.gd" id="1_ms76m"]
+[ext_resource type="PackedScene" uid="uid://d3ie0vi8yvdx8" path="res://data/models/IndustrialMixer.glb" id="2_ggy5g"]
+
+[node name="IndustrialMixer" type="Node3D"]
+script = ExtResource("1_ms76m")
+TagMap = {
+"advertisement": 1.0,
+"step3": 1.0
+}
+
+[node name="IndustrialMixer2" parent="." instance=ExtResource("2_ggy5g")]
+
+[node name="Interact01" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.77431, 0, 2.04674)
