@@ -1039,6 +1039,13 @@ func ManageFactory(delta : float, param : Dictionary, actionDepth : int) -> int:
 		return Globals.ACTION_STATE.Finished
 		
 	var table : Advertisement = self.getFirstOfTree(Globals.AD_TYPE.Table, chair)
+	
+	var peep_detector := get_node("PeepDetector") as Area3D
+	for bodies in peep_detector.get_overlapping_bodies():
+		if bodies != self and not table.ActionPlans.is_empty():
+			# Hire Them!
+			pass
+	
 	# Already waiting for job applicant
 	if not table.ActionPlans.is_empty():
 		return Globals.ACTION_STATE.Running
@@ -1086,6 +1093,16 @@ func ManageFactory(delta : float, param : Dictionary, actionDepth : int) -> int:
 	return Globals.ACTION_STATE.Running
 	
 func JobOffer(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	var plan : ActionPlan = param.get("current_plan", null)
+	var ad : Advertisement = param.get("plan_ad", null)
+	
+	var ad_target = self.getClosestInteract(ad)
+	if not self.isAtLocation(ad_target, 1.0):
+		param["target"] = ad_target
+		param["precision"] = 0.5
+		self.pushAction("Goto", actionDepth)
+		return Globals.ACTION_STATE.Running
 	# 1. Go to desk
 	# 2. "chat" with CEO
 	# 3. Done

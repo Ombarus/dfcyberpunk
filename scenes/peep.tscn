@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://do51rp00ju53t"]
+[gd_scene load_steps=29 format=3 uid="uid://do51rp00ju53t"]
 
 [ext_resource type="Script" path="res://scripts/entity.gd" id="1_nu0po"]
 [ext_resource type="Script" path="res://scripts/sequencer.gd" id="2_3w7h5"]
@@ -101,8 +101,12 @@ states/Walk/position = Vector2(78, 184)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_qsww2"), "Idle", "Interact", SubResource("AnimationNodeStateMachineTransition_y51r2"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_rr0el"), "Interact", "Idle", SubResource("AnimationNodeStateMachineTransition_jo7p6"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_dndwq"), "Idle", "SitChair", SubResource("AnimationNodeStateMachineTransition_2pm1p"), "SitChair", "SitChairIdle", SubResource("AnimationNodeStateMachineTransition_mqkvg"), "Idle", "SleepBed", SubResource("AnimationNodeStateMachineTransition_attys"), "SleepBed", "SleepBedIdle", SubResource("AnimationNodeStateMachineTransition_4h8sh"), "SitChairIdle", "StandChair", SubResource("AnimationNodeStateMachineTransition_p85wi"), "StandChair", "Idle", SubResource("AnimationNodeStateMachineTransition_wj11f"), "SleepBedIdle", "WakeBed", SubResource("AnimationNodeStateMachineTransition_05m1f"), "WakeBed", "Idle", SubResource("AnimationNodeStateMachineTransition_0fb32")]
 graph_offset = Vector2(-443, -169)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_p0rmp"]
+size = Vector3(10, 3, 10)
+
 [node name="Peep1" type="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.13031, 0.422798, -3.21431)
+collision_layer = 2
+collision_mask = 3
 floor_constant_speed = true
 floor_block_on_wall = false
 floor_max_angle = 1.0472
@@ -128,3 +132,11 @@ path_desired_distance = 0.25
 target_desired_distance = 0.5
 path_height_offset = 0.25
 debug_enabled = true
+
+[node name="PeepDetector" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PeepDetector"]
+shape = SubResource("BoxShape3D_p0rmp")
