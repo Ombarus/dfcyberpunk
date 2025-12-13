@@ -1041,10 +1041,25 @@ func ManageFactory(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var table : Advertisement = self.getFirstOfTree(Globals.AD_TYPE.Table, chair)
 	
 	var peep_detector := get_node("PeepDetector") as Area3D
-	for bodies in peep_detector.get_overlapping_bodies():
-		if bodies != self and not table.ActionPlans.is_empty():
-			# Hire Them!
-			pass
+	for body in peep_detector.get_overlapping_bodies():
+		if body != self and not table.ActionPlans.is_empty():
+			var next_job : Advertisement = null
+			var job_offers_path : Array[NodePath] = chair.AdMetaData.get("job_offers", [])
+			var job_offers : Array[Advertisement] = []
+			for p in job_offers_path:
+				job_offers.push_back(get_node(p) as Advertisement)
+			for job in job_offers:
+				if job.BelongTo == body:
+					break
+				# keep iterating to make sure peep doesn't already have a job
+				if next_job == null and job.ActionPlans.is_empty():
+					next_job = job
+			if next_job != null:
+				var jobOfferPlan : ActionPlan = load("res://data/plans/WorkOnMcGuffin.tres")
+				next_job.ActionPlans.push_back(jobOfferPlan)
+				next_job.BelongTo = body
+				#TODO: Post "Talk" => "Congratulation, You're hired!"
+				return Globals.ACTION_STATE.Running
 	
 	# Already waiting for job applicant
 	if not table.ActionPlans.is_empty():
@@ -1098,12 +1113,12 @@ func JobOffer(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var ad : Advertisement = param.get("plan_ad", null)
 	
 	var ad_target = self.getClosestInteract(ad)
+	# 1. Go to desk
 	if not self.isAtLocation(ad_target, 1.0):
 		param["target"] = ad_target
 		param["precision"] = 0.5
 		self.pushAction("Goto", actionDepth)
 		return Globals.ACTION_STATE.Running
-	# 1. Go to desk
 	# 2. "chat" with CEO
 	# 3. Done
 	return Globals.ACTION_STATE.Running
