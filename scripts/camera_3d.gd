@@ -62,7 +62,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		var to = from + self.project_ray_normal(event.position) * 1000.0
 		var space_state = get_world_3d().direct_space_state
 		var query = PhysicsRayQueryParameters3D.create(from, to)
-		query.collision_mask = 1  # only layer 1
+		query.collision_mask = 0x3 # 1 and 2 (peeps are on layer 2)
 
 		var result = space_state.intersect_ray(query)
 		if result:

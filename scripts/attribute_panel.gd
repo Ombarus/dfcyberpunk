@@ -34,7 +34,7 @@ func _process(delta: float) -> void:
 	if objRef == null:
 		return
 		
-	self.position = get_viewport().get_camera_3d().unproject_position(objRef.position)
+	self.global_position = get_viewport().get_camera_3d().unproject_position(objRef.global_position)
 	
 	var is_entity = objRef is Entity
 	self.needsContainer.get_parent().visible = is_entity

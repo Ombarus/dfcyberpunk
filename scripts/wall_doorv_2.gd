@@ -12,14 +12,14 @@ func _ready() -> void:
 		(get_node("AnimationPlayer") as AnimationPlayer).play(AnimToPlay)
 		
 	if t != null:
-		nav.target_position = t.position
+		nav.target_position = t.global_position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	if t == null:
 		return
 	var next = nav.get_next_path_position()
-	var dir = (next - self.position).normalized()
+	var dir = (next - self.global_position).normalized()
 	self.velocity = dir
-	self.position += dir * delta
+	self.global_position += dir * delta
 	

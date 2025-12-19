@@ -228,7 +228,7 @@ func GoGetItem(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	var inv : Array = self.Inventory
 	
-	var target_pos : Vector3 = item.position
+	var target_pos : Vector3 = item.global_position
 	var container : Advertisement = self.getContainer(item)
 	var precision := 0.0
 	if container != null:
@@ -263,7 +263,7 @@ func GoDropItem(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	var inv : Array = self.Inventory
 	
-	var target_pos = self.position
+	var target_pos = self.global_position
 	var precision := 0.0
 	if container != null:
 		target_pos = self.getClosestInteract(container)
@@ -431,15 +431,15 @@ func Goto(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var next := nav_agent.get_next_path_position()
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	
-	var dir = (next - self.position).normalized()
+	var dir = (next - self.global_position).normalized()
 	# For some reason it's REALLY hard to keep the capsule properly
 	# aligned on the Y axis
 	# So just hack it if we run into problems
 	if abs(dir.y) > 0.8:
-		self.position.y = next.y
+		self.global_position.y = next.y
 	dir *= self.MovePixSec
 	var look_at_vec : Vector3 = next
-	look_at_vec.y = self.position.y
+	look_at_vec.y = self.global_position.y
 	var anim : AnimationPlayer = self.find_child("AnimationPlayer", true, false)
 	
 	if nav_agent.is_target_reached() or isAtLocation(nav_agent.target_position, precision):
@@ -744,13 +744,13 @@ func RefillFridge2(delta : float, param : Dictionary, actionDepth : int) -> int:
 	
 
 func Spawn(delta : float, param : Dictionary, actionDepth : int) -> int:
-	var pos : Vector3 = self.position
+	var pos : Vector3 = self.global_position
 	var pack := param["scene"] as PackedScene
 	var count : int = param.get("count", 1)
 	for i in range(count):
 		var n := pack.instantiate() as Advertisement
 		self.get_parent().add_child(n)
-		n.position = pos
+		n.global_position = pos
 		n.BelongTo = self
 		n.visible = false
 		var inv : Array = self.Inventory
@@ -1236,7 +1236,7 @@ func getPlayingAnim(param : Dictionary) -> String:
 	return param.get("last_anim", "")
 
 func isAtLocation(loc : Vector3, min_dist : float = 1.0) -> bool:
-	var p : Vector3 = self.position
+	var p : Vector3 = self.global_position
 	loc.y = 0
 	p.y = 0
 	if p.distance_squared_to(loc) <= (min_dist * min_dist):
