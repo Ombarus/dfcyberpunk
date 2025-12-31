@@ -882,12 +882,28 @@ spot_angle_attenuation = 0.420448
 
 [node name="Peep1" parent="." instance=ExtResource("22_lc0q6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 10.6764, 2)
+TagMap = {
+"advertisement": 1.0,
+"unemployed": 1.0
+}
 
 [node name="Peep2" parent="." instance=ExtResource("22_lc0q6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 7.11395, 2)
+TagMap = {
+"advertisement": 1.0,
+"unemployed": 1.0
+}
 
 [node name="Peep3" parent="." instance=ExtResource("22_lc0q6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 4.06617, 2)
+TagMap = {
+"advertisement": 1.0,
+"unemployed": 1.0
+}
 
 [node name="Peep4" parent="." instance=ExtResource("22_lc0q6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1.09202, 2)
+TagMap = {
+"advertisement": 1.0,
+"unemployed": 1.0
+}

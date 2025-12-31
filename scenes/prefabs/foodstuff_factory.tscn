@@ -1,11 +1,10 @@
-[gd_scene load_steps=35 format=3 uid="uid://bbmkd6vm8huo"]
+[gd_scene load_steps=36 format=3 uid="uid://bbmkd6vm8huo"]
 
 [ext_resource type="PackedScene" uid="uid://chjfk0exg7m7y" path="res://data/models/RoadBlank.glb" id="3_fkanh"]
 [ext_resource type="PackedScene" uid="uid://ckkkaxossb5me" path="res://data/models/RoadCenter.glb" id="4_cfdis"]
 [ext_resource type="PackedScene" uid="uid://c48ee6yyy7eiu" path="res://data/models/SidewalkLeft.glb" id="5_r5srt"]
 [ext_resource type="PackedScene" uid="uid://cq5toniusvnen" path="res://data/models/Lampost.glb" id="6_a3tel"]
 [ext_resource type="PackedScene" uid="uid://cuw4l6m6k88v" path="res://data/models/GarageDoor.glb" id="6_wt650"]
-[ext_resource type="PackedScene" uid="uid://ut1us53ubf8" path="res://data/models/WallDoorv2.glb" id="7_eaqty"]
 [ext_resource type="PackedScene" uid="uid://nclqsdv0fun8" path="res://data/models/SkyScraperWallWindowShort.glb" id="8_0cmtn"]
 [ext_resource type="PackedScene" uid="uid://dmulf3tbdyolu" path="res://data/models/FloorGrill.glb" id="9_qk77m"]
 [ext_resource type="PackedScene" uid="uid://d4g3ttcifjjc2" path="res://data/models/SkyScraperWallPlain.glb" id="9_uxdfr"]
@@ -33,6 +32,8 @@
 [ext_resource type="Script" path="res://scripts/actionplan.gd" id="29_fvj6m"]
 [ext_resource type="PackedScene" uid="uid://do51rp00ju53t" path="res://scenes/peep.tscn" id="30_1ax7e"]
 [ext_resource type="Resource" uid="uid://dtqpy7077a4qm" path="res://data/plans/ManageFactory.tres" id="30_wfrj8"]
+[ext_resource type="PackedScene" uid="uid://c15oh0t0lqxu7" path="res://data/models/Railing.glb" id="32_whd1v"]
+[ext_resource type="PackedScene" uid="uid://ro7io5uafmos" path="res://data/models/RailingEnd.glb" id="33_gvfo1"]
 [ext_resource type="Environment" uid="uid://cspehjk1qfofp" path="res://data/main_environment.tres" id="34_ac6f8"]
 
 [node name="FoodstuffFactory" type="Node3D"]
@@ -1272,7 +1273,7 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -11.2386, 15, -11.2868)
 [node name="AirCon5" parent="WestBuilding" instance=ExtResource("26_bn68q")]
 transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -12.6294, 15, -9.30491)
 
-[node name="WallDoorv22" parent="WestBuilding" instance=ExtResource("7_eaqty")]
+[node name="WallDoorV2" parent="WestBuilding" instance=ExtResource("10_djmj4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -12)
 
 [node name="SkyScraperWallWindowShort2" parent="WestBuilding" instance=ExtResource("8_0cmtn")]
@@ -2159,6 +2160,24 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 1, -2, -3, -1)
 [node name="WallPlain4" parent="WestBuilding/Floor2/Office5" instance=ExtResource("25_itqwo")]
 transform = Transform3D(-2.18557e-08, 0, 1.5, 0, 0.5, 0, -0.5, 0, -6.55671e-08, -2, -3, 1)
 
+[node name="Railing8" parent="WestBuilding/Floor2" instance=ExtResource("32_whd1v")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -13, 0, -13.8177)
+
+[node name="Railing10" parent="WestBuilding/Floor2" instance=ExtResource("32_whd1v")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -15, 0, -13.8177)
+
+[node name="RailingEnd12" parent="WestBuilding/Floor2" instance=ExtResource("33_gvfo1")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -17, 0, -13.8177)
+
+[node name="RailingEnd13" parent="WestBuilding/Floor2" instance=ExtResource("33_gvfo1")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -15, 0, -13.8177)
+
+[node name="RailingEnd15" parent="WestBuilding/Floor2" instance=ExtResource("33_gvfo1")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -13, 0, -13.8174)
+
+[node name="RailingEnd16" parent="WestBuilding/Floor2" instance=ExtResource("33_gvfo1")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -13, 0, -13.8177)
+
 [node name="Floor3" type="Node3D" parent="WestBuilding"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
 
@@ -2266,6 +2285,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -16)
 
 [node name="StairMetalStraight2" parent="WestBuilding/Floor3" instance=ExtResource("11_7nnbr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -16)
+
+[node name="Railing5" parent="WestBuilding/Floor3" instance=ExtResource("32_whd1v")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -13, 0, -13.8177)
+
+[node name="Railing7" parent="WestBuilding/Floor3" instance=ExtResource("32_whd1v")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -15, 0, -13.8177)
+
+[node name="RailingEnd7" parent="WestBuilding/Floor3" instance=ExtResource("33_gvfo1")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -17, 0, -13.8177)
+
+[node name="RailingEnd8" parent="WestBuilding/Floor3" instance=ExtResource("33_gvfo1")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -15, 0, -13.8177)
+
+[node name="RailingEnd10" parent="WestBuilding/Floor3" instance=ExtResource("33_gvfo1")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -13, 0, -13.8174)
+
+[node name="RailingEnd11" parent="WestBuilding/Floor3" instance=ExtResource("33_gvfo1")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -13, 0, -13.8177)
 
 [node name="Floor4" type="Node3D" parent="WestBuilding"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
@@ -2533,6 +2570,30 @@ transform = Transform3D(0.815759, 0, 0.578391, 0, 1, 0, -0.578391, 0, 0.815759, 
 
 [node name="Cyberdeck4" parent="WestBuilding/Floor4" instance=ExtResource("24_7mwym")]
 transform = Transform3D(0.769817, 0, -0.638264, 0, 1, 0, 0.638264, 0, 0.769817, -11.7439, 0.73, -10.4532)
+
+[node name="Railing2" parent="WestBuilding/Floor4" instance=ExtResource("32_whd1v")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -13, 0, -13.8177)
+
+[node name="Railing4" parent="WestBuilding/Floor4" instance=ExtResource("32_whd1v")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -13, 0, -13.8177)
+
+[node name="Railing3" parent="WestBuilding/Floor4" instance=ExtResource("32_whd1v")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -15, 0, -13.8177)
+
+[node name="RailingEnd2" parent="WestBuilding/Floor4" instance=ExtResource("33_gvfo1")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -17, 0, -13.8177)
+
+[node name="RailingEnd3" parent="WestBuilding/Floor4" instance=ExtResource("33_gvfo1")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -15, 0, -13.8177)
+
+[node name="RailingEnd5" parent="WestBuilding/Floor4" instance=ExtResource("33_gvfo1")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -13, 0, -15.8174)
+
+[node name="RailingEnd6" parent="WestBuilding/Floor4" instance=ExtResource("33_gvfo1")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -13, 0, -13.8174)
+
+[node name="RailingEnd4" parent="WestBuilding/Floor4" instance=ExtResource("33_gvfo1")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -13, 0, -13.8177)
 
 [node name="SidewalkLeft75" parent="WestBuilding" instance=ExtResource("5_r5srt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 15, -16)

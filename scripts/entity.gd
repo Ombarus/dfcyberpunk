@@ -1084,10 +1084,10 @@ func ManageFactory(delta : float, param : Dictionary, actionDepth : int) -> int:
 	# 1. Get a list of Things that need worker (Maybe link the plans like I did for deliveries)
 	var next_job : Advertisement = null
 	if player_state == "SitChairIdle":
-		var job_offers_path : Array[NodePath] = chair.AdMetaData.get("job_offers", [])
+		var job_offers_path : Array = chair.AdMetaData.get("job_offers", [])
 		var job_offers : Array[Advertisement] = []
 		for p in job_offers_path:
-			job_offers.push_back(get_node(p) as Advertisement)
+			job_offers.push_back(chair.get_node(p) as Advertisement)
 		for job in job_offers:
 			if job.ActionPlans.is_empty():
 				next_job = job

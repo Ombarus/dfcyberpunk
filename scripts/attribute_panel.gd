@@ -8,6 +8,7 @@ var currentAction : Label
 var entityPlans : Control
 var adInfo : Control
 var adPlans: Control
+var adOffers : Control
 var inventoryContainer : Control
 
 func _ready() -> void:
@@ -18,6 +19,7 @@ func _ready() -> void:
 	self.entityPlans = self.find_child("PlanScore", true, false)
 	self.adInfo = self.find_child("AdInfo", true, false)
 	self.adPlans = self.find_child("AdScore", true, false)
+	self.adOffers = self.find_child("AdOffers", true, false)
 	self.inventoryContainer = self.find_child("Inventory", true, false)
 	
 	var need_ref : Control = self.find_child("Need", true, false)
@@ -115,6 +117,18 @@ func _process(delta: float) -> void:
 		else:
 			belongNode.text = "Belong To: " + objRef.BelongTo.name
 		typeNode.text = "Type: " + Globals.AD_TYPE.keys()[objRef.Type]
+		# Won't include "special" plans that override getActionPlansFor()
+		var list_root : VBoxContainer = get_node("HBoxContainer/Info/AdOffers/ColorRect2/AdScore")
+		for c in list_root.get_children():
+			c.queue_free()
+		for p in objRef.ActionPlans:
+			var actionName : String = p.ActionName
+			var l : RichTextLabel = RichTextLabel.new()
+			var color := "[color=white]"
+			l.bbcode_enabled = true
+			l.text = color + actionName + "[/color]"
+			l.custom_minimum_size = Vector2(250, 20)
+			list_root.add_child(l)
 		
 func OnAdSelected_Callback(obj_ref):
 	objRef = obj_ref

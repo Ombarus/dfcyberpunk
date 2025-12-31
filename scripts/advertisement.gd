@@ -28,8 +28,7 @@ var timeSystem : WorldClock
 # Want to have somewhat dynamic plans.
 # This allow an Advertisement to recalculate reward based on who's asking
 func GetActionPlansFor(npc : Entity) -> Array:
-	var nodes : Array = get_tree().get_nodes_in_group(str(Globals.AD_TYPE.Food))
-	var food_count : int = nodes.size()
+	var isunemployed : bool = npc.TagMap.has("unemployed")
 	var results := []
 	for i in ActionPlans:
 		var plan := i as ActionPlan
@@ -38,6 +37,10 @@ func GetActionPlansFor(npc : Entity) -> Array:
 			var cur_hour = self.timeSystem.CurDateTime["hour"]
 			if cur_hour < plan.StartHour or cur_hour >= plan.EndHour:
 				continue
+		# Not sure I like hardcoding it. But the alternative is to have 
+		# a complex system of "tag matching" which I don't want to do right now
+		if plan.ActionName == "JobOffer" and not isunemployed:
+			continue
 		var new_plan := plan.duplicate()
 		results.append(new_plan)
 	return results
