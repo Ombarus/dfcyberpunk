@@ -77,16 +77,19 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	# Terrible hack to "cast" player object to CharacterBody3D
 	# Without having to make ALL Advertisement inherit from it
+	var nav_agent := self.find_child("NavigationAgent3D", true, false) as NavigationAgent3D
 	if "velocity" in self:
 		# Add the gravity.
 		var cur_anim = self.animState(self)
 		# Disable gravity when doing "special" animations (like sleeping or sitting)
 		if not self.call("is_on_floor"):
-			self.velocity += self.call("get_gravity") * delta
+			nav_agent.velocity += self.call("get_gravity") * delta
+			#self.velocity += self.call("get_gravity") * delta
 		# A bit of a hack because sometime we abort "Walk" and don't reset velocity
 		if not cur_anim in ["Walk", "Idle"]:
 			(self.get_node("CollisionShape3D") as CollisionShape3D).disabled = true
-			self.velocity = Vector3.ZERO
+			nav_agent.velocity = Vector3.ZERO
+			#self.velocity = Vector3.ZERO
 		else:
 			(self.get_node("CollisionShape3D") as CollisionShape3D).disabled = false
 		
@@ -108,11 +111,16 @@ func _physics_process(delta: float) -> void:
 		
 		# If we're not trying to walk don't do anything weird (like colliding with a bed while sleeping!)
 		if largest_col.length_squared() > 0.01 and self.velocity.length_squared() > 0.01:
-			self.velocity += largest_col * self.MovePixSec
-			pass
+			nav_agent.velocity += largest_col * self.MovePixSec
+			#self.velocity += largest_col * self.MovePixSec
 			
-		self.call("move_and_slide")
-
+		if self.name == "Peep2" and self.get_parent().name == "Dynamic":
+			print("hello")
+		#self.call("move_and_slide")
+		
+func _on_velocity_computed(safe_velocity : Vector3):
+	self.velocity = safe_velocity
+	self.call("move_and_slide")
 
 ###################################################################################################
 ## ACTION FUNCTION
@@ -430,13 +438,17 @@ func Goto(delta : float, param : Dictionary, actionDepth : int) -> int:
 	nav_agent.target_position = param["target"] as Vector3
 	var next := nav_agent.get_next_path_position()
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	var cur_pos : Vector3 = self.global_position
+	# Ignore movement in y for pathfinding
+	cur_pos.y = next.y
 	
-	var dir = (next - self.global_position).normalized()
+	var dir = (next - cur_pos).normalized()
 	# For some reason it's REALLY hard to keep the capsule properly
 	# aligned on the Y axis
 	# So just hack it if we run into problems
-	if abs(dir.y) > 0.8:
-		self.global_position.y = next.y
+	#if abs(dir.y) > 0.80:
+	#	self.global_position.y = next.y
+
 	dir *= self.MovePixSec
 	var look_at_vec : Vector3 = next
 	look_at_vec.y = self.global_position.y
@@ -466,7 +478,8 @@ func Goto(delta : float, param : Dictionary, actionDepth : int) -> int:
 		# I might have made a mistake aligning the models to Y- in Blender
 		# Seems like it becomes z+ in Godot and look_at assume Z-?
 		#self.rotate_y(deg_to_rad(180.0))
-		self.velocity = Vector3(dir.x, self.velocity.y, dir.z)
+		#self.velocity = Vector3(dir.x, self.velocity.y, dir.z)
+		nav_agent.velocity = Vector3(dir.x, self.velocity.y, dir.z)
 
 	return Globals.ACTION_STATE.Running
 

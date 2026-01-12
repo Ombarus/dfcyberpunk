@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bpldl6svmqy4v" path="res://data/models/Peep1.glb" id="3_00n07"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bpfx1"]
-radius = 0.25
+radius = 0.2
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qtky6"]
 animation = &"Idle"
@@ -131,6 +131,13 @@ anim_player = NodePath("../Peep1/AnimationPlayer")
 path_desired_distance = 0.25
 target_desired_distance = 0.5
 path_height_offset = 0.25
+avoidance_enabled = true
+height = 2.0
+radius = 0.25
+neighbor_distance = 4.0
+max_neighbors = 2
+time_horizon_agents = 2.0
+max_speed = 2.0
 debug_enabled = true
 
 [node name="PeepDetector" type="Area3D" parent="."]
@@ -140,3 +147,5 @@ collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PeepDetector"]
 shape = SubResource("BoxShape3D_p0rmp")
+
+[connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_velocity_computed"]
