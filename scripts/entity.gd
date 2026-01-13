@@ -49,6 +49,9 @@ var actionStack : Array
 var lastAction : String
 var knownPlans : Array
 
+var lastPos: Vector3
+var stuckCounter: float
+
 class ActionStep:
 	var Name : String
 	var State : Globals.ACTION_STATE
@@ -84,12 +87,10 @@ func _physics_process(delta: float) -> void:
 		# Disable gravity when doing "special" animations (like sleeping or sitting)
 		if not self.call("is_on_floor"):
 			nav_agent.velocity += self.call("get_gravity") * delta
-			#self.velocity += self.call("get_gravity") * delta
 		# A bit of a hack because sometime we abort "Walk" and don't reset velocity
 		if not cur_anim in ["Walk", "Idle"]:
 			(self.get_node("CollisionShape3D") as CollisionShape3D).disabled = true
 			nav_agent.velocity = Vector3.ZERO
-			#self.velocity = Vector3.ZERO
 		else:
 			(self.get_node("CollisionShape3D") as CollisionShape3D).disabled = false
 		
@@ -112,11 +113,6 @@ func _physics_process(delta: float) -> void:
 		# If we're not trying to walk don't do anything weird (like colliding with a bed while sleeping!)
 		if largest_col.length_squared() > 0.01 and self.velocity.length_squared() > 0.01:
 			nav_agent.velocity += largest_col * self.MovePixSec
-			#self.velocity += largest_col * self.MovePixSec
-			
-		if self.name == "Peep2" and self.get_parent().name == "Dynamic":
-			print("hello")
-		#self.call("move_and_slide")
 		
 func _on_velocity_computed(safe_velocity : Vector3):
 	self.velocity = safe_velocity
@@ -202,21 +198,8 @@ func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 	
 	self.knownPlans = collected_plans
 	
-	var best_action : Dictionary = {}
-	# Skip actions that would put the NPC at more than 100% of their need
-	# This is because otherwise sleeping would always be at the top because of
-	# How much energy it gives, even with the scale-down factor for already satisfied needs
-	# TODO: It'd be nice to integrate this steep score cutoff directly in the score calculation but I'm not sure how
-	for data in collected_plans:
-		best_action = data
-		var cur_plan := data["plan"] as ActionPlan
-		var planed_sat : float = cur_plan.GetExpectedReward(Globals.NEEDS.Satiety) + Needs.Current(Globals.NEEDS.Satiety)
-		var planed_sati : float = cur_plan.GetExpectedReward(Globals.NEEDS.Satisfaction) + Needs.Current(Globals.NEEDS.Satisfaction) 
-		var planed_ener : float = cur_plan.GetExpectedReward(Globals.NEEDS.Energy) + Needs.Current(Globals.NEEDS.Energy)
-		
-		if planed_sat < 1.0 and planed_sati < 1.0 and planed_ener < 1.0:
-			break
-	
+	var best_action : Dictionary = collected_plans[0]
+
 	# duplicate so we can modify properties in a unique way
 	# NOTE: might not always be the case, for example maybe a car would only ever have one active plan and the
 	#       state from the previous action would influence the current plan
@@ -480,6 +463,18 @@ func Goto(delta : float, param : Dictionary, actionDepth : int) -> int:
 		#self.rotate_y(deg_to_rad(180.0))
 		#self.velocity = Vector3(dir.x, self.velocity.y, dir.z)
 		nav_agent.velocity = Vector3(dir.x, self.velocity.y, dir.z)
+	
+	# Another hack to try to avoid NPC getting stuck by NavMesh logic
+	var last_speed : float = (self.global_position - self.lastPos).length() / delta # m/sec
+	if last_speed < self.MovePixSec / 10.0:
+		self.stuckCounter += delta
+	else:
+		self.stuckCounter = 0.0
+		
+	self.lastPos = self.global_position
+	
+	if self.stuckCounter >= 3.0: # arbitrary, if we haven't move for 3 seconds, do something drastic
+		self.global_position = next
 
 	return Globals.ACTION_STATE.Running
 

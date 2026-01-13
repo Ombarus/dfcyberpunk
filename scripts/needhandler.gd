@@ -36,7 +36,14 @@ func ApplyNeedOverTime(need : Globals.NEEDS, amount : float, delta : float) -> v
 func GetRewardScoreFromPlan(plan : ActionPlan) -> float:
 	var score := 0.0
 	for need_type in Globals.NEEDS.values():
-		score += plan.GetExpectedReward(need_type) / max(CurrentNeeds[need_type], 0.000001)
+		var expected_reward : float = plan.GetExpectedReward(need_type)
+		if CurrentNeeds[need_type] + expected_reward > 1.0:
+			# Avoid selecting a plan that would put us above 1.0
+			# This is because otherwise sleeping would always be at the top because of
+			# How much energy it gives, even with the scale-down factor for already satisfied needs
+			# We might need to be a little more subtle at some point
+			score -= 1000
+		score += expected_reward / max(CurrentNeeds[need_type], 0.000001)
 	return score
 
 
