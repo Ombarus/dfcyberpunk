@@ -1052,10 +1052,10 @@ func ManageFactory(delta : float, param : Dictionary, actionDepth : int) -> int:
 	for body in peep_detector.get_overlapping_bodies():
 		if body != self and not table.ActionPlans.is_empty():
 			var next_job : Advertisement = null
-			var job_offers_path : Array[NodePath] = chair.AdMetaData.get("job_offers", [])
+			var job_offers_path : Array = chair.AdMetaData.get("job_offers", [])
 			var job_offers : Array[Advertisement] = []
 			for p in job_offers_path:
-				job_offers.push_back(get_node(p) as Advertisement)
+				job_offers.push_back(chair.get_node(p) as Advertisement)
 			for job in job_offers:
 				if job.BelongTo == body:
 					break
@@ -1124,12 +1124,12 @@ func JobOffer(delta : float, param : Dictionary, actionDepth : int) -> int:
 	# 1. Go to desk
 	if not self.isAtLocation(ad_target, 1.0):
 		param["target"] = ad_target
-		param["precision"] = 0.5
+		param["precision"] = 1.0
 		self.pushAction("Goto", actionDepth)
 		return Globals.ACTION_STATE.Running
 	# 2. "chat" with CEO
 	# 3. Done
-	return Globals.ACTION_STATE.Running
+	return Globals.ACTION_STATE.Finished
 	
 func WorkOnMcGuffin(delta : float, param : Dictionary, actionDepth : int) -> int:
 	# 1. Go to mcguffin

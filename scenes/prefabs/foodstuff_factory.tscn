@@ -2518,10 +2518,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 3, -14)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 3, -16)
 
 [node name="Desk2" parent="WestBuilding/Floor4" instance=ExtResource("23_5kipy")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -11.6214, 0, -11)
+transform = Transform3D(-4.37114e-08, 0, -1.2, 0, 1, 0, 1, 0, -5.24537e-08, -11.6214, 0, -11)
 
 [node name="Desk3" parent="WestBuilding/Floor4" instance=ExtResource("23_5kipy")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -11.6214, 0, -10)
+transform = Transform3D(-4.37114e-08, 0, -1.2, 0, 1, 0, 1, 0, -5.24537e-08, -11.6214, 0, -10)
 script = ExtResource("28_1iib3")
 Type = 9
 
@@ -2566,10 +2566,10 @@ AdMetaData = {
 transform = Transform3D(1, 0, -2.08616e-07, 0, 1, 0, 2.08616e-07, 0, 1, -11.7253, 0.73, -10.1381)
 
 [node name="Cyberdeck3" parent="WestBuilding/Floor4" instance=ExtResource("24_7mwym")]
-transform = Transform3D(0.815759, 0, 0.578391, 0, 1, 0, -0.578391, 0, 0.815759, -11.922, 0.73, -9.74207)
+transform = Transform3D(1.08741, 0, 0.770996, 0, 1.333, 0, -0.770996, 0, 1.08741, -11.922, 0.73, -9.74207)
 
 [node name="Cyberdeck4" parent="WestBuilding/Floor4" instance=ExtResource("24_7mwym")]
-transform = Transform3D(0.769817, 0, -0.638264, 0, 1, 0, 0.638264, 0, 0.769817, -11.7439, 0.73, -10.4532)
+transform = Transform3D(1.34718, 0, -1.11696, 0, 1.75, 0, 1.11696, 0, 1.34718, -11.6169, 0.73, -10.7041)
 
 [node name="Railing2" parent="WestBuilding/Floor4" instance=ExtResource("32_whd1v")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -13, 0, -13.8177)

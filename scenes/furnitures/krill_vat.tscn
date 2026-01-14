@@ -1,13 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7envvfjad00v"]
+[gd_scene load_steps=4 format=3 uid="uid://c7envvfjad00v"]
 
-[ext_resource type="Script" path="res://scripts/advertisement.gd" id="1_wbd5g"]
+[ext_resource type="Script" path="res://scripts/ads/vatadvertisement.gd" id="1_v4x44"]
+[ext_resource type="PackedScene" uid="uid://c1kyhiw28s0wh" path="res://scenes/mcguffin.tscn" id="2_hskkd"]
 [ext_resource type="PackedScene" uid="uid://cc7eh3gatv1vh" path="res://data/models/KrillVat.glb" id="2_xvle0"]
 
 [node name="KrillVat" type="Node3D"]
-script = ExtResource("1_wbd5g")
+script = ExtResource("1_v4x44")
+pack = ExtResource("2_hskkd")
 TagMap = {
 "advertisement": 1.0,
 "step1": 1.0
 }
 
 [node name="KrillVat2" parent="." instance=ExtResource("2_xvle0")]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 60.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -102,7 +102,7 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(-443, -169)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p0rmp"]
-size = Vector3(10, 3, 10)
+size = Vector3(3, 3, 5)
 
 [node name="Peep1" type="CharacterBody3D"]
 collision_layer = 2
@@ -146,6 +146,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PeepDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 shape = SubResource("BoxShape3D_p0rmp")
 
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_velocity_computed"]

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1kyhiw28s0wh"]
+
+[ext_resource type="Script" path="res://scripts/advertisement.gd" id="1_vtbtt"]
+[ext_resource type="PackedScene" uid="uid://cfjk1xevfthyr" path="res://data/models/McGuffin.glb" id="2_soa51"]
+
+[node name="Parts" type="Node3D"]
+script = ExtResource("1_vtbtt")
+
+[node name="McGuffin2" parent="." instance=ExtResource("2_soa51")]

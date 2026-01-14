@@ -103,8 +103,8 @@ shader_parameter/base = ExtResource("38_7hk0u")
 script = ExtResource("1_ol7km")
 CurDateTime = {
 "day": 1,
-"hour": 17,
-"minute": 0,
+"hour": 10,
+"minute": 5,
 "month": 1,
 "second": 0,
 "year": 2035
