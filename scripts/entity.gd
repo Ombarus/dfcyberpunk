@@ -48,20 +48,16 @@ var curParam : Dictionary
 var actionStack : Array
 var lastAction : String
 var knownPlans : Array
+var messagingSystem : Messaging
 
 var lastPos: Vector3
 var stuckCounter: float
-
-class ActionStep:
-	var Name : String
-	var State : Globals.ACTION_STATE
-	var Metadata : Dictionary
-
 
 func _ready() -> void:
 	super._ready()
 	self.actionStack = []
 	self.timeSystem = self.get_tree().root.find_child("WorldClock", true, false)
+	self.messagingSystem = self.get_tree().root.find_child("Messaging", true, false)
 
 func _process(delta: float) -> void:
 	if self.actionStack.size() == 0:
@@ -445,6 +441,7 @@ func Goto(delta : float, param : Dictionary, actionDepth : int) -> int:
 		#self.position = nav_agent.target_position
 		self.velocity = Vector3.ZERO
 		if self.animState(self) == "Idle" and is_top_of_stack:
+			self.messagingSystem.Say(self, "I've reached my destination!")
 			return Globals.ACTION_STATE.Finished
 		else:
 			return Globals.ACTION_STATE.Running
@@ -1066,7 +1063,7 @@ func ManageFactory(delta : float, param : Dictionary, actionDepth : int) -> int:
 				var jobOfferPlan : ActionPlan = load("res://data/plans/WorkOnMcGuffin.tres")
 				next_job.ActionPlans.push_back(jobOfferPlan)
 				next_job.BelongTo = body
-				#TODO: Post "Talk" => "Congratulation, You're hired!"
+				self.messagingSystem.Say(self, "Congratulation, You're hired!")
 				return Globals.ACTION_STATE.Running
 	
 	# Already waiting for job applicant
@@ -1117,6 +1114,10 @@ func ManageFactory(delta : float, param : Dictionary, actionDepth : int) -> int:
 	
 func JobOffer(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	
+	if not is_top_of_stack:
+		return Globals.ACTION_STATE.Running
+	
 	var plan : ActionPlan = param.get("current_plan", null)
 	var ad : Advertisement = param.get("plan_ad", null)
 	
@@ -1127,9 +1128,17 @@ func JobOffer(delta : float, param : Dictionary, actionDepth : int) -> int:
 		param["precision"] = 1.0
 		self.pushAction("Goto", actionDepth)
 		return Globals.ACTION_STATE.Running
+	
 	# 2. "chat" with CEO
-	# 3. Done
-	return Globals.ACTION_STATE.Finished
+	var heard := self.messagingSystem.Listen(self)
+	for m in heard:
+		if m.Text.contains("hired"):
+			# 3. Done
+			self.TagMap.erase("unemployed")
+			return Globals.ACTION_STATE.Finished
+			
+	# wait for CEO to talk
+	return Globals.ACTION_STATE.Running
 	
 func WorkOnMcGuffin(delta : float, param : Dictionary, actionDepth : int) -> int:
 	# 1. Go to mcguffin

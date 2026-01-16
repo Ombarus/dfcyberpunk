@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://jndmy02i7f13"]
+
+[node name="TextBubble" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1664.0
+offset_bottom = -936.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 1
+offset_top = -23.0
+offset_right = 100.0
+pivot_offset = Vector2(0, 23)
+text = "Hello"
+fit_content = true

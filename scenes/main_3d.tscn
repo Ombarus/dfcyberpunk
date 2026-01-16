@@ -1,10 +1,12 @@
-[gd_scene load_steps=63 format=3 uid="uid://8qm8xqhjvjw5"]
+[gd_scene load_steps=65 format=3 uid="uid://8qm8xqhjvjw5"]
 
 [ext_resource type="PackedScene" uid="uid://ckkkaxossb5me" path="res://data/models/RoadCenter.glb" id="1_3innq"]
 [ext_resource type="Script" path="res://scripts/world_clock.gd" id="1_ol7km"]
 [ext_resource type="Script" path="res://scripts/camera_3d.gd" id="1_v6ick"]
+[ext_resource type="Script" path="res://scripts/messaging.gd" id="2_ofj32"]
 [ext_resource type="PackedScene" uid="uid://d2ha23ap0m16j" path="res://data/models/RoadLeft.glb" id="2_sv3ae"]
 [ext_resource type="PackedScene" uid="uid://c48ee6yyy7eiu" path="res://data/models/SidewalkLeft.glb" id="3_4b6ik"]
+[ext_resource type="PackedScene" uid="uid://jndmy02i7f13" path="res://scenes/text_bubble.tscn" id="3_4wg5t"]
 [ext_resource type="Environment" uid="uid://cspehjk1qfofp" path="res://data/main_environment.tres" id="3_kiy8e"]
 [ext_resource type="PackedScene" uid="uid://ciuheo5ao43vg" path="res://data/models/SidewalkCrackedLeft.glb" id="4_vig16"]
 [ext_resource type="PackedScene" uid="uid://chjfk0exg7m7y" path="res://data/models/RoadBlank.glb" id="5_2x4bw"]
@@ -109,6 +111,10 @@ CurDateTime = {
 "second": 0,
 "year": 2035
 }
+
+[node name="Messaging" type="Node" parent="Systems"]
+script = ExtResource("2_ofj32")
+BubbleScene = ExtResource("3_4wg5t")
 
 [node name="LookAt" type="Node3D" parent="."]
 
