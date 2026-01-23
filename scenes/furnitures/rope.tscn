@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://c55xvxl0rmwq4"]
+
+[ext_resource type="Script" path="res://scripts/rope.gd" id="1_75tsw"]
+[ext_resource type="Material" uid="uid://182or8dbvno2" path="res://data/textures/ImphenziaPixPalMaterial.tres" id="1_c1pwv"]
+
+[node name="Rope" type="MeshInstance3D"]
+material_override = ExtResource("1_c1pwv")
+script = ExtResource("1_75tsw")

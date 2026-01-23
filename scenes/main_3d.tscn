@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://8qm8xqhjvjw5"]
+[gd_scene load_steps=69 format=4 uid="uid://8qm8xqhjvjw5"]
 
 [ext_resource type="PackedScene" uid="uid://ckkkaxossb5me" path="res://data/models/RoadCenter.glb" id="1_3innq"]
 [ext_resource type="Script" path="res://scripts/world_clock.gd" id="1_ol7km"]
@@ -61,6 +61,7 @@
 [ext_resource type="PackedScene" uid="uid://cq5toniusvnen" path="res://data/models/Lampost.glb" id="41_87j0d"]
 [ext_resource type="PackedScene" uid="uid://bbmkd6vm8huo" path="res://scenes/prefabs/foodstuff_factory.tscn" id="49_aebg8"]
 [ext_resource type="PackedScene" uid="uid://b8gkdn5nrnwks" path="res://scenes/prefabs/appartment.tscn" id="54_g72lk"]
+[ext_resource type="PackedScene" uid="uid://c55xvxl0rmwq4" path="res://scenes/furnitures/rope.tscn" id="61_pnpkp"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hd65l"]
 radius = 5.0
@@ -97,6 +98,25 @@ shader_parameter/fiber_scale = 120.0
 shader_parameter/rim_color = Color(0, 0, 0, 1)
 shader_parameter/mix_texture = 1.0
 shader_parameter/base = ExtResource("38_7hk0u")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_tuk6y"]
+_surfaces = [{
+"aabb": AABB(-4.55118, 0.465645, -15.5875, 9.78648, 7.70917, 19.4812),
+"attribute_data": PackedByteArray("zcxMPs3MTD7NzEw+zcxMPs3MTD7NzEw+zcxMPs3MTD7NzEw+zcxMPs3MTD7NzEw+zcxMPs3MTD7NzEw+zcxMPs3MTD7NzEw+zcxMPs3MTD7NzEw+zcxMPs3MTD7NzEw+zcxMPs3MTD7NzEw+zcxMPs3MTD7NzEw+zcxMPs3MTD7NzEw+zcxMPs3MTD7NzEw+zcxMPs3MTD7NzEw+zcxMPs3MTD7NzEw+zcxMPs3MTD7NzEw+zcxMPs3MTD7NzEw+zcxMPs3MTD7NzEw+zcxMPs3MTD7NzEw+zcxMPs3MTD7NzEw+zcxMPs3MTD7NzEw+zcxMPs3MTD7NzEw+zcxMPs3MTD7NzEw+zcxMPs3MTD7NzEw+zcxMPs3MTD7NzEw+zcxMPs3MTD7NzEw+zcxMPs3MTD7NzEw+zcxMPs3MTD7NzEw+zcxMPs3MTD7NzEw+zcxMPs3MTD7NzEw+zcxMPg=="),
+"format": 34359742487,
+"index_count": 240,
+"index_data": PackedByteArray("AAAEAAEAAQAEAAUAAQAFAAIAAgAFAAYAAgAGAAMAAwAGAAcAAwAHAAAAAAAHAAQABAAIAAUABQAIAAkABQAJAAYABgAJAAoABgAKAAcABwAKAAsABwALAAQABAALAAgACAAMAAkACQAMAA0ACQANAAoACgANAA4ACgAOAAsACwAOAA8ACwAPAAgACAAPAAwADAAQAA0ADQAQABEADQARAA4ADgARABIADgASAA8ADwASABMADwATAAwADAATABAAEAAUABEAEQAUABUAEQAVABIAEgAVABYAEgAWABMAEwAWABcAEwAXABAAEAAXABQAFAAYABUAFQAYABkAFQAZABYAFgAZABoAFgAaABcAFwAaABsAFwAbABQAFAAbABgAGAAcABkAGQAcAB0AGQAdABoAGgAdAB4AGgAeABsAGwAeAB8AGwAfABgAGAAfABwAHAAgAB0AHQAgACEAHQAhAB4AHgAhACIAHgAiAB8AHwAiACMAHwAjABwAHAAjACAAIAAkACEAIQAkACUAIQAlACIAIgAlACYAIgAmACMAIwAmACcAIwAnACAAIAAnACQAJAAoACUAJQAoACkAJQApACYAJgApACoAJgAqACcAJwAqACsAJwArACQAJAArACgA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 44,
+"vertex_data": PackedByteArray("+xORwHhvAT90rXhAT36QwPij+D6AM3lAmw2RwABp7j4AlHhAR6ORwPij+D70DXhARcZdwLRyLT8LXeA/c5JcwLRaKD9SR+E/k6hdwLRCIz+B5t8/ZdxewLRaKD86/N4/QsAawMDbez8z06y+5oMZwMjNdj97sqm+fJEawNC/cT8fvq++2M0bwMjNdj/X3rK+LyOyv+Qetj/8tRjAXpmvvzyfsz/2YhjAb6Oxv5QfsT98NRnAQC20vzyfsz+CiBnAFrnFvrgl/z88lYzA1027vriv/D80dIzAIjLDvrg5+j/y5YzAYZ3Nvriv/D/6Bo3A5kMZP6J1LEDMfcvADZseP5xAK0AiZcvAcMoaP5YLKkA+38vASXMVP5xAK0Do98vA2g7IP+izYUCuigTB2MrKP/iFYEByggTB9PLIPwhYX0CYwwTB9jbGP/iFYEDUywTBqmsgQNOoj0CwrSLBo9EhQO0Vj0BvqSLBqu0gQAeDjkCQ7iLBsYcfQO0Vj0DR8iLB7XtbQDytskAIJ0DBlulcQOYeskCdJkDBTQ1cQJCQsUCUb0DBpJ9aQOYeskD/b0DBl5qKQOrw2UA39VzBGFWLQJRn2UB3+FzBoeqKQD7e2EAZRV3BIDCKQJRn2UDZQV3BuNymQArMAkEzKXnBl4enQMZ+AkHZHHnBfg2nQIIxAkHhWXnBn2KmQMZ+AkE7ZnnBpH3w+EcHur5G1f9/ZVvUtg6HWgJHB7q+AABGVWVb1LbeeqDwcRD7vEbV/39lW9S2XY8hBXEQ+7wAAEZVZVvUtmR4Nek0GSm7RtX/f2Vb1LbJlpsHNBkpuwAAuKplW9S2KHaF4pohRrlG1f9/ZVvUtnmd1gmaIUa5AAC4qmVb1LYhdHHcqSlWt0bV/39lW9S2jaPdC6kpVrcAALiqZVvUtkZy4NZsMVq1RtX/f2Vb1LYeqbkNbDFatQAAuKplW9S2j3C90ek4VLNG1f9/ZVvUtkCucA/pOFSzAABGVWVb1Lb3bvnMKEBFsUbV/39lW9S2BbMHEShARbEAAEZVZVvUtntthMgvRy2vRtX/f2Vb1LZ5t4QSL0ctrwAARlVlW9S2FWxVxARODK1G1f9/ZVvUtqm76RMETgytAABGVWVb1LZIcufWYjFdtUbV/39lW9S2F6m3DWIxXbUAAEZVZVvUtg==")
+}]
+
+[sub_resource type="SphereMesh" id="SphereMesh_jvbdr"]
+radius = 0.1
+height = 0.2
+radial_segments = 16
+rings = 8
 
 [node name="Main3D" type="Node3D"]
 
@@ -2510,5 +2530,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.78338, 3.51476, -3.11407)
 
 [node name="Peep3" parent="Dynamic" instance=ExtResource("35_8tejs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.13031, 7.4228, -3.21431)
+
+[node name="Rope" parent="Dynamic" instance=ExtResource("61_pnpkp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7298, 0)
+mesh = SubResource("ArrayMesh_tuk6y")
+A = 0.3
+Radius = 0.02
+Sides = 4
+UV = Vector2(0.2, 0.2)
+
+[node name="Node3D2" type="MeshInstance3D" parent="Dynamic/Rope"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5333, 0.505826, 3.88481)
+mesh = SubResource("SphereMesh_jvbdr")
+
+[node name="Node3D3" type="MeshInstance3D" parent="Dynamic/Rope"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.21742, 8.17615, -15.5785)
+mesh = SubResource("SphereMesh_jvbdr")
 
 [node name="HUD" parent="." instance=ExtResource("27_gevlh")]
