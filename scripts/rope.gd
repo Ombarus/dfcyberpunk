@@ -57,7 +57,7 @@ func _process(delta: float) -> void:
 		return
 	var n1 : Node3D = self.get_child(0)
 	var n2 : Node3D = self.get_child(1)
-	if self.PrevPos1 != n1.global_position or self.PrevPos2 != n2.global_position:
+	if self.PrevPos1 != n1.position or self.PrevPos2 != n2.position:
 		refresh_rope()
 	
 
@@ -66,8 +66,8 @@ func refresh_rope():
 		return
 	var n1 : Node3D = self.get_child(0)
 	var n2 : Node3D = self.get_child(1)
-	var start : Vector3 = n1.global_position
-	var end : Vector3 = n2.global_position
+	var start : Vector3 = n1.position
+	var end : Vector3 = n2.position
 	
 	var xz_start := start
 	xz_start.y = 0
@@ -86,8 +86,8 @@ func refresh_rope():
 	var y0 = -a * cosh(x0 / a)
 	
 	draw_catenary_rope_v2(0, x2, x0, y0, a, self.Radius, self.Segments, self.Sides)
-	self.PrevPos1 = n1.global_position
-	self.PrevPos2 = n2.global_position
+	self.PrevPos1 = n1.position
+	self.PrevPos2 = n2.position
 
 func solve_catenary_rope(
 	x2: float,
@@ -164,7 +164,7 @@ func build_tube_mesh(
 	var uvs: PackedVector2Array = []
 	var n1 : Node3D = self.get_child(0)
 	var n2 : Node3D = self.get_child(1)
-	var offset_transform : Transform3D = segment_to_segment_trasnform_v2(points[0], points[points.size()-1], n1.global_position, n2.global_position)
+	var offset_transform : Transform3D = segment_to_segment_trasnform_v2(points[0], points[points.size()-1], n1.position, n2.position)
 
 	var ring_count = points.size()
 	var ring_size = sides
@@ -255,7 +255,8 @@ func segment_to_segment_trasnform_v2(
 	v2 = v2.normalized()
 	
 	var angle = v1.angle_to(v2)
-	var rot = Basis(Vector3.UP, angle)
+	var crossp = v1.cross(v2).normalized()
+	var rot = Basis(crossp, angle)
 	var trans = p3 - p1
 	
 	return Transform3D(rot, trans)
