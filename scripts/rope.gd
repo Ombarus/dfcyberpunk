@@ -2,11 +2,15 @@
 extends MeshInstance3D
 class_name Rope
 
+var PrevPos1 : Vector3
+var PrevPos2 : Vector3
+
 @export var A : float = 3.0:
 	set(value):
-		A = value
-		if Engine.is_editor_hint():
-			refresh_rope()
+		if A > 1.0:
+			A = value
+			if Engine.is_editor_hint():
+				refresh_rope()
 	get:
 		return A
 @export var Radius : float = 0.2:
@@ -41,54 +45,65 @@ class_name Rope
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	refresh_rope()
-
-func refresh_rope():
-	print("hello")
+	
+func _enter_tree() -> void:
+	if Engine.is_editor_hint():
+		self.set_process(true)
+	else:
+		self.set_process(false)
+		
+func _process(delta: float) -> void:
 	if self.get_child_count() < 2:
 		return
 	var n1 : Node3D = self.get_child(0)
 	var n2 : Node3D = self.get_child(1)
-	create_catenary_rope_v6(n1.global_position, n2.global_position, self.A, self.Radius, self.Segments, self.Sides)
+	if self.PrevPos1 != n1.global_position or self.PrevPos2 != n2.global_position:
+		refresh_rope()
+	
 
-func create_catenary_rope_v6(
-	start: Vector3,
-	end: Vector3,
-	drop: float,
-	radius: float,
-	segments: int,
-	sides: int
-) -> void:
-	var x1 = start.x
-	var x2 = end.x
-	var x12swapped = false
-	var x12offset = 0.0
-	if x1 > x2:
-		x2 = start.x
-		x1 = end.x
-		x12swapped = true
-	if x1 != 0:
-		x12offset = x1
-		x2 = x2 - x1
-		x1 = 0.0
-	var y1 = start.y
-	var y2 = end.y
-	var y12offset = 0.0
-	if y1 != 0:
-		y12offset = y1
-		y2 = y2 - y1
-		y1 = 0.0
-	var sehne = sqrt((x2 * x2) + (y2 * y2))
-	var L := (end - start).length()
-	L *= drop
+func refresh_rope():
+	if self.get_child_count() < 2:
+		return
+	var n1 : Node3D = self.get_child(0)
+	var n2 : Node3D = self.get_child(1)
+	var start : Vector3 = n1.global_position
+	var end : Vector3 = n2.global_position
+	
+	var xz_start := start
+	xz_start.y = 0
+	var xz_end := end
+	xz_end.y = 0
+	var x1 = 0
+	var x2 = (xz_start - xz_end).length()
+	var y1 = 0
+	var y2 = end.y - start.y
+	var L := sqrt((x2 * x2) + (y2 * y2))
+	L *= self.A
+	
+	var a = solve_catenary_rope(x2, y2, L)
+	
+	var x0 = (x2 / 2) - a * atanh(y2 / L)
+	var y0 = -a * cosh(x0 / a)
+	
+	draw_catenary_rope_v2(0, x2, x0, y0, a, self.Radius, self.Segments, self.Sides)
+	self.PrevPos1 = n1.global_position
+	self.PrevPos2 = n2.global_position
+
+func solve_catenary_rope(
+	x2: float,
+	y2: float,
+	L: float
+) -> float:
+	var x1 := 0.0
+	var y1 := 0.0
+
 	var a = L
 	var term1 := 0.0
 	var term2 := 1.0
 	var maxiter : int = 4
 	var step : float = 1.0
 	for i in range(maxiter):
-		print("iter %d" % [i])
 		while term1 < term2:
-			print("%.5f: %.3f" % [step, a])
 			a = a - step
 			if a > 0:
 				term1 = sinh(x2 / (2 * a))
@@ -100,31 +115,13 @@ func create_catenary_rope_v6(
 				break
 		step = step / 10.0
 		while term2 < term1:
-			print("%.5f: %.3f" % [step, a])
 			a = a + step
 			term1 = sinh(x2 / (2 * a))
 			term2 = sqrt((L * L) - (y2 * y2)) / (2 * a)
 		step = step / 10.0
 
-	var x0 = (x2 / 2) - a * atanh(y2 / L)
-	var y0 = -a * cosh(x0 / a)
-	var xm = x0 + (a * sinh(y2 / x2))
-	var ym = y_x(xm, a, x0, y0)
-	var dhmax = ((y2 * xm) / x2) - y_x(xm, a, x0, y0)
-	var x1delta = x2 / 1000
-	var x2delta = x2 - x1delta
-	var y1delta = y_x(x1delta, a, x0, y0)
-	var y2delta = y_x(x2delta, a, x0, y0) - y2
-	var alpha1 = atan(y1delta / x1delta) * 180 / PI
-	var alpha2 = atan(y2delta / (x1delta)) * 180 / PI
-	
-	### CREATE GRAPH
-	
-	
-	
 	print("L=%.3f, x1=%.3f, x2=%.3f, a=%.3f" % [L, x1, x2, a])
-	
-	draw_catenary_rope_v2(0, x2, x0, y0, a, self.Radius, self.Segments, self.Sides)
+	return a
 
 func y_x(x, a, x0, y0):
 	var val = y0 + a * cosh((x - x0) / a)
@@ -208,8 +205,8 @@ func build_tube_mesh(
 		for j in sides:
 			var angle = angles[j]
 			var dir = cos(angle) * normal + sin(angle) * binormal
-			var v : Vector3 = (offset_transform * p) + dir * radius
-			#v = offset_transform * v
+			var v : Vector3 = p + dir * radius
+			v = offset_transform * v
 			vertices.append(v)
 			normals.append(dir)
 			uvs.append(self.UV)
