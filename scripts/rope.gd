@@ -164,7 +164,7 @@ func build_tube_mesh(
 	var uvs: PackedVector2Array = []
 	var n1 : Node3D = self.get_child(0)
 	var n2 : Node3D = self.get_child(1)
-	var offset_transform : Transform3D = segment_to_segment_trasnform(points[0], points[points.size()-1], n1.global_position, n2.global_position)
+	var offset_transform : Transform3D = segment_to_segment_trasnform_v2(points[0], points[points.size()-1], n1.global_position, n2.global_position)
 
 	var ring_count = points.size()
 	var ring_size = sides
@@ -240,9 +240,8 @@ func build_tube_mesh(
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 
 	return mesh
-
-# ChatGPT
-func segment_to_segment_trasnform(
+	
+func segment_to_segment_trasnform_v2(
 	p1: Vector3,
 	p2: Vector3,
 	p3: Vector3,
@@ -250,36 +249,13 @@ func segment_to_segment_trasnform(
 ) -> Transform3D:
 	var v1 = p2 - p1
 	var v2 = p4 - p3
-
+	v1.y = 0
+	v2.y = 0
 	v1 = v1.normalized()
 	v2 = v2.normalized()
-
-	# Rotation: align v1 to v2
-	var axis = v1.cross(v2)
-	var axis_len = axis.length()
-
-	var rotation: Basis
-
-	if axis_len < 1e-6:
-		# Parallel or antiparallel
-		if v1.dot(v2) > 0.0:
-			rotation = Basis.IDENTITY
-		else:
-			# 180-degree flip around any perpendicular axis
-			var ortho = v1.cross(Vector3.UP)
-			if ortho.length() < 1e-6:
-				ortho = v1.cross(Vector3.RIGHT)
-			rotation = Basis(ortho.normalized(), PI)
-	else:
-		axis /= axis_len
-		var angle = acos(clamp(v1.dot(v2), -1.0, 1.0))
-		rotation = Basis(axis, angle)
-
-	# Translation:
-	#   p1 -> origin
-	#   rotate
-	#   move to p3
-	var translated_p1 = rotation * p1
-	var translation = p3 - translated_p1
-
-	return Transform3D(rotation, translation)
+	
+	var angle = v1.angle_to(v2)
+	var rot = Basis(Vector3.UP, angle)
+	var trans = p3 - p1
+	
+	return Transform3D(rot, trans)
