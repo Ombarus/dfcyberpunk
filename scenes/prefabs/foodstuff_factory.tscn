@@ -1190,6 +1190,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3, -32)
 
 [node name="KrillVat10" parent="NorthBuilding" instance=ExtResource("14_ic3ji")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 6, -28)
+TagMap = {
+"advertisement": 1.0,
+"step1": 0.0
+}
 
 [node name="KrillVat11" parent="NorthBuilding" instance=ExtResource("14_ic3ji")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 6, -25)

@@ -5,5 +5,9 @@
 
 [node name="Parts" type="Node3D"]
 script = ExtResource("1_vtbtt")
+TagMap = {
+"advertisement": 1.0,
+"completion": 0.0
+}
 
 [node name="McGuffin2" parent="." instance=ExtResource("2_soa51")]

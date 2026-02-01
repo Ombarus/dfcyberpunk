@@ -1047,7 +1047,8 @@ func ManageFactory(delta : float, param : Dictionary, actionDepth : int) -> int:
 	
 	var peep_detector := get_node("PeepDetector") as Area3D
 	for body in peep_detector.get_overlapping_bodies():
-		if body != self and not table.ActionPlans.is_empty():
+		var body_ad := body as Advertisement
+		if body != self and not table.ActionPlans.is_empty() and body_ad and body_ad.TagMap.has("unemployed"):
 			var next_job : Advertisement = null
 			var job_offers_path : Array = chair.AdMetaData.get("job_offers", [])
 			var job_offers : Array[Advertisement] = []
@@ -1141,6 +1142,28 @@ func JobOffer(delta : float, param : Dictionary, actionDepth : int) -> int:
 	return Globals.ACTION_STATE.Running
 	
 func WorkOnMcGuffin(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	var plan : ActionPlan = param.get("current_plan", null)
+	var plan_ad : Advertisement = param.get("plan_ad", null)
+	
+	if not is_top_of_stack:
+		return Globals.ACTION_STATE.Running
+		
+	# For now, just uglily collect useful ads
+	# also force 3 steps, so ugly!
+	var machines := [[], [], []]
+	var factory_root = plan_ad.get_parent()
+	for c in factory_root.get_children():
+		var machine_ad = c as Advertisement
+		if machine_ad != null and machine_ad.TagMap.has("step1"):
+			machines[0].push_back(machine_ad)
+		elif machine_ad != null and machine_ad.TagMap.has("step2"):
+			machines[1].push_back(machine_ad)
+		elif machine_ad != null and machine_ad.TagMap.has("step3"):
+			machines[2].push_back(machine_ad)
+			
+	
+	
 	# 1. Go to mcguffin
 	# 2. Interact with it (several seconds?)
 	# 3. Spawn McGuffin in inv

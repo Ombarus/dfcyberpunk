@@ -5,7 +5,7 @@ class_name Rope
 var PrevPos1 : Vector3
 var PrevPos2 : Vector3
 
-@export var A : float = 3.0:
+@export_range(1, 20, 0.001, "or_greater") var A : float = 3.0:
 	set(value):
 		if A > 1.0:
 			A = value
