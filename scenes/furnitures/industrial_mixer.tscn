@@ -1,10 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://tev7wogaiq8h"]
+[gd_scene load_steps=4 format=3 uid="uid://tev7wogaiq8h"]
 
-[ext_resource type="Script" path="res://scripts/advertisement.gd" id="1_ms76m"]
+[ext_resource type="Script" path="res://scripts/ads/blenderadvertisement.gd" id="1_q5116"]
 [ext_resource type="PackedScene" uid="uid://d3ie0vi8yvdx8" path="res://data/models/IndustrialMixer.glb" id="2_ggy5g"]
+[ext_resource type="PackedScene" uid="uid://c3nn4sy70lp2v" path="res://scenes/foodstuff3d.tscn" id="2_rd4oq"]
 
 [node name="IndustrialMixer" type="Node3D"]
-script = ExtResource("1_ms76m")
+script = ExtResource("1_q5116")
+Output = ExtResource("2_rd4oq")
+CompletionInput = 0.5
+CompletionOutput = 1.0
+MinInvStartProcess = 2
 TagMap = {
 "advertisement": 1.0,
 "step3": 1.0
@@ -14,3 +19,9 @@ TagMap = {
 
 [node name="Interact01" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.77431, 0, 2.04674)
+
+[node name="ProcessTimer" type="Timer" parent="."]
+wait_time = 7.0
+one_shot = true
+
+[connection signal="timeout" from="ProcessTimer" to="." method="_on_process_timer_timeout"]

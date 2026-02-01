@@ -1,13 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://c8v4svwjlvi4k"]
+[gd_scene load_steps=4 format=3 uid="uid://c8v4svwjlvi4k"]
 
-[ext_resource type="Script" path="res://scripts/advertisement.gd" id="1_fjotk"]
+[ext_resource type="Script" path="res://scripts/ads/blenderadvertisement.gd" id="1_ud7vc"]
+[ext_resource type="PackedScene" uid="uid://c1kyhiw28s0wh" path="res://scenes/mcguffin.tscn" id="2_7um7e"]
 [ext_resource type="PackedScene" uid="uid://dyvooh011kse" path="res://data/models/Blender.glb" id="2_vtkgy"]
 
 [node name="Blender" type="Node3D"]
-script = ExtResource("1_fjotk")
+script = ExtResource("1_ud7vc")
+Output = ExtResource("2_7um7e")
 TagMap = {
 "advertisement": 1.0,
 "step2": 1.0
 }
 
 [node name="Blender" parent="." instance=ExtResource("2_vtkgy")]
+
+[node name="ProcessTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="ProcessTimer" to="." method="_on_process_timer_timeout"]

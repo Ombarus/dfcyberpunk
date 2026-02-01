@@ -1150,8 +1150,8 @@ func WorkOnMcGuffin(delta : float, param : Dictionary, actionDepth : int) -> int
 		return Globals.ACTION_STATE.Running
 		
 	# For now, just uglily collect useful ads
-	# also force 3 steps, so ugly!
-	var machines := [[], [], []]
+	# also force 3 steps, so ugly! (4th step is just final drop off)
+	var machines := [[], [], [], []]
 	var factory_root = plan_ad.get_parent()
 	for c in factory_root.get_children():
 		var machine_ad = c as Advertisement
@@ -1161,19 +1161,81 @@ func WorkOnMcGuffin(delta : float, param : Dictionary, actionDepth : int) -> int
 			machines[1].push_back(machine_ad)
 		elif machine_ad != null and machine_ad.TagMap.has("step3"):
 			machines[2].push_back(machine_ad)
+		elif machine_ad != null and machine_ad.TagMap.has("step4"):
+			machines[3].push_back(machine_ad)
 			
+	# Priority #1, drop anything we have in our inventory in the next machine
+	for i in self.Inventory:
+		var item := i as Advertisement
+		# we might have junk in our inventory, completion will be -1.0 and can be ignored
+		var completion : float = item.TagMap.get("completion", -1.0)
+		var machine : Advertisement
+		if completion == 0.0:
+			machine = choose_best_machine(machines[1], 0.0, 3)
+		elif completion == 0.5:
+			machine = choose_best_machine(machines[2], 0.5, 2)
+		elif completion == 1.0:
+			# Just drop off, there should be only one drop off
+			machine = machines[3][0]
+		param["item"] = item
+		param["container"] = machine
+		self.pushAction("GoDropItem", actionDepth)
+		return Globals.ACTION_STATE.Running
+		
+	# Prio 1.5, finish work (but drop any inventory item before that)
+	var cur_hour = self.timeSystem.CurDateTime["hour"]
+	if cur_hour > plan.EndHour:
+		return Globals.ACTION_STATE.Finished
+		
+	# Priority #2, Pickup final product from step3 and put it in step 4	
+	for m in machines[2]:
+		var machine := m as Advertisement
+		for i in machine.Inventory:
+			var item := i as Advertisement
+			if item.TagMap.get("completion", -1.0) == 1.0:
+				param["item"] = item
+				self.pushAction("GoGetItem", actionDepth)
+				return Globals.ACTION_STATE.Running
 	
-	
-	# 1. Go to mcguffin
-	# 2. Interact with it (several seconds?)
-	# 3. Spawn McGuffin in inv
-	# 4. Bring to McGuffin2
-	# 5. Drop McGuffin into McGuffin2
-	# 6. Repeat
-	# 7. At the end, spawn foodstuff
-	# 8. (Foodstuff should be delivered to Warehouse?)
+	# Priority #3, Pickup step2 and put in step 3
+	for m in machines[1]:
+		var machine := m as Advertisement
+		for i in machine.Inventory:
+			var item := i as Advertisement
+			if item.TagMap.get("completion", -1.0) == 0.5:
+				param["item"] = item
+				self.pushAction("GoGetItem", actionDepth)
+				return Globals.ACTION_STATE.Running
+				
+	# Priority #4, Pickup step1 and put in step 2
+	for m in machines[0]:
+		var machine := m as Advertisement
+		for i in machine.Inventory:
+			var item := i as Advertisement
+			if item.TagMap.get("completion", -1.0) == 0.0:
+				param["item"] = item
+				self.pushAction("GoGetItem", actionDepth)
+				return Globals.ACTION_STATE.Running
+
 	return Globals.ACTION_STATE.Running
 	
+func choose_best_machine(machines : Array, completion : float, target : int) -> Advertisement:
+	var best_machine = null
+	var best_count := -100
+	for m in machines:
+		var machine := m as Advertisement
+		var cur_count := 0
+		for i in machine.Inventory:
+			var item := i as Advertisement
+			if item.TagMap.get("completion", -1.0) == completion:
+				cur_count += 1
+		var missing : int = target - cur_count
+		if missing > 0 and missing > best_count:
+			best_machine = machine
+			best_count = missing
+	if best_machine == null:
+		best_machine = machines[0]
+	return best_machine
 
 ###################################################################################################
 ## ACTION FUNCTION (NEED REVISION)

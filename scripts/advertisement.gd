@@ -1,6 +1,8 @@
 extends Node3D
 class_name Advertisement
 
+signal Wake # Used to trigger custom code in some Advertisement (like a timer to delete something after X seconds)
+
 @export var Type : Globals.AD_TYPE = Globals.AD_TYPE.Other
 
 # Wanted to call this "Owner" but Godot has a property "owner" that clashes
