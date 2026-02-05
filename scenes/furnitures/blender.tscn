@@ -18,4 +18,7 @@ TagMap = {
 wait_time = 5.0
 one_shot = true
 
+[node name="Interact01" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.675597)
+
 [connection signal="timeout" from="ProcessTimer" to="." method="_on_process_timer_timeout"]

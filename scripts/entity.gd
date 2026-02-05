@@ -215,6 +215,11 @@ func GoGetItem(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	var inv : Array = self.Inventory
 	
+	# Someone picked up the object before us
+	var item_owner : Advertisement = (item as Advertisement).BelongTo
+	if item_owner != null and item_owner != self:
+		return Globals.ACTION_STATE.Error
+	
 	var target_pos : Vector3 = item.global_position
 	var container : Advertisement = self.getContainer(item)
 	var precision := 0.0
@@ -250,6 +255,11 @@ func GoDropItem(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	var inv : Array = self.Inventory
 	
+	# Someone picked up the object before us
+	var item_owner : Advertisement = (item as Advertisement).BelongTo
+	if item_owner != null and item_owner != self:
+		return Globals.ACTION_STATE.Error
+	
 	var target_pos = self.global_position
 	var precision := 0.0
 	if container != null:
@@ -272,6 +282,8 @@ func GoDropItem(delta : float, param : Dictionary, actionDepth : int) -> int:
 				if self.isItemInInv(inv, o):
 					all_done = false
 			if all_done:
+				if container != null:
+					container.emit_signal("Wake")
 				return Globals.ACTION_STATE.Finished
 		
 	#TODO: handle NOT container case (just drop)
