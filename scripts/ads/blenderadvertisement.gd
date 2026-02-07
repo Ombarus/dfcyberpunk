@@ -7,11 +7,19 @@ extends Advertisement
 
 var AnimPlayer : AnimationPlayer
 var ProcessTimer : Timer
+var runAnim : String
+var stopAnim : String
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if has_node("Blender/AnimationPlayer"):
 		self.AnimPlayer = get_node("Blender/AnimationPlayer")
+		if self.AnimPlayer.has_animation("BlenderRun"):
+			runAnim = "BlenderRun"
+			stopAnim = "BlenderStop"
+		else:
+			runAnim = "GrinderRun"
+			stopAnim = "GrinderStop"
 	self.ProcessTimer = get_node("ProcessTimer")
 	self.Wake.connect(OnWake)
 	
@@ -25,14 +33,14 @@ func OnWake() -> void:
 			
 	if to_blend.size() >= self.MinInvStartProcess:
 		if self.AnimPlayer != null:
-			self.AnimPlayer.play("GrinderRun")
+			self.AnimPlayer.play(self.runAnim)
 		for i in to_blend:
 			self.Inventory.erase(i)
 		self.ProcessTimer.start()
 
 func _on_process_timer_timeout() -> void:
 	if self.AnimPlayer != null:
-		self.AnimPlayer.play("GrinderStop")
+		self.AnimPlayer.play(self.stopAnim)
 	var n := self.Output.instantiate() as Advertisement
 	self.get_parent().add_child(n)
 	n.global_position = self.global_position
