@@ -14,6 +14,7 @@ func _on_timer_timeout() -> void:
 	self.get_parent().add_child(n)
 	n.global_position = self.global_position
 	n.visible = false
+	n.TagMap["completion"] = 0.0
 	inv.append(n)
 	self.Inventory = inv
 	n.AdMetaData["container"] = self

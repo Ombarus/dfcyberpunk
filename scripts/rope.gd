@@ -73,9 +73,7 @@ func refresh_rope():
 	xz_start.y = 0
 	var xz_end := end
 	xz_end.y = 0
-	var x1 = 0
 	var x2 = (xz_start - xz_end).length()
-	var y1 = 0
 	var y2 = end.y - start.y
 	var L := sqrt((x2 * x2) + (y2 * y2))
 	L *= self.A
@@ -236,10 +234,10 @@ func build_tube_mesh(
 	arrays[Mesh.ARRAY_TEX_UV] = uvs
 	arrays[Mesh.ARRAY_INDEX] = indices
 
-	var mesh := ArrayMesh.new()
-	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+	var new_mesh := ArrayMesh.new()
+	new_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 
-	return mesh
+	return new_mesh
 	
 func segment_to_segment_trasnform_v2(
 	p1: Vector3,

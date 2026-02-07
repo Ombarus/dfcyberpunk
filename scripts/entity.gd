@@ -275,6 +275,8 @@ func GoDropItem(delta : float, param : Dictionary, actionDepth : int) -> int:
 	if is_top_of_stack:
 		if item is Advertisement:
 			if not self.isItemInInv(inv, item):
+				if container != null:
+					container.emit_signal("Wake")
 				return Globals.ACTION_STATE.Finished
 		else:
 			var all_done = true
@@ -1233,7 +1235,7 @@ func WorkOnMcGuffin(delta : float, param : Dictionary, actionDepth : int) -> int
 	
 func choose_best_machine(machines : Array, completion : float, target : int) -> Advertisement:
 	var best_machine = null
-	var best_count := -100
+	var best_count := 100
 	for m in machines:
 		var machine := m as Advertisement
 		var cur_count := 0
@@ -1242,7 +1244,7 @@ func choose_best_machine(machines : Array, completion : float, target : int) -> 
 			if item.TagMap.get("completion", -1.0) == completion:
 				cur_count += 1
 		var missing : int = target - cur_count
-		if missing > 0 and missing > best_count:
+		if missing > 0 and missing < best_count:
 			best_machine = machine
 			best_count = missing
 	if best_machine == null:

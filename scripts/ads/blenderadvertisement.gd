@@ -23,7 +23,7 @@ func OnWake() -> void:
 		if completion == self.CompletionInput:
 			to_blend.append(item)
 			
-	if to_blend.size() > self.MinInvStartProcess:
+	if to_blend.size() >= self.MinInvStartProcess:
 		if self.AnimPlayer != null:
 			self.AnimPlayer.play("GrinderRun")
 		for i in to_blend:
