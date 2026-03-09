@@ -3,6 +3,7 @@ extends Node
 var AD_GROUP := "advertisements"
 var DEFAULT_TABLE_HEIGHT := 0.73
 var DAY_LENGTH_SEC := 900.0
+var DEBUG = true # Planing to use it to optimize out some costy logic while dev
 
 enum ACTION_STATE {
 	Running,

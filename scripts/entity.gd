@@ -53,6 +53,8 @@ var messagingSystem : Messaging
 var lastPos: Vector3
 var stuckCounter: float
 
+var warnCounter := {} # For debugging action reward
+
 func _ready() -> void:
 	super._ready()
 	self.actionStack = []
@@ -60,6 +62,9 @@ func _ready() -> void:
 	self.messagingSystem = self.get_tree().root.find_child("Messaging", true, false)
 
 func _process(delta: float) -> void:
+	if Globals.DEBUG == true:
+		check_plan_reward(self.actionStack, self.curParam)
+	
 	if self.actionStack.size() == 0:
 		self.pushAction("Default", -1)
 	var i := 0
@@ -346,7 +351,6 @@ func Transfer(delta : float, param : Dictionary, actionDepth : int) -> int:
 
 	return Globals.ACTION_STATE.Finished
 
-# This could be much simpler if Entity used AdMetaData
 func toFromExchange(to : Advertisement, from : Advertisement, items : Array, param : Dictionary):
 	var from_inv : Array = from.Inventory
 	
@@ -1191,6 +1195,9 @@ func WorkOnMcGuffin(delta : float, param : Dictionary, actionDepth : int) -> int
 		elif completion == 1.0:
 			# Just drop off, there should be only one drop off
 			machine = machines[3][0]
+		else:
+			# Skip unrelated inventory
+			continue
 		param["item"] = item
 		param["container"] = machine
 		self.pushAction("GoDropItem", actionDepth)
@@ -1274,7 +1281,7 @@ func pushAction(action : String, afterIndex : int) -> void:
 	var at_index = afterIndex + 1
 	# At the end of the list, simply add the action
 	if at_index == self.actionStack.size():
-		print("Entity %s Pushed %s" % [self.name, action])
+		# print("Entity %s Pushed %s" % [self.name, action])
 		self.actionStack.push_back(action)
 		return
 		
@@ -1290,7 +1297,7 @@ func pushAction(action : String, afterIndex : int) -> void:
 	
 func popAction(depth) -> void:
 	var last_action = self.actionStack[depth]
-	print("Entity %s Poped %s" % [self.name, last_action])
+	# print("Entity %s Poped %s" % [self.name, last_action])
 	self.lastAction = last_action
 	self.actionStack = self.actionStack.slice(0, depth)
 	
@@ -1424,3 +1431,22 @@ class Sorter:
 			return true
 		return false
 		
+func check_plan_reward(actions : Array, param : Dictionary):
+	var plan : ActionPlan = param.get("current_plan", null)
+	if plan == null:
+		return
+	
+	var rewards = plan.ActualReward
+	var found = false
+	for action in actions:
+		found = false
+		var warn : int = self.warnCounter.get(action, 0)
+		for reward in rewards:
+			if reward["Action"] == action:
+				found = true
+				break
+		if found == false and warn < 5:
+			print("************* NO REWARD FOR %s *************" % [action])
+			self.warnCounter[action] = warn + 1
+		
+	

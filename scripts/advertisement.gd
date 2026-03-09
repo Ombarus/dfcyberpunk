@@ -21,9 +21,7 @@ signal Wake # Used to trigger custom code in some Advertisement (like a timer to
 # if multiple objects match a group of tags they can
 # be ordered from most prefered to less ideal
 # (ex: eating on a dining table is prefered but at worst we can eat on a office desk?)
-@export var TagMap := {
-	"advertisement": 1.0
-}
+@export var TagMap : Dictionary
 
 var timeSystem : WorldClock
 
@@ -52,6 +50,13 @@ func _ready() -> void:
 	self.add_to_group(str(self.Type))
 	self.add_to_group(Globals.AD_GROUP)
 	self.timeSystem = self.get_tree().root.find_child("WorldClock", true, false)
+	
+	# Stupid Array/Dict bug in exported variables
+	# make it so that dictionary is shared between instances
+	var tag_copy := {}
+	for k in self.TagMap:
+		tag_copy[k] = self.TagMap[k]
+	self.TagMap = tag_copy
 	
 	# Bit of a hack so I can start with items already in the inventory
 	if PickupChildren:

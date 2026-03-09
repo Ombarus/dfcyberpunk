@@ -35,22 +35,22 @@ func _ready() -> void:
 	for data in _eat_me.ActualReward:
 		if data["Action"] == "Eat" and data["State"] == Globals.ACTION_STATE.Running:
 			var satiety_before = data["Rewards"][Globals.NEEDS.Satiety]
-			print("%s: Satiety Before %.5f" % [self.name, satiety_before])
+			#print("%s: Satiety Before %.5f" % [self.name, satiety_before])
 			#NOTE: I don't know if I'm working with a copy or a static array here. I need to validate it's only changing the copy
 			if override_satiety_grade == Globals.GRADE.Unset:
 				data["Rewards"][Globals.NEEDS.Satiety] = override_satiety / 4.0
 			else:
 				data["Rewards"][Globals.NEEDS.Satiety] = Globals.REWARD_BASE[Globals.NEEDS.Satiety][override_satiety_grade] * override_satiety_per
-			print("%s: Satiety After %.5f" % [self.name, data["Rewards"][Globals.NEEDS.Satiety]])
+			#print("%s: Satiety After %.5f" % [self.name, data["Rewards"][Globals.NEEDS.Satiety]])
 		if data["Action"] == "Eat" and data["State"] == Globals.ACTION_STATE.Finished:
 			var satisfaction_before = data["Rewards"][Globals.NEEDS.Satisfaction]
-			print("%s: Satisfaction Before %.5f" % [self.name, satisfaction_before])
+			#print("%s: Satisfaction Before %.5f" % [self.name, satisfaction_before])
 			#NOTE: I don't know if I'm working with a copy or a static array here. I need to validate it's only changing the copy
 			if override_satisfaction_grade == Globals.GRADE.Unset:
 				data["Rewards"][Globals.NEEDS.Satisfaction] = override_satisfaction
 			else:
 				data["Rewards"][Globals.NEEDS.Satisfaction] = Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][override_satisfaction_grade] * override_satisfaction_per
-			print("%s: Satisfaction After %.5f" % [self.name, data["Rewards"][Globals.NEEDS.Satisfaction]])
+			#print("%s: Satisfaction After %.5f" % [self.name, data["Rewards"][Globals.NEEDS.Satisfaction]])
 
 # Want to have somewhat dynamic plans.
 # This allow an Advertisement to recalculate reward based on who's asking

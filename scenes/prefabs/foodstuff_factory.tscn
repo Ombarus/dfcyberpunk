@@ -1173,15 +1173,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -32)
 
 [node name="IndustrialMixer3" parent="NorthBuilding" instance=ExtResource("11_lsovj")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.68715, 0.00758757, -23.2189)
+MinInvStartProcess = 3
 
 [node name="IndustrialMixer4" parent="NorthBuilding" instance=ExtResource("11_lsovj")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.68715, -0.0100728, -30.2189)
+MinInvStartProcess = 3
 
 [node name="Blender3" parent="NorthBuilding" instance=ExtResource("12_pjlw6")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2.80607, -0.0648576, -20.4667)
+MinInvStartProcess = 2
 
 [node name="Blender" parent="NorthBuilding" instance=ExtResource("12_pjlw6")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2.80607, -0.0656818, -25.4667)
+MinInvStartProcess = 2
 
 [node name="StairMetalStraight2" parent="NorthBuilding" instance=ExtResource("11_7nnbr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -32)
@@ -1230,13 +1234,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3535, -4.76837e-07, -24.09
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.64067, -4.76837e-07, -24.5335)
 
 [node name="CardboardBox2" parent="NorthBuilding" instance=ExtResource("16_6tugh")]
-transform = Transform3D(0.85623, 0, 0.516595, -0.0055477, 0.999942, 0.00919504, -0.516565, -0.010739, 0.856181, -7.61989, 0.158712, -31.3793)
+transform = Transform3D(-0.516565, -0.010739, 0.856181, -0.0055477, 0.999942, 0.00919504, -0.85623, 1.40069e-09, -0.516595, 0.0556399, 0.158712, -17.0645)
 
 [node name="CardboardBox3" parent="NorthBuilding" instance=ExtResource("16_6tugh")]
-transform = Transform3D(-0.788568, 0, -0.614947, 0, 1, 0, 0.614947, 0, -0.788568, -6.65277, 0.167441, -30.2159)
+transform = Transform3D(0.614947, 0, -0.788568, 0, 1, 0, 0.788568, 0, 0.614947, 1.21904, 0.167441, -18.0316)
 
 [node name="DeliveryCrate" parent="NorthBuilding" instance=ExtResource("16_6tugh")]
-transform = Transform3D(0.852316, 0, -0.523027, 0.00561678, 0.999942, 0.009153, 0.522997, -0.010739, 0.852267, -6.26437, 0.176171, -29.7537)
+transform = Transform3D(0.522997, -0.010739, 0.852267, 0.00561678, 0.999942, 0.009153, -0.852316, 4.69417e-10, 0.523027, 1.68124, 0.176171, -18.42)
 script = ExtResource("28_1iib3")
 TagMap = {
 "advertisement": 1.0,
@@ -1270,7 +1274,7 @@ transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -19.4641, 9, -5.49093)
 transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -10.3232, 9, -5.44624)
 
 [node name="WoodPalette" parent="NorthBuilding" instance=ExtResource("19_eg8ws")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.93592, 0, -31.1502)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.284739, 0, -18.7485)
 
 [node name="WoodPalette2" parent="NorthBuilding" instance=ExtResource("19_eg8ws")]
 transform = Transform3D(0.95241, 0, 0.304819, 0, 1, 0, -0.304819, 0, 0.95241, -2.93592, 0, -31.5)
@@ -1280,6 +1284,24 @@ transform = Transform3D(0.839743, 0, 0.542984, 0, 1, 0, -0.542984, 0, 0.839743, 
 
 [node name="WoodPalette4" parent="NorthBuilding" instance=ExtResource("19_eg8ws")]
 transform = Transform3D(0.88029, 0, 0.474436, 0, 1, 0, -0.474436, 0, 0.88029, -3.24247, 0.441012, -31.6101)
+
+[node name="WoodPalette6" parent="NorthBuilding" instance=ExtResource("19_eg8ws")]
+transform = Transform3D(0.95241, 0, 0.304819, 0, 1, 0, -0.304819, 0, 0.95241, -5.93592, 0, -31.5)
+
+[node name="WoodPalette7" parent="NorthBuilding" instance=ExtResource("19_eg8ws")]
+transform = Transform3D(0.839743, 0, 0.542984, 0, 1, 0, -0.542984, 0, 0.839743, -6.24247, 0.231222, -31.55)
+
+[node name="WoodPalette8" parent="NorthBuilding" instance=ExtResource("19_eg8ws")]
+transform = Transform3D(0.88029, 0, 0.474436, 0, 1, 0, -0.474436, 0, 0.88029, -6.24247, 0.441012, -31.6101)
+
+[node name="WoodPalette9" parent="NorthBuilding" instance=ExtResource("19_eg8ws")]
+transform = Transform3D(0.8268, 0, 0.562496, 0, 1, 0, -0.562496, 0, 0.8268, -6.38136, 0.6572, -31.5833)
+
+[node name="WoodPalette10" parent="NorthBuilding" instance=ExtResource("19_eg8ws")]
+transform = Transform3D(0.651194, 0, 0.758911, 0, 1, 0, -0.758911, 0, 0.651194, -6.6895, 0.888422, -31.5443)
+
+[node name="WoodPalette11" parent="NorthBuilding" instance=ExtResource("19_eg8ws")]
+transform = Transform3D(0.709522, 0, 0.704683, 0, 1, 0, -0.704683, 0, 0.709522, -6.70655, 1.09821, -31.6019)
 
 [node name="WoodPalette5" parent="NorthBuilding" instance=ExtResource("19_eg8ws")]
 transform = Transform3D(0.841298, 0, 0.540572, 0, 1, 0, -0.540572, 0, 0.841298, -3.2423, 0.646215, -31.6144)

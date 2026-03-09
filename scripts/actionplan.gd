@@ -117,6 +117,87 @@ func GetExpectedReward(need : Globals.NEEDS) -> float:
 # ie: Different food give more/less Satiety per second, bad job give less Wealth, etc.
 var ActualReward := [
 	{
+		"Action": "EatSelectedFood",
+		"State": Globals.ACTION_STATE.Finished,
+		# EatSelectedFood rewards are handled by "Eat"
+		"Rewards": {}
+	},
+	{
+		"Action": "GoDropItem",
+		"State": Globals.ACTION_STATE.Finished,
+		# GoDropItem is a sub-action that doesn't reward anything, but leaving an empty like that helps me debug missing rewards for new actions
+		"Rewards": {}
+	},
+	{
+		"Action": "GoGetItem",
+		"State": Globals.ACTION_STATE.Finished,
+		# GoGetItem is a sub-action that doesn't reward anything, but leaving an empty like that helps me debug missing rewards for new actions
+		"Rewards": {}
+	},
+	{
+		"Action": "Transfer",
+		"State": Globals.ACTION_STATE.Finished,
+		# Transfer is a sub-action that doesn't reward anything, but leaving an empty like that helps me debug missing rewards for new actions
+		"Rewards": {}
+	},
+	{
+		"Action": "TravelAnimState",
+		"State": Globals.ACTION_STATE.Finished,
+		# TravelAnimState is a sub-action that doesn't reward anything, but leaving an empty like that helps me debug missing rewards for new actions
+		"Rewards": {}
+	},
+	{
+		"Action": "LoadWait",
+		"State": Globals.ACTION_STATE.Finished,
+		# LoadWait is a sub-action that doesn't reward anything, but leaving an empty like that helps me debug missing rewards for new actions
+		"Rewards": {}
+	},
+	{
+		"Action": "Wait",
+		"State": Globals.ACTION_STATE.Finished,
+		# Wait is a sub-action that doesn't reward anything, but leaving an empty like that helps me debug missing rewards for new actions
+		"Rewards": {}
+	},
+	{
+		"Action": "Goto",
+		"State": Globals.ACTION_STATE.Finished,
+		# Goto is a sub-action that doesn't reward anything, but leaving an empty like that helps me debug missing rewards for new actions
+		"Rewards": {}
+	},
+	{
+		"Action": "ManageFactory",
+		"State": Globals.ACTION_STATE.Finished,
+		"Rewards": {
+			Globals.NEEDS.Wealth: Globals.REWARD_BASE[Globals.NEEDS.Wealth][Globals.GRADE.Small] * 2.0,
+			Globals.NEEDS.Joy: Globals.REWARD_BASE[Globals.NEEDS.Joy][Globals.GRADE.VSmall] * -1.0,
+			Globals.NEEDS.Satisfaction: Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Small]
+		}
+	},
+	{
+		"Action": "WorkOnMcGuffin",
+		"State": Globals.ACTION_STATE.Finished,
+		"Rewards": {
+			Globals.NEEDS.Wealth: Globals.REWARD_BASE[Globals.NEEDS.Wealth][Globals.GRADE.Small],
+			Globals.NEEDS.Joy: Globals.REWARD_BASE[Globals.NEEDS.Joy][Globals.GRADE.VSmall] * -1.0,
+			Globals.NEEDS.Satisfaction: Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Small]
+		}
+	},
+	{
+		"Action": "JobOffer",
+		"State": Globals.ACTION_STATE.Finished,
+		"Rewards": {
+			Globals.NEEDS.Satisfaction: Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.Small],
+			Globals.NEEDS.Joy: Globals.REWARD_BASE[Globals.NEEDS.Joy][Globals.GRADE.Big],
+			Globals.NEEDS.Security: Globals.REWARD_BASE[Globals.NEEDS.Security][Globals.GRADE.VSmall],
+			Globals.NEEDS.Comfort: Globals.REWARD_BASE[Globals.NEEDS.Comfort][Globals.GRADE.VSmall]
+		}
+	},
+	{
+		"Action": "GoPutFoodInFridge",
+		"State": Globals.ACTION_STATE.Finished,
+		"Rewards": {Globals.NEEDS.Satisfaction: Globals.REWARD_BASE[Globals.NEEDS.Satisfaction][Globals.GRADE.VSmall]}
+	},
+	{
 		"Action": "Sleep",
 		"State": Globals.ACTION_STATE.Running,
 		# If running, need is /sec, if not then it's given whole on state transition
@@ -141,7 +222,7 @@ var ActualReward := [
 		"Action": "EatAtBar",
 		"State": Globals.ACTION_STATE.Finished,
 		"Rewards": {
-			Globals.NEEDS.Energy: Globals.REWARD_BASE[Globals.NEEDS.Energy][Globals.GRADE.VSmall],
+			Globals.NEEDS.Joy: Globals.REWARD_BASE[Globals.NEEDS.Energy][Globals.GRADE.Small],
 			Globals.NEEDS.Wealth: -Globals.REWARD_BASE[Globals.NEEDS.Wealth][Globals.GRADE.VSmall]
 		}
 	},
