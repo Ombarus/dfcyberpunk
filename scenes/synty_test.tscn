@@ -1,0 +1,768 @@
+[gd_scene format=3 uid="uid://c7xe3vr1tfxxf"]
+
+[ext_resource type="PackedScene" path="res://data/synty/meshes/Character_Alien_Male_01.tscn" id="1_tas7f"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/Character_Alien_Male_02.tscn" id="2_yjdqo"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/Character_Android_Female_01.tscn" id="3_2gd05"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/Character_Augmented_Male_01.tscn" id="4_mvl6s"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/Character_Cop_01.tscn" id="5_gfcsj"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/Character_CyberPunk_Male_01.tscn" id="6_fo47k"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/Character_Cyber_Female_01.tscn" id="7_6w6lg"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/Character_Cyber_Male_01.tscn" id="8_5s8nk"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/Character_CyborgNinja_01.tscn" id="9_ri1yg"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/Character_Garbage_Male_01.tscn" id="10_dkogj"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/Character_Hacker_Female_01.tscn" id="11_fja4b"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/Character_Hologram_Female_01.tscn" id="12_mgnos"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/Character_Junky_Female_01.tscn" id="13_kkqiu"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/Character_Junky_Male_01.tscn" id="14_i7hl6"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/Character_Medical_Male_01.tscn" id="15_nfymv"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/Character_Monk_Male_01.tscn" id="16_rpmjc"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/Character_Muscle_Male_01.tscn" id="17_oe1mi"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/Character_Rich_Female_01.tscn" id="18_m1b11"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/Character_Rich_Male_01.tscn" id="19_ydmeh"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/Character_Robot_01.tscn" id="20_jrmg5"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Advanced_01.tscn" id="21_mvl6s"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Advanced_02.tscn" id="22_gfcsj"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Advanced_Doorway_01.tscn" id="23_fo47k"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Background_Lrg_01.tscn" id="24_jrmg5"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Background_Lrg_02.tscn" id="25_gin08"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Background_Lrg_03.tscn" id="26_w5dwh"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Background_Med_01.tscn" id="27_jjejw"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Background_Med_02.tscn" id="28_uk8a3"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Background_Med_03.tscn" id="29_gh8n0"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Background_Med_04.tscn" id="30_2oo51"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Background_Med_05.tscn" id="31_g4hr0"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Background_Med_06.tscn" id="32_mf8w3"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Background_Med_07.tscn" id="33_llnox"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Background_Med_08.tscn" id="34_ndsd6"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Background_Med_09.tscn" id="35_ihryq"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Background_Small_01.tscn" id="36_artop"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Background_Small_02.tscn" id="37_ytakp"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Background_Small_03.tscn" id="38_a7v1a"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Background_Small_04.tscn" id="39_mafrd"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Bank_01.tscn" id="40_2oo51"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Bank_01_Glass.tscn" id="41_g4hr0"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Bank_Door_Bottom_01.tscn" id="42_mf8w3"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Bank_Door_Bottom_01_Glass.tscn" id="43_llnox"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Bank_Door_Top_01.tscn" id="44_ndsd6"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Bank_Door_Top_01_Glass.tscn" id="45_ihryq"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Chopshop_01.tscn" id="46_mf8w3"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Chopshop_Interior_01.tscn" id="47_llnox"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_City_Wall_01.tscn" id="48_ndsd6"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_City_Wall_Tower_01.tscn" id="49_ihryq"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_FoodHole_01.tscn" id="50_a7v1a"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Industrial_01.tscn" id="51_mafrd"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Industrial_02.tscn" id="52_b4dr2"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_LandingPad_01.tscn" id="53_dr634"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Security_WatchStation_01.tscn" id="54_asbec"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Large_01.tscn" id="54_cy1pr"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Security_WatchStation_01_Glass.tscn" id="55_8ccud"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Large_02.tscn" id="55_b6qcs"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Shop_Open_01.tscn" id="56_hjxiy"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Large_03.tscn" id="56_uu2j6"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Large_04.tscn" id="57_1shw3"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Large_05.tscn" id="58_4de41"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Large_06.tscn" id="59_nnxbj"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Large_Part_01.tscn" id="60_y74xb"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Large_Part_02.tscn" id="61_m0q7b"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Large_Part_03.tscn" id="62_egmx0"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Large_Part_04.tscn" id="63_425n3"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Large_Part_05.tscn" id="64_fp5pj"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Large_Part_06.tscn" id="65_je8ya"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Large_Part_07.tscn" id="66_15lhy"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Large_Part_08.tscn" id="67_n1k0l"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Power_01.tscn" id="68_y74xb"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Power_02.tscn" id="69_m0q7b"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Power_03.tscn" id="70_egmx0"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Power_04.tscn" id="71_425n3"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Raised_01.tscn" id="72_fp5pj"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Raised_02.tscn" id="73_je8ya"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Roof_Pagoda_01.tscn" id="74_egmx0"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Roof_Pagoda_02.tscn" id="75_425n3"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Section_Corner_01.tscn" id="76_bnohh"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Section_Corner_01_Glass.tscn" id="77_2vqhp"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Section_Corner_02.tscn" id="78_7v6nf"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Section_Corner_03.tscn" id="79_asbec"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Section_Door_01.tscn" id="80_8ccud"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Section_Door_02.tscn" id="81_hjxiy"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Section_Door_03.tscn" id="82_x6fet"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Section_Door_04.tscn" id="83_krlw8"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Section_Door_04_Glass.tscn" id="84_h4lte"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Section_Door_05.tscn" id="85_43yv2"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Section_Door_05_Glass.tscn" id="86_wxgu1"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Section_Door_06.tscn" id="87_vp2an"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Section_Door_07.tscn" id="88_eohy4"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Section_Door_07_Door.tscn" id="89_j5o81"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Section_Door_07_Glass.tscn" id="90_dgxbt"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Section_Grid_01.tscn" id="91_ngc4s"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Section_Industrial_01.tscn" id="92_u5jps"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Section_Industrial_02.tscn" id="93_2xilb"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Section_Industrial_03.tscn" id="94_87p82"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Section_Wall_01.tscn" id="95_pm2ks"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Section_Wall_02.tscn" id="96_wllm3"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Section_Wall_03.tscn" id="97_do04m"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Section_Wall_04.tscn" id="98_l5r32"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Section_Wall_05.tscn" id="99_3idy1"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Section_Window_01.tscn" id="100_1icsr"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Section_Window_02.tscn" id="101_ypnbq"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Section_Window_03.tscn" id="102_xtqjl"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Section_Window_04.tscn" id="103_0bcsb"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_StripClub_01.tscn" id="107_krlw8"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_StripClub_Interior_01.tscn" id="108_h4lte"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_StripClub_Interior_02.tscn" id="109_43yv2"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_StripClub_Interior_03.tscn" id="110_wxgu1"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Underpass_01.tscn" id="111_j5o81"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Warehouse_01.tscn" id="112_dgxbt"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Warehouse_Door_Bottom_01.tscn" id="113_ngc4s"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Warehouse_Door_Bottom_Glass_01.tscn" id="114_u5jps"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Warehouse_Door_Glass_01.tscn" id="115_2xilb"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Warehouse_Door_Top_01.tscn" id="116_87p82"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Ceiling_01.tscn" id="117_l5r32"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Cloud_01.tscn" id="118_3idy1"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Cloud_02.tscn" id="119_1icsr"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Cloud_03.tscn" id="120_ypnbq"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Cloud_04.tscn" id="121_xtqjl"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Cloud_05.tscn" id="122_0bcsb"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Dirt_Mound_Small_01.tscn" id="123_4umk4"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Dirt_Mound_Small_02.tscn" id="124_uri82"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Floor_01.tscn" id="125_dqaaj"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Graffiti_Ground_01.tscn" id="126_udqxk"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Graffiti_Ground_02.tscn" id="127_08hy0"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Graffiti_Ground_03.tscn" id="128_7k47j"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Graffiti_Ground_04.tscn" id="129_ca505"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Graffiti_Ground_05.tscn" id="130_4ekbo"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Graffiti_Wall_01.tscn" id="131_iqc1y"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Graffiti_Wall_02.tscn" id="132_tmupn"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Graffiti_Wall_03.tscn" id="133_743w2"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Graffiti_Wall_04.tscn" id="134_hj1um"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Graffiti_Wall_05.tscn" id="135_dtslm"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Grass_Patch_01.tscn" id="136_w0g7o"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Grass_Patch_02.tscn" id="137_ncu2e"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Grass_Patch_03.tscn" id="138_7u5hv"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Greeble_Cube_01.tscn" id="139_bjfqv"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Greeble_Cube_02.tscn" id="140_p32p5"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Ground_01.tscn" id="141_a2a7x"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Ground_Flat_01.tscn" id="142_lcnun"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Ground_Tile_01.tscn" id="143_gs5am"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Ground_Tile_02.tscn" id="144_6e00i"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Ground_Tile_03.tscn" id="145_udgx8"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Ground_Tile_04.tscn" id="146_gj12d"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Ground_Tile_05.tscn" id="147_mmpp0"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Ground_Tile_06.tscn" id="148_niswo"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Ground_Tile_07.tscn" id="149_7ppd2"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Ground_Tile_08.tscn" id="150_0i4i3"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Ground_Tile_09.tscn" id="151_23jp1"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Ground_Tile_Base_01.tscn" id="152_h3e83"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Ground_Tile_Base_02.tscn" id="153_8fs7u"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Ground_Tile_Base_03.tscn" id="154_n01is"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Ground_Tile_Base_04.tscn" id="155_o6wwn"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Ground_Tile_Floating_Platform_01.tscn" id="156_d68qp"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Ground_Tile_Half_01.tscn" id="157_tkwpj"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Ground_Tile_Half_02.tscn" id="158_46m6n"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Ground_Tile_Half_03.tscn" id="159_5f0kx"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Ground_Tile_Half_04.tscn" id="160_3jt4e"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Ground_Tile_Half_05.tscn" id="161_nss7v"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Ground_Tile_Supports_01.tscn" id="162_wgxrt"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Ground_Tile_Supports_02.tscn" id="163_6gait"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Ground_Tile_Tube_01.tscn" id="164_gaakq"]
+
+[node name="SyntyTest" type="Node3D" unique_id=67957223]
+
+[node name="Characters" type="Node3D" parent="." unique_id=2105553315]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -75.08931)
+
+[node name="Character_Alien_Male_01" parent="Characters" unique_id=1584863790 instance=ExtResource("1_tas7f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22939976, 0, 0)
+skeleton = NodePath("../..")
+
+[node name="Character_Alien_Male_02" parent="Characters" unique_id=1391775913 instance=ExtResource("2_yjdqo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46879798, 0, 0)
+skeleton = NodePath("../..")
+
+[node name="Character_Android_Female_01" parent="Characters" unique_id=53138149 instance=ExtResource("3_2gd05")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22442946, 0, 0)
+skeleton = NodePath("../..")
+
+[node name="Character_Augmented_Male_01" parent="Characters" unique_id=1509533258 instance=ExtResource("4_mvl6s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.44554448, 0, 0)
+skeleton = NodePath("../..")
+
+[node name="Character_Cop_01" parent="Characters" unique_id=1370409775 instance=ExtResource("5_gfcsj")]
+skeleton = NodePath("../..")
+
+[node name="Character_CyberPunk_Male_01" parent="Characters" unique_id=263263534 instance=ExtResource("6_fo47k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45086467, 0, -0.172652)
+skeleton = NodePath("../..")
+
+[node name="Character_Cyber_Female_01" parent="Characters" unique_id=1893372276 instance=ExtResource("7_6w6lg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.172652)
+skeleton = NodePath("../..")
+
+[node name="Character_Cyber_Male_01" parent="Characters" unique_id=1808920728 instance=ExtResource("8_5s8nk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2283631, 0, -0.172652)
+skeleton = NodePath("../..")
+
+[node name="Character_CyborgNinja_01" parent="Characters" unique_id=1835242486 instance=ExtResource("9_ri1yg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45729086, 0, -0.172652)
+skeleton = NodePath("../..")
+
+[node name="Character_Garbage_Male_01" parent="Characters" unique_id=2111061579 instance=ExtResource("10_dkogj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22486316, 0, -0.172652)
+skeleton = NodePath("../..")
+
+[node name="Character_Hacker_Female_01" parent="Characters" unique_id=1289099955 instance=ExtResource("11_fja4b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23642062, 0, -0.3420446)
+skeleton = NodePath("../..")
+
+[node name="Character_Hologram_Female_01" parent="Characters" unique_id=1207410669 instance=ExtResource("12_mgnos")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46119523, 0, -0.3420446)
+skeleton = NodePath("../..")
+
+[node name="Character_Junky_Female_01" parent="Characters" unique_id=1437021342 instance=ExtResource("13_kkqiu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22315855, 0, -0.3420446)
+skeleton = NodePath("../..")
+
+[node name="Character_Junky_Male_01" parent="Characters" unique_id=711531750 instance=ExtResource("14_i7hl6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.44336116, 0, -0.3420446)
+skeleton = NodePath("../..")
+
+[node name="Character_Medical_Male_01" parent="Characters" unique_id=118985712 instance=ExtResource("15_nfymv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3420446)
+skeleton = NodePath("../..")
+
+[node name="Character_Monk_Male_01" parent="Characters" unique_id=809758775 instance=ExtResource("16_rpmjc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2281133, 0, -0.54208976)
+skeleton = NodePath("../..")
+
+[node name="Character_Muscle_Male_01" parent="Characters" unique_id=422815860 instance=ExtResource("17_oe1mi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45779565, 0, -0.54208976)
+skeleton = NodePath("../..")
+
+[node name="Character_Rich_Female_01" parent="Characters" unique_id=691636444 instance=ExtResource("18_m1b11")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22957797, 0, -0.54208976)
+skeleton = NodePath("../..")
+
+[node name="Character_Rich_Male_01" parent="Characters" unique_id=1900661953 instance=ExtResource("19_ydmeh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45937234, 0, -0.54208976)
+skeleton = NodePath("../..")
+
+[node name="Character_Robot_01" parent="Characters" unique_id=2128508235 instance=ExtResource("20_jrmg5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.54208976)
+skeleton = NodePath("../..")
+
+[node name="Advanced" type="Node3D" parent="." unique_id=1758301730]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -80.80214)
+
+[node name="SM_Bld_Advanced_01" parent="Advanced" unique_id=350129803 instance=ExtResource("21_mvl6s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5905495, 0, 0)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Advanced_02" parent="Advanced" unique_id=814503002 instance=ExtResource("22_gfcsj")]
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Advanced_Doorway_01" parent="Advanced" unique_id=1903475819 instance=ExtResource("23_fo47k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.9912071)
+skeleton = NodePath("../..")
+
+[node name="Background" type="Node3D" parent="." unique_id=1445304669]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -114.232605)
+
+[node name="SM_Bld_Background_Lrg_01" parent="Background" unique_id=197381098 instance=ExtResource("24_jrmg5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.231207, 0, 0)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Background_Lrg_02" parent="Background" unique_id=1413538655 instance=ExtResource("25_gin08")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.975712, 0, 0)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Background_Lrg_03" parent="Background" unique_id=1638566890 instance=ExtResource("26_w5dwh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.903408, 0, 0)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Background_Med_01" parent="Background" unique_id=1513295123 instance=ExtResource("27_jjejw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.332039, 0, 0)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Background_Med_02" parent="Background" unique_id=50910064 instance=ExtResource("28_uk8a3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.780571, 0, 0)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Background_Med_03" parent="Background" unique_id=1795165021 instance=ExtResource("29_gh8n0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.855944, 0, 0)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Background_Med_04" parent="Background" unique_id=1259006454 instance=ExtResource("30_2oo51")]
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Background_Med_05" parent="Background" unique_id=1207550314 instance=ExtResource("31_g4hr0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 17.415718)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Background_Med_06" parent="Background" unique_id=1667597247 instance=ExtResource("32_mf8w3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.353022, 0, 17.415718)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Background_Med_07" parent="Background" unique_id=78697990 instance=ExtResource("33_llnox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.884056, 0, 17.415718)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Background_Med_08" parent="Background" unique_id=176141962 instance=ExtResource("34_ndsd6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.745255, 0, 17.415718)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Background_Med_09" parent="Background" unique_id=1850065351 instance=ExtResource("35_ihryq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.47093, 0, 17.415718)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Background_Small_01" parent="Background" unique_id=1906159969 instance=ExtResource("36_artop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.493843, 0, 13.068769)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Background_Small_02" parent="Background" unique_id=1156026073 instance=ExtResource("37_ytakp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.247953, 0, 13.068769)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Background_Small_03" parent="Background" unique_id=1900890788 instance=ExtResource("38_a7v1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.872477, 0, 18.910902)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Background_Small_04" parent="Background" unique_id=1083044958 instance=ExtResource("39_mafrd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.791615, 0, 19.622557)
+skeleton = NodePath("../..")
+
+[node name="Bank" type="Node3D" parent="." unique_id=1576439108]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.477686, 0, -72.08931)
+
+[node name="SM_Bld_Bank_01" parent="Bank" unique_id=1512052198 instance=ExtResource("40_2oo51")]
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Bank_01_Glass" parent="Bank" unique_id=1265037384 instance=ExtResource("41_g4hr0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.065315, 0, 4.961803)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Bank_Door_Bottom_01" parent="Bank" unique_id=902690455 instance=ExtResource("42_mf8w3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.956512, 0.67570066, -0.046227932)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Bank_Door_Bottom_01_Glass" parent="Bank" unique_id=29412023 instance=ExtResource("43_llnox")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0657153, 0.030260682, 5.121222)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Bank_Door_Top_01" parent="Bank" unique_id=1039665039 instance=ExtResource("44_ndsd6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9494767, 1.6970727, -0.046227932)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Bank_Door_Top_01_Glass" parent="Bank" unique_id=639581711 instance=ExtResource("45_ihryq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0739436, -0.04819721, 5.105792)
+skeleton = NodePath("../..")
+
+[node name="ChopShop" type="Node3D" parent="." unique_id=307845258]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.444215, 0, -72.08931)
+
+[node name="SM_Bld_Chopshop_01" parent="ChopShop" unique_id=1924706329 instance=ExtResource("46_mf8w3")]
+
+[node name="SM_Bld_Chopshop_Interior_01" parent="ChopShop" unique_id=1931086022 instance=ExtResource("47_llnox")]
+
+[node name="CityWall" type="Node3D" parent="." unique_id=909429235]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.700444, 0, -83.28798)
+
+[node name="SM_Bld_City_Wall_01" parent="CityWall" unique_id=894591052 instance=ExtResource("48_ndsd6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.070804, 0, 0)
+
+[node name="SM_Bld_City_Wall_Tower_01" parent="CityWall" unique_id=583218275 instance=ExtResource("49_ihryq")]
+
+[node name="Misc1" type="Node3D" parent="." unique_id=2130972814]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.48462, 0, -88.46792)
+
+[node name="SM_Bld_FoodHole_01" parent="Misc1" unique_id=1625547287 instance=ExtResource("50_a7v1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.971573, 0, 0)
+
+[node name="SM_Bld_Industrial_01" parent="Misc1" unique_id=115402691 instance=ExtResource("51_mafrd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.535079, 0, 7.4387093)
+
+[node name="SM_Bld_Industrial_02" parent="Misc1" unique_id=1495845717 instance=ExtResource("52_b4dr2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7123356, 0, 8.677898)
+
+[node name="SM_Bld_LandingPad_01" parent="Misc1" unique_id=1461345189 instance=ExtResource("53_dr634")]
+
+[node name="SM_Bld_Security_WatchStation_01" parent="Misc1" unique_id=1226675500 instance=ExtResource("54_asbec")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.349091, 0, -5.7552032)
+
+[node name="SM_Bld_Security_WatchStation_01_Glass" parent="Misc1" unique_id=566352277 instance=ExtResource("55_8ccud")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.848118, 4.6155605, -6.374771)
+
+[node name="SM_Bld_Shop_Open_01" parent="Misc1" unique_id=186793896 instance=ExtResource("56_hjxiy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.743843)
+
+[node name="BldLarge" type="Node3D" parent="." unique_id=1470793658]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 66.23883, 0, -62.86787)
+
+[node name="SM_Bld_Large_01" parent="BldLarge" unique_id=539758239 instance=ExtResource("54_cy1pr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.513626, 0, 0)
+
+[node name="SM_Bld_Large_02" parent="BldLarge" unique_id=792218365 instance=ExtResource("55_b6qcs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.199482, 0, 0)
+
+[node name="SM_Bld_Large_03" parent="BldLarge" unique_id=1958026843 instance=ExtResource("56_uu2j6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.670049, 0, 0)
+
+[node name="SM_Bld_Large_04" parent="BldLarge" unique_id=1276922248 instance=ExtResource("57_1shw3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.17098, 0, 0)
+
+[node name="SM_Bld_Large_05" parent="BldLarge" unique_id=1075696176 instance=ExtResource("58_4de41")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.984575, 0, 0)
+
+[node name="SM_Bld_Large_06" parent="BldLarge" unique_id=1226400084 instance=ExtResource("59_nnxbj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.331596, 0, 0)
+
+[node name="SM_Bld_Large_Part_01" parent="BldLarge" unique_id=1692671741 instance=ExtResource("60_y74xb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.567875, 0, 17.189215)
+
+[node name="SM_Bld_Large_Part_02" parent="BldLarge" unique_id=1571132826 instance=ExtResource("61_m0q7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.041824, 0, 17.974855)
+
+[node name="SM_Bld_Large_Part_03" parent="BldLarge" unique_id=1714761300 instance=ExtResource("62_egmx0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.665438, 0, 18.18093)
+
+[node name="SM_Bld_Large_Part_04" parent="BldLarge" unique_id=1774195978 instance=ExtResource("63_425n3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16.775694)
+
+[node name="SM_Bld_Large_Part_05" parent="BldLarge" unique_id=62558808 instance=ExtResource("64_fp5pj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.537735, 0, 16.562922)
+
+[node name="SM_Bld_Large_Part_06" parent="BldLarge" unique_id=1148128471 instance=ExtResource("65_je8ya")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.557709, 0, 17.593533)
+
+[node name="SM_Bld_Large_Part_07" parent="BldLarge" unique_id=2052999106 instance=ExtResource("66_15lhy")]
+
+[node name="SM_Bld_Large_Part_08" parent="BldLarge" unique_id=243302833 instance=ExtResource("67_n1k0l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1276455, 0, 0)
+
+[node name="BldPower" type="Node3D" parent="." unique_id=1133231150]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.405502, 0, -59.663197)
+
+[node name="SM_Bld_Power_01" parent="BldPower" unique_id=1192551105 instance=ExtResource("68_y74xb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.131388, 0, 0)
+
+[node name="SM_Bld_Power_02" parent="BldPower" unique_id=338934624 instance=ExtResource("69_m0q7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.445269, 0, 0)
+
+[node name="SM_Bld_Power_03" parent="BldPower" unique_id=1608739140 instance=ExtResource("70_egmx0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.159959, 0, 11.037897)
+
+[node name="SM_Bld_Power_04" parent="BldPower" unique_id=43517718 instance=ExtResource("71_425n3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.867886)
+
+[node name="SM_Bld_Raised_01" parent="BldPower" unique_id=770300023 instance=ExtResource("72_fp5pj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5273867, 0, 10.430372)
+
+[node name="SM_Bld_Raised_02" parent="BldPower" unique_id=1832811380 instance=ExtResource("73_je8ya")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.8336754)
+
+[node name="SM_Bld_Roof_Pagoda_01" parent="BldPower" unique_id=122759113 instance=ExtResource("74_egmx0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15.609343)
+
+[node name="SM_Bld_Roof_Pagoda_02" parent="BldPower" unique_id=889113016 instance=ExtResource("75_425n3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.139854, 0, 15.915222)
+
+[node name="Section" type="Node3D" parent="." unique_id=1994447914]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.23797, 0, -62.877403)
+
+[node name="SM_Bld_Section_Corner_01" parent="Section" unique_id=1070874806 instance=ExtResource("76_bnohh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4736423, 0, 0)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Section_Corner_01_Glass" parent="Section" unique_id=1520662863 instance=ExtResource("77_2vqhp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4736423, 0, 0)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Section_Corner_02" parent="Section" unique_id=1132906775 instance=ExtResource("78_7v6nf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.096785, 0, 0)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Section_Corner_03" parent="Section" unique_id=262803364 instance=ExtResource("79_asbec")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.0032434, 0, 0)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Section_Door_01" parent="Section" unique_id=295564945 instance=ExtResource("80_8ccud")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.717794)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Section_Door_02" parent="Section" unique_id=1070156928 instance=ExtResource("81_hjxiy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.985469, 0, 9.461798)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Section_Door_03" parent="Section" unique_id=587226229 instance=ExtResource("82_x6fet")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1230383, 0, 9.645027)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Section_Door_04" parent="Section" unique_id=1145804056 instance=ExtResource("83_krlw8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.925318, 0, 0)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Section_Door_04_Glass" parent="Section" unique_id=1289385758 instance=ExtResource("84_h4lte")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.925318, 0, 0)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Section_Door_05" parent="Section" unique_id=1903421193 instance=ExtResource("85_43yv2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.566934, 0, 9.26046)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Section_Door_05_Glass" parent="Section" unique_id=1074567647 instance=ExtResource("86_wxgu1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.566934, 0, 9.26046)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Section_Door_06" parent="Section" unique_id=375029961 instance=ExtResource("87_vp2an")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.135345, 0, 7.590679)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Section_Door_07" parent="Section" unique_id=125705407 instance=ExtResource("88_eohy4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.462839, 0, 0.22601795)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Section_Door_07_Door" parent="Section" unique_id=69096628 instance=ExtResource("89_j5o81")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.716602, 1.1725574, 0.22601795)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Section_Door_07_Glass" parent="Section" unique_id=663319899 instance=ExtResource("90_dgxbt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.92659, 1.5311543, 0.056807518)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Section_Grid_01" parent="Section" unique_id=21674559 instance=ExtResource("91_ngc4s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 9)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Section_Industrial_01" parent="Section" unique_id=860656107 instance=ExtResource("92_u5jps")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.2598104, 0, 17.725973)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Section_Industrial_02" parent="Section" unique_id=745910164 instance=ExtResource("93_2xilb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 17.725973)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Section_Industrial_03" parent="Section" unique_id=1716768690 instance=ExtResource("94_87p82")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.486143, 0, 17.725973)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Section_Wall_01" parent="Section" unique_id=1333292287 instance=ExtResource("95_pm2ks")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.743082, 0, 26.66108)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Section_Wall_02" parent="Section" unique_id=703820106 instance=ExtResource("96_wllm3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.676594, 0, 26.66108)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Section_Wall_03" parent="Section" unique_id=1795506203 instance=ExtResource("97_do04m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.291094, 0, 26.66108)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Section_Wall_04" parent="Section" unique_id=2053436767 instance=ExtResource("98_l5r32")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9323997, 0, 26.66108)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Section_Wall_05" parent="Section" unique_id=1190444688 instance=ExtResource("99_3idy1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.328497, 0, 26.66108)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Section_Window_01" parent="Section" unique_id=602208621 instance=ExtResource("100_1icsr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.117178, 0, 18.01122)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Section_Window_02" parent="Section" unique_id=840865416 instance=ExtResource("101_ypnbq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.205433, 0, 18.01122)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Section_Window_03" parent="Section" unique_id=695670518 instance=ExtResource("102_xtqjl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.91251, 0, 18.01122)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Section_Window_04" parent="Section" unique_id=241831738 instance=ExtResource("103_0bcsb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.425463, 0, 26.927622)
+skeleton = NodePath("../..")
+
+[node name="StripClub" type="Node3D" parent="." unique_id=813646270]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.49377, 0, -12.885155)
+
+[node name="SM_Bld_StripClub_01" parent="StripClub" unique_id=478964204 instance=ExtResource("107_krlw8")]
+visible = false
+
+[node name="SM_Bld_StripClub_Interior_01" parent="StripClub" unique_id=1534970409 instance=ExtResource("108_h4lte")]
+
+[node name="SM_Bld_StripClub_Interior_02" parent="StripClub" unique_id=1893122061 instance=ExtResource("109_43yv2")]
+
+[node name="SM_Bld_StripClub_Interior_03" parent="StripClub" unique_id=1639368440 instance=ExtResource("110_wxgu1")]
+
+[node name="Warehouse" type="Node3D" parent="." unique_id=1190185719]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59.042473, 0, -54.567444)
+
+[node name="SM_Bld_Underpass_01" parent="Warehouse" unique_id=1383580602 instance=ExtResource("111_j5o81")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.169888, 0, 0)
+
+[node name="SM_Bld_Warehouse_01" parent="Warehouse" unique_id=356963661 instance=ExtResource("112_dgxbt")]
+
+[node name="SM_Bld_Warehouse_Door_Bottom_01" parent="Warehouse" unique_id=368432477 instance=ExtResource("113_ngc4s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0159435, 0.06359863, 0)
+
+[node name="SM_Bld_Warehouse_Door_Bottom_Glass_01" parent="Warehouse" unique_id=909777303 instance=ExtResource("114_u5jps")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.015763, 1.717419, 0.0056680143)
+
+[node name="SM_Bld_Warehouse_Door_Glass_01" parent="Warehouse" unique_id=1061002151 instance=ExtResource("115_2xilb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.98442, 0, 4.98235)
+
+[node name="SM_Bld_Warehouse_Door_Top_01" parent="Warehouse" unique_id=613847495 instance=ExtResource("116_87p82")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0159435, 3.2647371, 0)
+
+[node name="Env" type="Node3D" parent="." unique_id=1483382721]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.258963, 0, -34.244938)
+
+[node name="SM_Env_Ceiling_01" parent="Env" unique_id=655363578 instance=ExtResource("117_l5r32")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23.32547, 0)
+
+[node name="SM_Env_Cloud_01" parent="Env" unique_id=246068269 instance=ExtResource("118_3idy1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.8828087)
+
+[node name="SM_Env_Cloud_02" parent="Env" unique_id=1981405020 instance=ExtResource("119_1icsr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.246856, 0, 4.8479905)
+
+[node name="SM_Env_Cloud_03" parent="Env" unique_id=1182099552 instance=ExtResource("120_ypnbq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.588622, 0, 8.713627)
+
+[node name="SM_Env_Cloud_04" parent="Env" unique_id=1289360880 instance=ExtResource("121_xtqjl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.895484, 0, 7.6037664)
+
+[node name="SM_Env_Cloud_05" parent="Env" unique_id=461140490 instance=ExtResource("122_0bcsb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.730031, 0, 9.8814)
+
+[node name="SM_Env_Dirt_Mound_Small_01" parent="Env" unique_id=681865695 instance=ExtResource("123_4umk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5549592, 0, 2.3004332)
+
+[node name="SM_Env_Dirt_Mound_Small_02" parent="Env" unique_id=1531345282 instance=ExtResource("124_uri82")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4051328, 0, 2.385645)
+
+[node name="SM_Env_Floor_01" parent="Env" unique_id=1679262452 instance=ExtResource("125_dqaaj")]
+
+[node name="Graffiti" type="Node3D" parent="." unique_id=296819545]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -19)
+
+[node name="SM_Env_Graffiti_Ground_01" parent="Graffiti" unique_id=304818952 instance=ExtResource("126_udqxk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9539194, 0, 0)
+
+[node name="SM_Env_Graffiti_Ground_02" parent="Graffiti" unique_id=1652405370 instance=ExtResource("127_08hy0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.34687, 0, 0)
+
+[node name="SM_Env_Graffiti_Ground_03" parent="Graffiti" unique_id=1426759013 instance=ExtResource("128_7k47j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.513996, 0, 2.3370428)
+
+[node name="SM_Env_Graffiti_Ground_04" parent="Graffiti" unique_id=2017039660 instance=ExtResource("129_ca505")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.6063678)
+
+[node name="SM_Env_Graffiti_Ground_05" parent="Graffiti" unique_id=228955527 instance=ExtResource("130_4ekbo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.137603, 0, 2.7715955)
+
+[node name="SM_Env_Graffiti_Wall_01" parent="Graffiti" unique_id=619559453 instance=ExtResource("131_iqc1y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6668809, 0.42015147)
+
+[node name="SM_Env_Graffiti_Wall_02" parent="Graffiti" unique_id=2081999268 instance=ExtResource("132_tmupn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0248246, 0.6668809, -1.7155917)
+
+[node name="SM_Env_Graffiti_Wall_03" parent="Graffiti" unique_id=685726560 instance=ExtResource("133_743w2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.047432, 0.6668809, -1.7622483)
+
+[node name="SM_Env_Graffiti_Wall_04" parent="Graffiti" unique_id=175289414 instance=ExtResource("134_hj1um")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3807907, 0.6668809, -1.6822681)
+
+[node name="SM_Env_Graffiti_Wall_05" parent="Graffiti" unique_id=748195831 instance=ExtResource("135_dtslm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3827944, 0.38791853, -1.7564797)
+
+[node name="Ground" type="Node3D" parent="." unique_id=58545659]
+
+[node name="SM_Env_Grass_Patch_01" parent="Ground" unique_id=499752457 instance=ExtResource("136_w0g7o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.047174, 0, 0)
+
+[node name="SM_Env_Grass_Patch_02" parent="Ground" unique_id=146184907 instance=ExtResource("137_ncu2e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.672186, 0, 3.465557)
+
+[node name="SM_Env_Grass_Patch_03" parent="Ground" unique_id=411582 instance=ExtResource("138_7u5hv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.549864, 0, -2.8989563)
+
+[node name="SM_Env_Greeble_Cube_01" parent="Ground" unique_id=572181500 instance=ExtResource("139_bjfqv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.653336, 0, -4.8387494)
+
+[node name="SM_Env_Greeble_Cube_02" parent="Ground" unique_id=362357990 instance=ExtResource("140_p32p5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.185858, 0, 3.1826398)
+
+[node name="SM_Env_Ground_01" parent="Ground" unique_id=738115459 instance=ExtResource("141_a2a7x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.166477, 0, -5.906807)
+
+[node name="SM_Env_Ground_Flat_01" parent="Ground" unique_id=1314100957 instance=ExtResource("142_lcnun")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.434362, 0, 0)
+
+[node name="SM_Env_Ground_Tile_01" parent="Ground" unique_id=1574933905 instance=ExtResource("143_gs5am")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.744435, 0, 0)
+
+[node name="SM_Env_Ground_Tile_02" parent="Ground" unique_id=1974374214 instance=ExtResource("144_6e00i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.826539, 0, 6.844364)
+
+[node name="SM_Env_Ground_Tile_03" parent="Ground" unique_id=419376678 instance=ExtResource("145_udgx8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.131132, 0, 0)
+
+[node name="SM_Env_Ground_Tile_04" parent="Ground" unique_id=1407698095 instance=ExtResource("146_gj12d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.027025, 3.8146973e-06, 5.886118)
+
+[node name="SM_Env_Ground_Tile_05" parent="Ground" unique_id=1769557221 instance=ExtResource("147_mmpp0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0892944, 1.9073486e-06, 6.4227)
+
+[node name="SM_Env_Ground_Tile_06" parent="Ground" unique_id=75764389 instance=ExtResource("148_niswo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7533245, 0, 12.971011)
+
+[node name="SM_Env_Ground_Tile_07" parent="Ground" unique_id=261472383 instance=ExtResource("149_7ppd2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.92823, 0, 12.955713)
+
+[node name="SM_Env_Ground_Tile_08" parent="Ground" unique_id=656850824 instance=ExtResource("150_0i4i3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.470503, 0, 12.715711)
+
+[node name="SM_Env_Ground_Tile_09" parent="Ground" unique_id=1739964053 instance=ExtResource("151_23jp1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.641972, 0, 6.548045)
+
+[node name="SM_Env_Ground_Tile_Base_01" parent="Ground" unique_id=897513328 instance=ExtResource("152_h3e83")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.570702, 26.767712, -6.700449)
+
+[node name="SM_Env_Ground_Tile_Base_02" parent="Ground" unique_id=453828330 instance=ExtResource("153_8fs7u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0044804, 28.219059, -6.253399)
+
+[node name="SM_Env_Ground_Tile_Base_03" parent="Ground" unique_id=1873716144 instance=ExtResource("154_n01is")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26.761171, 0)
+
+[node name="SM_Env_Ground_Tile_Base_04" parent="Ground" unique_id=152816834 instance=ExtResource("155_o6wwn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26.543293, 7.165063)
+
+[node name="SM_Env_Ground_Tile_Floating_Platform_01" parent="Ground" unique_id=995345133 instance=ExtResource("156_d68qp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.677614, 25.644564, 5.0876236)
+
+[node name="SM_Env_Ground_Tile_Half_01" parent="Ground" unique_id=818948274 instance=ExtResource("157_tkwpj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6047611, -1.9073486e-06, -1.1960392)
+
+[node name="SM_Env_Ground_Tile_Half_02" parent="Ground" unique_id=501968709 instance=ExtResource("158_46m6n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1070642, 0, 2.0796833)
+
+[node name="SM_Env_Ground_Tile_Half_03" parent="Ground" unique_id=615370952 instance=ExtResource("159_5f0kx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1611605, 0, 5.306858)
+
+[node name="SM_Env_Ground_Tile_Half_04" parent="Ground" unique_id=367564442 instance=ExtResource("160_3jt4e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.092821, 0, 8.223631)
+
+[node name="SM_Env_Ground_Tile_Half_05" parent="Ground" unique_id=2074004139 instance=ExtResource("161_nss7v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.4429874, 0, 11.211237)
+
+[node name="SM_Env_Ground_Tile_Supports_01" parent="Ground" unique_id=1566781307 instance=ExtResource("162_wgxrt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.4748726, 0, -4.538644)
+
+[node name="SM_Env_Ground_Tile_Supports_02" parent="Ground" unique_id=1633623726 instance=ExtResource("163_6gait")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27423716, 0, -0.79948425)
+
+[node name="SM_Env_Ground_Tile_Tube_01" parent="Ground" unique_id=151269627 instance=ExtResource("164_gaakq")]
+
+[node name="Node3D11" type="Node3D" parent="." unique_id=316257808]
+
+[node name="Node3D12" type="Node3D" parent="." unique_id=481527861]
+
+[node name="Node3D13" type="Node3D" parent="." unique_id=1749380416]
