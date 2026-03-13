@@ -3,7 +3,6 @@ https://youtu.be/PuLuwzgYB4g?si=GW89VsARHsRXArKh
 
 - FIX: Delivery doesn't do multiple stop like it's supposed to
 - FIX? If the AI has nothing better to do it might re-trigger the same action even though it's already "done"... finishing it instantly and restarting every frame. Can I stop the AI from re-running a "already" finished task because it has nothing better to do?
-- FIX: WorkInShop doesn't seem to select the right random path location
 - DESIGN: ProcGen (Maybe prefab buildings "grid" placed randomly?) (Need to research how to make it look more organic, maybe "neighborhood" attributes to create "biomes"?)
 - Allow Default Action to jump to a new action if score is more than x% of current action
 - Design new Jobs
@@ -39,6 +38,7 @@ https://youtu.be/PuLuwzgYB4g?si=GW89VsARHsRXArKh
 ============= DONE ===========================
 ==============================================
 
+X FIX: WorkInShop doesn't seem to select the right random path location
 X Delivery Driver (deliver food from restaurant but also deliver foodstuff to market, medecine and electronics to doc and cyberdocs?)
 X Add camera zoom
 X Test Second floor and design transparency (ie: walls and ceiling should disapear when looking inside a building)

@@ -1,14 +1,17 @@
+Hospital bed
+Handgun
+
 Vending Machine
 X Sidewalk
 X Asphalt
 Pedestrian Crossing
 
-Concrete Wall
-Concrete Wall with Window
+XConcrete Wall
+XConcrete Wall with Window
 Concrete Wall with Window Aircon
 Balcony
 Concrete Wall with Sliding (Glass?) Door
-Concrete Wall with Closed Garage Door
+XConcrete Wall with Closed Garage Door
 
 XTile Floor
 Cracked Tile Floor
@@ -22,8 +25,8 @@ X Cooktop
 X Kitchen Cabinet
 X Sink
 X Fridge
-Computer
-Bar Stool (see adder3 ref)
+XComputer
+XBar Stool (see adder3 ref)
 X Desk
 X Desk Chair
 
@@ -31,15 +34,15 @@ X Desk Chair
 Grafity
 Signs (with Japanese/Chinese text)
 ~Pipes
-Cables
+XCables
 Lamppost
-StreetLamp
+XStreetLamp
 Street Ramen Shop
 X Cardboard Boxes
-Crates
+XCrates
 Tarp Covered Crate
 X Palette
-Rusty Barrel
+XRusty Barrel
 Electric Pole (with cables)
 
 Escape ladder/stairs outside
