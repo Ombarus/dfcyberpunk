@@ -651,6 +651,9 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7, 0, 
 [node name="SidewalkLeft59" parent="Static/NavigationRegion3D/Sidewalk" unique_id=1055383133 instance=ExtResource("3_4b6ik")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9, 0, -30.0009)
 
+[node name="SidewalkLeft64" parent="Static/NavigationRegion3D/Sidewalk" unique_id=217203797 instance=ExtResource("3_4b6ik")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 11, 0, -30.0009)
+
 [node name="SidewalkLeft40" parent="Static/NavigationRegion3D/Sidewalk" unique_id=1803304102 instance=ExtResource("3_4b6ik")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9, 0, -23.9964)
 
