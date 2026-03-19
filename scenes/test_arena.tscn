@@ -1,16 +1,19 @@
-[gd_scene load_steps=10 format=3 uid="uid://s2cte2or8nec"]
+[gd_scene format=3 uid="uid://s2cte2or8nec"]
 
 [ext_resource type="PackedScene" uid="uid://chjfk0exg7m7y" path="res://data/models/RoadBlank.glb" id="2_qrbjx"]
 [ext_resource type="PackedScene" uid="uid://do51rp00ju53t" path="res://scenes/peep.tscn" id="3_x3pwt"]
 [ext_resource type="PackedScene" uid="uid://bxf2irwexmp4l" path="res://scenes/peep2.tscn" id="4_qylfu"]
-[ext_resource type="Script" path="res://scripts/camera_3d.gd" id="5_oisk7"]
-[ext_resource type="Script" path="res://scripts/world_clock.gd" id="6_duicb"]
+[ext_resource type="Script" uid="uid://bcermlviu2nxj" path="res://scripts/camera_3d.gd" id="5_oisk7"]
+[ext_resource type="Script" uid="uid://bjx6pprxieo38" path="res://scripts/world_clock.gd" id="6_duicb"]
 [ext_resource type="Environment" uid="uid://cspehjk1qfofp" path="res://data/main_environment.tres" id="6_n04l0"]
-[ext_resource type="Script" path="res://scripts/messaging.gd" id="7_5c4qn"]
+[ext_resource type="Script" uid="uid://lmb08j05dt0" path="res://scripts/messaging.gd" id="7_5c4qn"]
 [ext_resource type="PackedScene" uid="uid://jndmy02i7f13" path="res://scenes/text_bubble.tscn" id="8_kux60"]
+[ext_resource type="Script" uid="uid://cxgydrfgr1ppa" path="res://scripts/actionplan.gd" id="8_trud8"]
+[ext_resource type="Resource" uid="uid://bv2bf5lv4fw4p" path="res://data/plans/FightMe.tres" id="9_xiblw"]
+[ext_resource type="PackedScene" uid="uid://c2hbs3xwqvwe3" path="res://scenes/hud.tscn" id="10_tgj8j"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_7heb7"]
-vertices = PackedVector3Array(-5.6, 0.5, -5.6, -5.6, 0.5, 5.6, 5.6, 0.5, 5.6, 5.6, 0.5, -5.6)
+vertices = PackedVector3Array(-5.6, 0.5, -5.6, -5.6, 0.5, 5.6000004, 5.6000004, 0.5, 5.6000004, 5.6000004, 0.5, -5.6)
 polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 geometry_parsed_geometry_type = 1
 geometry_collision_mask = 4294967293
@@ -21,152 +24,11 @@ agent_radius = 0.4
 agent_max_climb = 0.3
 agent_max_slope = 55.0
 
-[node name="TestArena" type="Node3D"]
+[node name="TestArena" type="Node3D" unique_id=1011470558]
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
-navigation_mesh = SubResource("NavigationMesh_7heb7")
+[node name="Systems" type="Node" parent="." unique_id=1707373770]
 
-[node name="RoadBlank2" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
-
-[node name="RoadBlank3" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-
-[node name="RoadBlank4" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
-
-[node name="RoadBlank5" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
-
-[node name="RoadBlank6" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
-
-[node name="RoadBlank7" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
-
-[node name="RoadBlank8" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4)
-
-[node name="RoadBlank9" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6)
-
-[node name="RoadBlank10" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
-
-[node name="RoadBlank11" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
-
-[node name="RoadBlank12" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
-
-[node name="RoadBlank13" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
-
-[node name="RoadBlank14" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2)
-
-[node name="RoadBlank15" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
-
-[node name="RoadBlank16" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
-
-[node name="RoadBlank17" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
-
-[node name="RoadBlank18" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -6)
-
-[node name="RoadBlank19" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
-
-[node name="RoadBlank20" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -4)
-
-[node name="RoadBlank21" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -6)
-
-[node name="RoadBlank22" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 2)
-
-[node name="RoadBlank23" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 4)
-
-[node name="RoadBlank24" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 4)
-
-[node name="RoadBlank25" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
-
-[node name="RoadBlank26" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2)
-
-[node name="RoadBlank27" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
-
-[node name="RoadBlank28" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
-
-[node name="RoadBlank29" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -2)
-
-[node name="RoadBlank30" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -6)
-
-[node name="RoadBlank31" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
-
-[node name="RoadBlank32" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -4)
-
-[node name="RoadBlank33" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -6)
-
-[node name="RoadBlank34" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2)
-
-[node name="RoadBlank35" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
-
-[node name="RoadBlank36" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 4)
-
-[node name="RoadBlank37" parent="NavigationRegion3D" instance=ExtResource("2_qrbjx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
-
-[node name="Fighters" type="Node3D" parent="."]
-
-[node name="Peep1" parent="." instance=ExtResource("3_x3pwt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.38031, 0.326524, 1.19896)
-
-[node name="Peep2" parent="." instance=ExtResource("4_qylfu")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.305298, 0.185869, -1.22883)
-
-[node name="LookAt" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20957, 0)
-
-[node name="Camera3D" type="Camera3D" parent="LookAt"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.21111, 4.87079)
-script = ExtResource("5_oisk7")
-ZoomSpeed = 0.5
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("6_n04l0")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
-transform = Transform3D(0.971108, -0.120163, -0.20618, 0.0225513, -0.813902, 0.580564, -0.237573, -0.56844, -0.787677, 10.1197, 4.88909, -1.29089)
-light_color = Color(0.86425, 0.874932, 0.886243, 1)
-shadow_enabled = true
-
-[node name="OmniLight3D" type="OmniLight3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.74549, 2.6691)
-light_color = Color(0.886452, 0.819712, 0.881083, 1)
-light_energy = 3.135
-shadow_enabled = true
-omni_range = 7.996
-
-[node name="Systems" type="Node" parent="."]
-
-[node name="WorldClock" type="Node" parent="Systems"]
+[node name="WorldClock" type="Node" parent="Systems" unique_id=1705766837]
 script = ExtResource("6_duicb")
 CurDateTime = {
 "day": 1,
@@ -177,9 +39,159 @@ CurDateTime = {
 "year": 2035
 }
 
-[node name="Messaging" type="Node" parent="Systems"]
+[node name="Messaging" type="Node" parent="Systems" unique_id=886660667]
 script = ExtResource("7_5c4qn")
 BubbleScene = ExtResource("8_kux60")
 
-[editable path="Peep1"]
-[editable path="Peep2"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1633306625]
+environment = ExtResource("6_n04l0")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=214767785]
+transform = Transform3D(0.971108, -0.120163, -0.20618, 0.0225513, -0.813902, 0.580564, -0.237573, -0.56844, -0.787677, 10.1197, 4.88909, -1.29089)
+light_color = Color(0.86425, 0.874932, 0.886243, 1)
+shadow_enabled = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="WorldEnvironment" unique_id=927377286]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.74549, 2.6691)
+light_color = Color(0.886452, 0.819712, 0.881083, 1)
+light_energy = 3.135
+shadow_enabled = true
+omni_range = 7.996
+
+[node name="LookAt" type="Node3D" parent="." unique_id=646765696]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20957, 0)
+
+[node name="Camera3D" type="Camera3D" parent="LookAt" unique_id=340926050]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.21111, 4.87079)
+script = ExtResource("5_oisk7")
+ZoomSpeed = 0.5
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=695877687]
+navigation_mesh = SubResource("NavigationMesh_7heb7")
+
+[node name="RoadBlank2" parent="NavigationRegion3D" unique_id=1843065944 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="RoadBlank3" parent="NavigationRegion3D" unique_id=1578671717 instance=ExtResource("2_qrbjx")]
+
+[node name="RoadBlank4" parent="NavigationRegion3D" unique_id=592845479 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="RoadBlank5" parent="NavigationRegion3D" unique_id=320923452 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+
+[node name="RoadBlank6" parent="NavigationRegion3D" unique_id=2026890270 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+
+[node name="RoadBlank7" parent="NavigationRegion3D" unique_id=1891335646 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[node name="RoadBlank8" parent="NavigationRegion3D" unique_id=2080473329 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4)
+
+[node name="RoadBlank9" parent="NavigationRegion3D" unique_id=1129459517 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6)
+
+[node name="RoadBlank10" parent="NavigationRegion3D" unique_id=39912522 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="RoadBlank11" parent="NavigationRegion3D" unique_id=1097888217 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="RoadBlank12" parent="NavigationRegion3D" unique_id=1206967327 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
+
+[node name="RoadBlank13" parent="NavigationRegion3D" unique_id=105125865 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+
+[node name="RoadBlank14" parent="NavigationRegion3D" unique_id=1059290107 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -2)
+
+[node name="RoadBlank15" parent="NavigationRegion3D" unique_id=1954665035 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="RoadBlank16" parent="NavigationRegion3D" unique_id=1927080134 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+
+[node name="RoadBlank17" parent="NavigationRegion3D" unique_id=794561522 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
+
+[node name="RoadBlank18" parent="NavigationRegion3D" unique_id=164439277 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -6)
+
+[node name="RoadBlank19" parent="NavigationRegion3D" unique_id=320007365 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
+
+[node name="RoadBlank20" parent="NavigationRegion3D" unique_id=223857531 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -4)
+
+[node name="RoadBlank21" parent="NavigationRegion3D" unique_id=978662614 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -6)
+
+[node name="RoadBlank22" parent="NavigationRegion3D" unique_id=898007321 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 2)
+
+[node name="RoadBlank23" parent="NavigationRegion3D" unique_id=169749014 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 4)
+
+[node name="RoadBlank24" parent="NavigationRegion3D" unique_id=682597581 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 4)
+
+[node name="RoadBlank25" parent="NavigationRegion3D" unique_id=418806482 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
+
+[node name="RoadBlank26" parent="NavigationRegion3D" unique_id=866032800 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2)
+
+[node name="RoadBlank27" parent="NavigationRegion3D" unique_id=1883984526 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="RoadBlank28" parent="NavigationRegion3D" unique_id=388687773 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+
+[node name="RoadBlank29" parent="NavigationRegion3D" unique_id=1106587665 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -2)
+
+[node name="RoadBlank30" parent="NavigationRegion3D" unique_id=1667917446 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -6)
+
+[node name="RoadBlank31" parent="NavigationRegion3D" unique_id=347593568 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
+
+[node name="RoadBlank32" parent="NavigationRegion3D" unique_id=1940049583 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -4)
+
+[node name="RoadBlank33" parent="NavigationRegion3D" unique_id=1725368465 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -6)
+
+[node name="RoadBlank34" parent="NavigationRegion3D" unique_id=1976334581 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2)
+
+[node name="RoadBlank35" parent="NavigationRegion3D" unique_id=759790455 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+
+[node name="RoadBlank36" parent="NavigationRegion3D" unique_id=1252989347 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 4)
+
+[node name="RoadBlank37" parent="NavigationRegion3D" unique_id=1594686441 instance=ExtResource("2_qrbjx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
+
+[node name="Fighters" type="Node3D" parent="." unique_id=1198588137]
+
+[node name="Peep1" parent="Fighters" unique_id=109950749 node_paths=PackedStringArray("BelongTo") instance=ExtResource("3_x3pwt")]
+BelongTo = NodePath("../Peep2")
+ActionPlans = Array[ExtResource("8_trud8")]([ExtResource("9_xiblw")])
+
+[node name="NavigationAgent3D" parent="Fighters/Peep1" index="4"]
+path_height_offset = 0.3
+
+[node name="Peep2" parent="Fighters" unique_id=1673972728 instance=ExtResource("4_qylfu")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -1.9067345)
+
+[node name="NavigationAgent3D" parent="Fighters/Peep2" index="4"]
+path_height_offset = 0.3
+
+[node name="HUD" parent="." unique_id=2117860959 instance=ExtResource("10_tgj8j")]
+
+[editable path="Fighters/Peep1"]
+[editable path="Fighters/Peep2"]

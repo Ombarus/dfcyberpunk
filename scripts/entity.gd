@@ -69,6 +69,11 @@ func _process(delta: float) -> void:
 		self.pushAction("Default", -1)
 	var i := 0
 	# For loop was having issue with updating actionStack during loop
+	if "velocity" in self:
+		var nav_agent := self.find_child("NavigationAgent3D", true, false) as NavigationAgent3D
+		# Actions must set velocity every frame in case we abort we have to stop the player
+		# (Y is gravity so keep it)
+		nav_agent.velocity = Vector3(0.0, nav_agent.velocity.y, 0.0)
 	while i < self.actionStack.size():
 		var s = self.callv(self.actionStack[i], [delta, self.curParam, i])
 		self.Needs.ApplyNeedForAction(self.actionStack[i], delta, self.curParam, s)
@@ -91,7 +96,6 @@ func _physics_process(delta: float) -> void:
 		# A bit of a hack because sometime we abort "Walk" and don't reset velocity
 		if not cur_anim in ["Walk", "Idle"]:
 			(self.get_node("CollisionShape3D") as CollisionShape3D).disabled = true
-			nav_agent.velocity = Vector3.ZERO
 		else:
 			(self.get_node("CollisionShape3D") as CollisionShape3D).disabled = false
 		
@@ -1257,6 +1261,59 @@ func choose_best_machine(machines : Array, completion : float, target : int) -> 
 	if best_machine == null:
 		best_machine = machines[0]
 	return best_machine
+
+
+func FightMe(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	var plan : ActionPlan = param.get("current_plan", null)
+	var victim : Advertisement = param.get("plan_ad", null)
+	
+	var has_defend_plan := false
+	for p in self.ActionPlans:
+		if p.ActionName == "DefendAgainstMe":
+			has_defend_plan = true
+			break
+	
+	if has_defend_plan == false:
+		var def_plan := load("res://data/plans/DefendAgainstMe.tres") as ActionPlan
+		self.ActionPlans.append(def_plan)
+		self.owner = victim # hack to make sure only victim can pick up Defend Plan
+	
+	#1. Get to victim
+	# Tackle animation work from about 1.9m away
+	if not isAtLocation(victim.global_position, 1.9):
+		param["target"] = victim.global_position
+		param["precision"] = 1.9
+		self.pushAction("Goto", actionDepth)
+		return Globals.ACTION_STATE.Running
+
+	#2. Tackle it
+	if isAtLocation(victim.global_position, 1.9) and is_top_of_stack and self.animState(victim) == "Walk":
+		param["obj"] = self
+		param["state"] = "Tackle"
+		self.pushAction("TravelAnimState", actionDepth)
+		return Globals.ACTION_STATE.Running
+		
+	#3. Punch (attack speed, hit chance, damage)
+	
+	return Globals.ACTION_STATE.Running
+
+
+func DefendAgainstMe(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	var plan : ActionPlan = param.get("current_plan", null)
+	var opponent : Advertisement = param.get("plan_ad", null)
+	
+	if not is_top_of_stack:
+		return Globals.ACTION_STATE.Running
+	
+	if self.animState(self) != "IdleMelee" and is_top_of_stack:
+		param["obj"] = self
+		param["state"] = "IdleMelee"
+		self.pushAction("TravelAnimState", actionDepth)
+		return Globals.ACTION_STATE.Running
+	
+	return Globals.ACTION_STATE.Running
 
 ###################################################################################################
 ## ACTION FUNCTION (NEED REVISION)
