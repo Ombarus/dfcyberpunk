@@ -179,6 +179,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
 [node name="Fighters" type="Node3D" parent="." unique_id=1198588137]
 
 [node name="Peep1" parent="Fighters" unique_id=109950749 node_paths=PackedStringArray("BelongTo") instance=ExtResource("3_x3pwt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.438109)
 BelongTo = NodePath("../Peep2")
 ActionPlans = Array[ExtResource("8_trud8")]([ExtResource("9_xiblw")])
 

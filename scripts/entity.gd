@@ -93,8 +93,9 @@ func _physics_process(delta: float) -> void:
 		# Disable gravity when doing "special" animations (like sleeping or sitting)
 		if not self.call("is_on_floor"):
 			nav_agent.velocity += self.call("get_gravity") * delta
+
 		# A bit of a hack because sometime we abort "Walk" and don't reset velocity
-		if not cur_anim in ["Walk", "Idle"]:
+		if not cur_anim in ["Walk", "Idle", "IdleMelee"]:
 			(self.get_node("CollisionShape3D") as CollisionShape3D).disabled = true
 		else:
 			(self.get_node("CollisionShape3D") as CollisionShape3D).disabled = false
@@ -129,10 +130,6 @@ func _on_velocity_computed(safe_velocity : Vector3):
 
 func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
-	# For now, don't interrupt running actions
-	# But what if we decide to go to sleep before finishing cooking?
-	if not is_top_of_stack:
-		return Globals.ACTION_STATE.Running
 		
 	var random_goto_plan := ActionPlan.new()
 	random_goto_plan.ActionName = "WalkRandomly"
@@ -204,6 +201,14 @@ func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 	self.knownPlans = collected_plans
 	
 	var best_action : Dictionary = collected_plans[0]
+	
+	
+	if not is_top_of_stack:
+		var cur_score : float = param["last_score"]
+		var new_score : float = best_action["score"]
+		# make current plan slightly "sticky" by increasing it's score by 30%
+		if cur_score * 1.3 >= new_score:
+			return Globals.ACTION_STATE.Running
 
 	# duplicate so we can modify properties in a unique way
 	# NOTE: might not always be the case, for example maybe a car would only ever have one active plan and the
@@ -211,6 +216,7 @@ func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 	# For now, all plans a duplicated
 	param["current_plan"] = best_action["plan"].duplicate()
 	param["plan_ad"] = best_action["ad"]
+	param["last_score"] = best_action["score"]
 	self.pushAction(best_action["plan"].ActionName, actionDepth)
 
 	return Globals.ACTION_STATE.Running
@@ -1268,6 +1274,18 @@ func FightMe(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var plan : ActionPlan = param.get("current_plan", null)
 	var victim : Advertisement = param.get("plan_ad", null)
 	
+	#1. Get to victim
+	# Tackle animation work from about 1.9m away
+	if not isAtLocation(victim.global_position, 1.9):
+		param["target"] = victim.global_position
+		param["precision"] = 1.9
+		self.pushAction("Goto", actionDepth)
+		return Globals.ACTION_STATE.Running
+	
+	var look_at_vec : Vector3 = victim.global_position
+	look_at_vec.y = self.global_position.y
+	self.look_at(look_at_vec, Vector3.UP)
+	
 	var has_defend_plan := false
 	for p in self.ActionPlans:
 		if p.ActionName == "DefendAgainstMe":
@@ -1278,22 +1296,18 @@ func FightMe(delta : float, param : Dictionary, actionDepth : int) -> int:
 		var def_plan := load("res://data/plans/DefendAgainstMe.tres") as ActionPlan
 		self.ActionPlans.append(def_plan)
 		self.owner = victim # hack to make sure only victim can pick up Defend Plan
-	
-	#1. Get to victim
-	# Tackle animation work from about 1.9m away
-	if not isAtLocation(victim.global_position, 1.9):
-		param["target"] = victim.global_position
-		param["precision"] = 1.9
-		self.pushAction("Goto", actionDepth)
-		return Globals.ACTION_STATE.Running
 
 	#2. Tackle it
-	if isAtLocation(victim.global_position, 1.9) and is_top_of_stack and self.animState(victim) == "Walk":
+	if isAtLocation(victim.global_position, 1.9) and self.animState(victim) == "Walk":
 		param["obj"] = self
 		param["state"] = "Tackle"
 		self.pushAction("TravelAnimState", actionDepth)
 		return Globals.ACTION_STATE.Running
-		
+	elif isAtLocation(victim.global_position, 1.9) and is_top_of_stack:
+		param["obj"] = self
+		param["state"] = "IdleMelee"
+		self.pushAction("TravelAnimState", actionDepth)
+		return Globals.ACTION_STATE.Running
 	#3. Punch (attack speed, hit chance, damage)
 	
 	return Globals.ACTION_STATE.Running
@@ -1303,6 +1317,10 @@ func DefendAgainstMe(delta : float, param : Dictionary, actionDepth : int) -> in
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	var plan : ActionPlan = param.get("current_plan", null)
 	var opponent : Advertisement = param.get("plan_ad", null)
+	
+	var look_at_vec : Vector3 = opponent.global_position
+	look_at_vec.y = self.global_position.y
+	self.look_at(look_at_vec, Vector3.UP)
 	
 	if not is_top_of_stack:
 		return Globals.ACTION_STATE.Running
