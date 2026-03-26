@@ -36,7 +36,8 @@ enum NEEDS {
 	Joy, # To oppose Satisfaction. Sometime fullfilling jobs are not fun so you need to watch TV
 	Security, # To ecourage company to spend money on security system. To encourage thugs to get guns
 	Curiosity, # To oppose Satisfaction and encourage Peeps to go to school. Learn skills but also take risks
-	Comfort # Encourage Peeps to buy useless things or better things (more comfortable couch, or better car)
+	Comfort, # Encourage Peeps to buy useless things or better things (more comfortable couch, or better car)
+	Stamina # For Combat and Running. Replenishes quickly. more quickly depending on skills and equipment
 }
 
 enum SKILLS {
@@ -46,7 +47,7 @@ enum SKILLS {
 }
 
 # To eventually help PCG most pieces should fit in a standard
-# grid. Right now I'm leaning toward 2x2x2m
+# grid. Right now I'm leaning toward 2x3x2m
 var FLOOR_HEIGHT : float = 3.0
 var FLOOR_WIDTH : float = 2.0
 
@@ -99,6 +100,13 @@ var REWARD_BASE := {
 		GRADE.Medium: 0.5, # ouch
 		GRADE.Small: 0.1, # annoyance
 		GRADE.VSmall: 0.05 # did you feel something?
+	},
+	NEEDS.Stamina: {
+		GRADE.VBig: 1.0, # Empty
+		GRADE.Big: 0.7, # Can't do much more after that
+		GRADE.Medium: 0.5, # 2 Medium Attack
+		GRADE.Small: 0.25, # 4 Small Attack
+		GRADE.VSmall: 0.05 # 0.05/sec = run for 20 seconds?
 	},
 	NEEDS.Humanity: {
 		GRADE.VBig: 0.83, # 5/6 essence (wired reflex lvl3)

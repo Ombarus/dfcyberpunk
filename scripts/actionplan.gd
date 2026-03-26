@@ -254,7 +254,8 @@ var ActualReward := [
 			Globals.NEEDS.Energy: -0.0006,
 			Globals.NEEDS.Satisfaction: -0.0005,
 			Globals.NEEDS.Joy: -0.0005,
-			Globals.NEEDS.Curiosity: -0.00005 # Will really depend on the personality
+			Globals.NEEDS.Curiosity: -0.00005, # Will really depend on the personality
+			Globals.NEEDS.Stamina: 0.6667 # 1.5 sec to replenish
 		}
 	},
 	{

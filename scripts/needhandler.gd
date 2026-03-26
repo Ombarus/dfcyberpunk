@@ -11,7 +11,8 @@ var CurrentNeeds := {
 	Globals.NEEDS.Joy: 0.5,
 	Globals.NEEDS.Security: 0.5,
 	Globals.NEEDS.Curiosity: 0.5,
-	Globals.NEEDS.Comfort: 0.5
+	Globals.NEEDS.Comfort: 0.5,
+	Globals.NEEDS.Stamina: 1.0
 }
 
 func Current(need : Globals.NEEDS) -> float:

@@ -35,7 +35,28 @@ func CurState() -> SEQ_STATE:
 
 func CurSequence() -> String:
 	return _cur_seq
-
+	
+func PunchSequence(attacker : Entity, defender : Entity):
+	_seq_state = SEQ_STATE.RUNNING
+	_cur_seq = "PunchSequence"
+	
+	var attacker_tree : AnimationTree = attacker.find_child("AnimationTree", true, false)
+	var attacker_state : AnimationNodeStateMachinePlayback = attacker_tree.get("parameters/playback")
+	var defender_tree : AnimationTree = defender.find_child("AnimationTree", true, false)
+	var defender_state : AnimationNodeStateMachinePlayback = defender_tree.get("parameters/playback")
+	
+	attacker_state.travel("Punch")
+	attacker.Needs.ApplyNeed(Globals.NEEDS.Stamina, -0.75)
+	var hit : float = randf()
+	if hit >= 0.5:
+		defender_state.travel("Stagger")
+		defender.Needs.ApplyNeed(Globals.NEEDS.Health, -0.25)
+	else:
+		defender_state.travel("Block")
+	await waitForState(attacker_state, "IdleMelee")
+	await waitForState(defender_state, "IdleMelee")
+	_seq_state = SEQ_STATE.FINISHED
+	
 func FridgeSequence(fridge : Advertisement):
 	_seq_state = SEQ_STATE.RUNNING
 	_cur_seq = "FridgeSequence"

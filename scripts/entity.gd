@@ -1272,7 +1272,10 @@ func choose_best_machine(machines : Array, completion : float, target : int) -> 
 func FightMe(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	var plan : ActionPlan = param.get("current_plan", null)
-	var victim : Advertisement = param.get("plan_ad", null)
+	var victim := param.get("plan_ad", null) as Entity
+	
+	if self.Needs.Current(Globals.NEEDS.Health) == 0 || victim.Needs.Current(Globals.NEEDS.Health) == 0:
+		return Globals.ACTION_STATE.Finished
 	
 	#1. Get to victim
 	# Tackle animation work from about 1.9m away
@@ -1303,12 +1306,14 @@ func FightMe(delta : float, param : Dictionary, actionDepth : int) -> int:
 		param["state"] = "Tackle"
 		self.pushAction("TravelAnimState", actionDepth)
 		return Globals.ACTION_STATE.Running
-	elif isAtLocation(victim.global_position, 1.9) and is_top_of_stack:
+	elif isAtLocation(victim.global_position, 1.9) and is_top_of_stack and self.animState(self) != "IdleMelee":
 		param["obj"] = self
 		param["state"] = "IdleMelee"
 		self.pushAction("TravelAnimState", actionDepth)
 		return Globals.ACTION_STATE.Running
-	#3. Punch (attack speed, hit chance, damage)
+		
+	#3. Punch (attack speed, hit chance (base (weapon?) + attack skill - defense skill?), damage (base + skill - armor?))
+	self.pushAction("Combat", actionDepth)
 	
 	return Globals.ACTION_STATE.Running
 
@@ -1316,7 +1321,7 @@ func FightMe(delta : float, param : Dictionary, actionDepth : int) -> int:
 func DefendAgainstMe(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	var plan : ActionPlan = param.get("current_plan", null)
-	var opponent : Advertisement = param.get("plan_ad", null)
+	var opponent := param.get("plan_ad", null) as Entity
 	
 	var look_at_vec : Vector3 = opponent.global_position
 	look_at_vec.y = self.global_position.y
@@ -1327,8 +1332,38 @@ func DefendAgainstMe(delta : float, param : Dictionary, actionDepth : int) -> in
 	
 	if self.animState(self) != "IdleMelee" and is_top_of_stack:
 		param["obj"] = self
-		param["state"] = "IdleMelee"
+		param["state"] = "Stagger"
 		self.pushAction("TravelAnimState", actionDepth)
+		return Globals.ACTION_STATE.Running
+	
+	return Globals.ACTION_STATE.Running
+	
+func Combat(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	var plan : ActionPlan = param.get("current_plan", null)
+	var opponent := param.get("plan_ad", null) as Entity
+	var seq : Sequencer = get_node("Sequencer")
+	
+	var my_anim_state = self.animState(self)
+	var opponent_anim_state = self.animState(opponent)
+	
+	if self.Needs.Current(Globals.NEEDS.Health) == 0 || opponent.Needs.Current(Globals.NEEDS.Health) == 0:
+		return Globals.ACTION_STATE.Finished
+	
+	var stamina : float = self.Needs.Current(Globals.NEEDS.Stamina)
+	# Not enough Stamina to throw a punch
+	if stamina < 0.75 || my_anim_state != "IdleMelee" || opponent_anim_state != "IdleMelee":
+		seq.SetContinue()
+		return Globals.ACTION_STATE.Running
+
+	if seq.CurState() == seq.SEQ_STATE.IDLE:
+		seq.PunchSequence(self, opponent)
+		return Globals.ACTION_STATE.Running
+	elif seq.CurState() == seq.SEQ_STATE.FINISHED:
+		seq.Reset()
+		return Globals.ACTION_STATE.Finished
+	else:
+		seq.SetContinue()
 		return Globals.ACTION_STATE.Running
 	
 	return Globals.ACTION_STATE.Running
