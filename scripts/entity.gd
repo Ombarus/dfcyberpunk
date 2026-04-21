@@ -97,6 +97,7 @@ func _physics_process(delta: float) -> void:
 		# A bit of a hack because sometime we abort "Walk" and don't reset velocity
 		if not cur_anim in ["Walk", "Idle", "IdleMelee"]:
 			(self.get_node("CollisionShape3D") as CollisionShape3D).disabled = true
+			nav_agent.velocity = Vector3.ZERO
 		else:
 			(self.get_node("CollisionShape3D") as CollisionShape3D).disabled = false
 		
@@ -1301,16 +1302,16 @@ func FightMe(delta : float, param : Dictionary, actionDepth : int) -> int:
 		self.owner = victim # hack to make sure only victim can pick up Defend Plan
 
 	#2. Tackle it
-	if isAtLocation(victim.global_position, 1.9) and self.animState(victim) == "Walk":
-		param["obj"] = self
-		param["state"] = "Tackle"
-		self.pushAction("TravelAnimState", actionDepth)
-		return Globals.ACTION_STATE.Running
-	elif isAtLocation(victim.global_position, 1.9) and is_top_of_stack and self.animState(self) != "IdleMelee":
-		param["obj"] = self
-		param["state"] = "IdleMelee"
-		self.pushAction("TravelAnimState", actionDepth)
-		return Globals.ACTION_STATE.Running
+	#if isAtLocation(victim.global_position, 1.9) and self.animState(victim) == "Walk":
+		#param["obj"] = self
+		#param["state"] = "Tackle"
+		#self.pushAction("TravelAnimState", actionDepth)
+		#return Globals.ACTION_STATE.Running
+	#elif isAtLocation(victim.global_position, 1.9) and is_top_of_stack and self.animState(self) != "IdleMelee":
+		#param["obj"] = self
+		#param["state"] = "IdleMelee"
+		#self.pushAction("TravelAnimState", actionDepth)
+		#return Globals.ACTION_STATE.Running
 		
 	#3. Punch (attack speed, hit chance (base (weapon?) + attack skill - defense skill?), damage (base + skill - armor?))
 	self.pushAction("Combat", actionDepth)
@@ -1327,15 +1328,10 @@ func DefendAgainstMe(delta : float, param : Dictionary, actionDepth : int) -> in
 	look_at_vec.y = self.global_position.y
 	self.look_at(look_at_vec, Vector3.UP)
 	
-	if not is_top_of_stack:
-		return Globals.ACTION_STATE.Running
+	if self.Needs.Current(Globals.NEEDS.Health) == 0 || opponent.Needs.Current(Globals.NEEDS.Health) == 0:
+		return Globals.ACTION_STATE.Finished
 	
-	if self.animState(self) != "IdleMelee" and is_top_of_stack:
-		param["obj"] = self
-		param["state"] = "Stagger"
-		self.pushAction("TravelAnimState", actionDepth)
-		return Globals.ACTION_STATE.Running
-	
+	# Fight will be orchestrated by attacker
 	return Globals.ACTION_STATE.Running
 	
 func Combat(delta : float, param : Dictionary, actionDepth : int) -> int:
@@ -1349,24 +1345,17 @@ func Combat(delta : float, param : Dictionary, actionDepth : int) -> int:
 	
 	if self.Needs.Current(Globals.NEEDS.Health) == 0 || opponent.Needs.Current(Globals.NEEDS.Health) == 0:
 		return Globals.ACTION_STATE.Finished
-	
-	var stamina : float = self.Needs.Current(Globals.NEEDS.Stamina)
-	# Not enough Stamina to throw a punch
-	if stamina < 0.75 || my_anim_state != "IdleMelee" || opponent_anim_state != "IdleMelee":
-		seq.SetContinue()
-		return Globals.ACTION_STATE.Running
-
+		
 	if seq.CurState() == seq.SEQ_STATE.IDLE:
-		seq.PunchSequence(self, opponent)
+		seq.FightSequence(self, opponent)
 		return Globals.ACTION_STATE.Running
 	elif seq.CurState() == seq.SEQ_STATE.FINISHED:
 		seq.Reset()
 		return Globals.ACTION_STATE.Finished
-	else:
-		seq.SetContinue()
-		return Globals.ACTION_STATE.Running
-	
+
+	seq.SetContinue()
 	return Globals.ACTION_STATE.Running
+	
 
 ###################################################################################################
 ## ACTION FUNCTION (NEED REVISION)

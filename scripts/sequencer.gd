@@ -36,26 +36,59 @@ func CurState() -> SEQ_STATE:
 func CurSequence() -> String:
 	return _cur_seq
 	
-func PunchSequence(attacker : Entity, defender : Entity):
+func FightSequence(attacker : Entity, defender : Entity):
 	_seq_state = SEQ_STATE.RUNNING
-	_cur_seq = "PunchSequence"
+	_cur_seq = "FightSequence"
 	
 	var attacker_tree : AnimationTree = attacker.find_child("AnimationTree", true, false)
 	var attacker_state : AnimationNodeStateMachinePlayback = attacker_tree.get("parameters/playback")
 	var defender_tree : AnimationTree = defender.find_child("AnimationTree", true, false)
 	var defender_state : AnimationNodeStateMachinePlayback = defender_tree.get("parameters/playback")
 	
-	attacker_state.travel("Punch")
-	attacker.Needs.ApplyNeed(Globals.NEEDS.Stamina, -0.75)
-	var hit : float = randf()
-	if hit >= 0.5:
-		defender_state.travel("Stagger")
-		defender.Needs.ApplyNeed(Globals.NEEDS.Health, -0.25)
-	else:
-		defender_state.travel("Block")
+	
+	attacker_state.travel("IdleMelee")
+	defender_state.travel("IdleMelee")
 	await waitForState(attacker_state, "IdleMelee")
 	await waitForState(defender_state, "IdleMelee")
-	_seq_state = SEQ_STATE.FINISHED
+	
+	# Fight until one drop
+	# idea:
+	#   wait for both to be in IdleMelee
+	#   if both have enough stamina, roll dice to decide who goes first
+	#   else the one with enough stamina goes
+	#   else wait until someone has enough stamina
+	while true:
+		var attacker_stamina : float = attacker.Needs.GetNeed(Globals.NEEDS.Stamina)
+		var defender_stamina : float = defender.Needs.GetNeed(Globals.NEEDS.Stamina)
+		
+		await waitForState(attacker_state, "IdleMelee")
+		await waitForState(defender_state, "IdleMelee")
+		# will abort when Entity decide to do something else
+		if await make_sure_still_running() == false:
+			return
+		
+		var hit : float = randf()
+		var initiative : float = randf()
+
+		if attacker_stamina >= 0.75 and (initiative >= 0.5 or defender_stamina < 0.75):
+			attacker_state.travel("Punch")
+			attacker.Needs.ApplyNeed(Globals.NEEDS.Stamina, -0.75)
+			if hit >= 0.5:
+				defender_state.travel("Stagger")
+				defender.Needs.ApplyNeed(Globals.NEEDS.Health, -0.25)
+			else:
+				defender_state.travel("Block")
+		elif defender_stamina >= 0.75:
+			defender_state.travel("Punch")
+			defender.Needs.ApplyNeed(Globals.NEEDS.Stamina, -0.75)
+			if hit >= 0.5:
+				attacker_state.travel("Stagger")
+				attacker.Needs.ApplyNeed(Globals.NEEDS.Health, -0.25)
+			else:
+				attacker_state.travel("Block")
+				
+		await get_tree().process_frame
+
 	
 func FridgeSequence(fridge : Advertisement):
 	_seq_state = SEQ_STATE.RUNNING
