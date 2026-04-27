@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6p1ojkslh4ss"]
+[gd_scene format=3 uid="uid://c6p1ojkslh4ss"]
 
-[ext_resource type="Script" path="res://scripts/attribute_panel.gd" id="1_7epo4"]
+[ext_resource type="Script" uid="uid://cgor7pw1hkjly" path="res://scripts/attribute_panel.gd" id="1_7epo4"]
 
-[node name="AttributePanel" type="Control"]
+[node name="AttributePanel" type="Control" unique_id=1787695548]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,7 +12,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_7epo4")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=793263110]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,7 +22,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.341176, 0.501961, 0.560784, 0.505882)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=972213625]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,20 +34,20 @@ offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InventoryGroup" type="VBoxContainer" parent="HBoxContainer"]
+[node name="InventoryGroup" type="VBoxContainer" parent="HBoxContainer" unique_id=1372289616]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="HBoxContainer/InventoryGroup"]
+[node name="Label" type="Label" parent="HBoxContainer/InventoryGroup" unique_id=1365520115]
 layout_mode = 2
 text = "Inventory:"
 
-[node name="ColorRect" type="ColorRect" parent="HBoxContainer/InventoryGroup"]
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/InventoryGroup" unique_id=602689512]
 layout_mode = 2
 size_flags_vertical = 3
 color = Color(0.1037, 0.15232, 0.17, 0.552941)
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/InventoryGroup/ColorRect"]
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/InventoryGroup/ColorRect" unique_id=1091207659]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -60,60 +60,59 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 
-[node name="Inventory" type="VBoxContainer" parent="HBoxContainer/InventoryGroup/ColorRect/ScrollContainer"]
+[node name="Inventory" type="VBoxContainer" parent="HBoxContainer/InventoryGroup/ColorRect/ScrollContainer" unique_id=1444788220]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Example" type="Label" parent="HBoxContainer/InventoryGroup/ColorRect/ScrollContainer/Inventory"]
+[node name="Example" type="Label" parent="HBoxContainer/InventoryGroup/ColorRect/ScrollContainer/Inventory" unique_id=248811360]
 visible = false
 layout_mode = 2
 size_flags_vertical = 6
 text = "Item 1"
 
-[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer" unique_id=612963299]
 layout_mode = 2
 
-[node name="Info" type="VBoxContainer" parent="HBoxContainer"]
+[node name="Info" type="VBoxContainer" parent="HBoxContainer" unique_id=980719094]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 1.75
 
-[node name="Name" type="Label" parent="HBoxContainer/Info"]
+[node name="Name" type="Label" parent="HBoxContainer/Info" unique_id=967613496]
 layout_mode = 2
 text = "Name: "
 
-[node name="AdInfo" type="VBoxContainer" parent="HBoxContainer/Info"]
+[node name="AdInfo" type="VBoxContainer" parent="HBoxContainer/Info" unique_id=1467104676]
 layout_mode = 2
 
-[node name="BelongTo" type="Label" parent="HBoxContainer/Info/AdInfo"]
+[node name="BelongTo" type="Label" parent="HBoxContainer/Info/AdInfo" unique_id=1555409979]
 layout_mode = 2
 text = "Belong To: "
 
-[node name="Type" type="Label" parent="HBoxContainer/Info/AdInfo"]
+[node name="Type" type="Label" parent="HBoxContainer/Info/AdInfo" unique_id=76975046]
 layout_mode = 2
 text = "Type:"
 
-[node name="NeedsGroup" type="VBoxContainer" parent="HBoxContainer/Info"]
-visible = false
+[node name="NeedsGroup" type="VBoxContainer" parent="HBoxContainer/Info" unique_id=1371402711]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/Info/NeedsGroup"]
+[node name="Label" type="Label" parent="HBoxContainer/Info/NeedsGroup" unique_id=1293486341]
 layout_mode = 2
 text = "Needs:"
 
-[node name="NeedList" type="VBoxContainer" parent="HBoxContainer/Info/NeedsGroup"]
+[node name="NeedList" type="VBoxContainer" parent="HBoxContainer/Info/NeedsGroup" unique_id=61481907]
 layout_mode = 2
 
-[node name="Need" type="HBoxContainer" parent="HBoxContainer/Info/NeedsGroup/NeedList"]
+[node name="Need" type="HBoxContainer" parent="HBoxContainer/Info/NeedsGroup/NeedList" unique_id=1842862949]
 visible = false
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/Info/NeedsGroup/NeedList/Need"]
+[node name="Label" type="Label" parent="HBoxContainer/Info/NeedsGroup/NeedList/Need" unique_id=73919947]
 custom_minimum_size = Vector2(125, 0)
 layout_mode = 2
 text = "Energy : "
 
-[node name="Progress" type="ProgressBar" parent="HBoxContainer/Info/NeedsGroup/NeedList/Need"]
+[node name="Progress" type="ProgressBar" parent="HBoxContainer/Info/NeedsGroup/NeedList/Need" unique_id=981567197]
 custom_minimum_size = Vector2(0, 27)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -121,7 +120,7 @@ max_value = 1.0
 value = 0.5
 show_percentage = false
 
-[node name="Label" type="Label" parent="HBoxContainer/Info/NeedsGroup/NeedList/Need/Progress"]
+[node name="Label" type="Label" parent="HBoxContainer/Info/NeedsGroup/NeedList/Need/Progress" unique_id=2001180051]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -132,28 +131,28 @@ text = "50 %"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="HBoxContainer/Info"]
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/Info" unique_id=502028160]
 layout_mode = 2
 
-[node name="PlansGroup" type="VBoxContainer" parent="HBoxContainer/Info"]
+[node name="PlansGroup" type="VBoxContainer" parent="HBoxContainer/Info" unique_id=127204385]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="CurrentAction" type="Label" parent="HBoxContainer/Info/PlansGroup"]
+[node name="CurrentAction" type="Label" parent="HBoxContainer/Info/PlansGroup" unique_id=52300244]
 layout_mode = 2
 text = "Action: SleepInBed->Goto"
 
-[node name="PlanScoreTitle" type="Label" parent="HBoxContainer/Info/PlansGroup"]
+[node name="PlanScoreTitle" type="Label" parent="HBoxContainer/Info/PlansGroup" unique_id=600381305]
 layout_mode = 2
 text = "Plan Scores:"
 
-[node name="ColorRect" type="ColorRect" parent="HBoxContainer/Info/PlansGroup"]
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/Info/PlansGroup" unique_id=1548709591]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 color = Color(0.101961, 0.152941, 0.168627, 0.552941)
 
-[node name="PlanScore" type="VBoxContainer" parent="HBoxContainer/Info/PlansGroup/ColorRect"]
+[node name="PlanScore" type="VBoxContainer" parent="HBoxContainer/Info/PlansGroup/ColorRect" unique_id=1617638775]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -163,20 +162,20 @@ offset_top = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AdOffers" type="VBoxContainer" parent="HBoxContainer/Info"]
+[node name="AdOffers" type="VBoxContainer" parent="HBoxContainer/Info" unique_id=1941080912]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="HBoxContainer/Info/AdOffers"]
+[node name="Label" type="Label" parent="HBoxContainer/Info/AdOffers" unique_id=1122073676]
 layout_mode = 2
 text = "Offered Plans:"
 
-[node name="ColorRect2" type="ColorRect" parent="HBoxContainer/Info/AdOffers"]
+[node name="ColorRect2" type="ColorRect" parent="HBoxContainer/Info/AdOffers" unique_id=1512290961]
 layout_mode = 2
 size_flags_vertical = 3
 color = Color(0.101961, 0.152941, 0.168627, 0.552941)
 
-[node name="AdScore" type="VBoxContainer" parent="HBoxContainer/Info/AdOffers/ColorRect2"]
+[node name="AdScore" type="VBoxContainer" parent="HBoxContainer/Info/AdOffers/ColorRect2" unique_id=1966703253]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

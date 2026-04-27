@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://do51rp00ju53t"]
+[gd_scene format=3 uid="uid://do51rp00ju53t"]
 
-[ext_resource type="Script" path="res://scripts/entity.gd" id="1_nu0po"]
-[ext_resource type="Script" path="res://scripts/sequencer.gd" id="2_3w7h5"]
+[ext_resource type="Script" uid="uid://csatkd3o1fv7w" path="res://scripts/entity.gd" id="1_nu0po"]
+[ext_resource type="Script" uid="uid://bqqjybiuh2hwv" path="res://scripts/sequencer.gd" id="2_3w7h5"]
 [ext_resource type="PackedScene" uid="uid://bpldl6svmqy4v" path="res://data/models/Peep1.glb" id="3_00n07"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://dyflbqc18yf8m" path="res://data/peep_animtree.tres" id="4_kouj5"]
 
@@ -11,7 +11,7 @@ radius = 0.2
 [sub_resource type="BoxShape3D" id="BoxShape3D_p0rmp"]
 size = Vector3(3, 3, 5)
 
-[node name="Peep1" type="CharacterBody3D"]
+[node name="Peep1" type="CharacterBody3D" unique_id=662199106]
 collision_layer = 2
 collision_mask = 3
 floor_constant_speed = true
@@ -20,21 +20,21 @@ floor_max_angle = 1.0472
 script = ExtResource("1_nu0po")
 MovePixSec = 1.5
 
-[node name="Sequencer" type="Node" parent="."]
+[node name="Sequencer" type="Node" parent="." unique_id=1773213298]
 script = ExtResource("2_3w7h5")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1396270304]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.934854, 0)
 shape = SubResource("CapsuleShape3D_bpfx1")
 
-[node name="Peep1" parent="." instance=ExtResource("3_00n07")]
+[node name="Peep1" parent="." unique_id=13739185 instance=ExtResource("3_00n07")]
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1604791016]
 root_node = NodePath("../Peep1")
 tree_root = ExtResource("4_kouj5")
 anim_player = NodePath("../Peep1/AnimationPlayer")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=2006669305]
 path_desired_distance = 0.25
 target_desired_distance = 0.5
 path_height_offset = 0.25
@@ -47,12 +47,12 @@ time_horizon_agents = 2.0
 max_speed = 2.0
 debug_enabled = true
 
-[node name="PeepDetector" type="Area3D" parent="."]
+[node name="PeepDetector" type="Area3D" parent="." unique_id=1532710900]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PeepDetector"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PeepDetector" unique_id=1810524442]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 shape = SubResource("BoxShape3D_p0rmp")
 

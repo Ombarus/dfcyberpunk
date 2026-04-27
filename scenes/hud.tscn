@@ -1,9 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://c2hbs3xwqvwe3"]
+[gd_scene format=3 uid="uid://c2hbs3xwqvwe3"]
 
-[ext_resource type="Script" path="res://scripts/hud_clock.gd" id="1_3kiyp"]
+[ext_resource type="Script" uid="uid://c8gubvvu0clji" path="res://scripts/hud_clock.gd" id="1_3kiyp"]
 [ext_resource type="PackedScene" uid="uid://c6p1ojkslh4ss" path="res://scenes/attribute_panel.tscn" id="2_nk6ap"]
+[ext_resource type="Script" uid="uid://c3gf1yn0sitth" path="res://scripts/attribute_panel_2.gd" id="3_5ysmq"]
 
-[node name="HUD" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oo0fn"]
+bg_color = Color(0.34117648, 0.5019608, 0.56078434, 0.5058824)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ysmq"]
+bg_color = Color(0.101960786, 0.15294118, 0.16862746, 0.5529412)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6fi6k"]
+bg_color = Color(0.101960786, 0.15294118, 0.16862746, 0.5529412)
+
+[node name="HUD" type="Control" unique_id=1993656264]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,10 +22,10 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1555177049]
 layer = 2
 
-[node name="Clock" type="Label" parent="CanvasLayer"]
+[node name="Clock" type="Label" parent="CanvasLayer" unique_id=2062393923]
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 240.0
@@ -23,7 +33,7 @@ offset_bottom = 39.0
 text = "2035-01-01 00:00"
 script = ExtResource("1_3kiyp")
 
-[node name="Label" type="Label" parent="CanvasLayer"]
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=551734474]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -38,7 +48,7 @@ text = "Controls:
 ASDW: Pan Camera
 QE: Rotate Camera"
 
-[node name="Label2" type="Label" parent="CanvasLayer"]
+[node name="Label2" type="Label" parent="CanvasLayer" unique_id=1204230544]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -50,7 +60,7 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "v0.0.1"
 
-[node name="AttributePanel" parent="CanvasLayer" instance=ExtResource("2_nk6ap")]
+[node name="AttributePanel" parent="CanvasLayer" unique_id=1054579478 instance=ExtResource("2_nk6ap")]
 visible = false
 custom_minimum_size = Vector2(100, 100)
 anchors_preset = 0
@@ -60,3 +70,277 @@ offset_right = 640.0
 offset_bottom = 496.0
 grow_horizontal = 1
 grow_vertical = 1
+
+[node name="AttributePanel2" type="Control" parent="CanvasLayer" unique_id=161205268]
+layout_mode = 3
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_top = 128.0
+offset_right = 592.0
+offset_bottom = -184.0
+grow_vertical = 2
+script = ExtResource("3_5ysmq")
+
+[node name="Close" type="Button" parent="CanvasLayer/AttributePanel2" unique_id=1597992073]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -32.0
+offset_bottom = 32.0
+grow_horizontal = 0
+text = "X"
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/AttributePanel2" unique_id=30307396]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.341176, 0.501961, 0.560784, 0.505882)
+
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer/AttributePanel2" unique_id=1890651103]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_oo0fn")
+current_tab = 0
+
+[node name="Status" type="Control" parent="CanvasLayer/AttributePanel2/TabContainer" unique_id=560733082]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/AttributePanel2/TabContainer/Status" unique_id=227354411]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 17.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Name" type="Label" parent="CanvasLayer/AttributePanel2/TabContainer/Status/VBoxContainer" unique_id=348853702]
+layout_mode = 2
+text = "Name: "
+
+[node name="AdInfo" type="VBoxContainer" parent="CanvasLayer/AttributePanel2/TabContainer/Status/VBoxContainer" unique_id=481237749]
+layout_mode = 2
+
+[node name="BelongTo" type="Label" parent="CanvasLayer/AttributePanel2/TabContainer/Status/VBoxContainer/AdInfo" unique_id=1613003917]
+layout_mode = 2
+text = "Belong To: "
+
+[node name="Type" type="Label" parent="CanvasLayer/AttributePanel2/TabContainer/Status/VBoxContainer/AdInfo" unique_id=2140599025]
+layout_mode = 2
+text = "Type:"
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/AttributePanel2/TabContainer/Status/VBoxContainer" unique_id=1016360742]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/AttributePanel2/TabContainer/Status/VBoxContainer" unique_id=1438221573]
+layout_mode = 2
+text = "Needs:"
+
+[node name="Needs" type="ScrollContainer" parent="CanvasLayer/AttributePanel2/TabContainer/Status/VBoxContainer" unique_id=610365585]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_5ysmq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/AttributePanel2/TabContainer/Status/VBoxContainer/Needs" unique_id=290355122]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Need" type="HBoxContainer" parent="CanvasLayer/AttributePanel2/TabContainer/Status/VBoxContainer/Needs/VBoxContainer" unique_id=1221941994]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/AttributePanel2/TabContainer/Status/VBoxContainer/Needs/VBoxContainer/Need" unique_id=2067666387]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+text = "Energy : "
+
+[node name="Progress" type="ProgressBar" parent="CanvasLayer/AttributePanel2/TabContainer/Status/VBoxContainer/Needs/VBoxContainer/Need" unique_id=442315818]
+custom_minimum_size = Vector2(0, 27)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+value = 0.5
+show_percentage = false
+
+[node name="Label" type="Label" parent="CanvasLayer/AttributePanel2/TabContainer/Status/VBoxContainer/Needs/VBoxContainer/Need/Progress" unique_id=152225207]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "50 %"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/AttributePanel2/TabContainer/Status/VBoxContainer" unique_id=95065979]
+layout_mode = 2
+text = "Skills:"
+
+[node name="Skills" type="ScrollContainer" parent="CanvasLayer/AttributePanel2/TabContainer/Status/VBoxContainer" unique_id=1732158278]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_6fi6k")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/AttributePanel2/TabContainer/Status/VBoxContainer/Skills" unique_id=1863758640]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Skill" type="HBoxContainer" parent="CanvasLayer/AttributePanel2/TabContainer/Status/VBoxContainer/Skills/VBoxContainer" unique_id=2035562896]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/AttributePanel2/TabContainer/Status/VBoxContainer/Skills/VBoxContainer/Skill" unique_id=886517883]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+text = "Fighting : "
+
+[node name="Progress" type="ProgressBar" parent="CanvasLayer/AttributePanel2/TabContainer/Status/VBoxContainer/Skills/VBoxContainer/Skill" unique_id=731671812]
+custom_minimum_size = Vector2(0, 27)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+value = 0.5
+show_percentage = false
+
+[node name="Label" type="Label" parent="CanvasLayer/AttributePanel2/TabContainer/Status/VBoxContainer/Skills/VBoxContainer/Skill/Progress" unique_id=914561820]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "50 %"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Inventory" type="Control" parent="CanvasLayer/AttributePanel2/TabContainer" unique_id=416977158]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/AttributePanel2/TabContainer/Inventory" unique_id=1858865553]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 17.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/AttributePanel2/TabContainer/Inventory/VBoxContainer" unique_id=300333917]
+layout_mode = 2
+text = "Inventory:"
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/AttributePanel2/TabContainer/Inventory/VBoxContainer" unique_id=691839279]
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.1037, 0.15232, 0.17, 0.552941)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/AttributePanel2/TabContainer/Inventory/VBoxContainer/ColorRect" unique_id=288296161]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 5.0
+offset_right = -10.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="Inventory" type="VBoxContainer" parent="CanvasLayer/AttributePanel2/TabContainer/Inventory/VBoxContainer/ColorRect/ScrollContainer" unique_id=2048609735]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Example" type="Label" parent="CanvasLayer/AttributePanel2/TabContainer/Inventory/VBoxContainer/ColorRect/ScrollContainer/Inventory" unique_id=496510975]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Item 1"
+
+[node name="AdOffers" type="VBoxContainer" parent="CanvasLayer/AttributePanel2/TabContainer/Inventory/VBoxContainer" unique_id=1456476949]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/AttributePanel2/TabContainer/Inventory/VBoxContainer/AdOffers" unique_id=2004558259]
+layout_mode = 2
+text = "Offered Plans:"
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/AttributePanel2/TabContainer/Inventory/VBoxContainer/AdOffers" unique_id=1101390517]
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.101961, 0.152941, 0.168627, 0.552941)
+
+[node name="AdScore" type="VBoxContainer" parent="CanvasLayer/AttributePanel2/TabContainer/Inventory/VBoxContainer/AdOffers/ColorRect2" unique_id=2086558013]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Debug" type="Control" parent="CanvasLayer/AttributePanel2/TabContainer" unique_id=225177779]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/AttributePanel2/TabContainer/Debug" unique_id=625259310]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 17.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlansGroup" type="VBoxContainer" parent="CanvasLayer/AttributePanel2/TabContainer/Debug/VBoxContainer" unique_id=505179111]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CurrentAction" type="Label" parent="CanvasLayer/AttributePanel2/TabContainer/Debug/VBoxContainer/PlansGroup" unique_id=1997798394]
+layout_mode = 2
+text = "Action: SleepInBed->Goto"
+
+[node name="PlanScoreTitle" type="Label" parent="CanvasLayer/AttributePanel2/TabContainer/Debug/VBoxContainer/PlansGroup" unique_id=326268881]
+layout_mode = 2
+text = "Plan Scores:"
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/AttributePanel2/TabContainer/Debug/VBoxContainer/PlansGroup" unique_id=576759446]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+color = Color(0.101961, 0.152941, 0.168627, 0.552941)
+
+[node name="PlanScore" type="VBoxContainer" parent="CanvasLayer/AttributePanel2/TabContainer/Debug/VBoxContainer/PlansGroup/ColorRect" unique_id=2017620050]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="pressed" from="CanvasLayer/AttributePanel2/Close" to="CanvasLayer/AttributePanel2" method="_on_close_pressed"]

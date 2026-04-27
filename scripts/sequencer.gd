@@ -44,6 +44,7 @@ func FightSequence(attacker : Entity, defender : Entity):
 	var attacker_state : AnimationNodeStateMachinePlayback = attacker_tree.get("parameters/playback")
 	var defender_tree : AnimationTree = defender.find_child("AnimationTree", true, false)
 	var defender_state : AnimationNodeStateMachinePlayback = defender_tree.get("parameters/playback")
+	var skill_name := Globals.SKILLS.Fighting
 	
 	
 	attacker_state.travel("IdleMelee")
@@ -67,13 +68,12 @@ func FightSequence(attacker : Entity, defender : Entity):
 		if await make_sure_still_running() == false:
 			return
 		
-		var hit : float = randf()
 		var initiative : float = randf()
 
 		if attacker_stamina >= 0.75 and (initiative >= 0.5 or defender_stamina < 0.75):
 			attacker_state.travel("Punch")
 			attacker.Needs.ApplyNeed(Globals.NEEDS.Stamina, -0.75)
-			if hit >= 0.5:
+			if attacker.Skills.SkillCheck(skill_name, defender.Skills.GetSkill(skill_name)):
 				defender_state.travel("Stagger")
 				defender.Needs.ApplyNeed(Globals.NEEDS.Health, -0.25)
 			else:
@@ -81,7 +81,7 @@ func FightSequence(attacker : Entity, defender : Entity):
 		elif defender_stamina >= 0.75:
 			defender_state.travel("Punch")
 			defender.Needs.ApplyNeed(Globals.NEEDS.Stamina, -0.75)
-			if hit >= 0.5:
+			if defender.Skills.SkillCheck(skill_name, attacker.Skills.GetSkill(skill_name)):
 				attacker_state.travel("Stagger")
 				attacker.Needs.ApplyNeed(Globals.NEEDS.Health, -0.25)
 			else:

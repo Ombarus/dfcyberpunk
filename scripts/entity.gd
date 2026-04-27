@@ -43,6 +43,7 @@ class_name Entity
 @export var SleepJitter : float = 0.1 # Random variation in % (if bed give +0.9, this will add/remove 10% of 0.9)
 
 var Needs := NeedHandler.new()
+var Skills := SkillHandler.new()
 
 var curParam : Dictionary
 var actionStack : Array

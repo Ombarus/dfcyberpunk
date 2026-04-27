@@ -1,0 +1,1641 @@
+[gd_scene format=3 uid="uid://c075rab8mvilu"]
+
+[ext_resource type="Environment" uid="uid://cspehjk1qfofp" path="res://data/main_environment.tres" id="1_0yg7r"]
+[ext_resource type="PackedScene" uid="uid://b60fptlrlfi5f" path="res://data/models/AirCon.glb" id="2_3cs8k"]
+[ext_resource type="PackedScene" uid="uid://dxa7y04pf4x2c" path="res://scenes/furnitures/wall_door_v2.tscn" id="3_oap1s"]
+[ext_resource type="PackedScene" uid="uid://nclqsdv0fun8" path="res://data/models/SkyScraperWallWindowShort.glb" id="4_jdyd7"]
+[ext_resource type="PackedScene" uid="uid://d4g3ttcifjjc2" path="res://data/models/SkyScraperWallPlain.glb" id="5_525so"]
+[ext_resource type="PackedScene" uid="uid://bwmqu6iuphkjx" path="res://data/models/SkyScraperWallWindowTall.glb" id="6_med5q"]
+[ext_resource type="PackedScene" uid="uid://bm31ysxugbyy6" path="res://data/models/SkyScraperColumn.glb" id="7_ew087"]
+[ext_resource type="PackedScene" uid="uid://cpih5xw0mdmnv" path="res://data/models/BeamRust.glb" id="8_ffvtn"]
+[ext_resource type="PackedScene" uid="uid://dx04tuw180duu" path="res://data/models/FloorShinyTile.glb" id="9_qowby"]
+[ext_resource type="PackedScene" uid="uid://kev47y2ajw15" path="res://data/models/StairMetalStraight.glb" id="10_g4o2p"]
+[ext_resource type="PackedScene" uid="uid://c15oh0t0lqxu7" path="res://data/models/Railing.glb" id="16_ff4i1"]
+[ext_resource type="PackedScene" uid="uid://ro7io5uafmos" path="res://data/models/RailingEnd.glb" id="17_6knen"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Power_02.tscn" id="23_ow1eu"]
+[ext_resource type="PackedScene" uid="uid://chjfk0exg7m7y" path="res://data/models/RoadBlank.glb" id="23_tjkew"]
+[ext_resource type="PackedScene" uid="uid://dl8g3bvfcpxj6" path="res://data/models/WallCornerGlow.glb" id="24_su6bs"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Road_Arrow_02_SF.tscn" id="25_4wm0l"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Prop_Medical_Machine_01.tscn" id="25_su6bs"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Env_Greeble_Cube_01.tscn" id="26_d8lkg"]
+[ext_resource type="PackedScene" path="res://data/synty/meshes/SM_Bld_Power_04.tscn" id="28_ow1eu"]
+[ext_resource type="PackedScene" uid="uid://c48ee6yyy7eiu" path="res://data/models/SidewalkLeft.glb" id="31_k3j0p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ow1eu"]
+emission_enabled = true
+emission = Color(0.972611, 0.121398784, 0.9999998, 1)
+emission_energy_multiplier = 5.8
+
+[sub_resource type="QuadMesh" id="QuadMesh_cr743"]
+material = SubResource("StandardMaterial3D_ow1eu")
+size = Vector2(2.5, 0.5)
+
+[node name="Hospital" type="Node3D" unique_id=383788526]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1100325388]
+environment = ExtResource("1_0yg7r")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=477629590]
+transform = Transform3D(0.8255634, -0.31236207, -0.46997333, 0.022551304, -0.81390214, 0.58056426, -0.56385857, -0.48989117, -0.66488373, 10.1197, 4.88909, -1.29089)
+light_color = Color(0.576384, 0.669329, 0.737235, 1)
+light_energy = 0.186
+shadow_enabled = true
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=1823847837]
+transform = Transform3D(0.28354254, 0.56207377, 0.77696633, 0.022551281, -0.8139021, 0.5805641, 0.95869434, -0.14709306, -0.24345137, 10.1197, 4.88909, -11.29089)
+light_color = Color(0.576384, 0.669329, 0.737235, 1)
+light_energy = 0.186
+shadow_enabled = true
+
+[node name="Building" type="Node3D" parent="." unique_id=1079983903]
+
+[node name="AirCon2" parent="Building" unique_id=1672421225 instance=ExtResource("2_3cs8k")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -2.2385998, 12, -3.28679)
+
+[node name="AirCon3" parent="Building" unique_id=1811179797 instance=ExtResource("2_3cs8k")]
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -3.6294003, 12, -1.3049102)
+
+[node name="AirCon4" parent="Building" unique_id=371620752 instance=ExtResource("2_3cs8k")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -2.2385998, 12, -7.2868004)
+
+[node name="AirCon5" parent="Building" unique_id=1116845234 instance=ExtResource("2_3cs8k")]
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -3.6294003, 12, -5.3049097)
+
+[node name="WallDoorV2" parent="Building" unique_id=512735493 instance=ExtResource("3_oap1s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+
+[node name="SkyScraperWallWindowShort2" parent="Building" unique_id=753731686 instance=ExtResource("4_jdyd7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+
+[node name="SkyScraperWallWindowShort3" parent="Building" unique_id=1652854644 instance=ExtResource("4_jdyd7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[node name="SkyScraperWallWindowShort4" parent="Building" unique_id=1188013115 instance=ExtResource("4_jdyd7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+
+[node name="SkyScraperWallPlain2" parent="Building" unique_id=1819852787 instance=ExtResource("5_525so")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="SkyScraperWallPlain3" parent="Building" unique_id=823712841 instance=ExtResource("5_525so")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
+
+[node name="SkyScraperWallWindowTall8" parent="Building" unique_id=86502337 instance=ExtResource("6_med5q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -2)
+
+[node name="SkyScraperWallWindowTall9" parent="Building" unique_id=1780743167 instance=ExtResource("6_med5q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -4)
+
+[node name="SkyScraperWallWindowTall10" parent="Building" unique_id=1615893753 instance=ExtResource("6_med5q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -6)
+
+[node name="SkyScraperWallWindowTall13" parent="Building" unique_id=603234221 instance=ExtResource("6_med5q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -16)
+
+[node name="SkyScraperWallWindowShort5" parent="Building" unique_id=138678703 instance=ExtResource("4_jdyd7")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.9412003, 0, 0.05882001)
+
+[node name="SkyScraperWallWindowShort6" parent="Building" unique_id=536355342 instance=ExtResource("4_jdyd7")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7.9412003, 0, 0.05882001)
+
+[node name="SkyScraperWallWindowShort7" parent="Building" unique_id=1823148542 instance=ExtResource("4_jdyd7")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.9412003, 0, 0.05882001)
+
+[node name="SkyScraperWallWindowShort8" parent="Building" unique_id=1400644070 instance=ExtResource("4_jdyd7")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.9412003, 0, 0.05882001)
+
+[node name="SkyScraperWallPlain4" parent="Building" unique_id=132179548 instance=ExtResource("5_525so")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9.9412, 0, 0.05882001)
+
+[node name="SkyScraperWallPlain5" parent="Building" unique_id=235313530 instance=ExtResource("5_525so")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.05881977, 0, 0.05882001)
+
+[node name="SkyScraperWallWindowTall14" parent="Building" unique_id=554944399 instance=ExtResource("6_med5q")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9.9412, 3, 0.05882001)
+
+[node name="SkyScraperWallWindowTall15" parent="Building" unique_id=793177322 instance=ExtResource("6_med5q")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7.9412003, 3, 0.05882001)
+
+[node name="SkyScraperWallWindowTall16" parent="Building" unique_id=110221983 instance=ExtResource("6_med5q")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.9412003, 3, 0.05882001)
+
+[node name="SkyScraperWallWindowTall17" parent="Building" unique_id=65423732 instance=ExtResource("6_med5q")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.9412003, 3, 0.05882001)
+
+[node name="SkyScraperWallWindowTall18" parent="Building" unique_id=1003874672 instance=ExtResource("6_med5q")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.9412003, 3, 0.05882001)
+
+[node name="SkyScraperWallWindowTall19" parent="Building" unique_id=1586331959 instance=ExtResource("6_med5q")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.05881977, 3, 0.05882001)
+
+[node name="SkyScraperWallWindowTall20" parent="Building" unique_id=617025824 instance=ExtResource("6_med5q")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9.9412, 6, 0.05882001)
+
+[node name="SkyScraperWallWindowTall21" parent="Building" unique_id=775704553 instance=ExtResource("6_med5q")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7.9412003, 6, 0.05882001)
+
+[node name="SkyScraperWallWindowTall22" parent="Building" unique_id=1522176670 instance=ExtResource("6_med5q")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.9412003, 6, 0.05882001)
+
+[node name="SkyScraperWallWindowTall23" parent="Building" unique_id=1318489185 instance=ExtResource("6_med5q")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.9412003, 6, 0.05882001)
+
+[node name="SkyScraperWallWindowTall24" parent="Building" unique_id=2063833242 instance=ExtResource("6_med5q")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.9412003, 6, 0.05882001)
+
+[node name="SkyScraperWallWindowTall25" parent="Building" unique_id=1864355955 instance=ExtResource("6_med5q")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.05881977, 6, 0.05882001)
+
+[node name="SkyScraperColumn2" parent="Building" unique_id=861188521 instance=ExtResource("7_ew087")]
+
+[node name="SkyScraperColumn3" parent="Building" unique_id=392130909 instance=ExtResource("7_ew087")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="SkyScraperColumn4" parent="Building" unique_id=156676923 instance=ExtResource("7_ew087")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="SkyScraperColumn14" parent="Building" unique_id=215404136 instance=ExtResource("7_ew087")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -16)
+
+[node name="SkyScraperColumn15" parent="Building" unique_id=1625801077 instance=ExtResource("7_ew087")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 3, -16)
+
+[node name="SkyScraperColumn16" parent="Building" unique_id=926410102 instance=ExtResource("7_ew087")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 6, -16)
+
+[node name="BeamRust2" parent="Building" unique_id=1470935026 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -2)
+
+[node name="BeamRust3" parent="Building" unique_id=1605486034 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -4)
+
+[node name="BeamRust4" parent="Building" unique_id=302961590 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -6)
+
+[node name="BeamRust5" parent="Building" unique_id=656853012 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -8)
+
+[node name="BeamRust6" parent="Building" unique_id=1941579024 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -10)
+
+[node name="BeamRust7" parent="Building" unique_id=779448356 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -12)
+
+[node name="BeamRust63" parent="Building" unique_id=236144767 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -14)
+
+[node name="BeamRust64" parent="Building" unique_id=1266759711 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -16)
+
+[node name="BeamRust8" parent="Building" unique_id=2026584721 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -10, 6, 0)
+
+[node name="BeamRust9" parent="Building" unique_id=766370970 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -8, 6, 0)
+
+[node name="BeamRust10" parent="Building" unique_id=1038080958 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 6, 0)
+
+[node name="BeamRust11" parent="Building" unique_id=1144092231 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4, 6, 0)
+
+[node name="BeamRust12" parent="Building" unique_id=1432640424 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 6, 0)
+
+[node name="BeamRust13" parent="Building" unique_id=1125126776 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 6, 0)
+
+[node name="SkyScraperWallWindowShort9" parent="Building" unique_id=1021059804 instance=ExtResource("4_jdyd7")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 0, -5.9448204)
+
+[node name="SkyScraperWallWindowShort10" parent="Building" unique_id=1411862042 instance=ExtResource("4_jdyd7")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 0, -7.9448004)
+
+[node name="SkyScraperWallWindowShort11" parent="Building" unique_id=1962367170 instance=ExtResource("4_jdyd7")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 0, -1.9448199)
+
+[node name="SkyScraperWallWindowShort12" parent="Building" unique_id=140468741 instance=ExtResource("4_jdyd7")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 0, -3.94482)
+
+[node name="SkyScraperWallPlain6" parent="Building" unique_id=1096915934 instance=ExtResource("5_525so")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 0, -13.9448)
+
+[node name="SkyScraperWallPlain7" parent="Building" unique_id=951288482 instance=ExtResource("5_525so")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 0, 0.0552001)
+
+[node name="SkyScraperWallWindowTall38" parent="Building" unique_id=715350196 instance=ExtResource("6_med5q")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 3, -13.9448)
+
+[node name="SkyScraperWallWindowTall39" parent="Building" unique_id=722850511 instance=ExtResource("6_med5q")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 3, -7.9448004)
+
+[node name="SkyScraperWallWindowTall40" parent="Building" unique_id=343437423 instance=ExtResource("6_med5q")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 3, -5.9448204)
+
+[node name="SkyScraperWallWindowTall41" parent="Building" unique_id=2027899673 instance=ExtResource("6_med5q")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 3, -3.94482)
+
+[node name="SkyScraperWallWindowTall42" parent="Building" unique_id=1936141923 instance=ExtResource("6_med5q")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 3, -1.9448199)
+
+[node name="SkyScraperWallWindowTall43" parent="Building" unique_id=1467046724 instance=ExtResource("6_med5q")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 3, 0.0552001)
+
+[node name="SkyScraperWallWindowTall44" parent="Building" unique_id=1791133572 instance=ExtResource("6_med5q")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 6, -13.9448)
+
+[node name="SkyScraperWallWindowTall45" parent="Building" unique_id=621466756 instance=ExtResource("6_med5q")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 6, -7.9448004)
+
+[node name="SkyScraperWallWindowTall46" parent="Building" unique_id=691880683 instance=ExtResource("6_med5q")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 6, -5.9448204)
+
+[node name="SkyScraperWallWindowTall47" parent="Building" unique_id=111213120 instance=ExtResource("6_med5q")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 6, -3.94482)
+
+[node name="SkyScraperWallWindowTall48" parent="Building" unique_id=1146368070 instance=ExtResource("6_med5q")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 6, -1.9448199)
+
+[node name="SkyScraperWallWindowTall49" parent="Building" unique_id=634169508 instance=ExtResource("6_med5q")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 6, 0.0552001)
+
+[node name="SkyScraperColumn6" parent="Building" unique_id=198877714 instance=ExtResource("7_ew087")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12, 0, -0.0036201477)
+
+[node name="SkyScraperColumn7" parent="Building" unique_id=1526792164 instance=ExtResource("7_ew087")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12, 3, -0.0036201477)
+
+[node name="SkyScraperColumn8" parent="Building" unique_id=1133260022 instance=ExtResource("7_ew087")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12, 6, -0.0036201477)
+
+[node name="BeamRust14" parent="Building" unique_id=925032818 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 6, -10.0036)
+
+[node name="BeamRust15" parent="Building" unique_id=575463258 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 6, -8.0036)
+
+[node name="BeamRust16" parent="Building" unique_id=1511464583 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 6, -6.0036)
+
+[node name="BeamRust17" parent="Building" unique_id=596254144 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 6, -4.00362)
+
+[node name="BeamRust18" parent="Building" unique_id=770229854 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 6, -2.0036201)
+
+[node name="BeamRust19" parent="Building" unique_id=1362917715 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 6, -0.0036201477)
+
+[node name="SkyScraperWallWindowShort13" parent="Building" unique_id=480354097 instance=ExtResource("4_jdyd7")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -5.9964, 0, -16)
+
+[node name="SkyScraperWallWindowShort14" parent="Building" unique_id=571891721 instance=ExtResource("4_jdyd7")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -3.9963999, 0, -16)
+
+[node name="SkyScraperWallWindowShort15" parent="Building" unique_id=697589067 instance=ExtResource("4_jdyd7")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -9.996401, 0, -16)
+
+[node name="SkyScraperWallWindowShort16" parent="Building" unique_id=422134126 instance=ExtResource("4_jdyd7")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -7.996401, 0, -16)
+
+[node name="SkyScraperWallPlain8" parent="Building" unique_id=1630857998 instance=ExtResource("5_525so")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -1.9963999, 0, -16)
+
+[node name="SkyScraperWallPlain9" parent="Building" unique_id=627339153 instance=ExtResource("5_525so")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -11.996401, 0, -16)
+
+[node name="SkyScraperWallWindowShort21" parent="Building" unique_id=656531861 instance=ExtResource("4_jdyd7")]
+transform = Transform3D(1, 0, -1.7484538e-07, -1.5285468e-14, -1, -8.742278e-08, -1.7484538e-07, 8.742278e-08, -1, 0.0035996437, 6, -6)
+
+[node name="SkyScraperWallWindowShort22" parent="Building" unique_id=1196085961 instance=ExtResource("4_jdyd7")]
+transform = Transform3D(1, 0, -1.7484538e-07, -1.5285468e-14, -1, -8.742278e-08, -1.7484538e-07, 8.742278e-08, -1, 0.0035996437, 6, -8)
+
+[node name="SkyScraperWallWindowShort25" parent="Building" unique_id=562215686 instance=ExtResource("4_jdyd7")]
+transform = Transform3D(1, 0, -1.7484538e-07, -1.5285468e-14, -1, -8.742278e-08, -1.7484538e-07, 8.742278e-08, -1, 0.0035996437, 6, -10)
+
+[node name="SkyScraperWallWindowShort26" parent="Building" unique_id=1251221637 instance=ExtResource("4_jdyd7")]
+transform = Transform3D(1, 0, -1.7484538e-07, -1.5285468e-14, -1, -8.742278e-08, -1.7484538e-07, 8.742278e-08, -1, 0.0035996437, 6, -12)
+
+[node name="SkyScraperWallWindowShort23" parent="Building" unique_id=1322334402 instance=ExtResource("4_jdyd7")]
+transform = Transform3D(1, 0, -1.7484538e-07, -1.5285468e-14, -1, -8.742278e-08, -1.7484538e-07, 8.742278e-08, -1, 0.0035996437, 6, -2)
+
+[node name="SkyScraperWallWindowShort24" parent="Building" unique_id=1513868613 instance=ExtResource("4_jdyd7")]
+transform = Transform3D(1, 0, -1.7484538e-07, -1.5285468e-14, -1, -8.742278e-08, -1.7484538e-07, 8.742278e-08, -1, 0.0035996437, 6, -4)
+
+[node name="SkyScraperWallPlain14" parent="Building" unique_id=736682991 instance=ExtResource("5_525so")]
+transform = Transform3D(1, 0, -1.7484538e-07, -1.5285468e-14, -1, -8.742278e-08, -1.7484538e-07, 8.742278e-08, -1, 0.0035996437, 5.9999995, -14)
+
+[node name="SkyScraperWallPlain15" parent="Building" unique_id=271864700 instance=ExtResource("5_525so")]
+transform = Transform3D(1, 0, -1.7484538e-07, -1.5285468e-14, -1, -8.742278e-08, -1.7484538e-07, 8.742278e-08, -1, 0.0035996437, 6.0000005, 0)
+
+[node name="SkyScraperWallWindowTall56" parent="Building" unique_id=116844122 instance=ExtResource("6_med5q")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -1.9963999, 3, -16)
+
+[node name="SkyScraperWallWindowTall57" parent="Building" unique_id=637721540 instance=ExtResource("6_med5q")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -3.9963999, 3, -16)
+
+[node name="SkyScraperWallWindowTall58" parent="Building" unique_id=943757741 instance=ExtResource("6_med5q")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -5.9964, 3, -16)
+
+[node name="SkyScraperWallWindowTall59" parent="Building" unique_id=86959166 instance=ExtResource("6_med5q")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -7.996401, 3, -16)
+
+[node name="SkyScraperWallWindowTall60" parent="Building" unique_id=2066189442 instance=ExtResource("6_med5q")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -9.996401, 3, -16)
+
+[node name="SkyScraperWallWindowTall61" parent="Building" unique_id=1975550426 instance=ExtResource("6_med5q")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -11.996401, 3, -16)
+
+[node name="SkyScraperWallWindowTall62" parent="Building" unique_id=2022094638 instance=ExtResource("6_med5q")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -1.9963999, 6, -16)
+
+[node name="SkyScraperWallWindowTall63" parent="Building" unique_id=1459346281 instance=ExtResource("6_med5q")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -3.9963999, 6, -16)
+
+[node name="SkyScraperWallWindowTall64" parent="Building" unique_id=887354881 instance=ExtResource("6_med5q")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -5.9964, 6, -16)
+
+[node name="SkyScraperWallWindowTall65" parent="Building" unique_id=1498438461 instance=ExtResource("6_med5q")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -7.996401, 6, -16)
+
+[node name="SkyScraperWallWindowTall66" parent="Building" unique_id=28367632 instance=ExtResource("6_med5q")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -9.996401, 6, -16)
+
+[node name="SkyScraperWallWindowTall67" parent="Building" unique_id=289111487 instance=ExtResource("6_med5q")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -11.996401, 6, -16)
+
+[node name="SkyScraperColumn10" parent="Building" unique_id=2031193846 instance=ExtResource("7_ew087")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -11.937599, 0, -16)
+
+[node name="SkyScraperColumn11" parent="Building" unique_id=462743121 instance=ExtResource("7_ew087")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -11.937599, 3, -16)
+
+[node name="SkyScraperColumn12" parent="Building" unique_id=1696041645 instance=ExtResource("7_ew087")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -11.937599, 6, -16)
+
+[node name="SkyScraperWallWindowTall74" parent="Building" unique_id=182219432 instance=ExtResource("6_med5q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, -2)
+
+[node name="SkyScraperWallWindowTall75" parent="Building" unique_id=502288935 instance=ExtResource("6_med5q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, -4)
+
+[node name="SkyScraperWallWindowTall76" parent="Building" unique_id=1652555618 instance=ExtResource("6_med5q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, -6)
+
+[node name="SkyScraperWallWindowShort17" parent="Building" unique_id=1975115873 instance=ExtResource("4_jdyd7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
+
+[node name="SkyScraperWallWindowTall27" parent="Building" unique_id=1429352875 instance=ExtResource("6_med5q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -12)
+
+[node name="SkyScraperWallWindowTall98" parent="Building" unique_id=252751975 instance=ExtResource("6_med5q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, -12)
+
+[node name="SkyScraperWallWindowShort18" parent="Building" unique_id=1481776446 instance=ExtResource("4_jdyd7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14)
+
+[node name="SkyScraperWallWindowTall29" parent="Building" unique_id=911048029 instance=ExtResource("6_med5q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -14)
+
+[node name="SkyScraperWallWindowTall99" parent="Building" unique_id=373708648 instance=ExtResource("6_med5q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, -14)
+
+[node name="SkyScraperWallWindowTall79" parent="Building" unique_id=1314638873 instance=ExtResource("6_med5q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, -16)
+
+[node name="SkyScraperWallWindowTall80" parent="Building" unique_id=1203421184 instance=ExtResource("6_med5q")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9.9412, 9, 0.05882001)
+
+[node name="SkyScraperWallWindowTall81" parent="Building" unique_id=614523172 instance=ExtResource("6_med5q")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7.9412003, 9, 0.05882001)
+
+[node name="SkyScraperWallWindowTall82" parent="Building" unique_id=398542616 instance=ExtResource("6_med5q")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.9412003, 9, 0.05882001)
+
+[node name="SkyScraperWallWindowTall83" parent="Building" unique_id=1939273512 instance=ExtResource("6_med5q")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.9412003, 9, 0.05882001)
+
+[node name="SkyScraperWallWindowTall84" parent="Building" unique_id=1210682596 instance=ExtResource("6_med5q")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.9412003, 9, 0.05882001)
+
+[node name="SkyScraperWallWindowTall85" parent="Building" unique_id=1084229389 instance=ExtResource("6_med5q")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.05881977, 9, 0.05882001)
+
+[node name="SkyScraperColumn18" parent="Building" unique_id=2146112907 instance=ExtResource("7_ew087")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="SkyScraperColumn19" parent="Building" unique_id=200133234 instance=ExtResource("7_ew087")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 9, -16)
+
+[node name="SkyScraperWallWindowTall86" parent="Building" unique_id=243307032 instance=ExtResource("6_med5q")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 9, -13.9448)
+
+[node name="SkyScraperWallWindowTall87" parent="Building" unique_id=303401227 instance=ExtResource("6_med5q")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 9, -7.9448004)
+
+[node name="SkyScraperWallWindowShort19" parent="Building" unique_id=70910397 instance=ExtResource("4_jdyd7")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 0, -9.9448)
+
+[node name="SkyScraperWallWindowTall50" parent="Building" unique_id=387411170 instance=ExtResource("6_med5q")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 3, -9.9448)
+
+[node name="SkyScraperWallWindowTall51" parent="Building" unique_id=1494118218 instance=ExtResource("6_med5q")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 6, -9.9448)
+
+[node name="BeamRust60" parent="Building" unique_id=699369831 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 6, -10.0036)
+
+[node name="SkyScraperWallWindowTall100" parent="Building" unique_id=795958425 instance=ExtResource("6_med5q")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 9, -9.9448)
+
+[node name="SkyScraperWallWindowShort20" parent="Building" unique_id=1135453188 instance=ExtResource("4_jdyd7")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -11.997405, 0, -11.957164)
+
+[node name="SkyScraperWallWindowTall52" parent="Building" unique_id=1385715735 instance=ExtResource("6_med5q")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 3, -11.9448)
+
+[node name="SkyScraperWallWindowTall53" parent="Building" unique_id=69862922 instance=ExtResource("6_med5q")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 6, -11.9448)
+
+[node name="BeamRust61" parent="Building" unique_id=413023249 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -11.997405, 6, -12.015964)
+
+[node name="BeamRust62" parent="Building" unique_id=38852091 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -11.997405, 6, -14.015964)
+
+[node name="SkyScraperWallWindowTall101" parent="Building" unique_id=1307559366 instance=ExtResource("6_med5q")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 9, -11.9448)
+
+[node name="SkyScraperWallWindowTall88" parent="Building" unique_id=924478558 instance=ExtResource("6_med5q")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 9, -5.9448204)
+
+[node name="SkyScraperWallWindowTall89" parent="Building" unique_id=1401635717 instance=ExtResource("6_med5q")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 9, -3.94482)
+
+[node name="SkyScraperWallWindowTall90" parent="Building" unique_id=1341690155 instance=ExtResource("6_med5q")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 9, -1.9448199)
+
+[node name="SkyScraperWallWindowTall91" parent="Building" unique_id=1062715179 instance=ExtResource("6_med5q")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 9, 0.0552001)
+
+[node name="SkyScraperColumn20" parent="Building" unique_id=262405595 instance=ExtResource("7_ew087")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12, 9, -0.0036201477)
+
+[node name="SkyScraperWallWindowTall92" parent="Building" unique_id=1201528845 instance=ExtResource("6_med5q")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -1.9963999, 9, -16)
+
+[node name="SkyScraperWallWindowTall93" parent="Building" unique_id=1145030297 instance=ExtResource("6_med5q")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -3.9963999, 9, -16)
+
+[node name="SkyScraperWallWindowTall94" parent="Building" unique_id=844876998 instance=ExtResource("6_med5q")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -5.9964, 9, -16)
+
+[node name="SkyScraperWallWindowTall95" parent="Building" unique_id=1252625051 instance=ExtResource("6_med5q")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -7.996401, 9, -16)
+
+[node name="SkyScraperWallWindowTall96" parent="Building" unique_id=1547875501 instance=ExtResource("6_med5q")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -9.996401, 9, -16)
+
+[node name="SkyScraperWallWindowTall97" parent="Building" unique_id=220554663 instance=ExtResource("6_med5q")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -11.996401, 9, -16)
+
+[node name="SkyScraperColumn21" parent="Building" unique_id=1738994722 instance=ExtResource("7_ew087")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -11.937599, 9, -16)
+
+[node name="BeamRust20" parent="Building" unique_id=1174737609 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -1.9376001, 6, -16)
+
+[node name="BeamRust21" parent="Building" unique_id=1278257765 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -3.9376001, 6, -16)
+
+[node name="BeamRust22" parent="Building" unique_id=1881491257 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -5.9376, 6, -16)
+
+[node name="BeamRust23" parent="Building" unique_id=1876707001 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -7.937599, 6, -16)
+
+[node name="BeamRust24" parent="Building" unique_id=79809090 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -9.937599, 6, -16)
+
+[node name="BeamRust25" parent="Building" unique_id=512315674 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -11.937599, 6, -16)
+
+[node name="BeamRust26" parent="Building" unique_id=517243785 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -2)
+
+[node name="BeamRust27" parent="Building" unique_id=1039319556 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -4)
+
+[node name="BeamRust28" parent="Building" unique_id=488297538 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -6)
+
+[node name="BeamRust29" parent="Building" unique_id=852466699 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -8)
+
+[node name="BeamRust30" parent="Building" unique_id=588110926 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -10)
+
+[node name="BeamRust31" parent="Building" unique_id=2128020812 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -16)
+
+[node name="BeamRust32" parent="Building" unique_id=124415031 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -10, 12, 0)
+
+[node name="BeamRust33" parent="Building" unique_id=1120727156 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -8, 12, 0)
+
+[node name="BeamRust34" parent="Building" unique_id=942237384 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 12, 0)
+
+[node name="BeamRust35" parent="Building" unique_id=1858363917 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4, 12, 0)
+
+[node name="BeamRust36" parent="Building" unique_id=722035732 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 12, 0)
+
+[node name="BeamRust37" parent="Building" unique_id=171313414 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 12, 0)
+
+[node name="BeamRust38" parent="Building" unique_id=515000226 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 12, -14.0036)
+
+[node name="BeamRust39" parent="Building" unique_id=51976274 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 12, -8.0036)
+
+[node name="BeamRust40" parent="Building" unique_id=1366299957 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 12, -6.0036)
+
+[node name="BeamRust41" parent="Building" unique_id=1943022542 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 12, -4.00362)
+
+[node name="BeamRust42" parent="Building" unique_id=608455777 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 12, -2.0036201)
+
+[node name="BeamRust43" parent="Building" unique_id=1069932459 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 12, -0.0036201477)
+
+[node name="BeamRust44" parent="Building" unique_id=1372383057 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -1.9376001, 12, -16)
+
+[node name="BeamRust45" parent="Building" unique_id=2083778600 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -3.9376001, 12, -16)
+
+[node name="BeamRust46" parent="Building" unique_id=1512895687 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -5.9376, 12, -16)
+
+[node name="BeamRust47" parent="Building" unique_id=705276506 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -7.937599, 12, -16)
+
+[node name="BeamRust48" parent="Building" unique_id=1881511253 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -9.937599, 12, -16)
+
+[node name="BeamRust49" parent="Building" unique_id=1427689248 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -11.937599, 12, -16)
+
+[node name="Floor1" type="Node3D" parent="Building" unique_id=2085257720]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 4)
+
+[node name="FloorShinyTile2" parent="Building/Floor1" unique_id=446999735 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -6)
+
+[node name="FloorShinyTile3" parent="Building/Floor1" unique_id=1641575652 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -8)
+
+[node name="FloorShinyTile4" parent="Building/Floor1" unique_id=1777516629 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -10)
+
+[node name="FloorShinyTile5" parent="Building/Floor1" unique_id=1368302976 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -12)
+
+[node name="FloorShinyTile6" parent="Building/Floor1" unique_id=1756484244 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -14)
+
+[node name="FloorShinyTile7" parent="Building/Floor1" unique_id=1623773915 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -16)
+
+[node name="FloorShinyTile8" parent="Building/Floor1" unique_id=791908245 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -6)
+
+[node name="FloorShinyTile9" parent="Building/Floor1" unique_id=1151915705 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -8)
+
+[node name="FloorShinyTile10" parent="Building/Floor1" unique_id=1758271755 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -10)
+
+[node name="FloorShinyTile11" parent="Building/Floor1" unique_id=748184500 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -12)
+
+[node name="FloorShinyTile12" parent="Building/Floor1" unique_id=763142450 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -14)
+
+[node name="FloorShinyTile13" parent="Building/Floor1" unique_id=670503970 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -16)
+
+[node name="FloorShinyTile14" parent="Building/Floor1" unique_id=440549874 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -6)
+
+[node name="FloorShinyTile15" parent="Building/Floor1" unique_id=632475693 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -8)
+
+[node name="FloorShinyTile16" parent="Building/Floor1" unique_id=652600610 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -10)
+
+[node name="FloorShinyTile17" parent="Building/Floor1" unique_id=1821535601 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -12)
+
+[node name="FloorShinyTile18" parent="Building/Floor1" unique_id=628451831 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -14)
+
+[node name="FloorShinyTile19" parent="Building/Floor1" unique_id=131854505 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -16)
+
+[node name="FloorShinyTile20" parent="Building/Floor1" unique_id=573154783 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -6)
+
+[node name="FloorShinyTile21" parent="Building/Floor1" unique_id=715185056 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -8)
+
+[node name="FloorShinyTile22" parent="Building/Floor1" unique_id=1494743545 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -10)
+
+[node name="FloorShinyTile23" parent="Building/Floor1" unique_id=2056082628 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -12)
+
+[node name="FloorShinyTile24" parent="Building/Floor1" unique_id=875520447 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -14)
+
+[node name="FloorShinyTile25" parent="Building/Floor1" unique_id=1234803496 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -16)
+
+[node name="FloorShinyTile26" parent="Building/Floor1" unique_id=1954938939 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -6)
+
+[node name="FloorShinyTile27" parent="Building/Floor1" unique_id=382009021 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -8)
+
+[node name="FloorShinyTile28" parent="Building/Floor1" unique_id=1010697239 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -10)
+
+[node name="FloorShinyTile29" parent="Building/Floor1" unique_id=607647452 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -12)
+
+[node name="FloorShinyTile30" parent="Building/Floor1" unique_id=383826688 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -14)
+
+[node name="FloorShinyTile31" parent="Building/Floor1" unique_id=689851279 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -16)
+
+[node name="FloorShinyTile32" parent="Building/Floor1" unique_id=2009034408 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -6)
+
+[node name="FloorShinyTile33" parent="Building/Floor1" unique_id=1117559559 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -8)
+
+[node name="FloorShinyTile34" parent="Building/Floor1" unique_id=293894566 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -10)
+
+[node name="FloorShinyTile35" parent="Building/Floor1" unique_id=185229200 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -12)
+
+[node name="FloorShinyTile36" parent="Building/Floor1" unique_id=1610889128 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -14)
+
+[node name="FloorShinyTile37" parent="Building/Floor1" unique_id=888677971 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -16)
+
+[node name="FloorShinyTile38" parent="Building/Floor1" unique_id=299933739 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -18)
+
+[node name="FloorShinyTile39" parent="Building/Floor1" unique_id=1394448499 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -18)
+
+[node name="FloorShinyTile40" parent="Building/Floor1" unique_id=128643840 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -18)
+
+[node name="FloorShinyTile41" parent="Building/Floor1" unique_id=975857870 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -18)
+
+[node name="FloorShinyTile42" parent="Building/Floor1" unique_id=1891175058 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -18)
+
+[node name="FloorShinyTile43" parent="Building/Floor1" unique_id=1573306293 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -18)
+
+[node name="FloorShinyTile44" parent="Building/Floor1" unique_id=1343257012 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -20)
+
+[node name="FloorShinyTile45" parent="Building/Floor1" unique_id=1962836275 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -20)
+
+[node name="FloorShinyTile46" parent="Building/Floor1" unique_id=1050883867 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -20)
+
+[node name="FloorShinyTile47" parent="Building/Floor1" unique_id=1280117073 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -20)
+
+[node name="FloorShinyTile48" parent="Building/Floor1" unique_id=1994006322 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -20)
+
+[node name="FloorShinyTile49" parent="Building/Floor1" unique_id=9995928 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -20)
+
+[node name="StairMetalStraight2" parent="Building/Floor1" unique_id=2099767252 instance=ExtResource("10_g4o2p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -20)
+
+[node name="Floor2" type="Node3D" parent="Building" unique_id=1865218812]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3, 4)
+
+[node name="FloorShinyTile2" parent="Building/Floor2" unique_id=512131100 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -6)
+
+[node name="FloorShinyTile3" parent="Building/Floor2" unique_id=1861679446 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -8)
+
+[node name="FloorShinyTile4" parent="Building/Floor2" unique_id=2044008101 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -10)
+
+[node name="FloorShinyTile5" parent="Building/Floor2" unique_id=2137252429 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -12)
+
+[node name="FloorShinyTile6" parent="Building/Floor2" unique_id=71860613 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -14)
+
+[node name="FloorShinyTile7" parent="Building/Floor2" unique_id=1820476563 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -16)
+
+[node name="FloorShinyTile8" parent="Building/Floor2" unique_id=1204221143 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -6)
+
+[node name="FloorShinyTile9" parent="Building/Floor2" unique_id=122628981 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -8)
+
+[node name="FloorShinyTile10" parent="Building/Floor2" unique_id=626726890 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -10)
+
+[node name="FloorShinyTile11" parent="Building/Floor2" unique_id=1731227703 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -12)
+
+[node name="FloorShinyTile12" parent="Building/Floor2" unique_id=1809745672 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -14)
+
+[node name="FloorShinyTile13" parent="Building/Floor2" unique_id=302640088 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -16)
+
+[node name="FloorShinyTile14" parent="Building/Floor2" unique_id=1655631882 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -6)
+
+[node name="FloorShinyTile15" parent="Building/Floor2" unique_id=412418178 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -8)
+
+[node name="FloorShinyTile16" parent="Building/Floor2" unique_id=1311590263 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -10)
+
+[node name="FloorShinyTile17" parent="Building/Floor2" unique_id=1657584699 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -12)
+
+[node name="FloorShinyTile18" parent="Building/Floor2" unique_id=201257775 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -14)
+
+[node name="FloorShinyTile20" parent="Building/Floor2" unique_id=1068498933 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -6)
+
+[node name="FloorShinyTile21" parent="Building/Floor2" unique_id=179482382 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -8)
+
+[node name="FloorShinyTile22" parent="Building/Floor2" unique_id=1352454849 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -10)
+
+[node name="FloorShinyTile23" parent="Building/Floor2" unique_id=55939307 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -12)
+
+[node name="FloorShinyTile24" parent="Building/Floor2" unique_id=519279312 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -14)
+
+[node name="FloorShinyTile26" parent="Building/Floor2" unique_id=1020941734 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -6)
+
+[node name="FloorShinyTile27" parent="Building/Floor2" unique_id=1177611184 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -8)
+
+[node name="FloorShinyTile28" parent="Building/Floor2" unique_id=1709251322 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -10)
+
+[node name="FloorShinyTile29" parent="Building/Floor2" unique_id=1625078523 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -12)
+
+[node name="FloorShinyTile30" parent="Building/Floor2" unique_id=1277234360 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -14)
+
+[node name="FloorShinyTile31" parent="Building/Floor2" unique_id=36436467 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -16)
+
+[node name="FloorShinyTile32" parent="Building/Floor2" unique_id=987348135 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -6)
+
+[node name="FloorShinyTile33" parent="Building/Floor2" unique_id=1606797986 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -8)
+
+[node name="FloorShinyTile34" parent="Building/Floor2" unique_id=1848730699 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -10)
+
+[node name="FloorShinyTile35" parent="Building/Floor2" unique_id=1435204980 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -12)
+
+[node name="FloorShinyTile36" parent="Building/Floor2" unique_id=1489071909 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -14)
+
+[node name="FloorShinyTile37" parent="Building/Floor2" unique_id=412489666 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -16)
+
+[node name="FloorShinyTile19" parent="Building/Floor2" unique_id=944048519 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -18)
+
+[node name="FloorShinyTile25" parent="Building/Floor2" unique_id=1201697456 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -18)
+
+[node name="FloorShinyTile44" parent="Building/Floor2" unique_id=1457486112 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -16)
+
+[node name="FloorShinyTile45" parent="Building/Floor2" unique_id=205196174 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -18)
+
+[node name="FloorShinyTile46" parent="Building/Floor2" unique_id=840393393 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -16)
+
+[node name="FloorShinyTile47" parent="Building/Floor2" unique_id=377836429 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -18)
+
+[node name="FloorShinyTile38" parent="Building/Floor2" unique_id=286208175 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -18)
+
+[node name="FloorShinyTile39" parent="Building/Floor2" unique_id=1514449214 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -18)
+
+[node name="FloorShinyTile40" parent="Building/Floor2" unique_id=1995364675 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -20)
+
+[node name="FloorShinyTile41" parent="Building/Floor2" unique_id=2090771917 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -20)
+
+[node name="FloorShinyTile42" parent="Building/Floor2" unique_id=334589682 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -20)
+
+[node name="FloorShinyTile43" parent="Building/Floor2" unique_id=1350609110 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -20)
+
+[node name="StairMetalStraight2" parent="Building/Floor2" unique_id=101920898 instance=ExtResource("10_g4o2p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -20)
+
+[node name="Office" type="Node3D" parent="Building/Floor2" unique_id=316520139]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 3, -5)
+
+[node name="Office2" type="Node3D" parent="Building/Floor2" unique_id=1519656382]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 3, -5)
+
+[node name="Office3" type="Node3D" parent="Building/Floor2" unique_id=338877582]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 3, -5)
+
+[node name="Office4" type="Node3D" parent="Building/Floor2" unique_id=1503114632]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -18, 3, -11)
+
+[node name="Office5" type="Node3D" parent="Building/Floor2" unique_id=1412897114]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -15, 3, -11)
+
+[node name="Railing8" parent="Building/Floor2" unique_id=257310464 instance=ExtResource("16_ff4i1")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -13, 0, -17.8177)
+
+[node name="Railing10" parent="Building/Floor2" unique_id=1902496339 instance=ExtResource("16_ff4i1")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -15, 0, -17.8177)
+
+[node name="RailingEnd12" parent="Building/Floor2" unique_id=106121034 instance=ExtResource("17_6knen")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -17, 0, -17.8177)
+
+[node name="RailingEnd13" parent="Building/Floor2" unique_id=542408933 instance=ExtResource("17_6knen")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -15, 0, -17.8177)
+
+[node name="RailingEnd15" parent="Building/Floor2" unique_id=1768173942 instance=ExtResource("17_6knen")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -13, 0, -17.8174)
+
+[node name="RailingEnd16" parent="Building/Floor2" unique_id=1841812083 instance=ExtResource("17_6knen")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -13, 0, -17.8177)
+
+[node name="Floor3" type="Node3D" parent="Building" unique_id=1544595692]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 6, 4)
+
+[node name="FloorShinyTile2" parent="Building/Floor3" unique_id=642551255 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -6)
+
+[node name="FloorShinyTile3" parent="Building/Floor3" unique_id=110965365 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -8)
+
+[node name="FloorShinyTile4" parent="Building/Floor3" unique_id=2131215283 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -10)
+
+[node name="FloorShinyTile5" parent="Building/Floor3" unique_id=1895457279 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -12)
+
+[node name="FloorShinyTile6" parent="Building/Floor3" unique_id=55392566 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -14)
+
+[node name="FloorShinyTile7" parent="Building/Floor3" unique_id=529713971 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -16)
+
+[node name="FloorShinyTile8" parent="Building/Floor3" unique_id=1988750212 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -6)
+
+[node name="FloorShinyTile9" parent="Building/Floor3" unique_id=870279072 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -8)
+
+[node name="FloorShinyTile10" parent="Building/Floor3" unique_id=927648563 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -10)
+
+[node name="FloorShinyTile11" parent="Building/Floor3" unique_id=51945583 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -12)
+
+[node name="FloorShinyTile12" parent="Building/Floor3" unique_id=637881335 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -14)
+
+[node name="FloorShinyTile13" parent="Building/Floor3" unique_id=740327947 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -16)
+
+[node name="FloorShinyTile14" parent="Building/Floor3" unique_id=1762347648 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -6)
+
+[node name="FloorShinyTile15" parent="Building/Floor3" unique_id=2055270681 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -8)
+
+[node name="FloorShinyTile16" parent="Building/Floor3" unique_id=709800285 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -10)
+
+[node name="FloorShinyTile17" parent="Building/Floor3" unique_id=132287431 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -12)
+
+[node name="FloorShinyTile18" parent="Building/Floor3" unique_id=2102941629 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -14)
+
+[node name="FloorShinyTile20" parent="Building/Floor3" unique_id=1567789509 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -6)
+
+[node name="FloorShinyTile21" parent="Building/Floor3" unique_id=538474125 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -8)
+
+[node name="FloorShinyTile22" parent="Building/Floor3" unique_id=1726615685 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -10)
+
+[node name="FloorShinyTile23" parent="Building/Floor3" unique_id=1392278078 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -12)
+
+[node name="FloorShinyTile24" parent="Building/Floor3" unique_id=1413642052 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -14)
+
+[node name="FloorShinyTile26" parent="Building/Floor3" unique_id=2071893520 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -6)
+
+[node name="FloorShinyTile27" parent="Building/Floor3" unique_id=1584333249 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -8)
+
+[node name="FloorShinyTile28" parent="Building/Floor3" unique_id=124741792 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -10)
+
+[node name="FloorShinyTile29" parent="Building/Floor3" unique_id=224076254 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -12)
+
+[node name="FloorShinyTile30" parent="Building/Floor3" unique_id=979333134 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -14)
+
+[node name="FloorShinyTile31" parent="Building/Floor3" unique_id=165784697 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -16)
+
+[node name="FloorShinyTile32" parent="Building/Floor3" unique_id=1534082191 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -6)
+
+[node name="FloorShinyTile33" parent="Building/Floor3" unique_id=799356279 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -8)
+
+[node name="FloorShinyTile34" parent="Building/Floor3" unique_id=1460204555 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -10)
+
+[node name="FloorShinyTile35" parent="Building/Floor3" unique_id=712210658 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -12)
+
+[node name="FloorShinyTile36" parent="Building/Floor3" unique_id=1477337424 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -14)
+
+[node name="FloorShinyTile37" parent="Building/Floor3" unique_id=300428006 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -16)
+
+[node name="FloorShinyTile19" parent="Building/Floor3" unique_id=189926448 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -18)
+
+[node name="FloorShinyTile25" parent="Building/Floor3" unique_id=35087541 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -18)
+
+[node name="FloorShinyTile44" parent="Building/Floor3" unique_id=820832646 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -16)
+
+[node name="FloorShinyTile45" parent="Building/Floor3" unique_id=1826895036 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -18)
+
+[node name="FloorShinyTile46" parent="Building/Floor3" unique_id=1605363192 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -16)
+
+[node name="FloorShinyTile47" parent="Building/Floor3" unique_id=1819084122 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -18)
+
+[node name="FloorShinyTile38" parent="Building/Floor3" unique_id=883120338 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -18)
+
+[node name="FloorShinyTile39" parent="Building/Floor3" unique_id=1363851906 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -18)
+
+[node name="FloorShinyTile40" parent="Building/Floor3" unique_id=1668211590 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -20)
+
+[node name="FloorShinyTile41" parent="Building/Floor3" unique_id=554131975 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -20)
+
+[node name="FloorShinyTile42" parent="Building/Floor3" unique_id=1679280601 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -20)
+
+[node name="FloorShinyTile43" parent="Building/Floor3" unique_id=1999636399 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -20)
+
+[node name="Railing5" parent="Building/Floor3" unique_id=1082682336 instance=ExtResource("16_ff4i1")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -13, 0, -17.8177)
+
+[node name="Railing6" parent="Building/Floor3" unique_id=1714141779 instance=ExtResource("16_ff4i1")]
+transform = Transform3D(-1, 0, 8.742279e-08, 0, 1, 0, -8.742279e-08, 0, -1, -13, 0, -17.8177)
+
+[node name="Railing7" parent="Building/Floor3" unique_id=991894084 instance=ExtResource("16_ff4i1")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -15, 0, -17.8177)
+
+[node name="RailingEnd7" parent="Building/Floor3" unique_id=290374047 instance=ExtResource("17_6knen")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -17, 0, -17.8177)
+
+[node name="RailingEnd8" parent="Building/Floor3" unique_id=2082249427 instance=ExtResource("17_6knen")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -15, 0, -17.8177)
+
+[node name="RailingEnd10" parent="Building/Floor3" unique_id=492689405 instance=ExtResource("17_6knen")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -13, 0, -17.8174)
+
+[node name="RailingEnd11" parent="Building/Floor3" unique_id=372360196 instance=ExtResource("17_6knen")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -13, 0, -17.8177)
+
+[node name="Floor4" type="Node3D" parent="Building" unique_id=2035616114]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 9, 4)
+
+[node name="FloorShinyTile2" parent="Building/Floor4" unique_id=1842941869 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -6)
+
+[node name="FloorShinyTile3" parent="Building/Floor4" unique_id=38625310 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -8)
+
+[node name="FloorShinyTile4" parent="Building/Floor4" unique_id=870279939 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -10)
+
+[node name="FloorShinyTile5" parent="Building/Floor4" unique_id=1417533448 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -12)
+
+[node name="FloorShinyTile6" parent="Building/Floor4" unique_id=1866191979 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -14)
+
+[node name="FloorShinyTile7" parent="Building/Floor4" unique_id=290499093 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -16)
+
+[node name="FloorShinyTile8" parent="Building/Floor4" unique_id=1541666349 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -6)
+
+[node name="FloorShinyTile9" parent="Building/Floor4" unique_id=1933294409 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -8)
+
+[node name="FloorShinyTile10" parent="Building/Floor4" unique_id=319888398 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -10)
+
+[node name="FloorShinyTile11" parent="Building/Floor4" unique_id=1731823996 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -12)
+
+[node name="FloorShinyTile12" parent="Building/Floor4" unique_id=869200128 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -14)
+
+[node name="FloorShinyTile13" parent="Building/Floor4" unique_id=537086817 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -16)
+
+[node name="FloorShinyTile72" parent="Building/Floor4" unique_id=791309249 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -16)
+
+[node name="FloorShinyTile73" parent="Building/Floor4" unique_id=1308322863 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -16)
+
+[node name="FloorShinyTile14" parent="Building/Floor4" unique_id=1248738032 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -6)
+
+[node name="FloorShinyTile15" parent="Building/Floor4" unique_id=700884246 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -8)
+
+[node name="FloorShinyTile16" parent="Building/Floor4" unique_id=555111287 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -10)
+
+[node name="FloorShinyTile17" parent="Building/Floor4" unique_id=955494555 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -12)
+
+[node name="FloorShinyTile18" parent="Building/Floor4" unique_id=635927539 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -14)
+
+[node name="FloorShinyTile20" parent="Building/Floor4" unique_id=236039311 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -6)
+
+[node name="FloorShinyTile21" parent="Building/Floor4" unique_id=959449298 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -8)
+
+[node name="FloorShinyTile22" parent="Building/Floor4" unique_id=770586289 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -10)
+
+[node name="FloorShinyTile23" parent="Building/Floor4" unique_id=1772236107 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -12)
+
+[node name="FloorShinyTile24" parent="Building/Floor4" unique_id=883064593 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -14)
+
+[node name="FloorShinyTile26" parent="Building/Floor4" unique_id=762285450 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -6)
+
+[node name="FloorShinyTile27" parent="Building/Floor4" unique_id=489145961 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -8)
+
+[node name="FloorShinyTile28" parent="Building/Floor4" unique_id=1817154775 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -10)
+
+[node name="FloorShinyTile29" parent="Building/Floor4" unique_id=2034627687 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -12)
+
+[node name="FloorShinyTile30" parent="Building/Floor4" unique_id=1613397837 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -14)
+
+[node name="FloorShinyTile31" parent="Building/Floor4" unique_id=199302745 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -16)
+
+[node name="FloorShinyTile32" parent="Building/Floor4" unique_id=547975169 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -6)
+
+[node name="FloorShinyTile33" parent="Building/Floor4" unique_id=1714190803 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -8)
+
+[node name="FloorShinyTile34" parent="Building/Floor4" unique_id=52750299 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -10)
+
+[node name="FloorShinyTile35" parent="Building/Floor4" unique_id=1039186382 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -12)
+
+[node name="FloorShinyTile36" parent="Building/Floor4" unique_id=1280259550 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -14)
+
+[node name="FloorShinyTile37" parent="Building/Floor4" unique_id=1144190231 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -16)
+
+[node name="FloorShinyTile19" parent="Building/Floor4" unique_id=1504558539 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -6)
+
+[node name="FloorShinyTile25" parent="Building/Floor4" unique_id=1902482679 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -8)
+
+[node name="FloorShinyTile38" parent="Building/Floor4" unique_id=1750420776 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -10)
+
+[node name="FloorShinyTile39" parent="Building/Floor4" unique_id=1638181653 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -12)
+
+[node name="FloorShinyTile40" parent="Building/Floor4" unique_id=1696690496 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -14)
+
+[node name="FloorShinyTile41" parent="Building/Floor4" unique_id=2022578012 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -16)
+
+[node name="FloorShinyTile42" parent="Building/Floor4" unique_id=828274406 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -6)
+
+[node name="FloorShinyTile43" parent="Building/Floor4" unique_id=1030964992 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -8)
+
+[node name="FloorShinyTile44" parent="Building/Floor4" unique_id=963604354 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -10)
+
+[node name="FloorShinyTile45" parent="Building/Floor4" unique_id=407575651 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -12)
+
+[node name="FloorShinyTile46" parent="Building/Floor4" unique_id=1784553248 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -14)
+
+[node name="FloorShinyTile47" parent="Building/Floor4" unique_id=1974162274 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -16)
+
+[node name="FloorShinyTile48" parent="Building/Floor4" unique_id=1520209683 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -6)
+
+[node name="FloorShinyTile49" parent="Building/Floor4" unique_id=2035322565 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -8)
+
+[node name="FloorShinyTile50" parent="Building/Floor4" unique_id=1425743869 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -10)
+
+[node name="FloorShinyTile51" parent="Building/Floor4" unique_id=629535101 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -12)
+
+[node name="FloorShinyTile52" parent="Building/Floor4" unique_id=519845919 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -14)
+
+[node name="FloorShinyTile53" parent="Building/Floor4" unique_id=1025348663 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -6)
+
+[node name="FloorShinyTile54" parent="Building/Floor4" unique_id=1193636700 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -8)
+
+[node name="FloorShinyTile55" parent="Building/Floor4" unique_id=1470182286 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -10)
+
+[node name="FloorShinyTile56" parent="Building/Floor4" unique_id=549573231 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -12)
+
+[node name="FloorShinyTile57" parent="Building/Floor4" unique_id=1297618913 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -14)
+
+[node name="FloorShinyTile58" parent="Building/Floor4" unique_id=1813590960 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -6)
+
+[node name="FloorShinyTile59" parent="Building/Floor4" unique_id=1402241057 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -8)
+
+[node name="FloorShinyTile60" parent="Building/Floor4" unique_id=721846652 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -10)
+
+[node name="FloorShinyTile61" parent="Building/Floor4" unique_id=1959164162 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -12)
+
+[node name="FloorShinyTile62" parent="Building/Floor4" unique_id=965617067 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -14)
+
+[node name="FloorShinyTile63" parent="Building/Floor4" unique_id=1769126389 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -16)
+
+[node name="FloorShinyTile70" parent="Building/Floor4" unique_id=184450649 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -16)
+
+[node name="FloorShinyTile71" parent="Building/Floor4" unique_id=2102395929 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -16)
+
+[node name="FloorShinyTile64" parent="Building/Floor4" unique_id=503439036 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -6)
+
+[node name="FloorShinyTile65" parent="Building/Floor4" unique_id=1690247335 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -8)
+
+[node name="FloorShinyTile66" parent="Building/Floor4" unique_id=1595279817 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -10)
+
+[node name="FloorShinyTile67" parent="Building/Floor4" unique_id=1853465810 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -12)
+
+[node name="FloorShinyTile68" parent="Building/Floor4" unique_id=1757290926 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -14)
+
+[node name="FloorShinyTile69" parent="Building/Floor4" unique_id=279517848 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -16)
+
+[node name="FloorShinyTile74" parent="Building/Floor4" unique_id=112768543 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -18)
+
+[node name="FloorShinyTile75" parent="Building/Floor4" unique_id=1898734670 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -18)
+
+[node name="FloorShinyTile76" parent="Building/Floor4" unique_id=996998749 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -18)
+
+[node name="FloorShinyTile77" parent="Building/Floor4" unique_id=1338589813 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -18)
+
+[node name="FloorShinyTile78" parent="Building/Floor4" unique_id=1418881674 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -18)
+
+[node name="FloorShinyTile79" parent="Building/Floor4" unique_id=1284473300 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -18)
+
+[node name="FloorShinyTile80" parent="Building/Floor4" unique_id=1707555740 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -20)
+
+[node name="FloorShinyTile81" parent="Building/Floor4" unique_id=1577479295 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -20)
+
+[node name="FloorShinyTile82" parent="Building/Floor4" unique_id=1593850788 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -20)
+
+[node name="FloorShinyTile83" parent="Building/Floor4" unique_id=628736427 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -20)
+
+[node name="FloorShinyTile84" parent="Building/Floor4" unique_id=1740939783 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -20)
+
+[node name="FloorShinyTile85" parent="Building/Floor4" unique_id=697949252 instance=ExtResource("9_qowby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -20)
+
+[node name="Furniture" type="Node3D" parent="Building/Floor4" unique_id=2069864723]
+
+[node name="AirCon2" parent="Building/Floor4/Furniture" unique_id=684012261 instance=ExtResource("2_3cs8k")]
+transform = Transform3D(1.63918e-07, 0, 1.25, 0, 1.25, 0, -1.25, 0, 1.63918e-07, -11.5679, 1.4893398, -14.0502)
+
+[node name="AirCon3" parent="Building/Floor4/Furniture" unique_id=1574968366 instance=ExtResource("2_3cs8k")]
+transform = Transform3D(1.63918e-07, 0, 1.25, 0, 1.25, 0, -1.25, 0, 1.63918e-07, -17.8179, 1.4893398, -14.0502)
+
+[node name="SidewalkLeft75" parent="Building" unique_id=1232347648 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -16)
+
+[node name="SidewalkLeft76" parent="Building" unique_id=1123471578 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -10)
+
+[node name="SidewalkLeft77" parent="Building" unique_id=1120902069 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -8)
+
+[node name="SidewalkLeft78" parent="Building" unique_id=729347415 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -6)
+
+[node name="SidewalkLeft79" parent="Building" unique_id=452043689 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -4)
+
+[node name="SidewalkLeft80" parent="Building" unique_id=889125570 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -2)
+
+[node name="SidewalkLeft81" parent="Building" unique_id=1103966643 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 12, -16)
+
+[node name="SidewalkLeft82" parent="Building" unique_id=45814081 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 12, -10)
+
+[node name="SidewalkLeft83" parent="Building" unique_id=114696074 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 12, -8)
+
+[node name="SidewalkLeft84" parent="Building" unique_id=31023389 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 12, -6)
+
+[node name="SidewalkLeft85" parent="Building" unique_id=897204741 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 12, -4)
+
+[node name="SidewalkLeft86" parent="Building" unique_id=22033819 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 12, -2)
+
+[node name="SidewalkLeft87" parent="Building" unique_id=1615168719 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 12, -16)
+
+[node name="SidewalkLeft88" parent="Building" unique_id=1752096571 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 12, -10)
+
+[node name="SidewalkLeft89" parent="Building" unique_id=1725009298 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 12, -8)
+
+[node name="SidewalkLeft90" parent="Building" unique_id=1959896361 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 12, -6)
+
+[node name="SidewalkLeft91" parent="Building" unique_id=583058123 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 12, -4)
+
+[node name="SidewalkLeft92" parent="Building" unique_id=7345786 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 12, -2)
+
+[node name="SidewalkLeft93" parent="Building" unique_id=577359703 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 12, -16)
+
+[node name="SidewalkLeft94" parent="Building" unique_id=1647900832 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 12, -10)
+
+[node name="SidewalkLeft97" parent="Building" unique_id=1040382880 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 12, -4)
+
+[node name="SidewalkLeft98" parent="Building" unique_id=967918487 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 12, -2)
+
+[node name="SidewalkLeft99" parent="Building" unique_id=664335696 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 12, -16)
+
+[node name="SidewalkLeft100" parent="Building" unique_id=905295662 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 12, -10)
+
+[node name="SidewalkLeft95" parent="Building" unique_id=1292450362 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 12, -8)
+
+[node name="SidewalkLeft101" parent="Building" unique_id=589314086 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 12, -8)
+
+[node name="SidewalkLeft96" parent="Building" unique_id=1064464615 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 12, -6)
+
+[node name="SidewalkLeft102" parent="Building" unique_id=280498168 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 12, -6)
+
+[node name="SidewalkLeft103" parent="Building" unique_id=204290377 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 12, -4)
+
+[node name="SidewalkLeft104" parent="Building" unique_id=1496209199 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 12, -2)
+
+[node name="SidewalkLeft105" parent="Building" unique_id=892544922 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 12, -16)
+
+[node name="SidewalkLeft106" parent="Building" unique_id=653845625 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 12, -10)
+
+[node name="BeamRust50" parent="Building" unique_id=795469403 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -12)
+
+[node name="BeamRust51" parent="Building" unique_id=123388411 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 12, -10.0036)
+
+[node name="SidewalkLeft111" parent="Building" unique_id=1599892346 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -12)
+
+[node name="SidewalkLeft112" parent="Building" unique_id=1646086920 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 12, -12)
+
+[node name="SidewalkLeft113" parent="Building" unique_id=389560778 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 12, -12)
+
+[node name="SidewalkLeft114" parent="Building" unique_id=2088354446 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 12, -12)
+
+[node name="SidewalkLeft115" parent="Building" unique_id=1220029009 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 12, -12)
+
+[node name="SidewalkLeft116" parent="Building" unique_id=1769939333 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 12, -12)
+
+[node name="BeamRust52" parent="Building" unique_id=646134369 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -14)
+
+[node name="BeamRust53" parent="Building" unique_id=1041692604 instance=ExtResource("8_ffvtn")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -12, 12, -12.0036)
+
+[node name="SidewalkLeft117" parent="Building" unique_id=1002483549 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -14)
+
+[node name="SidewalkLeft118" parent="Building" unique_id=1800893637 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 12, -14)
+
+[node name="SidewalkLeft119" parent="Building" unique_id=718955266 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 12, -14)
+
+[node name="SidewalkLeft120" parent="Building" unique_id=1361816390 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 12, -14)
+
+[node name="SidewalkLeft121" parent="Building" unique_id=1092022904 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 12, -14)
+
+[node name="SidewalkLeft122" parent="Building" unique_id=428281164 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 12, -14)
+
+[node name="SidewalkLeft107" parent="Building" unique_id=506488601 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 12, -8)
+
+[node name="SidewalkLeft108" parent="Building" unique_id=1579703153 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 12, -6)
+
+[node name="SidewalkLeft109" parent="Building" unique_id=209470745 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 12, -4)
+
+[node name="SidewalkLeft110" parent="Building" unique_id=609991563 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 12, -2)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Building" unique_id=1750414900]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -5.8163004, 5.71876, -4.4586697)
+light_color = Color(0.920466, 0.877113, 0.62165, 1)
+shadow_enabled = true
+spot_range = 11.694
+spot_attenuation = 0.35
+spot_angle = 74.04
+spot_angle_attenuation = 0.420448
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Building" unique_id=850452399]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -5.8163004, 8.5842, -5.5384398)
+light_color = Color(0.920466, 0.877113, 0.62165, 1)
+shadow_enabled = true
+spot_range = 11.694
+spot_attenuation = 0.35
+spot_angle = 74.04
+spot_angle_attenuation = 0.420448
+
+[node name="SM_Bld_Power_02" parent="Building" unique_id=338934624 instance=ExtResource("23_ow1eu")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -6, 12, -12)
+
+[node name="SkyScraperWallPlain10" parent="Building" unique_id=94818249 instance=ExtResource("5_525so")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -8)
+
+[node name="SkyScraperWallPlain11" parent="Building" unique_id=1248810121 instance=ExtResource("5_525so")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -10)
+
+[node name="SkyScraperWallPlain12" parent="Building" unique_id=1115948249 instance=ExtResource("5_525so")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, -8)
+
+[node name="SkyScraperWallPlain13" parent="Building" unique_id=61384269 instance=ExtResource("5_525so")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, -10)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Building" unique_id=2020864149]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.3222742, 10, -8)
+mesh = SubResource("QuadMesh_cr743")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Building" unique_id=1648674767]
+transform = Transform3D(-4.371139e-08, 0, 1, -1, -4.371139e-08, -4.371139e-08, 4.371139e-08, -1, 1.9106855e-15, 0.3222742, 9.675792, -8)
+mesh = SubResource("QuadMesh_cr743")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1740732873]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85575, 4.45631, -10)
+light_color = Color(0.688, 0.776867, 0.86, 1)
+omni_range = 13.38
+omni_attenuation = 0.555
+
+[node name="Street" type="Node3D" parent="." unique_id=1910384361]
+
+[node name="RoadBlank2" parent="Street" unique_id=765230728 instance=ExtResource("23_tjkew")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -10)
+
+[node name="RoadBlank3" parent="Street" unique_id=1610233318 instance=ExtResource("23_tjkew")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -12)
+
+[node name="RoadBlank6" parent="Street" unique_id=1856590140 instance=ExtResource("23_tjkew")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -6)
+
+[node name="RoadBlank7" parent="Street" unique_id=1055602657 instance=ExtResource("23_tjkew")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -8)
+
+[node name="RoadBlank4" parent="Street" unique_id=1483925812 instance=ExtResource("23_tjkew")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -10)
+
+[node name="RoadBlank5" parent="Street" unique_id=1835652506 instance=ExtResource("23_tjkew")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -12)
+
+[node name="RoadBlank8" parent="Street" unique_id=521582534 instance=ExtResource("23_tjkew")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -6)
+
+[node name="RoadBlank9" parent="Street" unique_id=794478087 instance=ExtResource("23_tjkew")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -8)
+
+[node name="SidewalkLeft2" parent="Street" unique_id=179316808 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+
+[node name="SidewalkLeft3" parent="Street" unique_id=5196217 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -4)
+
+[node name="SidewalkLeft10" parent="Street" unique_id=782358695 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2, 0, -4)
+
+[node name="SidewalkLeft11" parent="Street" unique_id=654578868 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 4, 0, -12)
+
+[node name="SidewalkLeft12" parent="Street" unique_id=2142268314 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4, 0, -4)
+
+[node name="SidewalkLeft13" parent="Street" unique_id=1011382555 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 6, 0, -12)
+
+[node name="SidewalkLeft14" parent="Street" unique_id=104185740 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 6, 0, -4)
+
+[node name="SidewalkLeft15" parent="Street" unique_id=488347910 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 8, 0, -12)
+
+[node name="SidewalkLeft4" parent="Street" unique_id=1587331062 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6)
+
+[node name="SidewalkLeft5" parent="Street" unique_id=1929253174 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -8)
+
+[node name="SidewalkLeft6" parent="Street" unique_id=1265731760 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -10)
+
+[node name="SidewalkLeft7" parent="Street" unique_id=1832779222 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -12)
+
+[node name="SidewalkLeft8" parent="Street" unique_id=560347980 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -14)
+
+[node name="SidewalkLeft9" parent="Street" unique_id=2030517105 instance=ExtResource("31_k3j0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -16)
+
+[node name="WallCornerGlow2" parent="Street" unique_id=1984680804 instance=ExtResource("24_su6bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
+
+[node name="WallCornerGlow3" parent="Street" unique_id=1466850973 instance=ExtResource("24_su6bs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -12)
+
+[node name="SM_Env_Road_Arrow_02_SF" parent="Street" unique_id=1916475028 instance=ExtResource("25_4wm0l")]
+transform = Transform3D(-3.4969112e-08, 0, -0.8, 0, 0.8, 0, 0.8, 0, -3.4969112e-08, 6, -0.099132955, -8)
+skeleton = NodePath("../../Interior")
+
+[node name="SM_Env_Road_Arrow_02_SF2" parent="Street" unique_id=802485629 instance=ExtResource("25_4wm0l")]
+transform = Transform3D(3.4969112e-08, 0, -0.8, 0, 0.8, 0, -0.8, 0, -3.4969112e-08, 6, -0.099132955, -8)
+skeleton = NodePath("../../Interior")
+
+[node name="SM_Env_Greeble_Cube_01" parent="Street" unique_id=572181500 instance=ExtResource("26_d8lkg")]
+transform = Transform3D(0.9307694, 0, 0, 0, 0.26193708, 0, 0, 0, 1.8356831, 2.389313, 3.644689, -8.10284)
+
+[node name="Interior" type="Node3D" parent="." unique_id=545759271]
+
+[node name="SM_Prop_Medical_Machine_01" parent="Interior" unique_id=1786978791 instance=ExtResource("25_su6bs")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -10, 3, -9)
+skeleton = NodePath("../..")
+
+[node name="SM_Bld_Power_04" parent="." unique_id=43517718 instance=ExtResource("28_ow1eu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 12, -4)

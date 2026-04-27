@@ -47,26 +47,6 @@ func GetRewardScoreFromPlan(plan : ActionPlan) -> float:
 		score += expected_reward / max(CurrentNeeds[need_type], 0.000001)
 	return score
 
-
-#Default
-#GoGetItem
-#GoDropItem
-#Transfer
-#toFromExchange
-#TravelAnimState
-#WalkRandomly
-#~Goto   ~~~~~
-#LoadWait
-#Wait
-#GoSleepInBed
-#*Sleep  *****
-#CookInKitchen2
-#GoPutFoodInFridge
-#RefilFridge2
-#Spawn
-#*EatSelectedFood ****
-#SleepOnFloor
-
 func ApplyNeedForAction(curAction : String, delta : float, param : Dictionary, curActionState : Globals.ACTION_STATE) -> void:
 	var plan : ActionPlan = param.get("current_plan", null)
 	for r in plan.ActualReward:
