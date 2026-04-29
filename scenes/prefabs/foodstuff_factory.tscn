@@ -3086,59 +3086,45 @@ transform = Transform3D(1, 0, 0, 0, 0.9953797, 0.09601791, 0, -0.09601791, 0.995
 
 [node name="SM_Prop_Fence_01" parent="." unique_id=411538709 instance=ExtResource("52_focja")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -22, 0, 0)
-surface_material_override/0 = null
 
 [node name="SM_Prop_Fence_02" parent="." unique_id=1788854960 instance=ExtResource("52_focja")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -20, 0, 0)
-surface_material_override/0 = null
 
 [node name="SM_Prop_Fence_03" parent="." unique_id=1701758855 instance=ExtResource("52_focja")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -18, 0, 0)
-surface_material_override/0 = null
 
 [node name="SM_Prop_Fence_04" parent="." unique_id=2107979406 instance=ExtResource("52_focja")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -16, 0, 0)
-surface_material_override/0 = null
 
 [node name="SM_Prop_Fence_05" parent="." unique_id=857534318 instance=ExtResource("52_focja")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -14, 0, 0)
-surface_material_override/0 = null
 
 [node name="SM_Prop_Fence_06" parent="." unique_id=310159045 instance=ExtResource("52_focja")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -12, 0, 0)
-surface_material_override/0 = null
 
 [node name="SM_Prop_Fence_07" parent="." unique_id=981941108 instance=ExtResource("52_focja")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -10, 0, 0)
-surface_material_override/0 = null
 
 [node name="SM_Prop_Fence_08" parent="." unique_id=1582722019 instance=ExtResource("52_focja")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -8, 0, 0)
-surface_material_override/0 = null
 
 [node name="SM_Prop_Fence_11" parent="." unique_id=287560591 instance=ExtResource("52_focja")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -6, 0, 0)
-surface_material_override/0 = null
 
 [node name="SM_Prop_Fence_12" parent="." unique_id=1132536787 instance=ExtResource("52_focja")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4, 0, 0)
-surface_material_override/0 = null
 
 [node name="SM_Prop_Fence_13" parent="." unique_id=1022622482 instance=ExtResource("52_focja")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 4, 0, 0)
-surface_material_override/0 = null
 
 [node name="SM_Prop_Fence_14" parent="." unique_id=758082572 instance=ExtResource("52_focja")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 6, 0, 0)
-surface_material_override/0 = null
 
 [node name="SM_Prop_Fence_09" parent="." unique_id=1367821341 instance=ExtResource("52_focja")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8, 0, 0)
-surface_material_override/0 = null
 
 [node name="SM_Prop_Fence_10" parent="." unique_id=1679182458 instance=ExtResource("52_focja")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 10, 0, 0)
-surface_material_override/0 = null
 
 [node name="SM_Prop_Scanner_01" parent="." unique_id=1808900740 instance=ExtResource("53_b7nlq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9653664, 1.4737315, -15.861838)
