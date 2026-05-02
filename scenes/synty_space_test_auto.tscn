@@ -1,0 +1,2532 @@
+[gd_scene format=3 uid="uid://drox2xawf05xx"]
+
+[ext_resource type="Script" uid="uid://d0mk3ld5458mu" path="res://scripts/synty_test_auto.gd" id="1_00dwj"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/_SM_Attach_EVA_Cover_Glass_01.tscn" id="2_0ahsc"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/_SM_Wep_Rifle_Mag_01.tscn" id="3_y7h8i"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/_SM_Wep_Rifle_Trigger_01.tscn" id="4_p3hbx"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/_SM_Wep_Shotgun_Pump_01.tscn" id="5_n3nxg"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/_SM_Wep_Shotgun_Slide_01.tscn" id="6_prmh6"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/_SM_Wep_Shotgun_Trigger_01.tscn" id="7_6i3h7"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/Flame_Mesh_New.tscn" id="8_dvv61"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/Flame_Mesh_Square.tscn" id="9_2xkfq"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/FX_Laser_Trail_01.tscn" id="10_1l5av"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/MissleReady.tscn" id="11_ktl7v"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/Rings.tscn" id="12_l11yn"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Alien_01.tscn" id="13_yblv3"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Alien_01_SK_Chr_Alien_01.tscn" id="14_yolcu"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Attach_SpaceSoldier_Armour_01.tscn" id="15_ohfrf"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Attach_SpaceSoldier_Armour_01_SK_Chr_Attach_SpaceSoldier_Armour_01.tscn" id="16_v5jpc"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Attach_SpaceSoldier_Armour_01_SK_Chr_SpaceSoldier_Armored.tscn" id="17_niiki"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Attach_SpaceSoldier_Armour_01_SK_Chr_SpaceSoldier_Female_Armored.tscn" id="18_86f8o"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Attach_SpaceSoldier_Armour_01_SK_Chr_SpaceSoldier_Male_Armored.tscn" id="19_jmdep"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Attach_SpaceSoldier_Female_Helmet_01.tscn" id="20_6ve7t"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Attach_SpaceSoldier_Female_Helmet_01_SK_Chr_Attach_SpaceSoldier_Female_Helmet_01.tscn" id="21_axd1v"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Attach_SpaceSoldier_Female_Helmet_01_SK_Chr_SpaceSoldier_Female_Armored.tscn" id="22_ouduf"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Attach_SpaceSoldier_Female_Helmet_01_SK_Chr_SpaceSoldier_Female_Helmet.tscn" id="23_jbtwf"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Attach_SpaceSoldier_Male_Helmet_01.tscn" id="24_wcui7"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Attach_SpaceSoldier_Male_Helmet_01_SK_Chr_Attach_SpaceSoldier_Male_Helmet_01.tscn" id="25_b17nw"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Attach_SpaceSoldier_Male_Helmet_01_SK_Chr_SpaceSoldier_Armored.tscn" id="26_hbw5p"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Attach_SpaceSoldier_Male_Helmet_01_SK_Chr_SpaceSoldier_Male_Armored.tscn" id="27_5o51k"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Attach_SpaceSoldier_Male_Helmet_01_SK_Chr_SpaceSoldier_Male_Helmet.tscn" id="28_hlbn6"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_BR_BigAlien_01.tscn" id="29_miuaw"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_BR_BigAlien_01_SK_Chr_BR_BigAlien_01.tscn" id="30_1tkwr"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_BR_BigAlien_02.tscn" id="31_volta"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_BR_BigAlien_02_SK_Chr_BR_BigAlien_02.tscn" id="32_pj5vu"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_BR_EVA_Suit_01.tscn" id="33_i7mjp"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_BR_EVA_Suit_01_SK_Chr_BR_EVA_Suit_01.tscn" id="34_m6xsy"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_BR_EVA_Suit_01_SK_Chr_BR_EVA_Suit_01_old.tscn" id="35_yk52v"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_BR_SpaceSoldier_Male_01.tscn" id="36_u8nwa"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_BR_SpaceSoldier_Male_01_SK_Chr_BR_SpaceSoldier_Male_01.tscn" id="37_v6cro"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_BR_War_Robot_01.tscn" id="38_ihqun"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_BR_War_Robot_01_SK_Chr_BR_War_Robot_01.tscn" id="39_ujbj6"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_CrewCaptain_Female_01.tscn" id="40_1wauh"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_CrewCaptain_Female_01_SK_Chr_CrewCaptain_Female_01.tscn" id="41_hnikb"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_CrewCaptain_Male_01.tscn" id="42_st1ve"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_CrewCaptain_Male_01_SK_Chr_CrewCaptain_Male_01.tscn" id="43_mjqnb"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Crew_Female_01.tscn" id="44_g0dpv"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Crew_Female_01_SK_Chr_Crew_Female_01.tscn" id="45_ef2we"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Crew_Male_01.tscn" id="46_pi3st"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Crew_Male_01_SK_Chr_Crew_Male_01.tscn" id="47_t31kp"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Cryo_Female_01.tscn" id="48_a32nw"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Cryo_Female_01_SK_Chr_Cryo_Female_01.tscn" id="49_snkw6"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Cryo_Male_01.tscn" id="50_h84ix"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Cryo_Male_01_SK_Chr_Cryo_Male_01.tscn" id="51_qy50o"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Hunter_Female_01.tscn" id="52_ynk0a"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Hunter_Female_01_SK_Chr_Hunter_Female_01.tscn" id="53_m26cn"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Junker_Female_01.tscn" id="54_llcn6"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Junker_Female_01_SK_Chr_Junker_Female_01.tscn" id="55_88ob1"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Junker_Male_01.tscn" id="56_rtq22"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Junker_Male_01_SK_Chr_Junker_Male_01.tscn" id="57_wh4v1"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Medic_Male_01.tscn" id="58_2g0oo"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Medic_Male_01_SK_Chr_Medic_Male_01.tscn" id="59_qqjjl"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Psionic_01.tscn" id="60_jiv8l"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_Psionic_01_SK_Chr_Psionic_01.tscn" id="61_x7kca"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_RobotFemale_01.tscn" id="62_d8qpi"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_RobotFemale_01_SK_Chr_RobotFemale_01.tscn" id="63_ywbb8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_SpaceSoldier_Female_01.tscn" id="64_rep5c"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_SpaceSoldier_Female_01_SK_Chr_SpaceSoldier_Female_01.tscn" id="65_2yeka"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_SpaceSoldier_Female_01_SK_Chr_SpaceSoldier_Female_Armored.tscn" id="66_c3xu2"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_SpaceSoldier_Head_Female_01.tscn" id="67_h414o"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_SpaceSoldier_Head_Female_01_SK_Chr_SpaceSoldier_Head_Female_01.tscn" id="68_gm1nt"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_SpaceSoldier_Head_Male_01.tscn" id="69_xrahh"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_SpaceSoldier_Head_Male_01_SK_Chr_SpaceSoldier_Head_Male_01.tscn" id="70_u3o4x"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_SpaceSoldier_Head_Male_01_SK_Chr_SpaceSoldier_Male.tscn" id="71_plhdj"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_SpaceSoldier_Male_01.tscn" id="72_x37li"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_SpaceSoldier_Male_01_SK_Chr_SpaceSoldier_Female_Helmet.tscn" id="73_nstr7"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_SpaceSoldier_Male_01_SK_Chr_SpaceSoldier_Male.tscn" id="74_jxve3"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_SpaceSoldier_Male_01_SK_Chr_SpaceSoldier_Male_01.tscn" id="75_ctyex"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_SpaceSoldier_Male_01_SK_Chr_SpaceSoldier_Male_Armored.tscn" id="76_h3evr"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SK_Chr_SpaceSoldier_Male_01_SK_Chr_SpaceSoldier_Male_Helmet.tscn" id="77_o6bic"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Bridge_Ceiling_01.tscn" id="78_oh463"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Bridge_Chair_01.tscn" id="79_4bd81"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Bridge_Chair_Captain_01.tscn" id="80_54gds"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Bridge_Console_01.tscn" id="81_n87ue"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Bridge_Console_02.tscn" id="82_p0van"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Bridge_Console_Corner_01.tscn" id="83_2ectr"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Bridge_Console_Corner_02.tscn" id="84_m87wv"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Bridge_Floor_01.tscn" id="85_bkww0"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Bridge_Platform_01.tscn" id="86_exy3l"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Bridge_Rear_Wall_01.tscn" id="87_2g64t"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Bridge_Walls_01.tscn" id="88_cochn"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Bridge_Walls_Glass_01.tscn" id="89_6fa8u"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Bridge_Wall_Details_01.tscn" id="90_qn5dg"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Ceiling_01.tscn" id="91_k7dxy"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Ceiling_02.tscn" id="92_d43vw"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Ceiling_03.tscn" id="93_yiquh"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Ceiling_Pipes_Straight_01.tscn" id="94_thsga"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Ceiling_Pipes_Straight_Broken_01.tscn" id="95_gaixs"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Ceiling_Pipes_Turn_L_01.tscn" id="96_v0g03"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Ceiling_Pipes_Turn_R_01.tscn" id="97_fy31a"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Ceiling_Pipe_Junction_01.tscn" id="98_ys8vl"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Corridor_Double_Arch_01.tscn" id="99_aqtnq"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Corridor_Double_Arch_02.tscn" id="100_r5afn"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Corridor_Single_Arch_01.tscn" id="101_1mthy"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Corridor_Single_Arch_02.tscn" id="102_k7pwp"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Corridor_Single_Arch_03.tscn" id="103_n5ft8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Crew_Beds_01.tscn" id="104_y8v3h"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Crew_Blank_01.tscn" id="105_mgune"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Crew_Blank_02.tscn" id="106_r3asf"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Crew_Desk_01.tscn" id="107_qfbmt"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Crew_Kitchen_01.tscn" id="108_ff5jy"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Crew_Shower_01.tscn" id="109_3k5ch"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Crew_Shower_Door_01.tscn" id="110_l5qon"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Crew_Toilet_01.tscn" id="111_36ws8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Crew_Toilet_Door_01.tscn" id="112_hdwrb"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Door_01.tscn" id="113_x3hsj"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Door_02.tscn" id="114_y5f2a"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Door_03.tscn" id="115_yimsg"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Floor_01.tscn" id="116_u67rq"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Floor_02.tscn" id="117_xlw0s"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Floor_03.tscn" id="118_f5wue"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Floor_04.tscn" id="119_2who2"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Floor_05.tscn" id="120_4mtsf"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Floor_06.tscn" id="121_ine37"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Floor_07.tscn" id="122_c7vxi"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Floor_08.tscn" id="123_e70rl"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Floor_09.tscn" id="124_s25vk"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Floor_010.tscn" id="125_waonc"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Floor_011.tscn" id="126_a227c"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Floor_Large_Walkway_02.tscn" id="127_nn5xf"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Floor_Large_Walkway_Endcap_01.tscn" id="128_p2inl"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Floor_Small_01.tscn" id="129_bvcfh"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Floor_Small_02.tscn" id="130_xnts2"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Floor_Small_03.tscn" id="131_n0ony"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Floor_Small_04.tscn" id="132_802ju"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Floor_Small_05.tscn" id="133_c11qy"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Floor_Small_06.tscn" id="134_y07t0"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Floor_Small_07.tscn" id="135_jngt6"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Floor_Small_08.tscn" id="136_qy4s8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Floor_Small_Hand_Rail_01.tscn" id="137_ni6to"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Floor_Small_Hand_Rail_End_01.tscn" id="138_6qmsv"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Floor_Small_Hatch_01.tscn" id="139_wvv3o"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Floor_Small_Hatch_Door_01.tscn" id="140_t4pda"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Floor_Small_Walkway_02.tscn" id="141_6tbd8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Floor_Small_Walkway_Endcap_01.tscn" id="142_ulc21"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_HangerCeiling_01.tscn" id="143_n1fs1"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_HangerDoor_01.tscn" id="144_gmlun"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_HangerDoor_01_SM_Bld_Hangar_01.tscn" id="145_qi6l3"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_HangerDoor_02.tscn" id="146_bo70p"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_HangerDoor_02_SM_Bld_Hangar_01.tscn" id="147_e56la"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_HangerExteriorShip_01.tscn" id="148_pcr02"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_HangerExteriorShip_02.tscn" id="149_jsi2d"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_HangerFloor_01.tscn" id="150_lui4u"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_HangerGlass_03.tscn" id="151_cqjo1"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_HangerPlatform_01.tscn" id="152_sqj0r"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Hanger_01.tscn" id="153_touu7"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Hanger_02.tscn" id="154_54dam"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_House_Interior_Floor_01.tscn" id="155_41gr5"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Hydroponics_BaseFloor_01.tscn" id="156_qkimy"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Hydroponics_Ladder_01.tscn" id="157_js0kx"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Hydroponics_Roof_01.tscn" id="158_weuiq"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Hydroponics_Roof_RingLights_01.tscn" id="159_rwjfp"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Hydroponics_UpperFloor_01.tscn" id="160_hyr2p"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Hydroponics_UpperWalkway_01.tscn" id="161_rloy7"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Hydroponics_WallPlantsLower_L_01.tscn" id="162_gfe5w"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Hydroponics_WallPlantsLower_R_01.tscn" id="163_gl027"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Hydroponics_WallPlantsUpper_L_01.tscn" id="164_4teq8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Hydroponics_WallPlantsUpper_R_01.tscn" id="165_cieci"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Landing_Platform_01.tscn" id="166_piqlf"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Lift_01.tscn" id="167_6ysma"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Lift_Door_01.tscn" id="168_kubk8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Lift_Door_02.tscn" id="169_hfajs"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Lift_Wall_01.tscn" id="170_cmkvv"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Lift_Wall_Door_01.tscn" id="171_lm3uo"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Lift_Wall_Door_02.tscn" id="172_83coa"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Roof_Exterior_01.tscn" id="173_8hbhs"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Roof_Exterior_02.tscn" id="174_ohibo"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Roof_Exterior_03.tscn" id="175_rqqmp"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_01.tscn" id="176_2blw6"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_01_Alt.tscn" id="177_gvdg3"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_02.tscn" id="178_jsoyo"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_03.tscn" id="179_w7whd"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_04.tscn" id="180_q10vg"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_04_Alt.tscn" id="181_5fka6"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_05.tscn" id="182_pvynt"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_06.tscn" id="183_w71xt"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Corner_Pillar_01.tscn" id="184_hv6ge"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Corner_Pillar_02.tscn" id="185_klfw6"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Corner_Pillar_03.tscn" id="186_plxtt"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Corner_Pillar_04.tscn" id="187_f10yk"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Corner_Pillar_05.tscn" id="188_ftlp0"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Corner_Pillar_Wide_01.tscn" id="189_ptwg5"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Corner_Pillar_Wide_02.tscn" id="190_ouny2"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Corner_Pillar_Wide_03.tscn" id="191_oc46u"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Corner_Pillar_Wide_04.tscn" id="192_2h80r"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Corner_Pillar_Wide_05.tscn" id="193_vqcl0"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Doorframe_01.tscn" id="194_fj2so"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Doorframe_02.tscn" id="195_11y82"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Doorframe_03.tscn" id="196_cnskd"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Doorframe_04.tscn" id="197_akfng"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Doorframe_05.tscn" id="198_fnamh"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Doorframe_06.tscn" id="199_vpmau"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Doorframe_Outer_01.tscn" id="200_brh12"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Doorframe_Outer_02.tscn" id="201_4gqb4"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Door_01.tscn" id="202_8eo8y"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Door_01_SM_Bld_Wall_Doorframe_02.tscn" id="203_mj31r"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Door_01_SM_Bld_Wall_Doorframe_03.tscn" id="204_rbv6i"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Door_01_SM_Bld_Wall_Doorframe_04.tscn" id="205_v65ru"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Door_01_SM_Bld_Wall_Doorframe_05.tscn" id="206_f7a3a"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Door_02.tscn" id="207_oxm1h"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Door_06.tscn" id="208_oatdw"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_EscPod_Hatch_01.tscn" id="209_k6jrm"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Esc_Hatch_Door_01.tscn" id="210_uxr0a"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Exterior_01.tscn" id="211_yh4s2"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Exterior_02.tscn" id="212_emx8k"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Exterior_03.tscn" id="213_55mjt"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Exterior_04.tscn" id="214_t3blh"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Exterior_Pillar_01.tscn" id="215_4y3ak"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Exterior_Window_01.tscn" id="216_0kgy8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Exterior_Window_02.tscn" id="217_l15km"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Glass_04.tscn" id="218_qbrb3"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Glass_04_Alt.tscn" id="219_6e564"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Mechanical_01.tscn" id="220_h1tan"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Mechanical_02.tscn" id="221_6oe4l"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Pillar_01.tscn" id="222_wewum"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Pillar_02.tscn" id="223_4dub4"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Pillar_03.tscn" id="224_7bdxx"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Pillar_04.tscn" id="225_13m6l"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Pillar_05.tscn" id="226_bnf27"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Pillar_06.tscn" id="227_5xcxd"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Pillar_07.tscn" id="228_qb5wi"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Pods_01.tscn" id="229_gut3j"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Pods_Glass_01.tscn" id="230_myr52"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Bld_Wall_Tube_01.tscn" id="231_yiwrc"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Chr_Alien_01.tscn" id="232_0y4h3"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Chr_Attach_Crew_Female_Hair_01.tscn" id="233_3jvnl"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Chr_Attach_Crew_Male_Hair_01.tscn" id="234_aouwe"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Chr_Attach_EVA_Cover_01.tscn" id="235_k4whl"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Chr_Attach_EVA_Cover_Clear_01.tscn" id="236_x8sqk"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Chr_Attach_EVA_Female_Head_Blank_01.tscn" id="237_nwbf5"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Chr_Attach_EVA_Female_Head_Scaled_01.tscn" id="238_edraa"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Chr_Attach_EVA_Male_Head_Blank_01.tscn" id="239_xka2n"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Chr_Attach_EVA_Male_Head_Scaled_01.tscn" id="240_davkn"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Chr_Attach_Hat_Captain_01.tscn" id="241_fy7fy"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Chr_Attach_Hat_Crew_01.tscn" id="242_pxog8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Chr_Attach_Hunter_Female_Hair_01.tscn" id="243_l6fgt"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Chr_Attach_Junker_Hair_Female_01.tscn" id="244_6qkld"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Chr_Attach_Junker_Headset_01.tscn" id="245_u3eta"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Chr_Attach_Junker_Helmet_01.tscn" id="246_7bhf6"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Chr_Attach_Junker_Helmet_Glass_01.tscn" id="247_33j24"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Chr_Attach_Male_Hair_01.tscn" id="248_xek5u"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Chr_Attach_Male_Hair_02.tscn" id="249_75df7"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Chr_Attach_Male_Hair_03.tscn" id="250_cv0sx"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Chr_Attach_Male_Hair_05.tscn" id="251_e4okc"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Chr_Attach_Male_Hair_06.tscn" id="252_g6x3c"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Chr_Attach_Male_Hair_07.tscn" id="253_yavyc"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Chr_Attach_Mask_Medic_01.tscn" id="254_2a5n2"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Chr_Attach_SpaceHelmet_01.tscn" id="255_rf0px"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Chr_Attach_SpaceHelmet_Glass_01.tscn" id="256_qvbin"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Astroid_01.tscn" id="257_l5wgg"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Astroid_02.tscn" id="258_pdv2m"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Astroid_03.tscn" id="259_eih58"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Astroid_04.tscn" id="260_xgt0g"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Astroid_05.tscn" id="261_2vpnv"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Astroid_Field_01.tscn" id="262_2o4e8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Astroid_Field_02.tscn" id="263_dq2j4"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Astroid_Field_LowDetail_01.tscn" id="264_ibmhy"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Astroid_Field_LowDetail_02.tscn" id="265_yun5l"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Astroid_Holes_01.tscn" id="266_8yu8j"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Astroid_Holes_02.tscn" id="267_gqbn4"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Astroid_Holes_03.tscn" id="268_fv3n7"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Astroid_Holes_04.tscn" id="269_5y58h"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Astroid_Holes_05.tscn" id="270_fkahd"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Astroid_Large_01.tscn" id="271_is7bb"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Astroid_Large_02.tscn" id="272_omolw"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Astroid_Large_Holes_01.tscn" id="273_qqjb2"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Astroid_Large_Holes_02.tscn" id="274_3yoje"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Debris_Pipe_01.tscn" id="275_gkpik"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Debris_Shell_01.tscn" id="276_f3use"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Debris_Shell_02.tscn" id="277_q5it4"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Debris_Shell_03.tscn" id="278_lkvbv"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Debris_Shell_04.tscn" id="279_1jln6"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Debris_Shell_05.tscn" id="280_6g0mt"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Debris_Shell_06.tscn" id="281_dsxev"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Debris_Shell_07.tscn" id="282_o43b3"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Debris_Shell_08.tscn" id="283_582oo"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Debris_Structure_01.tscn" id="284_difw0"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Debris_Structure_02.tscn" id="285_ckm00"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Debris_Structure_03.tscn" id="286_r3aaa"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Rubble_Pebbles_01.tscn" id="287_68b8d"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Rubble_Pebbles_02.tscn" id="288_es5at"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Rubble_Pile_01.tscn" id="289_ylcnt"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Env_Rubble_Pile_02.tscn" id="290_772i3"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_FX_LightBlocker_Cube_01.tscn" id="291_nf006"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_FX_LightBlocker_Cube_02.tscn" id="292_of4l4"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_FX_LightBlocker_Cube_03.tscn" id="293_4qxso"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Hud_Arrows_01.tscn" id="294_s53gk"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Hud_Barrier_01.tscn" id="295_rc2ve"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Hud_Barrier_02.tscn" id="296_el4c3"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Hud_Barrier_03.tscn" id="297_bdcir"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Hud_Box_01.tscn" id="298_qfi02"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Hud_Box_02.tscn" id="299_ogpgc"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Hud_Box_03.tscn" id="300_iwhuu"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Hud_Reticle_01.tscn" id="301_2jso5"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Hud_Reticle_02.tscn" id="302_6qbar"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Hud_Reticle_03.tscn" id="303_2uqxd"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Hud_Reticle_04.tscn" id="304_e3gtr"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Hud_Reticle_05.tscn" id="305_vww4f"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Hud_Reticle_06.tscn" id="306_evdub"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Hud_Reticle_07.tscn" id="307_2kpqy"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Hud_Reticle_08.tscn" id="308_f0lrc"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Hud_Reticle_09.tscn" id="309_fvpep"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Hud_Rings_01.tscn" id="310_xgbme"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Hud_Rings_02.tscn" id="311_tjojm"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Hud_Rings_04.tscn" id="312_8s3g0"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Hud_Screen_Backing_01.tscn" id="313_u60id"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Hud_Text_01.tscn" id="314_s0rc8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Hud_Text_02.tscn" id="315_2mwyn"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Hud_Text_03.tscn" id="316_d8ueh"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Hud_Text_04.tscn" id="317_8nmb6"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Hud_Text_Arrow_01.tscn" id="318_6ig3p"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_LightRay_Cube.tscn" id="319_8hjw8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_LightRay_Round.tscn" id="320_d6n5r"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Pebble_Debris_01.tscn" id="321_uf7iu"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Pebble_Debris_02.tscn" id="322_pp13k"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Pebble_Debris_03.tscn" id="323_wojn0"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_AirVent_Large_01.tscn" id="324_ltu8y"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_AirVent_Small_01.tscn" id="325_3osyi"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Antenna_01.tscn" id="326_7m2cr"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Barrel_01.tscn" id="327_rwer0"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Battery_01.tscn" id="328_m6k87"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Battery_02.tscn" id="329_7ldjv"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Battery_03.tscn" id="330_8gg2j"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Bed_01.tscn" id="331_e6tw8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Bed_02.tscn" id="332_vhwnj"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Bed_03.tscn" id="333_nm7ub"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Bed_Medical_01.tscn" id="334_e0dh0"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Bed_Medical_Slide_01.tscn" id="335_jaw68"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Buttons_01.tscn" id="336_hw8nb"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Buttons_02.tscn" id="337_duhpx"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Buttons_03.tscn" id="338_uyg73"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Buttons_04.tscn" id="339_t4sb6"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Buttons_05.tscn" id="340_te0n1"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Buttons_06.tscn" id="341_yt1yi"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Buttons_07.tscn" id="342_vo6sk"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Buttons_08.tscn" id="343_dvt1f"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Buttons_09.tscn" id="344_bqh27"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Buttons_10.tscn" id="345_6yy3q"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Buttons_11.tscn" id="346_pteaq"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Buttons_12.tscn" id="347_qec52"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Buttons_13.tscn" id="348_iv353"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Buttons_14.tscn" id="349_uuoif"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Cart_01.tscn" id="350_cym0x"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Cart_Filled_01.tscn" id="351_hsnv5"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_CenterTube_01.tscn" id="352_bqwyv"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_CenterTube_02.tscn" id="353_38fgx"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_CenterTube_Glass_01.tscn" id="354_p2ry3"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_CenterTube_Glass_02.tscn" id="355_ysxdm"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Chr_Female_Cryo_01.tscn" id="356_hxoyt"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Chr_Female_Cryo_02.tscn" id="357_s6x2m"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Chr_Male_Cryo_01.tscn" id="358_5uxwu"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Chr_Male_Cryo_02.tscn" id="359_cls75"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_ControllPanel_01.tscn" id="360_oc2or"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_ControllPanel_02.tscn" id="361_80lsq"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_ControllPanel_03.tscn" id="362_ypasn"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_ControllPanel_04.tscn" id="363_6571k"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_CornerSeat_01.tscn" id="364_el4nm"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_CornerTable_01.tscn" id="365_tshpw"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Crate_01.tscn" id="366_4dlk4"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Crate_02.tscn" id="367_r844b"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Crate_Ammo_01.tscn" id="368_6xqf5"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Crate_Ammo_02.tscn" id="369_3dntl"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Crate_health_01.tscn" id="370_18l6e"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Crate_health_02.tscn" id="371_sh44s"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Crate_Lid_01.tscn" id="372_07dfg"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Crate_Shield_01.tscn" id="373_iwr66"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Crate_Shield_02.tscn" id="374_64o0r"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Crate_Wide_01.tscn" id="375_3hff2"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Crate_Wide_Lid_01.tscn" id="376_4xdnb"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_CryoBed_01.tscn" id="377_2f47v"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_CryoBed_Lid_01.tscn" id="378_lx54k"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_CryoBed_Lid_Glass_01.tscn" id="379_6nivr"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_DeadZub_01.tscn" id="380_cnei0"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Decontamination_Shower_01.tscn" id="381_8p4n4"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Desk_End_01.tscn" id="382_a6hud"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Desk_Small_01.tscn" id="383_8m1im"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Airvent_01.tscn" id="384_veau8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Box_01.tscn" id="385_lqm1i"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Box_02.tscn" id="386_1tvuo"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Box_03.tscn" id="387_k45mb"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Box_04.tscn" id="388_6i440"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Box_05.tscn" id="389_e5jj7"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Box_06.tscn" id="390_136t0"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Button_01.tscn" id="391_86871"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_CeilingBox_01.tscn" id="392_48gih"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_CeilingBox_02.tscn" id="393_15kjj"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_CeilingBox_03.tscn" id="394_xf8em"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Handle_01.tscn" id="395_kdmwh"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Handle_02.tscn" id="396_umocy"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Keypad_01.tscn" id="397_lvd3r"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Lights_01.tscn" id="398_x0vf2"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Lights_02.tscn" id="399_wm3tm"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Lights_03.tscn" id="400_wl3fg"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Machine_01.tscn" id="401_yxaoy"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Panel_01.tscn" id="402_68ml7"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Panel_Broken_01.tscn" id="403_5iepu"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Panel_Fixed_01.tscn" id="404_2rnwv"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Pipes_01.tscn" id="405_qi8qf"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Pipes_02.tscn" id="406_m5ixp"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Pipes_03.tscn" id="407_we3u4"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Pipe_01.tscn" id="408_eqiwj"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Pipe_02.tscn" id="409_xg1tm"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Pipe_Broken_01.tscn" id="410_25lkd"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Pipe_Corner_01.tscn" id="411_vg3ht"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Pipe_Pillar_01.tscn" id="412_iq14f"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Pipe_Straight_01.tscn" id="413_w3qls"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Struts_01.tscn" id="414_y4v3n"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Struts_02.tscn" id="415_nwqt1"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_SynCola_01.tscn" id="416_lye0w"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_SynCola_02.tscn" id="417_mab0l"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Tank_01.tscn" id="418_egyjb"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Tank_02.tscn" id="419_4l1l7"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Vent_01.tscn" id="420_jhvgd"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Wirebox_01.tscn" id="421_yiccw"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Wire_01.tscn" id="422_gosi2"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Wire_02.tscn" id="423_4ptdq"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Wire_03.tscn" id="424_tnrvh"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Wire_04.tscn" id="425_n7u3n"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Detail_Wire_05.tscn" id="426_wn7rs"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_EnergyPort_01.tscn" id="427_525nx"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Engine_Construction_01.tscn" id="428_vqt8y"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_EscapePod_Door_01.tscn" id="429_jpbb8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_EscapePod_Door_02.tscn" id="430_o8uwk"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_EscapePod_Hatch_Large_01.tscn" id="431_obajk"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_EscapePod_Hatch_Small_01.tscn" id="432_ltwcw"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_FoodPacket_01.tscn" id="433_c8pnr"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_FoodPacket_02.tscn" id="434_ht2ph"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_FoodPacket_03.tscn" id="435_n4ofd"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_FoodPacket_04.tscn" id="436_22yk4"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_FoodTray_01.tscn" id="437_7uwee"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_FoodTray_02.tscn" id="438_hvjrb"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_FoodTray_03.tscn" id="439_alr6l"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Greeble_Cube_01.tscn" id="440_2m7u3"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Greeble_Cube_02.tscn" id="441_v8k64"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Greeble_Panel_01.tscn" id="442_k12c7"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Greeble_Panel_02.tscn" id="443_0pnts"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Greeble_Panel_03.tscn" id="444_mmund"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Greeble_Panel_04.tscn" id="445_5q71u"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Greeble_Panel_05.tscn" id="446_rmecy"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Greeble_Panel_06.tscn" id="447_mtyyk"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Greeble_Panel_07.tscn" id="448_b08at"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Handle_01.tscn" id="449_fid14"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_HandScanner_01.tscn" id="450_xrog6"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Hose_01.tscn" id="451_qr5nv"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Hose_02.tscn" id="452_ub6l7"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Hose_03.tscn" id="453_kxe27"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Hose_04.tscn" id="454_qmp0j"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Joystick_01.tscn" id="455_6ukne"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Keycard_01.tscn" id="456_2whyk"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Keycard_02.tscn" id="457_cdqk0"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Keycard_03.tscn" id="458_s5g8n"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Ladder_01.tscn" id="459_a5bau"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Ladder_Handles_01.tscn" id="460_c2j3t"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Light_Panel_01.tscn" id="461_kw3w4"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Light_Panel_02.tscn" id="462_v03va"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Light_Panel_03.tscn" id="463_d1ri4"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Light_Panel_04.tscn" id="464_4ytb5"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Light_Panel_05.tscn" id="465_hcjfu"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Light_Small_01.tscn" id="466_5m8bg"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Light_Small_02.tscn" id="467_xpwkw"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Light_Small_03.tscn" id="468_0vhcj"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Light_Small_04.tscn" id="469_wakit"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Light_Small_05.tscn" id="470_mrs60"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Light_Small_06.tscn" id="471_rmx2g"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Light_Small_07.tscn" id="472_8gjne"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Light_Small_08.tscn" id="473_g4v2q"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_MapTable_01.tscn" id="474_y8hht"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_MapTable_Top_01.tscn" id="475_xje7q"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_MedicalArms_01.tscn" id="476_c01kb"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Medical_Cart_01.tscn" id="477_dcuwb"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Medical_Cart_02.tscn" id="478_vnwg7"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Medical_Cart_Bare_01.tscn" id="479_tmygi"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Medical_Isolator_01.tscn" id="480_e7yrk"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Medical_Isolator_Glass_01.tscn" id="481_pl62i"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Medical_Machine_01.tscn" id="482_7iew6"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Medical_Scanner_01.tscn" id="483_m826r"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Medical_Tube_01.tscn" id="484_xlloi"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Medical_Tube_Glass_01.tscn" id="485_06n4b"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Mine_01.tscn" id="486_4uu5s"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Missile_01.tscn" id="487_0mg0c"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Missile_01_SM_Veh_MissleRack_01.tscn" id="488_a61gq"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Missile_02.tscn" id="489_0yg81"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Missile_02_SM_Veh_MissleRack_01.tscn" id="490_on2gc"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Missile_03.tscn" id="491_364yv"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Missile_03_SM_Veh_MissleRack_01.tscn" id="492_720pf"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Missile_04.tscn" id="493_cawxl"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Missile_04_SM_Veh_MissleRack_01.tscn" id="494_hq4ur"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Missile_05.tscn" id="495_eic4d"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Missile_06.tscn" id="496_d14h0"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Missile_07.tscn" id="497_mqc72"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Oxygen_Tank.tscn" id="498_p4row"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Oxygen_Tank_Large.tscn" id="499_xxe3h"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Oxygen_Tank_Small.tscn" id="500_a6vo8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Pad_01.tscn" id="501_5fylq"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Panel_01.tscn" id="502_05eyd"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Pillar_Detail_01.tscn" id="503_shsi1"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Plant_Container_01.tscn" id="504_k45ln"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Plant_Container_Shelf_01.tscn" id="505_fkom1"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Plant_Vase_01.tscn" id="506_bf14k"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Plant_Vase_02.tscn" id="507_sdufy"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Radar_Panel_01.tscn" id="508_ua42v"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Radar_Panel_02.tscn" id="509_13spb"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Satellite_01.tscn" id="510_wp1ri"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Satellite_02.tscn" id="511_tfx3a"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Satellite_03.tscn" id="512_bsm4p"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Satellite_04.tscn" id="513_3jllv"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Satellite_Stand_01.tscn" id="514_s48lk"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Screen_01.tscn" id="515_uvu8v"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Screen_02.tscn" id="516_0dasf"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Screen_03.tscn" id="517_5o72m"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Screen_04.tscn" id="518_348ao"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Screen_05.tscn" id="519_knuss"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Screen_06.tscn" id="520_h2d8a"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Screen_07.tscn" id="521_kmrh4"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Screen_08.tscn" id="522_o0w0d"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Screen_09.tscn" id="523_2xytn"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Screen_10.tscn" id="524_x0olw"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Screen_11.tscn" id="525_jiy7f"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Screen_Small_01.tscn" id="526_fpfke"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Screen_Small_02.tscn" id="527_246o2"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Sink_01.tscn" id="528_ux758"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Solar_Hex_01.tscn" id="529_2mmh5"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_SpaceWalk_End_01.tscn" id="530_2bjeq"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_SpaceWalk_Tube_01.tscn" id="531_08n7o"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_SquareTable_01.tscn" id="532_nuomn"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_StairsPlatform_01.tscn" id="533_yqowd"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_StairsPlatform_02.tscn" id="534_tb70w"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Stairs_01.tscn" id="535_reeng"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Stairs_02.tscn" id="536_3yiso"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Stairs_03.tscn" id="537_veea6"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Stairs_04.tscn" id="538_tod7x"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Stool_01.tscn" id="539_fsckm"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Stool_02.tscn" id="540_2kohp"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Table_01.tscn" id="541_3nbgv"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_TestTubes_01.tscn" id="542_8kvj6"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Test_Tube_01.tscn" id="543_w2t2j"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Test_Tube_02.tscn" id="544_2nfuc"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Test_Tube_Glass_01.tscn" id="545_phtbl"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Test_Tube_Glass_02.tscn" id="546_f8qyb"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Toilet_01.tscn" id="547_bjidx"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Base_Double_01.tscn" id="548_by080"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Base_Double_02.tscn" id="549_8rin5"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Base_Double_03.tscn" id="550_ansoy"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Base_Double_04.tscn" id="551_aboji"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Base_Double_05.tscn" id="552_bi311"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Base_Double_06.tscn" id="553_eyuqq"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Base_Double_07.tscn" id="554_6vbid"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Base_Double_08.tscn" id="555_ig0d1"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Base_Double_09.tscn" id="556_0ysuu"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Base_Double_010.tscn" id="557_lgj5y"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Base_Single_01.tscn" id="558_uful4"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Base_Single_02.tscn" id="559_745kb"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Base_Single_03.tscn" id="560_btiu8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Base_Single_04.tscn" id="561_th7n5"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Base_Single_05.tscn" id="562_08mb6"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Base_Single_06.tscn" id="563_3lujo"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Base_Single_07.tscn" id="564_w3eoh"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Base_Single_08.tscn" id="565_ttrv4"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Base_Single_09.tscn" id="566_sb37a"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Base_Single_010.tscn" id="567_fdn40"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Gattling_Barrel_01.tscn" id="568_d2n5e"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Gattling_Barrel_01_L.tscn" id="569_nqv85"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Gattling_Barrel_01_R.tscn" id="570_n2wlv"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Gattling_Barrel_02.tscn" id="571_qurlx"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Gattling_Barrel_02_L.tscn" id="572_ux6hb"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Gattling_Barrel_02_R.tscn" id="573_a7tgi"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Gattling_Barrel_03.tscn" id="574_nnfy1"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Gattling_Barrel_03_L.tscn" id="575_x5btk"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Gattling_Barrel_03_R.tscn" id="576_yeiwm"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Gattling_Base_01.tscn" id="577_nhp12"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Gattling_Base_02.tscn" id="578_gare8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Gattling_Base_03.tscn" id="579_t3fb8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Gattling_Base_Double_01.tscn" id="580_fx42o"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Gattling_Base_Double_02.tscn" id="581_piqcu"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Gattling_Base_Double_03.tscn" id="582_vcbsn"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Large_01.tscn" id="583_hlu76"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Large_02.tscn" id="584_ijud8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Large_Barrel_01.tscn" id="585_11pvr"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Large_Barrel_Double_01.tscn" id="586_pkgtt"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Large_Top_01.tscn" id="587_pw6vr"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Large_Top_Double_01.tscn" id="588_0prmr"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Laser_Barrel_01.tscn" id="589_sjsw4"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Laser_Barrel_02.tscn" id="590_ixecc"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Laser_Barrel_03.tscn" id="591_qvgay"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Laser_Barrel_Double_01.tscn" id="592_hteol"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Laser_Barrel_Double_02.tscn" id="593_snjh3"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Laser_Barrel_Double_03.tscn" id="594_4t27k"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Laser_Base_01.tscn" id="595_iefcd"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Laser_Base_02.tscn" id="596_klhla"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Laser_Base_03.tscn" id="597_2vx8f"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Laser_Base_Double_01.tscn" id="598_wxheu"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Laser_Base_Double_02.tscn" id="599_u7ujv"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Laser_Base_Double_03.tscn" id="600_f2ctx"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_MissileLarge_Base_01.tscn" id="601_wf40q"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_MissileLarge_Base_Double_01.tscn" id="602_0kjdx"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Missile_Barrel_01.tscn" id="603_1wmsa"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Missile_Barrel_02.tscn" id="604_ei4v5"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Missile_Barrel_03.tscn" id="605_32eoq"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Missile_Barrel_Double_01.tscn" id="606_jjtr0"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Missile_Barrel_Double_02.tscn" id="607_q0biv"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Missile_Barrel_Double_03.tscn" id="608_sq4d6"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Missile_Base_01.tscn" id="609_lblqr"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Missile_Base_02.tscn" id="610_1mv7i"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Missile_Base_03.tscn" id="611_g8kop"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Missile_Base_Double_01.tscn" id="612_bfx8r"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Missile_Base_Double_02.tscn" id="613_yv1op"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Missile_Base_Double_03.tscn" id="614_7p6hu"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Small_Ceiling_01.tscn" id="615_bnpyl"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Small_Floor_01.tscn" id="616_u7ah2"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Small_Gun_Ceiling_01.tscn" id="617_nfgxy"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Small_Gun_Floor_01.tscn" id="618_rbuvr"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Small_Pivot_Ceiling_01.tscn" id="619_i8ejx"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Turret_Small_Pivot_Floor_01.tscn" id="620_pu1h0"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Wall_Panel_Small_01.tscn" id="621_2bn60"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Wall_Panel_Small_02.tscn" id="622_kld2i"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Wall_Panel_Small_03.tscn" id="623_4r110"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Wires_01.tscn" id="624_afgag"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Wires_02.tscn" id="625_i7810"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Wires_03.tscn" id="626_ml7yg"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Wires_04.tscn" id="627_f4qur"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Prop_Wires_05.tscn" id="628_5dwug"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Bomber_01.tscn" id="629_n07nm"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Bomber_02.tscn" id="630_xb1nq"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Bomber_03.tscn" id="631_5gum8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Bomber_04.tscn" id="632_3kny4"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Colossal_01.tscn" id="633_0t3st"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Cruiser_01.tscn" id="634_m5e8b"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Cruiser_02.tscn" id="635_q1m83"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Cruiser_03.tscn" id="636_dt5tm"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Fighter_01.tscn" id="637_wa1yo"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Fighter_02.tscn" id="638_2gw30"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Fighter_03.tscn" id="639_4ewga"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Fighter_04.tscn" id="640_dma3j"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Fighter_05.tscn" id="641_uth6b"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Fighter_Heavy_01.tscn" id="642_c4oal"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Fighter_Heavy_02.tscn" id="643_2v7xd"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Fighter_Heavy_03.tscn" id="644_xhhpl"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Fighter_Heavy_04.tscn" id="645_xkp58"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Galactic_Carrier_01.tscn" id="646_hcs0u"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Galactic_Carrier_Armor_01.tscn" id="647_tnx7b"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Galactic_Carrier_Armor_Gun_01.tscn" id="648_nguck"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Galactic_Carrier_Armor_Gun_02.tscn" id="649_1m1lq"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Galactic_Carrier_Armor_Gun_03.tscn" id="650_dovdq"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Galactic_Carrier_Armor_Gun_04.tscn" id="651_8sfqe"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Galactic_Carrier_Armor_Gun_05.tscn" id="652_ionq1"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Galactic_Carrier_Fin_L_01.tscn" id="653_4u8do"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Galactic_Carrier_Fin_L_02.tscn" id="654_pig4f"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Galactic_Carrier_Fin_R_01.tscn" id="655_0p6vg"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Galactic_Carrier_Fin_R_02.tscn" id="656_7v26n"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Galactic_Carrier_Gun_01.tscn" id="657_b2pqa"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Galactic_Carrier_Gun_02.tscn" id="658_oycxl"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Galactic_Carrier_Gun_03.tscn" id="659_51hnx"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Galactic_Carrier_Gun_04.tscn" id="660_7pyjk"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Galactic_Carrier_Gun_05.tscn" id="661_a7tsy"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Galactic_Carrier_Gun_06.tscn" id="662_pmesy"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Galactic_Carrier_Gun_07.tscn" id="663_r8six"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Galactic_Carrier_Gun_08.tscn" id="664_jv4xx"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Galactic_Carrier_Gun_09.tscn" id="665_7wuat"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Galactic_Carrier_Gun_10.tscn" id="666_vnb2k"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Galactic_Carrier_Gun_11.tscn" id="667_tpfv8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Galactic_Carrier_Gun_12.tscn" id="668_56rr0"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Galactic_Carrier_Gun_13.tscn" id="669_08gxn"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Galactic_Carrier_Gun_14.tscn" id="670_0io2e"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Galactic_Carrier_Gun_15.tscn" id="671_n5i1r"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Galactic_Carrier_Gun_16.tscn" id="672_pdm3a"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Massive_Transport_01.tscn" id="673_1q7e5"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Station_01.tscn" id="674_dkjaa"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Station_02.tscn" id="675_kekan"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Station_03.tscn" id="676_xr3q6"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Station_04.tscn" id="677_3nrxn"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Station_05.tscn" id="678_32t1k"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Station_06.tscn" id="679_4xj34"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Stealth_01.tscn" id="680_dapy7"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Stealth_02.tscn" id="681_u37y4"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Stealth_03.tscn" id="682_1fjyc"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Stealth_04.tscn" id="683_aiaph"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Stealth_05.tscn" id="684_i7jly"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Transport_01.tscn" id="685_wtl4u"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Transport_CargoPod_01.tscn" id="686_k6fxj"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Transport_CargoPod_02.tscn" id="687_52dy0"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Transport_CargoPod_03.tscn" id="688_213kk"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Transport_CargoPod_04.tscn" id="689_3c2dr"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Transport_CargoPod_05.tscn" id="690_pp5a8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Transport_CargoPod_06.tscn" id="691_f66s3"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Transport_CargoPod_07.tscn" id="692_rq165"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Ship_Transport_CargoPod_08.tscn" id="693_31gfc"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Ammo_01.tscn" id="694_sldc7"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Arrow_01.tscn" id="695_x63yu"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Arrow_02.tscn" id="696_i1j6b"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Battery_01.tscn" id="697_6isha"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Cog_01.tscn" id="698_t4hwa"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Communication_01.tscn" id="699_4wd7u"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Electric_01.tscn" id="700_1h20y"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Electric_02.tscn" id="701_g6y0j"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Fire_01.tscn" id="702_xg17q"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Fix_01.tscn" id="703_lc2ov"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Heart_01.tscn" id="704_c3xll"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Leaf_01.tscn" id="705_jxkll"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Medical_02.tscn" id="706_lr8ft"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Medical_03.tscn" id="707_f6gj4"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Nuclear_01.tscn" id="708_2mtyc"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Number_01.tscn" id="709_pkimw"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Number_02.tscn" id="710_ajcui"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Number_03.tscn" id="711_wopq5"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Number_04.tscn" id="712_qph1p"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Number_05.tscn" id="713_u74vu"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Number_06.tscn" id="714_uniuq"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Number_07.tscn" id="715_rmaov"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Number_08.tscn" id="716_0mddg"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Number_09.tscn" id="717_puh7p"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Planet_01.tscn" id="718_7vidb"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Plant_01.tscn" id="719_gqnr4"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Rocket_01.tscn" id="720_p1qk0"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Science_01.tscn" id="721_rgcmj"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Shield_01.tscn" id="722_myb1f"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Ship_01.tscn" id="723_418io"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Toxic_01.tscn" id="724_52sew"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Warning_01.tscn" id="725_eo7ba"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_SignBorder_Water_01.tscn" id="726_vk3tq"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Sign_AirLock_01.tscn" id="727_mrggu"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Sign_Bridge_01.tscn" id="728_qj1q8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Sign_CrewQuarters_01.tscn" id="729_i8sad"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Sign_EngineRoom_01.tscn" id="730_a18m8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Sign_EscpapePod_01.tscn" id="731_f4xoo"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Sign_Exit_02.tscn" id="732_gja4g"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Sign_Hanger_01.tscn" id="733_gg6au"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Sign_Hydroponics_01.tscn" id="734_hu00k"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Sign_Hydroponics_02.tscn" id="735_4wtk5"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Sign_Kitchen_01.tscn" id="736_2a4om"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Sign_LoadingBay_01.tscn" id="737_yxuvc"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Sign_LockerRoom_01.tscn" id="738_qkggh"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Sign_MedicalBay_01.tscn" id="739_7b41a"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Sign_ScienceLab_01.tscn" id="740_d0j5g"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Tunnel_Mesh.tscn" id="741_r6dq3"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_01.tscn" id="742_bp0sk"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_02.tscn" id="743_3bi8s"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_03.tscn" id="744_csghy"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_04.tscn" id="745_hnt3g"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Beacon_01.tscn" id="746_4d5qo"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Drone_Attach_01.tscn" id="747_ikmkg"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Drone_Repair_01.tscn" id="748_xwgdd"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_EscapePod_Large_01.tscn" id="749_7v2hb"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_EscapePod_Small_01.tscn" id="750_8bune"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_MissleRack_01.tscn" id="751_61rn8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Body_01.tscn" id="752_186gj"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Body_02.tscn" id="753_i3pyx"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Body_03.tscn" id="754_xynup"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Body_04.tscn" id="755_vu4tl"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Cockpit_01.tscn" id="756_781hk"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Cockpit_02.tscn" id="757_fukx4"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Cockpit_03.tscn" id="758_7qeo0"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Cockpit_04.tscn" id="759_2ks1s"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Cockpit_05.tscn" id="760_vtilp"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Engine_01.tscn" id="761_spifs"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Engine_02.tscn" id="762_y4dae"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Engine_03.tscn" id="763_hurhk"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Engine_04.tscn" id="764_8dy7u"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Engine_05.tscn" id="765_je2wx"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Engine_06.tscn" id="766_ptdoj"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Engine_07.tscn" id="767_y1kt8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Engine_08.tscn" id="768_aacoq"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Engine_09.tscn" id="769_5tsfs"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_LandingGear_01.tscn" id="770_2nhxx"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_LandingGear_02.tscn" id="771_ff43b"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_LandingGear_Flat_01.tscn" id="772_ss6d8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_LandingGear_Flat_02.tscn" id="773_a4gsy"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_LandingGear_WheelPart_01.tscn" id="774_nsvvs"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_LandingGear_WheelPart_02.tscn" id="775_c67dv"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Misc_01.tscn" id="776_4liiy"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Misc_02.tscn" id="777_w70as"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Misc_03.tscn" id="778_oslcb"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Misc_04.tscn" id="779_rqf5l"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Misc_05.tscn" id="780_7bwpv"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Misc_06.tscn" id="781_hp65n"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Misc_07.tscn" id="782_juqht"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Misc_08.tscn" id="783_wnyfg"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Misc_09.tscn" id="784_ehc55"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Misc_010.tscn" id="785_jrq3c"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Misc_011.tscn" id="786_n3hqy"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Misc_012.tscn" id="787_k8810"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Misc_013.tscn" id="788_brdmg"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Misc_014.tscn" id="789_rempt"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Misc_015.tscn" id="790_yh255"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Misc_016.tscn" id="791_pdcjr"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Misc_017.tscn" id="792_dxplc"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Misc_018.tscn" id="793_rln27"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Misc_019.tscn" id="794_4c2qj"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Misc_020.tscn" id="795_8hpd6"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Misc_021.tscn" id="796_gcrhh"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Misc_022.tscn" id="797_rx4lb"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Misc_023.tscn" id="798_8be58"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Wing_01.tscn" id="799_aaeob"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Wing_02.tscn" id="800_icftg"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Wing_03.tscn" id="801_dcphp"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Wing_04.tscn" id="802_r5fuh"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Wing_05.tscn" id="803_5lwjt"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Wing_06.tscn" id="804_6srfo"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Wing_07.tscn" id="805_rpx7d"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Wing_08.tscn" id="806_v67no"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Wing_09.tscn" id="807_yq6qv"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Wing_010.tscn" id="808_0r18a"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Wing_011.tscn" id="809_6wton"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Wing_012.tscn" id="810_n7le8"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Wing_013.tscn" id="811_2amlj"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Wing_014.tscn" id="812_y062c"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Wing_015.tscn" id="813_k2wjx"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Part_Wing_016.tscn" id="814_b55j4"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_POV_Cockpit_01.tscn" id="815_io8gj"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_POV_Cockpit_Frame_01.tscn" id="816_2wsqb"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_POV_Cockpit_Frame_02.tscn" id="817_xmhb5"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_POV_Cockpit_Frame_03.tscn" id="818_50ob7"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_POV_Cockpit_Frame_Glass_01.tscn" id="819_v05fx"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_POV_Cockpit_Frame_Glass_02.tscn" id="820_6ixiw"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_POV_Cockpit_Frame_Glass_03.tscn" id="821_4t6qp"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_POV_Joystick_01.tscn" id="822_t15j5"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Sweepo_01.tscn" id="823_ujqi6"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Sweepo_Brush_01.tscn" id="824_sl225"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Sweepo_Wheel_L_01.tscn" id="825_l252j"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_Sweepo_Wheel_R_01.tscn" id="826_n7eiy"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_WarpGate_Glow_01.tscn" id="827_5q42v"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_WarpGate_Inner_01.tscn" id="828_enk8f"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Veh_WarpGate_Outer_01.tscn" id="829_b6fcx"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Wep_Pistol_01.tscn" id="830_xw07l"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Wep_Pistol_Trigger_01.tscn" id="831_s1cfx"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Wep_Rifle_01.tscn" id="832_ur5g5"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Wep_Shield_01.tscn" id="833_17yql"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Wep_Shield_Extended_01.tscn" id="834_fsfpn"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Wep_Shield_Extended_Energy_01.tscn" id="835_6tgpv"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Wep_Shotgun_01.tscn" id="836_42pda"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Wep_Sword_01.tscn" id="837_vhvbl"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Wep_Sword_Double_01.tscn" id="838_0odgk"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Wep_Sword_Double_Energy_01.tscn" id="839_ye1u0"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SM_Wep_Sword_Energy_01.tscn" id="840_tppyp"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SphereGeo.tscn" id="841_iweeg"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/SphereInverted.tscn" id="842_i1am0"]
+[ext_resource type="PackedScene" path="res://data/synty_space/meshes/UCX_SM_Bld_Ceiling_01.tscn" id="843_xehqb"]
+
+[node name="SyntyTestAuto" type="Node3D" unique_id=361048451]
+script = ExtResource("1_00dwj")
+
+[node name="_SM_Attach_EVA_Cover_Glass_01" parent="." unique_id=1651423410 instance=ExtResource("2_0ahsc")]
+
+[node name="_SM_Wep_Rifle_Mag_01" parent="." unique_id=230463144 instance=ExtResource("3_y7h8i")]
+
+[node name="_SM_Wep_Rifle_Trigger_01" parent="." unique_id=2054280857 instance=ExtResource("4_p3hbx")]
+
+[node name="_SM_Wep_Shotgun_Pump_01" parent="." unique_id=1443342085 instance=ExtResource("5_n3nxg")]
+
+[node name="_SM_Wep_Shotgun_Slide_01" parent="." unique_id=810536629 instance=ExtResource("6_prmh6")]
+
+[node name="_SM_Wep_Shotgun_Trigger_01" parent="." unique_id=84434938 instance=ExtResource("7_6i3h7")]
+
+[node name="Flame_Mesh_New" parent="." unique_id=1966053061 instance=ExtResource("8_dvv61")]
+
+[node name="Flame_Mesh_Square" parent="." unique_id=1471857085 instance=ExtResource("9_2xkfq")]
+
+[node name="FX_Laser_Trail_01" parent="." unique_id=24251728 instance=ExtResource("10_1l5av")]
+
+[node name="MissleReady" parent="." unique_id=1857289863 instance=ExtResource("11_ktl7v")]
+
+[node name="Rings" parent="." unique_id=1703802533 instance=ExtResource("12_l11yn")]
+
+[node name="SK_Chr_Alien_01" parent="." unique_id=189288576 instance=ExtResource("13_yblv3")]
+
+[node name="SK_Chr_Alien_02" parent="." unique_id=1761260937 instance=ExtResource("14_yolcu")]
+
+[node name="SK_Chr_Attach_SpaceSoldier_Armour_01" parent="." unique_id=1746330893 instance=ExtResource("15_ohfrf")]
+
+[node name="SK_Chr_Attach_SpaceSoldier_Armour_02" parent="." unique_id=631535952 instance=ExtResource("16_v5jpc")]
+
+[node name="SK_Chr_Attach_SpaceSoldier_Armour_03" parent="." unique_id=1678116767 instance=ExtResource("17_niiki")]
+
+[node name="SK_Chr_Attach_SpaceSoldier_Armour_04" parent="." unique_id=105373734 instance=ExtResource("18_86f8o")]
+
+[node name="SK_Chr_Attach_SpaceSoldier_Armour_05" parent="." unique_id=1493793409 instance=ExtResource("19_jmdep")]
+
+[node name="SK_Chr_Attach_SpaceSoldier_Female_Helmet_01" parent="." unique_id=600739700 instance=ExtResource("20_6ve7t")]
+
+[node name="SK_Chr_Attach_SpaceSoldier_Female_Helmet_02" parent="." unique_id=2068589141 instance=ExtResource("21_axd1v")]
+
+[node name="SK_Chr_Attach_SpaceSoldier_Female_Helmet_03" parent="." unique_id=1601994686 instance=ExtResource("22_ouduf")]
+
+[node name="SK_Chr_Attach_SpaceSoldier_Female_Helmet_04" parent="." unique_id=20650001 instance=ExtResource("23_jbtwf")]
+
+[node name="SK_Chr_Attach_SpaceSoldier_Male_Helmet_01" parent="." unique_id=457411186 instance=ExtResource("24_wcui7")]
+
+[node name="SK_Chr_Attach_SpaceSoldier_Male_Helmet_02" parent="." unique_id=1863038636 instance=ExtResource("25_b17nw")]
+
+[node name="SK_Chr_Attach_SpaceSoldier_Male_Helmet_03" parent="." unique_id=897451653 instance=ExtResource("26_hbw5p")]
+
+[node name="SK_Chr_Attach_SpaceSoldier_Male_Helmet_04" parent="." unique_id=176891810 instance=ExtResource("27_5o51k")]
+
+[node name="SK_Chr_Attach_SpaceSoldier_Male_Helmet_05" parent="." unique_id=1445273526 instance=ExtResource("28_hlbn6")]
+
+[node name="SK_Chr_BR_BigAlien_01" parent="." unique_id=1363206927 instance=ExtResource("29_miuaw")]
+
+[node name="SK_Chr_BR_BigAlien_02" parent="." unique_id=2104987816 instance=ExtResource("30_1tkwr")]
+
+[node name="SK_Chr_BR_BigAlien_03" parent="." unique_id=1282616595 instance=ExtResource("31_volta")]
+
+[node name="SK_Chr_BR_BigAlien_04" parent="." unique_id=1584583560 instance=ExtResource("32_pj5vu")]
+
+[node name="SK_Chr_BR_EVA_Suit_01" parent="." unique_id=2114678383 instance=ExtResource("33_i7mjp")]
+
+[node name="SK_Chr_BR_EVA_Suit_02" parent="." unique_id=1699022021 instance=ExtResource("34_m6xsy")]
+
+[node name="SK_Chr_BR_EVA_Suit_03" parent="." unique_id=248075844 instance=ExtResource("35_yk52v")]
+
+[node name="SK_Chr_BR_SpaceSoldier_Male_01" parent="." unique_id=868916901 instance=ExtResource("36_u8nwa")]
+
+[node name="SK_Chr_BR_SpaceSoldier_Male_02" parent="." unique_id=902724624 instance=ExtResource("37_v6cro")]
+
+[node name="SK_Chr_BR_War_Robot_01" parent="." unique_id=1068192868 instance=ExtResource("38_ihqun")]
+
+[node name="SK_Chr_BR_War_Robot_02" parent="." unique_id=454455194 instance=ExtResource("39_ujbj6")]
+
+[node name="SK_Chr_CrewCaptain_Female_01" parent="." unique_id=1405596919 instance=ExtResource("40_1wauh")]
+
+[node name="SK_Chr_CrewCaptain_Female_02" parent="." unique_id=984180224 instance=ExtResource("41_hnikb")]
+
+[node name="SK_Chr_CrewCaptain_Male_01" parent="." unique_id=998135516 instance=ExtResource("42_st1ve")]
+
+[node name="SK_Chr_CrewCaptain_Male_02" parent="." unique_id=986451760 instance=ExtResource("43_mjqnb")]
+
+[node name="SK_Chr_Crew_Female_01" parent="." unique_id=1850172813 instance=ExtResource("44_g0dpv")]
+
+[node name="SK_Chr_Crew_Female_02" parent="." unique_id=1962417257 instance=ExtResource("45_ef2we")]
+
+[node name="SK_Chr_Crew_Male_01" parent="." unique_id=136314581 instance=ExtResource("46_pi3st")]
+
+[node name="SK_Chr_Crew_Male_02" parent="." unique_id=395890516 instance=ExtResource("47_t31kp")]
+
+[node name="SK_Chr_Cryo_Female_01" parent="." unique_id=1835675522 instance=ExtResource("48_a32nw")]
+
+[node name="SK_Chr_Cryo_Female_02" parent="." unique_id=1510799268 instance=ExtResource("49_snkw6")]
+
+[node name="SK_Chr_Cryo_Male_01" parent="." unique_id=1286421551 instance=ExtResource("50_h84ix")]
+
+[node name="SK_Chr_Cryo_Male_02" parent="." unique_id=600536614 instance=ExtResource("51_qy50o")]
+
+[node name="SK_Chr_Hunter_Female_01" parent="." unique_id=656830039 instance=ExtResource("52_ynk0a")]
+
+[node name="SK_Chr_Hunter_Female_02" parent="." unique_id=1771871619 instance=ExtResource("53_m26cn")]
+
+[node name="SK_Chr_Junker_Female_01" parent="." unique_id=779568658 instance=ExtResource("54_llcn6")]
+
+[node name="SK_Chr_Junker_Female_02" parent="." unique_id=924231327 instance=ExtResource("55_88ob1")]
+
+[node name="SK_Chr_Junker_Male_01" parent="." unique_id=563898446 instance=ExtResource("56_rtq22")]
+
+[node name="SK_Chr_Junker_Male_02" parent="." unique_id=258483950 instance=ExtResource("57_wh4v1")]
+
+[node name="SK_Chr_Medic_Male_01" parent="." unique_id=302820192 instance=ExtResource("58_2g0oo")]
+
+[node name="SK_Chr_Medic_Male_02" parent="." unique_id=1207123256 instance=ExtResource("59_qqjjl")]
+
+[node name="SK_Chr_Psionic_01" parent="." unique_id=515529137 instance=ExtResource("60_jiv8l")]
+
+[node name="SK_Chr_Psionic_02" parent="." unique_id=969743868 instance=ExtResource("61_x7kca")]
+
+[node name="SK_Chr_RobotFemale_01" parent="." unique_id=521301444 instance=ExtResource("62_d8qpi")]
+
+[node name="SK_Chr_RobotFemale_02" parent="." unique_id=1001062517 instance=ExtResource("63_ywbb8")]
+
+[node name="SK_Chr_SpaceSoldier_Female_01" parent="." unique_id=208067598 instance=ExtResource("64_rep5c")]
+
+[node name="SK_Chr_SpaceSoldier_Female_02" parent="." unique_id=368362432 instance=ExtResource("65_2yeka")]
+
+[node name="SK_Chr_SpaceSoldier_Female_03" parent="." unique_id=1481609189 instance=ExtResource("66_c3xu2")]
+
+[node name="SK_Chr_SpaceSoldier_Head_Female_01" parent="." unique_id=2121560013 instance=ExtResource("67_h414o")]
+
+[node name="SK_Chr_SpaceSoldier_Head_Female_02" parent="." unique_id=825368953 instance=ExtResource("68_gm1nt")]
+
+[node name="SK_Chr_SpaceSoldier_Head_Male_01" parent="." unique_id=1505877105 instance=ExtResource("69_xrahh")]
+
+[node name="SK_Chr_SpaceSoldier_Head_Male_02" parent="." unique_id=1256895175 instance=ExtResource("70_u3o4x")]
+
+[node name="SK_Chr_SpaceSoldier_Head_Male_03" parent="." unique_id=1128905500 instance=ExtResource("71_plhdj")]
+
+[node name="SK_Chr_SpaceSoldier_Male_01" parent="." unique_id=172276350 instance=ExtResource("72_x37li")]
+
+[node name="SK_Chr_SpaceSoldier_Male_02" parent="." unique_id=1714168529 instance=ExtResource("73_nstr7")]
+
+[node name="SK_Chr_SpaceSoldier_Male_03" parent="." unique_id=66537694 instance=ExtResource("74_jxve3")]
+
+[node name="SK_Chr_SpaceSoldier_Male_04" parent="." unique_id=214031319 instance=ExtResource("75_ctyex")]
+
+[node name="SK_Chr_SpaceSoldier_Male_05" parent="." unique_id=505213793 instance=ExtResource("76_h3evr")]
+
+[node name="SK_Chr_SpaceSoldier_Male_06" parent="." unique_id=1350831311 instance=ExtResource("77_o6bic")]
+
+[node name="SM_Bld_Bridge_Ceiling_01" parent="." unique_id=1308746852 instance=ExtResource("78_oh463")]
+
+[node name="SM_Bld_Bridge_Chair_01" parent="." unique_id=1601333606 instance=ExtResource("79_4bd81")]
+
+[node name="SM_Bld_Bridge_Chair_Captain_01" parent="." unique_id=1700084478 instance=ExtResource("80_54gds")]
+
+[node name="SM_Bld_Bridge_Console_01" parent="." unique_id=1532373186 instance=ExtResource("81_n87ue")]
+
+[node name="SM_Bld_Bridge_Console_02" parent="." unique_id=25528033 instance=ExtResource("82_p0van")]
+
+[node name="SM_Bld_Bridge_Console_Corner_01" parent="." unique_id=160536403 instance=ExtResource("83_2ectr")]
+
+[node name="SM_Bld_Bridge_Console_Corner_02" parent="." unique_id=885975708 instance=ExtResource("84_m87wv")]
+
+[node name="SM_Bld_Bridge_Floor_01" parent="." unique_id=1999702695 instance=ExtResource("85_bkww0")]
+
+[node name="SM_Bld_Bridge_Platform_01" parent="." unique_id=792575335 instance=ExtResource("86_exy3l")]
+
+[node name="SM_Bld_Bridge_Rear_Wall_01" parent="." unique_id=1873292710 instance=ExtResource("87_2g64t")]
+
+[node name="SM_Bld_Bridge_Walls_01" parent="." unique_id=227471879 instance=ExtResource("88_cochn")]
+
+[node name="SM_Bld_Bridge_Walls_Glass_01" parent="." unique_id=1603764107 instance=ExtResource("89_6fa8u")]
+
+[node name="SM_Bld_Bridge_Wall_Details_01" parent="." unique_id=548476680 instance=ExtResource("90_qn5dg")]
+
+[node name="SM_Bld_Ceiling_01" parent="." unique_id=1601342453 instance=ExtResource("91_k7dxy")]
+
+[node name="SM_Bld_Ceiling_02" parent="." unique_id=403810803 instance=ExtResource("92_d43vw")]
+
+[node name="SM_Bld_Ceiling_03" parent="." unique_id=1514245729 instance=ExtResource("93_yiquh")]
+
+[node name="SM_Bld_Ceiling_Pipes_Straight_01" parent="." unique_id=1728144839 instance=ExtResource("94_thsga")]
+
+[node name="SM_Bld_Ceiling_Pipes_Straight_Broken_01" parent="." unique_id=1974643736 instance=ExtResource("95_gaixs")]
+
+[node name="SM_Bld_Ceiling_Pipes_Turn_L_01" parent="." unique_id=1458495125 instance=ExtResource("96_v0g03")]
+
+[node name="SM_Bld_Ceiling_Pipes_Turn_R_01" parent="." unique_id=1721433934 instance=ExtResource("97_fy31a")]
+
+[node name="SM_Bld_Ceiling_Pipe_Junction_01" parent="." unique_id=1006036567 instance=ExtResource("98_ys8vl")]
+
+[node name="SM_Bld_Corridor_Double_Arch_01" parent="." unique_id=1420494029 instance=ExtResource("99_aqtnq")]
+
+[node name="SM_Bld_Corridor_Double_Arch_02" parent="." unique_id=930965991 instance=ExtResource("100_r5afn")]
+
+[node name="SM_Bld_Corridor_Single_Arch_01" parent="." unique_id=1635312773 instance=ExtResource("101_1mthy")]
+
+[node name="SM_Bld_Corridor_Single_Arch_02" parent="." unique_id=1774272749 instance=ExtResource("102_k7pwp")]
+
+[node name="SM_Bld_Corridor_Single_Arch_03" parent="." unique_id=195441992 instance=ExtResource("103_n5ft8")]
+
+[node name="SM_Bld_Crew_Beds_01" parent="." unique_id=1629923461 instance=ExtResource("104_y8v3h")]
+
+[node name="SM_Bld_Crew_Blank_01" parent="." unique_id=174015349 instance=ExtResource("105_mgune")]
+
+[node name="SM_Bld_Crew_Blank_02" parent="." unique_id=770479708 instance=ExtResource("106_r3asf")]
+
+[node name="SM_Bld_Crew_Desk_01" parent="." unique_id=649899355 instance=ExtResource("107_qfbmt")]
+
+[node name="SM_Bld_Crew_Kitchen_01" parent="." unique_id=1789961191 instance=ExtResource("108_ff5jy")]
+
+[node name="SM_Bld_Crew_Shower_01" parent="." unique_id=699182420 instance=ExtResource("109_3k5ch")]
+
+[node name="SM_Bld_Crew_Shower_Door_01" parent="." unique_id=674729720 instance=ExtResource("110_l5qon")]
+
+[node name="SM_Bld_Crew_Toilet_01" parent="." unique_id=123188687 instance=ExtResource("111_36ws8")]
+
+[node name="SM_Bld_Crew_Toilet_Door_01" parent="." unique_id=1380506521 instance=ExtResource("112_hdwrb")]
+
+[node name="SM_Bld_Door_01" parent="." unique_id=1508827599 instance=ExtResource("113_x3hsj")]
+
+[node name="SM_Bld_Door_02" parent="." unique_id=2063464302 instance=ExtResource("114_y5f2a")]
+
+[node name="SM_Bld_Door_03" parent="." unique_id=1599141891 instance=ExtResource("115_yimsg")]
+
+[node name="SM_Bld_Floor_01" parent="." unique_id=282681283 instance=ExtResource("116_u67rq")]
+
+[node name="SM_Bld_Floor_02" parent="." unique_id=2072266849 instance=ExtResource("117_xlw0s")]
+
+[node name="SM_Bld_Floor_03" parent="." unique_id=962460682 instance=ExtResource("118_f5wue")]
+
+[node name="SM_Bld_Floor_04" parent="." unique_id=1933668537 instance=ExtResource("119_2who2")]
+
+[node name="SM_Bld_Floor_05" parent="." unique_id=1314911771 instance=ExtResource("120_4mtsf")]
+
+[node name="SM_Bld_Floor_06" parent="." unique_id=1410074442 instance=ExtResource("121_ine37")]
+
+[node name="SM_Bld_Floor_07" parent="." unique_id=391898660 instance=ExtResource("122_c7vxi")]
+
+[node name="SM_Bld_Floor_08" parent="." unique_id=961614031 instance=ExtResource("123_e70rl")]
+
+[node name="SM_Bld_Floor_09" parent="." unique_id=1763578882 instance=ExtResource("124_s25vk")]
+
+[node name="SM_Bld_Floor_010" parent="." unique_id=1190213879 instance=ExtResource("125_waonc")]
+
+[node name="SM_Bld_Floor_011" parent="." unique_id=1466984778 instance=ExtResource("126_a227c")]
+
+[node name="SM_Bld_Floor_Large_Walkway_02" parent="." unique_id=1545751439 instance=ExtResource("127_nn5xf")]
+
+[node name="SM_Bld_Floor_Large_Walkway_Endcap_01" parent="." unique_id=1806151350 instance=ExtResource("128_p2inl")]
+
+[node name="SM_Bld_Floor_Small_01" parent="." unique_id=1882559116 instance=ExtResource("129_bvcfh")]
+
+[node name="SM_Bld_Floor_Small_02" parent="." unique_id=930768001 instance=ExtResource("130_xnts2")]
+
+[node name="SM_Bld_Floor_Small_03" parent="." unique_id=1071936595 instance=ExtResource("131_n0ony")]
+
+[node name="SM_Bld_Floor_Small_04" parent="." unique_id=338777597 instance=ExtResource("132_802ju")]
+
+[node name="SM_Bld_Floor_Small_05" parent="." unique_id=114907139 instance=ExtResource("133_c11qy")]
+
+[node name="SM_Bld_Floor_Small_06" parent="." unique_id=1473811264 instance=ExtResource("134_y07t0")]
+
+[node name="SM_Bld_Floor_Small_07" parent="." unique_id=1778163367 instance=ExtResource("135_jngt6")]
+
+[node name="SM_Bld_Floor_Small_08" parent="." unique_id=1294493814 instance=ExtResource("136_qy4s8")]
+
+[node name="SM_Bld_Floor_Small_Hand_Rail_01" parent="." unique_id=911059409 instance=ExtResource("137_ni6to")]
+
+[node name="SM_Bld_Floor_Small_Hand_Rail_End_01" parent="." unique_id=1953843440 instance=ExtResource("138_6qmsv")]
+
+[node name="SM_Bld_Floor_Small_Hatch_01" parent="." unique_id=159260789 instance=ExtResource("139_wvv3o")]
+
+[node name="SM_Bld_Floor_Small_Hatch_Door_01" parent="." unique_id=539378518 instance=ExtResource("140_t4pda")]
+
+[node name="SM_Bld_Floor_Small_Walkway_02" parent="." unique_id=1850428239 instance=ExtResource("141_6tbd8")]
+
+[node name="SM_Bld_Floor_Small_Walkway_Endcap_01" parent="." unique_id=1854108773 instance=ExtResource("142_ulc21")]
+
+[node name="SM_Bld_HangerCeiling_01" parent="." unique_id=1876571087 instance=ExtResource("143_n1fs1")]
+
+[node name="SM_Bld_HangerDoor_01" parent="." unique_id=871890865 instance=ExtResource("144_gmlun")]
+
+[node name="SM_Bld_HangerDoor_02" parent="." unique_id=55644760 instance=ExtResource("145_qi6l3")]
+
+[node name="SM_Bld_HangerDoor_03" parent="." unique_id=798904131 instance=ExtResource("146_bo70p")]
+
+[node name="SM_Bld_HangerDoor_04" parent="." unique_id=175925878 instance=ExtResource("147_e56la")]
+
+[node name="SM_Bld_HangerExteriorShip_01" parent="." unique_id=1611213644 instance=ExtResource("148_pcr02")]
+
+[node name="SM_Bld_HangerExteriorShip_02" parent="." unique_id=903293594 instance=ExtResource("149_jsi2d")]
+
+[node name="SM_Bld_HangerFloor_01" parent="." unique_id=575583702 instance=ExtResource("150_lui4u")]
+
+[node name="SM_Bld_HangerGlass_03" parent="." unique_id=211286029 instance=ExtResource("151_cqjo1")]
+
+[node name="SM_Bld_HangerPlatform_01" parent="." unique_id=1954158611 instance=ExtResource("152_sqj0r")]
+
+[node name="SM_Bld_Hanger_01" parent="." unique_id=715153209 instance=ExtResource("153_touu7")]
+
+[node name="SM_Bld_Hanger_02" parent="." unique_id=272194968 instance=ExtResource("154_54dam")]
+
+[node name="SM_Bld_House_Interior_Floor_01" parent="." unique_id=1906997014 instance=ExtResource("155_41gr5")]
+
+[node name="SM_Bld_Hydroponics_BaseFloor_01" parent="." unique_id=1563334160 instance=ExtResource("156_qkimy")]
+
+[node name="SM_Bld_Hydroponics_Ladder_01" parent="." unique_id=1061709202 instance=ExtResource("157_js0kx")]
+
+[node name="SM_Bld_Hydroponics_Roof_01" parent="." unique_id=1816941067 instance=ExtResource("158_weuiq")]
+
+[node name="SM_Bld_Hydroponics_Roof_RingLights_01" parent="." unique_id=904985655 instance=ExtResource("159_rwjfp")]
+
+[node name="SM_Bld_Hydroponics_UpperFloor_01" parent="." unique_id=2090606002 instance=ExtResource("160_hyr2p")]
+
+[node name="SM_Bld_Hydroponics_UpperWalkway_01" parent="." unique_id=433640331 instance=ExtResource("161_rloy7")]
+
+[node name="SM_Bld_Hydroponics_WallPlantsLower_L_01" parent="." unique_id=1139504103 instance=ExtResource("162_gfe5w")]
+
+[node name="SM_Bld_Hydroponics_WallPlantsLower_R_01" parent="." unique_id=1531447355 instance=ExtResource("163_gl027")]
+
+[node name="SM_Bld_Hydroponics_WallPlantsUpper_L_01" parent="." unique_id=1100474511 instance=ExtResource("164_4teq8")]
+
+[node name="SM_Bld_Hydroponics_WallPlantsUpper_R_01" parent="." unique_id=1467027979 instance=ExtResource("165_cieci")]
+
+[node name="SM_Bld_Landing_Platform_01" parent="." unique_id=817320455 instance=ExtResource("166_piqlf")]
+
+[node name="SM_Bld_Lift_01" parent="." unique_id=978038512 instance=ExtResource("167_6ysma")]
+
+[node name="SM_Bld_Lift_Door_01" parent="." unique_id=108601362 instance=ExtResource("168_kubk8")]
+
+[node name="SM_Bld_Lift_Door_02" parent="." unique_id=26247376 instance=ExtResource("169_hfajs")]
+
+[node name="SM_Bld_Lift_Wall_01" parent="." unique_id=1386677642 instance=ExtResource("170_cmkvv")]
+
+[node name="SM_Bld_Lift_Wall_Door_01" parent="." unique_id=1137169207 instance=ExtResource("171_lm3uo")]
+
+[node name="SM_Bld_Lift_Wall_Door_02" parent="." unique_id=721583894 instance=ExtResource("172_83coa")]
+
+[node name="SM_Bld_Roof_Exterior_01" parent="." unique_id=2136309211 instance=ExtResource("173_8hbhs")]
+
+[node name="SM_Bld_Roof_Exterior_02" parent="." unique_id=331935451 instance=ExtResource("174_ohibo")]
+
+[node name="SM_Bld_Roof_Exterior_03" parent="." unique_id=1106335610 instance=ExtResource("175_rqqmp")]
+
+[node name="SM_Bld_Wall_01" parent="." unique_id=1596090543 instance=ExtResource("176_2blw6")]
+
+[node name="SM_Bld_Wall_01_Alt" parent="." unique_id=1839492989 instance=ExtResource("177_gvdg3")]
+
+[node name="SM_Bld_Wall_02" parent="." unique_id=39291877 instance=ExtResource("178_jsoyo")]
+
+[node name="SM_Bld_Wall_03" parent="." unique_id=213566727 instance=ExtResource("179_w7whd")]
+
+[node name="SM_Bld_Wall_04" parent="." unique_id=532251623 instance=ExtResource("180_q10vg")]
+
+[node name="SM_Bld_Wall_04_Alt" parent="." unique_id=1501876338 instance=ExtResource("181_5fka6")]
+
+[node name="SM_Bld_Wall_05" parent="." unique_id=711271910 instance=ExtResource("182_pvynt")]
+
+[node name="SM_Bld_Wall_06" parent="." unique_id=1083012478 instance=ExtResource("183_w71xt")]
+
+[node name="SM_Bld_Wall_Corner_Pillar_01" parent="." unique_id=1865685433 instance=ExtResource("184_hv6ge")]
+
+[node name="SM_Bld_Wall_Corner_Pillar_02" parent="." unique_id=1212618455 instance=ExtResource("185_klfw6")]
+
+[node name="SM_Bld_Wall_Corner_Pillar_03" parent="." unique_id=1197691466 instance=ExtResource("186_plxtt")]
+
+[node name="SM_Bld_Wall_Corner_Pillar_04" parent="." unique_id=909265308 instance=ExtResource("187_f10yk")]
+
+[node name="SM_Bld_Wall_Corner_Pillar_05" parent="." unique_id=2005922217 instance=ExtResource("188_ftlp0")]
+
+[node name="SM_Bld_Wall_Corner_Pillar_Wide_01" parent="." unique_id=2045183555 instance=ExtResource("189_ptwg5")]
+
+[node name="SM_Bld_Wall_Corner_Pillar_Wide_02" parent="." unique_id=980620251 instance=ExtResource("190_ouny2")]
+
+[node name="SM_Bld_Wall_Corner_Pillar_Wide_03" parent="." unique_id=394962512 instance=ExtResource("191_oc46u")]
+
+[node name="SM_Bld_Wall_Corner_Pillar_Wide_04" parent="." unique_id=1917045737 instance=ExtResource("192_2h80r")]
+
+[node name="SM_Bld_Wall_Corner_Pillar_Wide_05" parent="." unique_id=244437214 instance=ExtResource("193_vqcl0")]
+
+[node name="SM_Bld_Wall_Doorframe_01" parent="." unique_id=922069588 instance=ExtResource("194_fj2so")]
+
+[node name="SM_Bld_Wall_Doorframe_02" parent="." unique_id=1559487287 instance=ExtResource("195_11y82")]
+
+[node name="SM_Bld_Wall_Doorframe_03" parent="." unique_id=2008847998 instance=ExtResource("196_cnskd")]
+
+[node name="SM_Bld_Wall_Doorframe_04" parent="." unique_id=374846567 instance=ExtResource("197_akfng")]
+
+[node name="SM_Bld_Wall_Doorframe_05" parent="." unique_id=1053782257 instance=ExtResource("198_fnamh")]
+
+[node name="SM_Bld_Wall_Doorframe_06" parent="." unique_id=686338704 instance=ExtResource("199_vpmau")]
+
+[node name="SM_Bld_Wall_Doorframe_Outer_01" parent="." unique_id=2091199400 instance=ExtResource("200_brh12")]
+
+[node name="SM_Bld_Wall_Doorframe_Outer_02" parent="." unique_id=41000441 instance=ExtResource("201_4gqb4")]
+
+[node name="SM_Bld_Wall_Door_01" parent="." unique_id=737968655 instance=ExtResource("202_8eo8y")]
+
+[node name="SM_Bld_Wall_Door_02" parent="." unique_id=1019230138 instance=ExtResource("203_mj31r")]
+
+[node name="SM_Bld_Wall_Door_03" parent="." unique_id=1879489132 instance=ExtResource("204_rbv6i")]
+
+[node name="SM_Bld_Wall_Door_04" parent="." unique_id=1036463159 instance=ExtResource("205_v65ru")]
+
+[node name="SM_Bld_Wall_Door_05" parent="." unique_id=2147123059 instance=ExtResource("206_f7a3a")]
+
+[node name="SM_Bld_Wall_Door_06" parent="." unique_id=1826226577 instance=ExtResource("207_oxm1h")]
+
+[node name="SM_Bld_Wall_Door_07" parent="." unique_id=195566766 instance=ExtResource("208_oatdw")]
+
+[node name="SM_Bld_Wall_EscPod_Hatch_01" parent="." unique_id=1712569257 instance=ExtResource("209_k6jrm")]
+
+[node name="SM_Bld_Wall_Esc_Hatch_Door_01" parent="." unique_id=679392188 instance=ExtResource("210_uxr0a")]
+
+[node name="SM_Bld_Wall_Exterior_01" parent="." unique_id=445431062 instance=ExtResource("211_yh4s2")]
+
+[node name="SM_Bld_Wall_Exterior_02" parent="." unique_id=500950840 instance=ExtResource("212_emx8k")]
+
+[node name="SM_Bld_Wall_Exterior_03" parent="." unique_id=1157303798 instance=ExtResource("213_55mjt")]
+
+[node name="SM_Bld_Wall_Exterior_04" parent="." unique_id=1484572670 instance=ExtResource("214_t3blh")]
+
+[node name="SM_Bld_Wall_Exterior_Pillar_01" parent="." unique_id=1053390705 instance=ExtResource("215_4y3ak")]
+
+[node name="SM_Bld_Wall_Exterior_Window_01" parent="." unique_id=1710219178 instance=ExtResource("216_0kgy8")]
+
+[node name="SM_Bld_Wall_Exterior_Window_02" parent="." unique_id=2024013234 instance=ExtResource("217_l15km")]
+
+[node name="SM_Bld_Wall_Glass_04" parent="." unique_id=812999108 instance=ExtResource("218_qbrb3")]
+
+[node name="SM_Bld_Wall_Glass_04_Alt" parent="." unique_id=836365412 instance=ExtResource("219_6e564")]
+
+[node name="SM_Bld_Wall_Mechanical_01" parent="." unique_id=186577762 instance=ExtResource("220_h1tan")]
+
+[node name="SM_Bld_Wall_Mechanical_02" parent="." unique_id=4809398 instance=ExtResource("221_6oe4l")]
+
+[node name="SM_Bld_Wall_Pillar_01" parent="." unique_id=1936339506 instance=ExtResource("222_wewum")]
+
+[node name="SM_Bld_Wall_Pillar_02" parent="." unique_id=1245899034 instance=ExtResource("223_4dub4")]
+
+[node name="SM_Bld_Wall_Pillar_03" parent="." unique_id=789853028 instance=ExtResource("224_7bdxx")]
+
+[node name="SM_Bld_Wall_Pillar_04" parent="." unique_id=984391309 instance=ExtResource("225_13m6l")]
+
+[node name="SM_Bld_Wall_Pillar_05" parent="." unique_id=1832379079 instance=ExtResource("226_bnf27")]
+
+[node name="SM_Bld_Wall_Pillar_06" parent="." unique_id=1528125270 instance=ExtResource("227_5xcxd")]
+
+[node name="SM_Bld_Wall_Pillar_07" parent="." unique_id=2038464135 instance=ExtResource("228_qb5wi")]
+
+[node name="SM_Bld_Wall_Pods_01" parent="." unique_id=2130341312 instance=ExtResource("229_gut3j")]
+
+[node name="SM_Bld_Wall_Pods_Glass_01" parent="." unique_id=1938908146 instance=ExtResource("230_myr52")]
+
+[node name="SM_Bld_Wall_Tube_01" parent="." unique_id=1346381737 instance=ExtResource("231_yiwrc")]
+
+[node name="SM_Chr_Alien_01" parent="." unique_id=725398675 instance=ExtResource("232_0y4h3")]
+
+[node name="SM_Chr_Attach_Crew_Female_Hair_01" parent="." unique_id=1295896624 instance=ExtResource("233_3jvnl")]
+
+[node name="SM_Chr_Attach_Crew_Male_Hair_01" parent="." unique_id=413480358 instance=ExtResource("234_aouwe")]
+
+[node name="SM_Chr_Attach_EVA_Cover_01" parent="." unique_id=1102900934 instance=ExtResource("235_k4whl")]
+
+[node name="SM_Chr_Attach_EVA_Cover_Clear_01" parent="." unique_id=433316646 instance=ExtResource("236_x8sqk")]
+
+[node name="SM_Chr_Attach_EVA_Female_Head_Blank_01" parent="." unique_id=478627564 instance=ExtResource("237_nwbf5")]
+
+[node name="SM_Chr_Attach_EVA_Female_Head_Scaled_01" parent="." unique_id=2126051406 instance=ExtResource("238_edraa")]
+
+[node name="SM_Chr_Attach_EVA_Male_Head_Blank_01" parent="." unique_id=1169277457 instance=ExtResource("239_xka2n")]
+
+[node name="SM_Chr_Attach_EVA_Male_Head_Scaled_01" parent="." unique_id=1718816657 instance=ExtResource("240_davkn")]
+
+[node name="SM_Chr_Attach_Hat_Captain_01" parent="." unique_id=1816200154 instance=ExtResource("241_fy7fy")]
+
+[node name="SM_Chr_Attach_Hat_Crew_01" parent="." unique_id=2096874608 instance=ExtResource("242_pxog8")]
+
+[node name="SM_Chr_Attach_Hunter_Female_Hair_01" parent="." unique_id=81300210 instance=ExtResource("243_l6fgt")]
+
+[node name="SM_Chr_Attach_Junker_Hair_Female_01" parent="." unique_id=473113816 instance=ExtResource("244_6qkld")]
+
+[node name="SM_Chr_Attach_Junker_Headset_01" parent="." unique_id=2008441567 instance=ExtResource("245_u3eta")]
+
+[node name="SM_Chr_Attach_Junker_Helmet_01" parent="." unique_id=599244554 instance=ExtResource("246_7bhf6")]
+
+[node name="SM_Chr_Attach_Junker_Helmet_Glass_01" parent="." unique_id=757351970 instance=ExtResource("247_33j24")]
+
+[node name="SM_Chr_Attach_Male_Hair_01" parent="." unique_id=1510992364 instance=ExtResource("248_xek5u")]
+
+[node name="SM_Chr_Attach_Male_Hair_02" parent="." unique_id=1948385030 instance=ExtResource("249_75df7")]
+
+[node name="SM_Chr_Attach_Male_Hair_03" parent="." unique_id=776962352 instance=ExtResource("250_cv0sx")]
+
+[node name="SM_Chr_Attach_Male_Hair_05" parent="." unique_id=416579979 instance=ExtResource("251_e4okc")]
+
+[node name="SM_Chr_Attach_Male_Hair_06" parent="." unique_id=746968115 instance=ExtResource("252_g6x3c")]
+
+[node name="SM_Chr_Attach_Male_Hair_07" parent="." unique_id=22785260 instance=ExtResource("253_yavyc")]
+
+[node name="SM_Chr_Attach_Mask_Medic_01" parent="." unique_id=661532805 instance=ExtResource("254_2a5n2")]
+
+[node name="SM_Chr_Attach_SpaceHelmet_01" parent="." unique_id=2045779062 instance=ExtResource("255_rf0px")]
+
+[node name="SM_Chr_Attach_SpaceHelmet_Glass_01" parent="." unique_id=301256849 instance=ExtResource("256_qvbin")]
+
+[node name="SM_Env_Astroid_01" parent="." unique_id=116915786 instance=ExtResource("257_l5wgg")]
+
+[node name="SM_Env_Astroid_02" parent="." unique_id=1571035693 instance=ExtResource("258_pdv2m")]
+
+[node name="SM_Env_Astroid_03" parent="." unique_id=1543264389 instance=ExtResource("259_eih58")]
+
+[node name="SM_Env_Astroid_04" parent="." unique_id=1997179544 instance=ExtResource("260_xgt0g")]
+
+[node name="SM_Env_Astroid_05" parent="." unique_id=1948800594 instance=ExtResource("261_2vpnv")]
+
+[node name="SM_Env_Astroid_Field_01" parent="." unique_id=1637981839 instance=ExtResource("262_2o4e8")]
+
+[node name="SM_Env_Astroid_Field_02" parent="." unique_id=750988574 instance=ExtResource("263_dq2j4")]
+
+[node name="SM_Env_Astroid_Field_LowDetail_01" parent="." unique_id=1100215381 instance=ExtResource("264_ibmhy")]
+
+[node name="SM_Env_Astroid_Field_LowDetail_02" parent="." unique_id=649340311 instance=ExtResource("265_yun5l")]
+
+[node name="SM_Env_Astroid_Holes_01" parent="." unique_id=1487178017 instance=ExtResource("266_8yu8j")]
+
+[node name="SM_Env_Astroid_Holes_02" parent="." unique_id=634051547 instance=ExtResource("267_gqbn4")]
+
+[node name="SM_Env_Astroid_Holes_03" parent="." unique_id=1517912409 instance=ExtResource("268_fv3n7")]
+
+[node name="SM_Env_Astroid_Holes_04" parent="." unique_id=685912015 instance=ExtResource("269_5y58h")]
+
+[node name="SM_Env_Astroid_Holes_05" parent="." unique_id=811460202 instance=ExtResource("270_fkahd")]
+
+[node name="SM_Env_Astroid_Large_01" parent="." unique_id=40975562 instance=ExtResource("271_is7bb")]
+
+[node name="SM_Env_Astroid_Large_02" parent="." unique_id=478419126 instance=ExtResource("272_omolw")]
+
+[node name="SM_Env_Astroid_Large_Holes_01" parent="." unique_id=77185941 instance=ExtResource("273_qqjb2")]
+
+[node name="SM_Env_Astroid_Large_Holes_02" parent="." unique_id=58573216 instance=ExtResource("274_3yoje")]
+
+[node name="SM_Env_Debris_Pipe_01" parent="." unique_id=1734992786 instance=ExtResource("275_gkpik")]
+
+[node name="SM_Env_Debris_Shell_01" parent="." unique_id=1591267873 instance=ExtResource("276_f3use")]
+
+[node name="SM_Env_Debris_Shell_02" parent="." unique_id=1956418250 instance=ExtResource("277_q5it4")]
+
+[node name="SM_Env_Debris_Shell_03" parent="." unique_id=424167471 instance=ExtResource("278_lkvbv")]
+
+[node name="SM_Env_Debris_Shell_04" parent="." unique_id=1040088736 instance=ExtResource("279_1jln6")]
+
+[node name="SM_Env_Debris_Shell_05" parent="." unique_id=1494004799 instance=ExtResource("280_6g0mt")]
+
+[node name="SM_Env_Debris_Shell_06" parent="." unique_id=605830213 instance=ExtResource("281_dsxev")]
+
+[node name="SM_Env_Debris_Shell_07" parent="." unique_id=1223109948 instance=ExtResource("282_o43b3")]
+
+[node name="SM_Env_Debris_Shell_08" parent="." unique_id=1870075487 instance=ExtResource("283_582oo")]
+
+[node name="SM_Env_Debris_Structure_01" parent="." unique_id=323399106 instance=ExtResource("284_difw0")]
+
+[node name="SM_Env_Debris_Structure_02" parent="." unique_id=806488432 instance=ExtResource("285_ckm00")]
+
+[node name="SM_Env_Debris_Structure_03" parent="." unique_id=368777791 instance=ExtResource("286_r3aaa")]
+
+[node name="SM_Env_Rubble_Pebbles_01" parent="." unique_id=1575396567 instance=ExtResource("287_68b8d")]
+
+[node name="SM_Env_Rubble_Pebbles_02" parent="." unique_id=1725628146 instance=ExtResource("288_es5at")]
+
+[node name="SM_Env_Rubble_Pile_01" parent="." unique_id=1557986973 instance=ExtResource("289_ylcnt")]
+
+[node name="SM_Env_Rubble_Pile_02" parent="." unique_id=232797238 instance=ExtResource("290_772i3")]
+
+[node name="SM_FX_LightBlocker_Cube_01" parent="." unique_id=664671753 instance=ExtResource("291_nf006")]
+
+[node name="SM_FX_LightBlocker_Cube_02" parent="." unique_id=1083038377 instance=ExtResource("292_of4l4")]
+
+[node name="SM_FX_LightBlocker_Cube_03" parent="." unique_id=131697491 instance=ExtResource("293_4qxso")]
+
+[node name="SM_Hud_Arrows_01" parent="." unique_id=592381361 instance=ExtResource("294_s53gk")]
+
+[node name="SM_Hud_Barrier_01" parent="." unique_id=836588593 instance=ExtResource("295_rc2ve")]
+
+[node name="SM_Hud_Barrier_02" parent="." unique_id=1819115548 instance=ExtResource("296_el4c3")]
+
+[node name="SM_Hud_Barrier_03" parent="." unique_id=1833769137 instance=ExtResource("297_bdcir")]
+
+[node name="SM_Hud_Box_01" parent="." unique_id=148949994 instance=ExtResource("298_qfi02")]
+
+[node name="SM_Hud_Box_02" parent="." unique_id=618724563 instance=ExtResource("299_ogpgc")]
+
+[node name="SM_Hud_Box_03" parent="." unique_id=548145601 instance=ExtResource("300_iwhuu")]
+
+[node name="SM_Hud_Reticle_01" parent="." unique_id=2005819061 instance=ExtResource("301_2jso5")]
+
+[node name="SM_Hud_Reticle_02" parent="." unique_id=1519439707 instance=ExtResource("302_6qbar")]
+
+[node name="SM_Hud_Reticle_03" parent="." unique_id=51238468 instance=ExtResource("303_2uqxd")]
+
+[node name="SM_Hud_Reticle_04" parent="." unique_id=2117307024 instance=ExtResource("304_e3gtr")]
+
+[node name="SM_Hud_Reticle_05" parent="." unique_id=1100174709 instance=ExtResource("305_vww4f")]
+
+[node name="SM_Hud_Reticle_06" parent="." unique_id=854178161 instance=ExtResource("306_evdub")]
+
+[node name="SM_Hud_Reticle_07" parent="." unique_id=1203432418 instance=ExtResource("307_2kpqy")]
+
+[node name="SM_Hud_Reticle_08" parent="." unique_id=310187044 instance=ExtResource("308_f0lrc")]
+
+[node name="SM_Hud_Reticle_09" parent="." unique_id=657335148 instance=ExtResource("309_fvpep")]
+
+[node name="SM_Hud_Rings_01" parent="." unique_id=1832314500 instance=ExtResource("310_xgbme")]
+
+[node name="SM_Hud_Rings_02" parent="." unique_id=240051268 instance=ExtResource("311_tjojm")]
+
+[node name="SM_Hud_Rings_04" parent="." unique_id=93189370 instance=ExtResource("312_8s3g0")]
+
+[node name="SM_Hud_Screen_Backing_01" parent="." unique_id=582024287 instance=ExtResource("313_u60id")]
+
+[node name="SM_Hud_Text_01" parent="." unique_id=1480199445 instance=ExtResource("314_s0rc8")]
+
+[node name="SM_Hud_Text_02" parent="." unique_id=454281022 instance=ExtResource("315_2mwyn")]
+
+[node name="SM_Hud_Text_03" parent="." unique_id=1799379111 instance=ExtResource("316_d8ueh")]
+
+[node name="SM_Hud_Text_04" parent="." unique_id=759426066 instance=ExtResource("317_8nmb6")]
+
+[node name="SM_Hud_Text_Arrow_01" parent="." unique_id=481267657 instance=ExtResource("318_6ig3p")]
+
+[node name="SM_LightRay_Cube" parent="." unique_id=1750314885 instance=ExtResource("319_8hjw8")]
+
+[node name="SM_LightRay_Round" parent="." unique_id=525470538 instance=ExtResource("320_d6n5r")]
+
+[node name="SM_Pebble_Debris_01" parent="." unique_id=1329198285 instance=ExtResource("321_uf7iu")]
+
+[node name="SM_Pebble_Debris_02" parent="." unique_id=784757207 instance=ExtResource("322_pp13k")]
+
+[node name="SM_Pebble_Debris_03" parent="." unique_id=586014737 instance=ExtResource("323_wojn0")]
+
+[node name="SM_Prop_AirVent_Large_01" parent="." unique_id=615831747 instance=ExtResource("324_ltu8y")]
+
+[node name="SM_Prop_AirVent_Small_01" parent="." unique_id=401656096 instance=ExtResource("325_3osyi")]
+
+[node name="SM_Prop_Antenna_01" parent="." unique_id=1086618877 instance=ExtResource("326_7m2cr")]
+
+[node name="SM_Prop_Barrel_01" parent="." unique_id=283476213 instance=ExtResource("327_rwer0")]
+
+[node name="SM_Prop_Battery_01" parent="." unique_id=1720307373 instance=ExtResource("328_m6k87")]
+
+[node name="SM_Prop_Battery_02" parent="." unique_id=218750897 instance=ExtResource("329_7ldjv")]
+
+[node name="SM_Prop_Battery_03" parent="." unique_id=1014485506 instance=ExtResource("330_8gg2j")]
+
+[node name="SM_Prop_Bed_01" parent="." unique_id=1770901878 instance=ExtResource("331_e6tw8")]
+
+[node name="SM_Prop_Bed_02" parent="." unique_id=839285065 instance=ExtResource("332_vhwnj")]
+
+[node name="SM_Prop_Bed_03" parent="." unique_id=323260622 instance=ExtResource("333_nm7ub")]
+
+[node name="SM_Prop_Bed_Medical_01" parent="." unique_id=1850596249 instance=ExtResource("334_e0dh0")]
+
+[node name="SM_Prop_Bed_Medical_Slide_01" parent="." unique_id=1367901363 instance=ExtResource("335_jaw68")]
+
+[node name="SM_Prop_Buttons_01" parent="." unique_id=1848712426 instance=ExtResource("336_hw8nb")]
+
+[node name="SM_Prop_Buttons_02" parent="." unique_id=520772467 instance=ExtResource("337_duhpx")]
+
+[node name="SM_Prop_Buttons_03" parent="." unique_id=1075307316 instance=ExtResource("338_uyg73")]
+
+[node name="SM_Prop_Buttons_04" parent="." unique_id=654792950 instance=ExtResource("339_t4sb6")]
+
+[node name="SM_Prop_Buttons_05" parent="." unique_id=1143541234 instance=ExtResource("340_te0n1")]
+
+[node name="SM_Prop_Buttons_06" parent="." unique_id=2142374823 instance=ExtResource("341_yt1yi")]
+
+[node name="SM_Prop_Buttons_07" parent="." unique_id=1559426153 instance=ExtResource("342_vo6sk")]
+
+[node name="SM_Prop_Buttons_08" parent="." unique_id=1078741887 instance=ExtResource("343_dvt1f")]
+
+[node name="SM_Prop_Buttons_09" parent="." unique_id=1880406872 instance=ExtResource("344_bqh27")]
+
+[node name="SM_Prop_Buttons_10" parent="." unique_id=769717639 instance=ExtResource("345_6yy3q")]
+
+[node name="SM_Prop_Buttons_11" parent="." unique_id=621637523 instance=ExtResource("346_pteaq")]
+
+[node name="SM_Prop_Buttons_12" parent="." unique_id=231951875 instance=ExtResource("347_qec52")]
+
+[node name="SM_Prop_Buttons_13" parent="." unique_id=513960043 instance=ExtResource("348_iv353")]
+
+[node name="SM_Prop_Buttons_14" parent="." unique_id=129762577 instance=ExtResource("349_uuoif")]
+
+[node name="SM_Prop_Cart_01" parent="." unique_id=88151161 instance=ExtResource("350_cym0x")]
+
+[node name="SM_Prop_Cart_Filled_01" parent="." unique_id=1625803631 instance=ExtResource("351_hsnv5")]
+
+[node name="SM_Prop_CenterTube_01" parent="." unique_id=943987004 instance=ExtResource("352_bqwyv")]
+
+[node name="SM_Prop_CenterTube_02" parent="." unique_id=540789893 instance=ExtResource("353_38fgx")]
+
+[node name="SM_Prop_CenterTube_Glass_01" parent="." unique_id=1962334188 instance=ExtResource("354_p2ry3")]
+
+[node name="SM_Prop_CenterTube_Glass_02" parent="." unique_id=1830521118 instance=ExtResource("355_ysxdm")]
+
+[node name="SM_Prop_Chr_Female_Cryo_01" parent="." unique_id=462214820 instance=ExtResource("356_hxoyt")]
+
+[node name="SM_Prop_Chr_Female_Cryo_02" parent="." unique_id=768119338 instance=ExtResource("357_s6x2m")]
+
+[node name="SM_Prop_Chr_Male_Cryo_01" parent="." unique_id=1402675973 instance=ExtResource("358_5uxwu")]
+
+[node name="SM_Prop_Chr_Male_Cryo_02" parent="." unique_id=1892477294 instance=ExtResource("359_cls75")]
+
+[node name="SM_Prop_ControllPanel_01" parent="." unique_id=2033182761 instance=ExtResource("360_oc2or")]
+
+[node name="SM_Prop_ControllPanel_02" parent="." unique_id=985322057 instance=ExtResource("361_80lsq")]
+
+[node name="SM_Prop_ControllPanel_03" parent="." unique_id=1501196545 instance=ExtResource("362_ypasn")]
+
+[node name="SM_Prop_ControllPanel_04" parent="." unique_id=1843218333 instance=ExtResource("363_6571k")]
+
+[node name="SM_Prop_CornerSeat_01" parent="." unique_id=686953302 instance=ExtResource("364_el4nm")]
+
+[node name="SM_Prop_CornerTable_01" parent="." unique_id=592205831 instance=ExtResource("365_tshpw")]
+
+[node name="SM_Prop_Crate_01" parent="." unique_id=951391882 instance=ExtResource("366_4dlk4")]
+
+[node name="SM_Prop_Crate_02" parent="." unique_id=1640133568 instance=ExtResource("367_r844b")]
+
+[node name="SM_Prop_Crate_Ammo_01" parent="." unique_id=51715167 instance=ExtResource("368_6xqf5")]
+
+[node name="SM_Prop_Crate_Ammo_02" parent="." unique_id=1113187202 instance=ExtResource("369_3dntl")]
+
+[node name="SM_Prop_Crate_health_01" parent="." unique_id=1185522080 instance=ExtResource("370_18l6e")]
+
+[node name="SM_Prop_Crate_health_02" parent="." unique_id=2099042586 instance=ExtResource("371_sh44s")]
+
+[node name="SM_Prop_Crate_Lid_01" parent="." unique_id=837863425 instance=ExtResource("372_07dfg")]
+
+[node name="SM_Prop_Crate_Shield_01" parent="." unique_id=935808875 instance=ExtResource("373_iwr66")]
+
+[node name="SM_Prop_Crate_Shield_02" parent="." unique_id=2132086138 instance=ExtResource("374_64o0r")]
+
+[node name="SM_Prop_Crate_Wide_01" parent="." unique_id=1548875800 instance=ExtResource("375_3hff2")]
+
+[node name="SM_Prop_Crate_Wide_Lid_01" parent="." unique_id=1568155977 instance=ExtResource("376_4xdnb")]
+
+[node name="SM_Prop_CryoBed_01" parent="." unique_id=1309338844 instance=ExtResource("377_2f47v")]
+
+[node name="SM_Prop_CryoBed_Lid_01" parent="." unique_id=325175397 instance=ExtResource("378_lx54k")]
+
+[node name="SM_Prop_CryoBed_Lid_Glass_01" parent="." unique_id=1950468068 instance=ExtResource("379_6nivr")]
+
+[node name="SM_Prop_DeadZub_01" parent="." unique_id=647725243 instance=ExtResource("380_cnei0")]
+
+[node name="SM_Prop_Decontamination_Shower_01" parent="." unique_id=1158586510 instance=ExtResource("381_8p4n4")]
+
+[node name="SM_Prop_Desk_End_01" parent="." unique_id=1538137828 instance=ExtResource("382_a6hud")]
+
+[node name="SM_Prop_Desk_Small_01" parent="." unique_id=1214927091 instance=ExtResource("383_8m1im")]
+
+[node name="SM_Prop_Detail_Airvent_01" parent="." unique_id=440462784 instance=ExtResource("384_veau8")]
+
+[node name="SM_Prop_Detail_Box_01" parent="." unique_id=1461431795 instance=ExtResource("385_lqm1i")]
+
+[node name="SM_Prop_Detail_Box_02" parent="." unique_id=337730360 instance=ExtResource("386_1tvuo")]
+
+[node name="SM_Prop_Detail_Box_03" parent="." unique_id=1642963708 instance=ExtResource("387_k45mb")]
+
+[node name="SM_Prop_Detail_Box_04" parent="." unique_id=1562464609 instance=ExtResource("388_6i440")]
+
+[node name="SM_Prop_Detail_Box_05" parent="." unique_id=429475860 instance=ExtResource("389_e5jj7")]
+
+[node name="SM_Prop_Detail_Box_06" parent="." unique_id=523426048 instance=ExtResource("390_136t0")]
+
+[node name="SM_Prop_Detail_Button_01" parent="." unique_id=254462301 instance=ExtResource("391_86871")]
+
+[node name="SM_Prop_Detail_CeilingBox_01" parent="." unique_id=1983970910 instance=ExtResource("392_48gih")]
+
+[node name="SM_Prop_Detail_CeilingBox_02" parent="." unique_id=1233711703 instance=ExtResource("393_15kjj")]
+
+[node name="SM_Prop_Detail_CeilingBox_03" parent="." unique_id=1683500550 instance=ExtResource("394_xf8em")]
+
+[node name="SM_Prop_Detail_Handle_01" parent="." unique_id=477837830 instance=ExtResource("395_kdmwh")]
+
+[node name="SM_Prop_Detail_Handle_02" parent="." unique_id=1959919071 instance=ExtResource("396_umocy")]
+
+[node name="SM_Prop_Detail_Keypad_01" parent="." unique_id=2031933848 instance=ExtResource("397_lvd3r")]
+
+[node name="SM_Prop_Detail_Lights_01" parent="." unique_id=2001538748 instance=ExtResource("398_x0vf2")]
+
+[node name="SM_Prop_Detail_Lights_02" parent="." unique_id=1887031665 instance=ExtResource("399_wm3tm")]
+
+[node name="SM_Prop_Detail_Lights_03" parent="." unique_id=214880183 instance=ExtResource("400_wl3fg")]
+
+[node name="SM_Prop_Detail_Machine_01" parent="." unique_id=1775615898 instance=ExtResource("401_yxaoy")]
+
+[node name="SM_Prop_Detail_Panel_01" parent="." unique_id=518538262 instance=ExtResource("402_68ml7")]
+
+[node name="SM_Prop_Detail_Panel_Broken_01" parent="." unique_id=387042968 instance=ExtResource("403_5iepu")]
+
+[node name="SM_Prop_Detail_Panel_Fixed_01" parent="." unique_id=1873040892 instance=ExtResource("404_2rnwv")]
+
+[node name="SM_Prop_Detail_Pipes_01" parent="." unique_id=780990960 instance=ExtResource("405_qi8qf")]
+
+[node name="SM_Prop_Detail_Pipes_02" parent="." unique_id=439376567 instance=ExtResource("406_m5ixp")]
+
+[node name="SM_Prop_Detail_Pipes_03" parent="." unique_id=631235857 instance=ExtResource("407_we3u4")]
+
+[node name="SM_Prop_Detail_Pipe_01" parent="." unique_id=993358902 instance=ExtResource("408_eqiwj")]
+
+[node name="SM_Prop_Detail_Pipe_02" parent="." unique_id=821834431 instance=ExtResource("409_xg1tm")]
+
+[node name="SM_Prop_Detail_Pipe_Broken_01" parent="." unique_id=811204692 instance=ExtResource("410_25lkd")]
+
+[node name="SM_Prop_Detail_Pipe_Corner_01" parent="." unique_id=1929878760 instance=ExtResource("411_vg3ht")]
+
+[node name="SM_Prop_Detail_Pipe_Pillar_01" parent="." unique_id=746983619 instance=ExtResource("412_iq14f")]
+
+[node name="SM_Prop_Detail_Pipe_Straight_01" parent="." unique_id=2112510991 instance=ExtResource("413_w3qls")]
+
+[node name="SM_Prop_Detail_Struts_01" parent="." unique_id=228942969 instance=ExtResource("414_y4v3n")]
+
+[node name="SM_Prop_Detail_Struts_02" parent="." unique_id=921510613 instance=ExtResource("415_nwqt1")]
+
+[node name="SM_Prop_Detail_SynCola_01" parent="." unique_id=1321136118 instance=ExtResource("416_lye0w")]
+
+[node name="SM_Prop_Detail_SynCola_02" parent="." unique_id=580658536 instance=ExtResource("417_mab0l")]
+
+[node name="SM_Prop_Detail_Tank_01" parent="." unique_id=1095281549 instance=ExtResource("418_egyjb")]
+
+[node name="SM_Prop_Detail_Tank_02" parent="." unique_id=1078552929 instance=ExtResource("419_4l1l7")]
+
+[node name="SM_Prop_Detail_Vent_01" parent="." unique_id=1752298914 instance=ExtResource("420_jhvgd")]
+
+[node name="SM_Prop_Detail_Wirebox_01" parent="." unique_id=88978685 instance=ExtResource("421_yiccw")]
+
+[node name="SM_Prop_Detail_Wire_01" parent="." unique_id=1360375616 instance=ExtResource("422_gosi2")]
+
+[node name="SM_Prop_Detail_Wire_02" parent="." unique_id=691677583 instance=ExtResource("423_4ptdq")]
+
+[node name="SM_Prop_Detail_Wire_03" parent="." unique_id=377674690 instance=ExtResource("424_tnrvh")]
+
+[node name="SM_Prop_Detail_Wire_04" parent="." unique_id=1919825282 instance=ExtResource("425_n7u3n")]
+
+[node name="SM_Prop_Detail_Wire_05" parent="." unique_id=1622677162 instance=ExtResource("426_wn7rs")]
+
+[node name="SM_Prop_EnergyPort_01" parent="." unique_id=2007842608 instance=ExtResource("427_525nx")]
+
+[node name="SM_Prop_Engine_Construction_01" parent="." unique_id=1018036960 instance=ExtResource("428_vqt8y")]
+
+[node name="SM_Prop_EscapePod_Door_01" parent="." unique_id=906155347 instance=ExtResource("429_jpbb8")]
+
+[node name="SM_Prop_EscapePod_Door_02" parent="." unique_id=498255317 instance=ExtResource("430_o8uwk")]
+
+[node name="SM_Prop_EscapePod_Hatch_Large_01" parent="." unique_id=1084285993 instance=ExtResource("431_obajk")]
+
+[node name="SM_Prop_EscapePod_Hatch_Small_01" parent="." unique_id=590065630 instance=ExtResource("432_ltwcw")]
+
+[node name="SM_Prop_FoodPacket_01" parent="." unique_id=326102023 instance=ExtResource("433_c8pnr")]
+
+[node name="SM_Prop_FoodPacket_02" parent="." unique_id=1683309620 instance=ExtResource("434_ht2ph")]
+
+[node name="SM_Prop_FoodPacket_03" parent="." unique_id=1848261259 instance=ExtResource("435_n4ofd")]
+
+[node name="SM_Prop_FoodPacket_04" parent="." unique_id=69538095 instance=ExtResource("436_22yk4")]
+
+[node name="SM_Prop_FoodTray_01" parent="." unique_id=1577581136 instance=ExtResource("437_7uwee")]
+
+[node name="SM_Prop_FoodTray_02" parent="." unique_id=1478505825 instance=ExtResource("438_hvjrb")]
+
+[node name="SM_Prop_FoodTray_03" parent="." unique_id=122254183 instance=ExtResource("439_alr6l")]
+
+[node name="SM_Prop_Greeble_Cube_01" parent="." unique_id=925523238 instance=ExtResource("440_2m7u3")]
+
+[node name="SM_Prop_Greeble_Cube_02" parent="." unique_id=1807383642 instance=ExtResource("441_v8k64")]
+
+[node name="SM_Prop_Greeble_Panel_01" parent="." unique_id=862218688 instance=ExtResource("442_k12c7")]
+
+[node name="SM_Prop_Greeble_Panel_02" parent="." unique_id=1663052943 instance=ExtResource("443_0pnts")]
+
+[node name="SM_Prop_Greeble_Panel_03" parent="." unique_id=301771552 instance=ExtResource("444_mmund")]
+
+[node name="SM_Prop_Greeble_Panel_04" parent="." unique_id=783225301 instance=ExtResource("445_5q71u")]
+
+[node name="SM_Prop_Greeble_Panel_05" parent="." unique_id=1751786482 instance=ExtResource("446_rmecy")]
+
+[node name="SM_Prop_Greeble_Panel_06" parent="." unique_id=1716481352 instance=ExtResource("447_mtyyk")]
+
+[node name="SM_Prop_Greeble_Panel_07" parent="." unique_id=989678029 instance=ExtResource("448_b08at")]
+
+[node name="SM_Prop_Handle_01" parent="." unique_id=981365483 instance=ExtResource("449_fid14")]
+
+[node name="SM_Prop_HandScanner_01" parent="." unique_id=1285003992 instance=ExtResource("450_xrog6")]
+
+[node name="SM_Prop_Hose_01" parent="." unique_id=1906807950 instance=ExtResource("451_qr5nv")]
+
+[node name="SM_Prop_Hose_02" parent="." unique_id=467499637 instance=ExtResource("452_ub6l7")]
+
+[node name="SM_Prop_Hose_03" parent="." unique_id=15371755 instance=ExtResource("453_kxe27")]
+
+[node name="SM_Prop_Hose_04" parent="." unique_id=894624638 instance=ExtResource("454_qmp0j")]
+
+[node name="SM_Prop_Joystick_01" parent="." unique_id=1704803876 instance=ExtResource("455_6ukne")]
+
+[node name="SM_Prop_Keycard_01" parent="." unique_id=1191322273 instance=ExtResource("456_2whyk")]
+
+[node name="SM_Prop_Keycard_02" parent="." unique_id=1832289886 instance=ExtResource("457_cdqk0")]
+
+[node name="SM_Prop_Keycard_03" parent="." unique_id=1526637018 instance=ExtResource("458_s5g8n")]
+
+[node name="SM_Prop_Ladder_01" parent="." unique_id=1400911377 instance=ExtResource("459_a5bau")]
+
+[node name="SM_Prop_Ladder_Handles_01" parent="." unique_id=543295920 instance=ExtResource("460_c2j3t")]
+
+[node name="SM_Prop_Light_Panel_01" parent="." unique_id=432100666 instance=ExtResource("461_kw3w4")]
+
+[node name="SM_Prop_Light_Panel_02" parent="." unique_id=339868512 instance=ExtResource("462_v03va")]
+
+[node name="SM_Prop_Light_Panel_03" parent="." unique_id=588292064 instance=ExtResource("463_d1ri4")]
+
+[node name="SM_Prop_Light_Panel_04" parent="." unique_id=761563166 instance=ExtResource("464_4ytb5")]
+
+[node name="SM_Prop_Light_Panel_05" parent="." unique_id=1492035621 instance=ExtResource("465_hcjfu")]
+
+[node name="SM_Prop_Light_Small_01" parent="." unique_id=1151672885 instance=ExtResource("466_5m8bg")]
+
+[node name="SM_Prop_Light_Small_02" parent="." unique_id=1061321231 instance=ExtResource("467_xpwkw")]
+
+[node name="SM_Prop_Light_Small_03" parent="." unique_id=1976687002 instance=ExtResource("468_0vhcj")]
+
+[node name="SM_Prop_Light_Small_04" parent="." unique_id=2109776759 instance=ExtResource("469_wakit")]
+
+[node name="SM_Prop_Light_Small_05" parent="." unique_id=423611967 instance=ExtResource("470_mrs60")]
+
+[node name="SM_Prop_Light_Small_06" parent="." unique_id=1656578500 instance=ExtResource("471_rmx2g")]
+
+[node name="SM_Prop_Light_Small_07" parent="." unique_id=1383730901 instance=ExtResource("472_8gjne")]
+
+[node name="SM_Prop_Light_Small_08" parent="." unique_id=1628783456 instance=ExtResource("473_g4v2q")]
+
+[node name="SM_Prop_MapTable_01" parent="." unique_id=585980256 instance=ExtResource("474_y8hht")]
+
+[node name="SM_Prop_MapTable_Top_01" parent="." unique_id=1954978477 instance=ExtResource("475_xje7q")]
+
+[node name="SM_Prop_MedicalArms_01" parent="." unique_id=1500393903 instance=ExtResource("476_c01kb")]
+
+[node name="SM_Prop_Medical_Cart_01" parent="." unique_id=2061446870 instance=ExtResource("477_dcuwb")]
+
+[node name="SM_Prop_Medical_Cart_02" parent="." unique_id=783848873 instance=ExtResource("478_vnwg7")]
+
+[node name="SM_Prop_Medical_Cart_Bare_01" parent="." unique_id=1534250781 instance=ExtResource("479_tmygi")]
+
+[node name="SM_Prop_Medical_Isolator_01" parent="." unique_id=1622913424 instance=ExtResource("480_e7yrk")]
+
+[node name="SM_Prop_Medical_Isolator_Glass_01" parent="." unique_id=555113515 instance=ExtResource("481_pl62i")]
+
+[node name="SM_Prop_Medical_Machine_01" parent="." unique_id=93884641 instance=ExtResource("482_7iew6")]
+
+[node name="SM_Prop_Medical_Scanner_01" parent="." unique_id=254342723 instance=ExtResource("483_m826r")]
+
+[node name="SM_Prop_Medical_Tube_01" parent="." unique_id=1742933362 instance=ExtResource("484_xlloi")]
+
+[node name="SM_Prop_Medical_Tube_Glass_01" parent="." unique_id=1348972577 instance=ExtResource("485_06n4b")]
+
+[node name="SM_Prop_Mine_01" parent="." unique_id=1890945590 instance=ExtResource("486_4uu5s")]
+
+[node name="SM_Prop_Missile_01" parent="." unique_id=617898571 instance=ExtResource("487_0mg0c")]
+
+[node name="SM_Prop_Missile_02" parent="." unique_id=237597844 instance=ExtResource("488_a61gq")]
+
+[node name="SM_Prop_Missile_03" parent="." unique_id=299354471 instance=ExtResource("489_0yg81")]
+
+[node name="SM_Prop_Missile_04" parent="." unique_id=736865459 instance=ExtResource("490_on2gc")]
+
+[node name="SM_Prop_Missile_05" parent="." unique_id=1317129658 instance=ExtResource("491_364yv")]
+
+[node name="SM_Prop_Missile_06" parent="." unique_id=1564988824 instance=ExtResource("492_720pf")]
+
+[node name="SM_Prop_Missile_07" parent="." unique_id=1575900280 instance=ExtResource("493_cawxl")]
+
+[node name="SM_Prop_Missile_08" parent="." unique_id=845980582 instance=ExtResource("494_hq4ur")]
+
+[node name="SM_Prop_Missile_09" parent="." unique_id=1084878214 instance=ExtResource("495_eic4d")]
+
+[node name="SM_Prop_Missile_10" parent="." unique_id=113108067 instance=ExtResource("496_d14h0")]
+
+[node name="SM_Prop_Missile_11" parent="." unique_id=1295436159 instance=ExtResource("497_mqc72")]
+
+[node name="SM_Prop_Oxygen_Tank" parent="." unique_id=1968214680 instance=ExtResource("498_p4row")]
+
+[node name="SM_Prop_Oxygen_Tank_Large" parent="." unique_id=182607578 instance=ExtResource("499_xxe3h")]
+
+[node name="SM_Prop_Oxygen_Tank_Small" parent="." unique_id=1846812233 instance=ExtResource("500_a6vo8")]
+
+[node name="SM_Prop_Pad_01" parent="." unique_id=793463134 instance=ExtResource("501_5fylq")]
+
+[node name="SM_Prop_Panel_01" parent="." unique_id=11181838 instance=ExtResource("502_05eyd")]
+
+[node name="SM_Prop_Pillar_Detail_01" parent="." unique_id=385906075 instance=ExtResource("503_shsi1")]
+
+[node name="SM_Prop_Plant_Container_01" parent="." unique_id=159575666 instance=ExtResource("504_k45ln")]
+
+[node name="SM_Prop_Plant_Container_Shelf_01" parent="." unique_id=189184848 instance=ExtResource("505_fkom1")]
+
+[node name="SM_Prop_Plant_Vase_01" parent="." unique_id=2048957257 instance=ExtResource("506_bf14k")]
+
+[node name="SM_Prop_Plant_Vase_02" parent="." unique_id=936262915 instance=ExtResource("507_sdufy")]
+
+[node name="SM_Prop_Radar_Panel_01" parent="." unique_id=983827972 instance=ExtResource("508_ua42v")]
+
+[node name="SM_Prop_Radar_Panel_02" parent="." unique_id=1144577049 instance=ExtResource("509_13spb")]
+
+[node name="SM_Prop_Satellite_01" parent="." unique_id=543081731 instance=ExtResource("510_wp1ri")]
+
+[node name="SM_Prop_Satellite_02" parent="." unique_id=607882971 instance=ExtResource("511_tfx3a")]
+
+[node name="SM_Prop_Satellite_03" parent="." unique_id=1471224824 instance=ExtResource("512_bsm4p")]
+
+[node name="SM_Prop_Satellite_04" parent="." unique_id=2045654644 instance=ExtResource("513_3jllv")]
+
+[node name="SM_Prop_Satellite_Stand_01" parent="." unique_id=324414294 instance=ExtResource("514_s48lk")]
+
+[node name="SM_Prop_Screen_01" parent="." unique_id=636046846 instance=ExtResource("515_uvu8v")]
+
+[node name="SM_Prop_Screen_02" parent="." unique_id=1463119155 instance=ExtResource("516_0dasf")]
+
+[node name="SM_Prop_Screen_03" parent="." unique_id=657591304 instance=ExtResource("517_5o72m")]
+
+[node name="SM_Prop_Screen_04" parent="." unique_id=1345316151 instance=ExtResource("518_348ao")]
+
+[node name="SM_Prop_Screen_05" parent="." unique_id=809398830 instance=ExtResource("519_knuss")]
+
+[node name="SM_Prop_Screen_06" parent="." unique_id=2013118865 instance=ExtResource("520_h2d8a")]
+
+[node name="SM_Prop_Screen_07" parent="." unique_id=1398503407 instance=ExtResource("521_kmrh4")]
+
+[node name="SM_Prop_Screen_08" parent="." unique_id=864578093 instance=ExtResource("522_o0w0d")]
+
+[node name="SM_Prop_Screen_09" parent="." unique_id=258116400 instance=ExtResource("523_2xytn")]
+
+[node name="SM_Prop_Screen_10" parent="." unique_id=869930366 instance=ExtResource("524_x0olw")]
+
+[node name="SM_Prop_Screen_11" parent="." unique_id=11973502 instance=ExtResource("525_jiy7f")]
+
+[node name="SM_Prop_Screen_Small_01" parent="." unique_id=1305693999 instance=ExtResource("526_fpfke")]
+
+[node name="SM_Prop_Screen_Small_02" parent="." unique_id=1467016878 instance=ExtResource("527_246o2")]
+
+[node name="SM_Prop_Sink_01" parent="." unique_id=1154687665 instance=ExtResource("528_ux758")]
+
+[node name="SM_Prop_Solar_Hex_01" parent="." unique_id=1217531737 instance=ExtResource("529_2mmh5")]
+
+[node name="SM_Prop_SpaceWalk_End_01" parent="." unique_id=14433593 instance=ExtResource("530_2bjeq")]
+
+[node name="SM_Prop_SpaceWalk_Tube_01" parent="." unique_id=175641641 instance=ExtResource("531_08n7o")]
+
+[node name="SM_Prop_SquareTable_01" parent="." unique_id=1150657672 instance=ExtResource("532_nuomn")]
+
+[node name="SM_Prop_StairsPlatform_01" parent="." unique_id=1412639318 instance=ExtResource("533_yqowd")]
+
+[node name="SM_Prop_StairsPlatform_02" parent="." unique_id=1319766227 instance=ExtResource("534_tb70w")]
+
+[node name="SM_Prop_Stairs_01" parent="." unique_id=914198196 instance=ExtResource("535_reeng")]
+
+[node name="SM_Prop_Stairs_02" parent="." unique_id=793572144 instance=ExtResource("536_3yiso")]
+
+[node name="SM_Prop_Stairs_03" parent="." unique_id=1355603643 instance=ExtResource("537_veea6")]
+
+[node name="SM_Prop_Stairs_04" parent="." unique_id=1921144697 instance=ExtResource("538_tod7x")]
+
+[node name="SM_Prop_Stool_01" parent="." unique_id=349813715 instance=ExtResource("539_fsckm")]
+
+[node name="SM_Prop_Stool_02" parent="." unique_id=399128862 instance=ExtResource("540_2kohp")]
+
+[node name="SM_Prop_Table_01" parent="." unique_id=978962497 instance=ExtResource("541_3nbgv")]
+
+[node name="SM_Prop_TestTubes_01" parent="." unique_id=621785062 instance=ExtResource("542_8kvj6")]
+
+[node name="SM_Prop_Test_Tube_01" parent="." unique_id=1606921806 instance=ExtResource("543_w2t2j")]
+
+[node name="SM_Prop_Test_Tube_02" parent="." unique_id=735041284 instance=ExtResource("544_2nfuc")]
+
+[node name="SM_Prop_Test_Tube_Glass_01" parent="." unique_id=767869446 instance=ExtResource("545_phtbl")]
+
+[node name="SM_Prop_Test_Tube_Glass_02" parent="." unique_id=1344949107 instance=ExtResource("546_f8qyb")]
+
+[node name="SM_Prop_Toilet_01" parent="." unique_id=205711900 instance=ExtResource("547_bjidx")]
+
+[node name="SM_Prop_Turret_Base_Double_01" parent="." unique_id=2115713141 instance=ExtResource("548_by080")]
+
+[node name="SM_Prop_Turret_Base_Double_02" parent="." unique_id=1752326452 instance=ExtResource("549_8rin5")]
+
+[node name="SM_Prop_Turret_Base_Double_03" parent="." unique_id=1117254824 instance=ExtResource("550_ansoy")]
+
+[node name="SM_Prop_Turret_Base_Double_04" parent="." unique_id=1615661937 instance=ExtResource("551_aboji")]
+
+[node name="SM_Prop_Turret_Base_Double_05" parent="." unique_id=266242740 instance=ExtResource("552_bi311")]
+
+[node name="SM_Prop_Turret_Base_Double_06" parent="." unique_id=995536056 instance=ExtResource("553_eyuqq")]
+
+[node name="SM_Prop_Turret_Base_Double_07" parent="." unique_id=1268919520 instance=ExtResource("554_6vbid")]
+
+[node name="SM_Prop_Turret_Base_Double_08" parent="." unique_id=1310671295 instance=ExtResource("555_ig0d1")]
+
+[node name="SM_Prop_Turret_Base_Double_09" parent="." unique_id=1270241514 instance=ExtResource("556_0ysuu")]
+
+[node name="SM_Prop_Turret_Base_Double_010" parent="." unique_id=1008990661 instance=ExtResource("557_lgj5y")]
+
+[node name="SM_Prop_Turret_Base_Single_01" parent="." unique_id=1320631497 instance=ExtResource("558_uful4")]
+
+[node name="SM_Prop_Turret_Base_Single_02" parent="." unique_id=712359511 instance=ExtResource("559_745kb")]
+
+[node name="SM_Prop_Turret_Base_Single_03" parent="." unique_id=140184131 instance=ExtResource("560_btiu8")]
+
+[node name="SM_Prop_Turret_Base_Single_04" parent="." unique_id=558720855 instance=ExtResource("561_th7n5")]
+
+[node name="SM_Prop_Turret_Base_Single_05" parent="." unique_id=190751246 instance=ExtResource("562_08mb6")]
+
+[node name="SM_Prop_Turret_Base_Single_06" parent="." unique_id=327387567 instance=ExtResource("563_3lujo")]
+
+[node name="SM_Prop_Turret_Base_Single_07" parent="." unique_id=696965528 instance=ExtResource("564_w3eoh")]
+
+[node name="SM_Prop_Turret_Base_Single_08" parent="." unique_id=1974710563 instance=ExtResource("565_ttrv4")]
+
+[node name="SM_Prop_Turret_Base_Single_09" parent="." unique_id=529643379 instance=ExtResource("566_sb37a")]
+
+[node name="SM_Prop_Turret_Base_Single_010" parent="." unique_id=1326221834 instance=ExtResource("567_fdn40")]
+
+[node name="SM_Prop_Turret_Gattling_Barrel_01" parent="." unique_id=404849953 instance=ExtResource("568_d2n5e")]
+
+[node name="SM_Prop_Turret_Gattling_Barrel_01_L" parent="." unique_id=387839598 instance=ExtResource("569_nqv85")]
+
+[node name="SM_Prop_Turret_Gattling_Barrel_01_R" parent="." unique_id=1149056021 instance=ExtResource("570_n2wlv")]
+
+[node name="SM_Prop_Turret_Gattling_Barrel_02" parent="." unique_id=567603507 instance=ExtResource("571_qurlx")]
+
+[node name="SM_Prop_Turret_Gattling_Barrel_02_L" parent="." unique_id=1860708820 instance=ExtResource("572_ux6hb")]
+
+[node name="SM_Prop_Turret_Gattling_Barrel_02_R" parent="." unique_id=1977712341 instance=ExtResource("573_a7tgi")]
+
+[node name="SM_Prop_Turret_Gattling_Barrel_03" parent="." unique_id=919696635 instance=ExtResource("574_nnfy1")]
+
+[node name="SM_Prop_Turret_Gattling_Barrel_03_L" parent="." unique_id=1343377348 instance=ExtResource("575_x5btk")]
+
+[node name="SM_Prop_Turret_Gattling_Barrel_03_R" parent="." unique_id=531591626 instance=ExtResource("576_yeiwm")]
+
+[node name="SM_Prop_Turret_Gattling_Base_01" parent="." unique_id=2058944500 instance=ExtResource("577_nhp12")]
+
+[node name="SM_Prop_Turret_Gattling_Base_02" parent="." unique_id=2093358308 instance=ExtResource("578_gare8")]
+
+[node name="SM_Prop_Turret_Gattling_Base_03" parent="." unique_id=767706881 instance=ExtResource("579_t3fb8")]
+
+[node name="SM_Prop_Turret_Gattling_Base_Double_01" parent="." unique_id=312161819 instance=ExtResource("580_fx42o")]
+
+[node name="SM_Prop_Turret_Gattling_Base_Double_02" parent="." unique_id=673612368 instance=ExtResource("581_piqcu")]
+
+[node name="SM_Prop_Turret_Gattling_Base_Double_03" parent="." unique_id=1585906948 instance=ExtResource("582_vcbsn")]
+
+[node name="SM_Prop_Turret_Large_01" parent="." unique_id=1039224855 instance=ExtResource("583_hlu76")]
+
+[node name="SM_Prop_Turret_Large_02" parent="." unique_id=1463371017 instance=ExtResource("584_ijud8")]
+
+[node name="SM_Prop_Turret_Large_Barrel_01" parent="." unique_id=2132937548 instance=ExtResource("585_11pvr")]
+
+[node name="SM_Prop_Turret_Large_Barrel_Double_01" parent="." unique_id=1810711258 instance=ExtResource("586_pkgtt")]
+
+[node name="SM_Prop_Turret_Large_Top_01" parent="." unique_id=1809059077 instance=ExtResource("587_pw6vr")]
+
+[node name="SM_Prop_Turret_Large_Top_Double_01" parent="." unique_id=2053443061 instance=ExtResource("588_0prmr")]
+
+[node name="SM_Prop_Turret_Laser_Barrel_01" parent="." unique_id=244898534 instance=ExtResource("589_sjsw4")]
+
+[node name="SM_Prop_Turret_Laser_Barrel_02" parent="." unique_id=433875839 instance=ExtResource("590_ixecc")]
+
+[node name="SM_Prop_Turret_Laser_Barrel_03" parent="." unique_id=540804005 instance=ExtResource("591_qvgay")]
+
+[node name="SM_Prop_Turret_Laser_Barrel_Double_01" parent="." unique_id=1527377537 instance=ExtResource("592_hteol")]
+
+[node name="SM_Prop_Turret_Laser_Barrel_Double_02" parent="." unique_id=21197537 instance=ExtResource("593_snjh3")]
+
+[node name="SM_Prop_Turret_Laser_Barrel_Double_03" parent="." unique_id=525745316 instance=ExtResource("594_4t27k")]
+
+[node name="SM_Prop_Turret_Laser_Base_01" parent="." unique_id=1725208736 instance=ExtResource("595_iefcd")]
+
+[node name="SM_Prop_Turret_Laser_Base_02" parent="." unique_id=1938808681 instance=ExtResource("596_klhla")]
+
+[node name="SM_Prop_Turret_Laser_Base_03" parent="." unique_id=1148953048 instance=ExtResource("597_2vx8f")]
+
+[node name="SM_Prop_Turret_Laser_Base_Double_01" parent="." unique_id=525674017 instance=ExtResource("598_wxheu")]
+
+[node name="SM_Prop_Turret_Laser_Base_Double_02" parent="." unique_id=177762577 instance=ExtResource("599_u7ujv")]
+
+[node name="SM_Prop_Turret_Laser_Base_Double_03" parent="." unique_id=2021792606 instance=ExtResource("600_f2ctx")]
+
+[node name="SM_Prop_Turret_MissileLarge_Base_01" parent="." unique_id=540297172 instance=ExtResource("601_wf40q")]
+
+[node name="SM_Prop_Turret_MissileLarge_Base_Double_01" parent="." unique_id=65229121 instance=ExtResource("602_0kjdx")]
+
+[node name="SM_Prop_Turret_Missile_Barrel_01" parent="." unique_id=1540095247 instance=ExtResource("603_1wmsa")]
+
+[node name="SM_Prop_Turret_Missile_Barrel_02" parent="." unique_id=1135284873 instance=ExtResource("604_ei4v5")]
+
+[node name="SM_Prop_Turret_Missile_Barrel_03" parent="." unique_id=1519416936 instance=ExtResource("605_32eoq")]
+
+[node name="SM_Prop_Turret_Missile_Barrel_Double_01" parent="." unique_id=840607828 instance=ExtResource("606_jjtr0")]
+
+[node name="SM_Prop_Turret_Missile_Barrel_Double_02" parent="." unique_id=1865511870 instance=ExtResource("607_q0biv")]
+
+[node name="SM_Prop_Turret_Missile_Barrel_Double_03" parent="." unique_id=50622084 instance=ExtResource("608_sq4d6")]
+
+[node name="SM_Prop_Turret_Missile_Base_01" parent="." unique_id=665731832 instance=ExtResource("609_lblqr")]
+
+[node name="SM_Prop_Turret_Missile_Base_02" parent="." unique_id=1269753866 instance=ExtResource("610_1mv7i")]
+
+[node name="SM_Prop_Turret_Missile_Base_03" parent="." unique_id=1553058672 instance=ExtResource("611_g8kop")]
+
+[node name="SM_Prop_Turret_Missile_Base_Double_01" parent="." unique_id=1876467283 instance=ExtResource("612_bfx8r")]
+
+[node name="SM_Prop_Turret_Missile_Base_Double_02" parent="." unique_id=511062761 instance=ExtResource("613_yv1op")]
+
+[node name="SM_Prop_Turret_Missile_Base_Double_03" parent="." unique_id=474686220 instance=ExtResource("614_7p6hu")]
+
+[node name="SM_Prop_Turret_Small_Ceiling_01" parent="." unique_id=28679691 instance=ExtResource("615_bnpyl")]
+
+[node name="SM_Prop_Turret_Small_Floor_01" parent="." unique_id=1143120060 instance=ExtResource("616_u7ah2")]
+
+[node name="SM_Prop_Turret_Small_Gun_Ceiling_01" parent="." unique_id=1979996708 instance=ExtResource("617_nfgxy")]
+
+[node name="SM_Prop_Turret_Small_Gun_Floor_01" parent="." unique_id=377008534 instance=ExtResource("618_rbuvr")]
+
+[node name="SM_Prop_Turret_Small_Pivot_Ceiling_01" parent="." unique_id=1384875167 instance=ExtResource("619_i8ejx")]
+
+[node name="SM_Prop_Turret_Small_Pivot_Floor_01" parent="." unique_id=1168902783 instance=ExtResource("620_pu1h0")]
+
+[node name="SM_Prop_Wall_Panel_Small_01" parent="." unique_id=1270772170 instance=ExtResource("621_2bn60")]
+
+[node name="SM_Prop_Wall_Panel_Small_02" parent="." unique_id=1352637477 instance=ExtResource("622_kld2i")]
+
+[node name="SM_Prop_Wall_Panel_Small_03" parent="." unique_id=1488365551 instance=ExtResource("623_4r110")]
+
+[node name="SM_Prop_Wires_01" parent="." unique_id=1608939825 instance=ExtResource("624_afgag")]
+
+[node name="SM_Prop_Wires_02" parent="." unique_id=286981446 instance=ExtResource("625_i7810")]
+
+[node name="SM_Prop_Wires_03" parent="." unique_id=1160628522 instance=ExtResource("626_ml7yg")]
+
+[node name="SM_Prop_Wires_04" parent="." unique_id=1555001357 instance=ExtResource("627_f4qur")]
+
+[node name="SM_Prop_Wires_05" parent="." unique_id=869051190 instance=ExtResource("628_5dwug")]
+
+[node name="SM_Ship_Bomber_01" parent="." unique_id=1408494772 instance=ExtResource("629_n07nm")]
+
+[node name="SM_Ship_Bomber_02" parent="." unique_id=720764361 instance=ExtResource("630_xb1nq")]
+
+[node name="SM_Ship_Bomber_03" parent="." unique_id=1470054582 instance=ExtResource("631_5gum8")]
+
+[node name="SM_Ship_Bomber_04" parent="." unique_id=1917580130 instance=ExtResource("632_3kny4")]
+
+[node name="SM_Ship_Colossal_01" parent="." unique_id=265074784 instance=ExtResource("633_0t3st")]
+
+[node name="SM_Ship_Cruiser_01" parent="." unique_id=1105457703 instance=ExtResource("634_m5e8b")]
+
+[node name="SM_Ship_Cruiser_02" parent="." unique_id=1588790365 instance=ExtResource("635_q1m83")]
+
+[node name="SM_Ship_Cruiser_03" parent="." unique_id=542739794 instance=ExtResource("636_dt5tm")]
+
+[node name="SM_Ship_Fighter_01" parent="." unique_id=1169925931 instance=ExtResource("637_wa1yo")]
+
+[node name="SM_Ship_Fighter_02" parent="." unique_id=1555925712 instance=ExtResource("638_2gw30")]
+
+[node name="SM_Ship_Fighter_03" parent="." unique_id=2133402603 instance=ExtResource("639_4ewga")]
+
+[node name="SM_Ship_Fighter_04" parent="." unique_id=397999284 instance=ExtResource("640_dma3j")]
+
+[node name="SM_Ship_Fighter_05" parent="." unique_id=805354020 instance=ExtResource("641_uth6b")]
+
+[node name="SM_Ship_Fighter_Heavy_01" parent="." unique_id=842598696 instance=ExtResource("642_c4oal")]
+
+[node name="SM_Ship_Fighter_Heavy_02" parent="." unique_id=807345570 instance=ExtResource("643_2v7xd")]
+
+[node name="SM_Ship_Fighter_Heavy_03" parent="." unique_id=800530274 instance=ExtResource("644_xhhpl")]
+
+[node name="SM_Ship_Fighter_Heavy_04" parent="." unique_id=1172433128 instance=ExtResource("645_xkp58")]
+
+[node name="SM_Ship_Galactic_Carrier_01" parent="." unique_id=1686055372 instance=ExtResource("646_hcs0u")]
+
+[node name="SM_Ship_Galactic_Carrier_Armor_01" parent="." unique_id=159475403 instance=ExtResource("647_tnx7b")]
+
+[node name="SM_Ship_Galactic_Carrier_Armor_Gun_01" parent="." unique_id=1821539350 instance=ExtResource("648_nguck")]
+
+[node name="SM_Ship_Galactic_Carrier_Armor_Gun_02" parent="." unique_id=512052165 instance=ExtResource("649_1m1lq")]
+
+[node name="SM_Ship_Galactic_Carrier_Armor_Gun_03" parent="." unique_id=2146050788 instance=ExtResource("650_dovdq")]
+
+[node name="SM_Ship_Galactic_Carrier_Armor_Gun_04" parent="." unique_id=1095999950 instance=ExtResource("651_8sfqe")]
+
+[node name="SM_Ship_Galactic_Carrier_Armor_Gun_05" parent="." unique_id=1867597914 instance=ExtResource("652_ionq1")]
+
+[node name="SM_Ship_Galactic_Carrier_Fin_L_01" parent="." unique_id=1991730340 instance=ExtResource("653_4u8do")]
+
+[node name="SM_Ship_Galactic_Carrier_Fin_L_02" parent="." unique_id=1625508268 instance=ExtResource("654_pig4f")]
+
+[node name="SM_Ship_Galactic_Carrier_Fin_R_01" parent="." unique_id=1403071490 instance=ExtResource("655_0p6vg")]
+
+[node name="SM_Ship_Galactic_Carrier_Fin_R_02" parent="." unique_id=1216305211 instance=ExtResource("656_7v26n")]
+
+[node name="SM_Ship_Galactic_Carrier_Gun_01" parent="." unique_id=704997794 instance=ExtResource("657_b2pqa")]
+
+[node name="SM_Ship_Galactic_Carrier_Gun_02" parent="." unique_id=2097455108 instance=ExtResource("658_oycxl")]
+
+[node name="SM_Ship_Galactic_Carrier_Gun_03" parent="." unique_id=1338523429 instance=ExtResource("659_51hnx")]
+
+[node name="SM_Ship_Galactic_Carrier_Gun_04" parent="." unique_id=957344561 instance=ExtResource("660_7pyjk")]
+
+[node name="SM_Ship_Galactic_Carrier_Gun_05" parent="." unique_id=370034905 instance=ExtResource("661_a7tsy")]
+
+[node name="SM_Ship_Galactic_Carrier_Gun_06" parent="." unique_id=552496817 instance=ExtResource("662_pmesy")]
+
+[node name="SM_Ship_Galactic_Carrier_Gun_07" parent="." unique_id=1007650720 instance=ExtResource("663_r8six")]
+
+[node name="SM_Ship_Galactic_Carrier_Gun_08" parent="." unique_id=149951566 instance=ExtResource("664_jv4xx")]
+
+[node name="SM_Ship_Galactic_Carrier_Gun_09" parent="." unique_id=1209637222 instance=ExtResource("665_7wuat")]
+
+[node name="SM_Ship_Galactic_Carrier_Gun_10" parent="." unique_id=1686048402 instance=ExtResource("666_vnb2k")]
+
+[node name="SM_Ship_Galactic_Carrier_Gun_11" parent="." unique_id=1125441340 instance=ExtResource("667_tpfv8")]
+
+[node name="SM_Ship_Galactic_Carrier_Gun_12" parent="." unique_id=1401985514 instance=ExtResource("668_56rr0")]
+
+[node name="SM_Ship_Galactic_Carrier_Gun_13" parent="." unique_id=451551545 instance=ExtResource("669_08gxn")]
+
+[node name="SM_Ship_Galactic_Carrier_Gun_14" parent="." unique_id=1935043660 instance=ExtResource("670_0io2e")]
+
+[node name="SM_Ship_Galactic_Carrier_Gun_15" parent="." unique_id=476261756 instance=ExtResource("671_n5i1r")]
+
+[node name="SM_Ship_Galactic_Carrier_Gun_16" parent="." unique_id=1077512958 instance=ExtResource("672_pdm3a")]
+
+[node name="SM_Ship_Massive_Transport_01" parent="." unique_id=370946086 instance=ExtResource("673_1q7e5")]
+
+[node name="SM_Ship_Station_01" parent="." unique_id=649453021 instance=ExtResource("674_dkjaa")]
+
+[node name="SM_Ship_Station_02" parent="." unique_id=43888404 instance=ExtResource("675_kekan")]
+
+[node name="SM_Ship_Station_03" parent="." unique_id=359777110 instance=ExtResource("676_xr3q6")]
+
+[node name="SM_Ship_Station_04" parent="." unique_id=1329437401 instance=ExtResource("677_3nrxn")]
+
+[node name="SM_Ship_Station_05" parent="." unique_id=1246164065 instance=ExtResource("678_32t1k")]
+
+[node name="SM_Ship_Station_06" parent="." unique_id=61984230 instance=ExtResource("679_4xj34")]
+
+[node name="SM_Ship_Stealth_01" parent="." unique_id=242510046 instance=ExtResource("680_dapy7")]
+
+[node name="SM_Ship_Stealth_02" parent="." unique_id=1644740367 instance=ExtResource("681_u37y4")]
+
+[node name="SM_Ship_Stealth_03" parent="." unique_id=1773625713 instance=ExtResource("682_1fjyc")]
+
+[node name="SM_Ship_Stealth_04" parent="." unique_id=905887794 instance=ExtResource("683_aiaph")]
+
+[node name="SM_Ship_Stealth_05" parent="." unique_id=1796004820 instance=ExtResource("684_i7jly")]
+
+[node name="SM_Ship_Transport_01" parent="." unique_id=1129140727 instance=ExtResource("685_wtl4u")]
+
+[node name="SM_Ship_Transport_CargoPod_01" parent="." unique_id=1380428009 instance=ExtResource("686_k6fxj")]
+
+[node name="SM_Ship_Transport_CargoPod_02" parent="." unique_id=484330663 instance=ExtResource("687_52dy0")]
+
+[node name="SM_Ship_Transport_CargoPod_03" parent="." unique_id=960369018 instance=ExtResource("688_213kk")]
+
+[node name="SM_Ship_Transport_CargoPod_04" parent="." unique_id=114179407 instance=ExtResource("689_3c2dr")]
+
+[node name="SM_Ship_Transport_CargoPod_05" parent="." unique_id=1907244996 instance=ExtResource("690_pp5a8")]
+
+[node name="SM_Ship_Transport_CargoPod_06" parent="." unique_id=1345143237 instance=ExtResource("691_f66s3")]
+
+[node name="SM_Ship_Transport_CargoPod_07" parent="." unique_id=1152053332 instance=ExtResource("692_rq165")]
+
+[node name="SM_Ship_Transport_CargoPod_08" parent="." unique_id=253179953 instance=ExtResource("693_31gfc")]
+
+[node name="SM_SignBorder_Ammo_01" parent="." unique_id=1735479643 instance=ExtResource("694_sldc7")]
+
+[node name="SM_SignBorder_Arrow_01" parent="." unique_id=1693880769 instance=ExtResource("695_x63yu")]
+
+[node name="SM_SignBorder_Arrow_02" parent="." unique_id=1281673864 instance=ExtResource("696_i1j6b")]
+
+[node name="SM_SignBorder_Battery_01" parent="." unique_id=1925662706 instance=ExtResource("697_6isha")]
+
+[node name="SM_SignBorder_Cog_01" parent="." unique_id=772354123 instance=ExtResource("698_t4hwa")]
+
+[node name="SM_SignBorder_Communication_01" parent="." unique_id=759079384 instance=ExtResource("699_4wd7u")]
+
+[node name="SM_SignBorder_Electric_01" parent="." unique_id=1520722584 instance=ExtResource("700_1h20y")]
+
+[node name="SM_SignBorder_Electric_02" parent="." unique_id=957672051 instance=ExtResource("701_g6y0j")]
+
+[node name="SM_SignBorder_Fire_01" parent="." unique_id=1097853105 instance=ExtResource("702_xg17q")]
+
+[node name="SM_SignBorder_Fix_01" parent="." unique_id=1426915180 instance=ExtResource("703_lc2ov")]
+
+[node name="SM_SignBorder_Heart_01" parent="." unique_id=1963107996 instance=ExtResource("704_c3xll")]
+
+[node name="SM_SignBorder_Leaf_01" parent="." unique_id=1459786943 instance=ExtResource("705_jxkll")]
+
+[node name="SM_SignBorder_Medical_02" parent="." unique_id=925502396 instance=ExtResource("706_lr8ft")]
+
+[node name="SM_SignBorder_Medical_03" parent="." unique_id=737570425 instance=ExtResource("707_f6gj4")]
+
+[node name="SM_SignBorder_Nuclear_01" parent="." unique_id=1067283676 instance=ExtResource("708_2mtyc")]
+
+[node name="SM_SignBorder_Number_01" parent="." unique_id=793591501 instance=ExtResource("709_pkimw")]
+
+[node name="SM_SignBorder_Number_02" parent="." unique_id=2137676934 instance=ExtResource("710_ajcui")]
+
+[node name="SM_SignBorder_Number_03" parent="." unique_id=360483824 instance=ExtResource("711_wopq5")]
+
+[node name="SM_SignBorder_Number_04" parent="." unique_id=1657321189 instance=ExtResource("712_qph1p")]
+
+[node name="SM_SignBorder_Number_05" parent="." unique_id=1847504793 instance=ExtResource("713_u74vu")]
+
+[node name="SM_SignBorder_Number_06" parent="." unique_id=872754340 instance=ExtResource("714_uniuq")]
+
+[node name="SM_SignBorder_Number_07" parent="." unique_id=284999987 instance=ExtResource("715_rmaov")]
+
+[node name="SM_SignBorder_Number_08" parent="." unique_id=890035623 instance=ExtResource("716_0mddg")]
+
+[node name="SM_SignBorder_Number_09" parent="." unique_id=1956413519 instance=ExtResource("717_puh7p")]
+
+[node name="SM_SignBorder_Planet_01" parent="." unique_id=827903859 instance=ExtResource("718_7vidb")]
+
+[node name="SM_SignBorder_Plant_01" parent="." unique_id=694183872 instance=ExtResource("719_gqnr4")]
+
+[node name="SM_SignBorder_Rocket_01" parent="." unique_id=1357061339 instance=ExtResource("720_p1qk0")]
+
+[node name="SM_SignBorder_Science_01" parent="." unique_id=1612695432 instance=ExtResource("721_rgcmj")]
+
+[node name="SM_SignBorder_Shield_01" parent="." unique_id=839550548 instance=ExtResource("722_myb1f")]
+
+[node name="SM_SignBorder_Ship_01" parent="." unique_id=604523735 instance=ExtResource("723_418io")]
+
+[node name="SM_SignBorder_Toxic_01" parent="." unique_id=695587135 instance=ExtResource("724_52sew")]
+
+[node name="SM_SignBorder_Warning_01" parent="." unique_id=995652634 instance=ExtResource("725_eo7ba")]
+
+[node name="SM_SignBorder_Water_01" parent="." unique_id=407106678 instance=ExtResource("726_vk3tq")]
+
+[node name="SM_Sign_AirLock_01" parent="." unique_id=1576795648 instance=ExtResource("727_mrggu")]
+
+[node name="SM_Sign_Bridge_01" parent="." unique_id=439088151 instance=ExtResource("728_qj1q8")]
+
+[node name="SM_Sign_CrewQuarters_01" parent="." unique_id=1196558936 instance=ExtResource("729_i8sad")]
+
+[node name="SM_Sign_EngineRoom_01" parent="." unique_id=1263781714 instance=ExtResource("730_a18m8")]
+
+[node name="SM_Sign_EscpapePod_01" parent="." unique_id=192282890 instance=ExtResource("731_f4xoo")]
+
+[node name="SM_Sign_Exit_02" parent="." unique_id=1301900831 instance=ExtResource("732_gja4g")]
+
+[node name="SM_Sign_Hanger_01" parent="." unique_id=553244197 instance=ExtResource("733_gg6au")]
+
+[node name="SM_Sign_Hydroponics_01" parent="." unique_id=2057827410 instance=ExtResource("734_hu00k")]
+
+[node name="SM_Sign_Hydroponics_02" parent="." unique_id=1648355070 instance=ExtResource("735_4wtk5")]
+
+[node name="SM_Sign_Kitchen_01" parent="." unique_id=409373415 instance=ExtResource("736_2a4om")]
+
+[node name="SM_Sign_LoadingBay_01" parent="." unique_id=483207788 instance=ExtResource("737_yxuvc")]
+
+[node name="SM_Sign_LockerRoom_01" parent="." unique_id=2010010154 instance=ExtResource("738_qkggh")]
+
+[node name="SM_Sign_MedicalBay_01" parent="." unique_id=1604455087 instance=ExtResource("739_7b41a")]
+
+[node name="SM_Sign_ScienceLab_01" parent="." unique_id=1998379046 instance=ExtResource("740_d0j5g")]
+
+[node name="SM_Tunnel_Mesh" parent="." unique_id=1812181827 instance=ExtResource("741_r6dq3")]
+
+[node name="SM_Veh_01" parent="." unique_id=96696213 instance=ExtResource("742_bp0sk")]
+
+[node name="SM_Veh_02" parent="." unique_id=233875416 instance=ExtResource("743_3bi8s")]
+
+[node name="SM_Veh_03" parent="." unique_id=719057483 instance=ExtResource("744_csghy")]
+
+[node name="SM_Veh_04" parent="." unique_id=421178332 instance=ExtResource("745_hnt3g")]
+
+[node name="SM_Veh_Beacon_01" parent="." unique_id=115027146 instance=ExtResource("746_4d5qo")]
+
+[node name="SM_Veh_Drone_Attach_01" parent="." unique_id=1751844524 instance=ExtResource("747_ikmkg")]
+
+[node name="SM_Veh_Drone_Repair_01" parent="." unique_id=803098001 instance=ExtResource("748_xwgdd")]
+
+[node name="SM_Veh_EscapePod_Large_01" parent="." unique_id=1149098069 instance=ExtResource("749_7v2hb")]
+
+[node name="SM_Veh_EscapePod_Small_01" parent="." unique_id=679629313 instance=ExtResource("750_8bune")]
+
+[node name="SM_Veh_MissleRack_01" parent="." unique_id=1208497244 instance=ExtResource("751_61rn8")]
+
+[node name="SM_Veh_Part_Body_01" parent="." unique_id=254269705 instance=ExtResource("752_186gj")]
+
+[node name="SM_Veh_Part_Body_02" parent="." unique_id=821108914 instance=ExtResource("753_i3pyx")]
+
+[node name="SM_Veh_Part_Body_03" parent="." unique_id=1227637324 instance=ExtResource("754_xynup")]
+
+[node name="SM_Veh_Part_Body_04" parent="." unique_id=1099624065 instance=ExtResource("755_vu4tl")]
+
+[node name="SM_Veh_Part_Cockpit_01" parent="." unique_id=455953999 instance=ExtResource("756_781hk")]
+
+[node name="SM_Veh_Part_Cockpit_02" parent="." unique_id=882871533 instance=ExtResource("757_fukx4")]
+
+[node name="SM_Veh_Part_Cockpit_03" parent="." unique_id=884030767 instance=ExtResource("758_7qeo0")]
+
+[node name="SM_Veh_Part_Cockpit_04" parent="." unique_id=1454939711 instance=ExtResource("759_2ks1s")]
+
+[node name="SM_Veh_Part_Cockpit_05" parent="." unique_id=446542814 instance=ExtResource("760_vtilp")]
+
+[node name="SM_Veh_Part_Engine_01" parent="." unique_id=652301298 instance=ExtResource("761_spifs")]
+
+[node name="SM_Veh_Part_Engine_02" parent="." unique_id=1357530718 instance=ExtResource("762_y4dae")]
+
+[node name="SM_Veh_Part_Engine_03" parent="." unique_id=1606594901 instance=ExtResource("763_hurhk")]
+
+[node name="SM_Veh_Part_Engine_04" parent="." unique_id=1922011831 instance=ExtResource("764_8dy7u")]
+
+[node name="SM_Veh_Part_Engine_05" parent="." unique_id=916878674 instance=ExtResource("765_je2wx")]
+
+[node name="SM_Veh_Part_Engine_06" parent="." unique_id=1615680485 instance=ExtResource("766_ptdoj")]
+
+[node name="SM_Veh_Part_Engine_07" parent="." unique_id=384539534 instance=ExtResource("767_y1kt8")]
+
+[node name="SM_Veh_Part_Engine_08" parent="." unique_id=2069620444 instance=ExtResource("768_aacoq")]
+
+[node name="SM_Veh_Part_Engine_09" parent="." unique_id=2021266445 instance=ExtResource("769_5tsfs")]
+
+[node name="SM_Veh_Part_LandingGear_01" parent="." unique_id=18809863 instance=ExtResource("770_2nhxx")]
+
+[node name="SM_Veh_Part_LandingGear_02" parent="." unique_id=803897891 instance=ExtResource("771_ff43b")]
+
+[node name="SM_Veh_Part_LandingGear_Flat_01" parent="." unique_id=1692720654 instance=ExtResource("772_ss6d8")]
+
+[node name="SM_Veh_Part_LandingGear_Flat_02" parent="." unique_id=322483542 instance=ExtResource("773_a4gsy")]
+
+[node name="SM_Veh_Part_LandingGear_WheelPart_01" parent="." unique_id=84113303 instance=ExtResource("774_nsvvs")]
+
+[node name="SM_Veh_Part_LandingGear_WheelPart_02" parent="." unique_id=1006333285 instance=ExtResource("775_c67dv")]
+
+[node name="SM_Veh_Part_Misc_01" parent="." unique_id=1364429156 instance=ExtResource("776_4liiy")]
+
+[node name="SM_Veh_Part_Misc_02" parent="." unique_id=1836696568 instance=ExtResource("777_w70as")]
+
+[node name="SM_Veh_Part_Misc_03" parent="." unique_id=92232980 instance=ExtResource("778_oslcb")]
+
+[node name="SM_Veh_Part_Misc_04" parent="." unique_id=1078751775 instance=ExtResource("779_rqf5l")]
+
+[node name="SM_Veh_Part_Misc_05" parent="." unique_id=1832090287 instance=ExtResource("780_7bwpv")]
+
+[node name="SM_Veh_Part_Misc_06" parent="." unique_id=1732496060 instance=ExtResource("781_hp65n")]
+
+[node name="SM_Veh_Part_Misc_07" parent="." unique_id=778598185 instance=ExtResource("782_juqht")]
+
+[node name="SM_Veh_Part_Misc_08" parent="." unique_id=10561281 instance=ExtResource("783_wnyfg")]
+
+[node name="SM_Veh_Part_Misc_09" parent="." unique_id=1240470814 instance=ExtResource("784_ehc55")]
+
+[node name="SM_Veh_Part_Misc_010" parent="." unique_id=1100300035 instance=ExtResource("785_jrq3c")]
+
+[node name="SM_Veh_Part_Misc_011" parent="." unique_id=224856029 instance=ExtResource("786_n3hqy")]
+
+[node name="SM_Veh_Part_Misc_012" parent="." unique_id=852487022 instance=ExtResource("787_k8810")]
+
+[node name="SM_Veh_Part_Misc_013" parent="." unique_id=981718170 instance=ExtResource("788_brdmg")]
+
+[node name="SM_Veh_Part_Misc_014" parent="." unique_id=1177667604 instance=ExtResource("789_rempt")]
+
+[node name="SM_Veh_Part_Misc_015" parent="." unique_id=1451748290 instance=ExtResource("790_yh255")]
+
+[node name="SM_Veh_Part_Misc_016" parent="." unique_id=350545793 instance=ExtResource("791_pdcjr")]
+
+[node name="SM_Veh_Part_Misc_017" parent="." unique_id=686581724 instance=ExtResource("792_dxplc")]
+
+[node name="SM_Veh_Part_Misc_018" parent="." unique_id=1166470298 instance=ExtResource("793_rln27")]
+
+[node name="SM_Veh_Part_Misc_019" parent="." unique_id=1756885755 instance=ExtResource("794_4c2qj")]
+
+[node name="SM_Veh_Part_Misc_020" parent="." unique_id=1635886608 instance=ExtResource("795_8hpd6")]
+
+[node name="SM_Veh_Part_Misc_021" parent="." unique_id=1497111620 instance=ExtResource("796_gcrhh")]
+
+[node name="SM_Veh_Part_Misc_022" parent="." unique_id=810049235 instance=ExtResource("797_rx4lb")]
+
+[node name="SM_Veh_Part_Misc_023" parent="." unique_id=1783936081 instance=ExtResource("798_8be58")]
+
+[node name="SM_Veh_Part_Wing_01" parent="." unique_id=1359682899 instance=ExtResource("799_aaeob")]
+
+[node name="SM_Veh_Part_Wing_02" parent="." unique_id=1217101680 instance=ExtResource("800_icftg")]
+
+[node name="SM_Veh_Part_Wing_03" parent="." unique_id=1194869306 instance=ExtResource("801_dcphp")]
+
+[node name="SM_Veh_Part_Wing_04" parent="." unique_id=249740040 instance=ExtResource("802_r5fuh")]
+
+[node name="SM_Veh_Part_Wing_05" parent="." unique_id=1291809477 instance=ExtResource("803_5lwjt")]
+
+[node name="SM_Veh_Part_Wing_06" parent="." unique_id=182628183 instance=ExtResource("804_6srfo")]
+
+[node name="SM_Veh_Part_Wing_07" parent="." unique_id=223549561 instance=ExtResource("805_rpx7d")]
+
+[node name="SM_Veh_Part_Wing_08" parent="." unique_id=1021429748 instance=ExtResource("806_v67no")]
+
+[node name="SM_Veh_Part_Wing_09" parent="." unique_id=403817577 instance=ExtResource("807_yq6qv")]
+
+[node name="SM_Veh_Part_Wing_010" parent="." unique_id=1663245824 instance=ExtResource("808_0r18a")]
+
+[node name="SM_Veh_Part_Wing_011" parent="." unique_id=1414986906 instance=ExtResource("809_6wton")]
+
+[node name="SM_Veh_Part_Wing_012" parent="." unique_id=1905397683 instance=ExtResource("810_n7le8")]
+
+[node name="SM_Veh_Part_Wing_013" parent="." unique_id=761842374 instance=ExtResource("811_2amlj")]
+
+[node name="SM_Veh_Part_Wing_014" parent="." unique_id=1076292364 instance=ExtResource("812_y062c")]
+
+[node name="SM_Veh_Part_Wing_015" parent="." unique_id=1620089247 instance=ExtResource("813_k2wjx")]
+
+[node name="SM_Veh_Part_Wing_016" parent="." unique_id=685854022 instance=ExtResource("814_b55j4")]
+
+[node name="SM_Veh_POV_Cockpit_01" parent="." unique_id=721568763 instance=ExtResource("815_io8gj")]
+
+[node name="SM_Veh_POV_Cockpit_Frame_01" parent="." unique_id=760178659 instance=ExtResource("816_2wsqb")]
+
+[node name="SM_Veh_POV_Cockpit_Frame_02" parent="." unique_id=167432971 instance=ExtResource("817_xmhb5")]
+
+[node name="SM_Veh_POV_Cockpit_Frame_03" parent="." unique_id=1847069802 instance=ExtResource("818_50ob7")]
+
+[node name="SM_Veh_POV_Cockpit_Frame_Glass_01" parent="." unique_id=657170420 instance=ExtResource("819_v05fx")]
+
+[node name="SM_Veh_POV_Cockpit_Frame_Glass_02" parent="." unique_id=1401911334 instance=ExtResource("820_6ixiw")]
+
+[node name="SM_Veh_POV_Cockpit_Frame_Glass_03" parent="." unique_id=1053150606 instance=ExtResource("821_4t6qp")]
+
+[node name="SM_Veh_POV_Joystick_01" parent="." unique_id=528162757 instance=ExtResource("822_t15j5")]
+
+[node name="SM_Veh_Sweepo_01" parent="." unique_id=1446382260 instance=ExtResource("823_ujqi6")]
+
+[node name="SM_Veh_Sweepo_Brush_01" parent="." unique_id=999028490 instance=ExtResource("824_sl225")]
+
+[node name="SM_Veh_Sweepo_Wheel_L_01" parent="." unique_id=2052519696 instance=ExtResource("825_l252j")]
+
+[node name="SM_Veh_Sweepo_Wheel_R_01" parent="." unique_id=1681403237 instance=ExtResource("826_n7eiy")]
+
+[node name="SM_Veh_WarpGate_Glow_01" parent="." unique_id=2055302849 instance=ExtResource("827_5q42v")]
+
+[node name="SM_Veh_WarpGate_Inner_01" parent="." unique_id=1806119897 instance=ExtResource("828_enk8f")]
+
+[node name="SM_Veh_WarpGate_Outer_01" parent="." unique_id=1787941804 instance=ExtResource("829_b6fcx")]
+
+[node name="SM_Wep_Pistol_01" parent="." unique_id=692010347 instance=ExtResource("830_xw07l")]
+
+[node name="SM_Wep_Pistol_Trigger_01" parent="." unique_id=442488770 instance=ExtResource("831_s1cfx")]
+
+[node name="SM_Wep_Rifle_01" parent="." unique_id=1465469186 instance=ExtResource("832_ur5g5")]
+
+[node name="SM_Wep_Shield_01" parent="." unique_id=644944289 instance=ExtResource("833_17yql")]
+
+[node name="SM_Wep_Shield_Extended_01" parent="." unique_id=1795862011 instance=ExtResource("834_fsfpn")]
+
+[node name="SM_Wep_Shield_Extended_Energy_01" parent="." unique_id=1459951311 instance=ExtResource("835_6tgpv")]
+
+[node name="SM_Wep_Shotgun_01" parent="." unique_id=154881056 instance=ExtResource("836_42pda")]
+
+[node name="SM_Wep_Sword_01" parent="." unique_id=1655564417 instance=ExtResource("837_vhvbl")]
+
+[node name="SM_Wep_Sword_Double_01" parent="." unique_id=2002747930 instance=ExtResource("838_0odgk")]
+
+[node name="SM_Wep_Sword_Double_Energy_01" parent="." unique_id=531113122 instance=ExtResource("839_ye1u0")]
+
+[node name="SM_Wep_Sword_Energy_01" parent="." unique_id=2070077597 instance=ExtResource("840_tppyp")]
+
+[node name="SphereGeo" parent="." unique_id=54219919 instance=ExtResource("841_iweeg")]
+
+[node name="SphereInverted" parent="." unique_id=2124921513 instance=ExtResource("842_i1am0")]
+
+[node name="UCX_SM_Bld_Ceiling_01" parent="." unique_id=1823501618 instance=ExtResource("843_xehqb")]
