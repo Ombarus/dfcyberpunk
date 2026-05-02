@@ -1299,6 +1299,7 @@ func FightMe(delta : float, param : Dictionary, actionDepth : int) -> int:
 	
 	if has_defend_plan == false:
 		var def_plan := load("res://data/plans/DefendAgainstMe.tres") as ActionPlan
+		#TODO: Kinda need to remove it at some point?
 		self.ActionPlans.append(def_plan)
 		self.owner = victim # hack to make sure only victim can pick up Defend Plan
 
@@ -1355,6 +1356,26 @@ func Combat(delta : float, param : Dictionary, actionDepth : int) -> int:
 		return Globals.ACTION_STATE.Finished
 
 	seq.SetContinue()
+	return Globals.ACTION_STATE.Running
+	
+func Steal(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	var plan : ActionPlan = param.get("current_plan", null)
+	var victim := param.get("plan_ad", null) as Entity
+	
+	if not is_top_of_stack:
+		return Globals.ACTION_STATE.Running
+	
+	if self.Needs.Current(Globals.NEEDS.Health) == 0:
+		# Stealing failed, you ded
+		return Globals.ACTION_STATE.Error
+	
+	if  victim.Needs.Current(Globals.NEEDS.Health) == 0:
+		# steal something from corpse
+		return Globals.ACTION_STATE.Finished
+		
+	self.pushAction("FightMe", actionDepth)
+	
 	return Globals.ACTION_STATE.Running
 	
 

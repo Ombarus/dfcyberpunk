@@ -81,16 +81,6 @@ offset_bottom = -184.0
 grow_vertical = 2
 script = ExtResource("3_5ysmq")
 
-[node name="Close" type="Button" parent="CanvasLayer/AttributePanel2" unique_id=1597992073]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -32.0
-offset_bottom = 32.0
-grow_horizontal = 0
-text = "X"
-
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/AttributePanel2" unique_id=30307396]
 layout_mode = 1
 anchors_preset = 15
@@ -109,9 +99,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_oo0fn")
-current_tab = 0
+current_tab = 2
 
 [node name="Status" type="Control" parent="CanvasLayer/AttributePanel2/TabContainer" unique_id=560733082]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -266,11 +257,12 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 
-[node name="Inventory" type="VBoxContainer" parent="CanvasLayer/AttributePanel2/TabContainer/Inventory/VBoxContainer/ColorRect/ScrollContainer" unique_id=2048609735]
+[node name="InventoryList" type="VBoxContainer" parent="CanvasLayer/AttributePanel2/TabContainer/Inventory/VBoxContainer/ColorRect/ScrollContainer" unique_id=2048609735]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Example" type="Label" parent="CanvasLayer/AttributePanel2/TabContainer/Inventory/VBoxContainer/ColorRect/ScrollContainer/Inventory" unique_id=496510975]
+[node name="Example" type="Label" parent="CanvasLayer/AttributePanel2/TabContainer/Inventory/VBoxContainer/ColorRect/ScrollContainer/InventoryList" unique_id=496510975]
+visible = false
 layout_mode = 2
 size_flags_vertical = 6
 text = "Item 1"
@@ -299,7 +291,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Debug" type="Control" parent="CanvasLayer/AttributePanel2/TabContainer" unique_id=225177779]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
@@ -333,14 +324,50 @@ size_flags_vertical = 3
 mouse_filter = 2
 color = Color(0.101961, 0.152941, 0.168627, 0.552941)
 
-[node name="PlanScore" type="VBoxContainer" parent="CanvasLayer/AttributePanel2/TabContainer/Debug/VBoxContainer/PlansGroup/ColorRect" unique_id=2017620050]
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/AttributePanel2/TabContainer/Debug/VBoxContainer/PlansGroup/ColorRect" unique_id=199745398]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = 8.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="PlanScore" type="VBoxContainer" parent="CanvasLayer/AttributePanel2/TabContainer/Debug/VBoxContainer/PlansGroup/ColorRect/ScrollContainer" unique_id=2017620050]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Metadata" type="Label" parent="CanvasLayer/AttributePanel2/TabContainer/Debug/VBoxContainer/PlansGroup" unique_id=355957901]
+layout_mode = 2
+text = "Metadata:"
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/AttributePanel2/TabContainer/Debug/VBoxContainer/PlansGroup" unique_id=1107819543]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+color = Color(0.101961, 0.152941, 0.168627, 0.552941)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/AttributePanel2/TabContainer/Debug/VBoxContainer/PlansGroup/ColorRect2" unique_id=775422310]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Metadatalbl" type="Label" parent="CanvasLayer/AttributePanel2/TabContainer/Debug/VBoxContainer/PlansGroup/ColorRect2/ScrollContainer" unique_id=308767339]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Close" type="Button" parent="CanvasLayer/AttributePanel2" unique_id=1597992073]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -32.0
+offset_bottom = 32.0
+grow_horizontal = 0
+text = "X"
 
 [connection signal="pressed" from="CanvasLayer/AttributePanel2/Close" to="CanvasLayer/AttributePanel2" method="_on_close_pressed"]

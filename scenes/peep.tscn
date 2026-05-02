@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://csatkd3o1fv7w" path="res://scripts/entity.gd" id="1_nu0po"]
 [ext_resource type="Script" uid="uid://bqqjybiuh2hwv" path="res://scripts/sequencer.gd" id="2_3w7h5"]
+[ext_resource type="Script" uid="uid://cxgydrfgr1ppa" path="res://scripts/actionplan.gd" id="2_twiet"]
 [ext_resource type="PackedScene" uid="uid://bpldl6svmqy4v" path="res://data/models/Peep1.glb" id="3_00n07"]
+[ext_resource type="Resource" uid="uid://bqmu8o5ypms82" path="res://data/plans/Steal.tres" id="3_o0pb1"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://dyflbqc18yf8m" path="res://data/peep_animtree.tres" id="4_kouj5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bpfx1"]
@@ -19,6 +21,7 @@ floor_block_on_wall = false
 floor_max_angle = 1.0472
 script = ExtResource("1_nu0po")
 MovePixSec = 1.5
+ActionPlans = Array[ExtResource("2_twiet")]([ExtResource("3_o0pb1")])
 
 [node name="Sequencer" type="Node" parent="." unique_id=1773213298]
 script = ExtResource("2_3w7h5")
