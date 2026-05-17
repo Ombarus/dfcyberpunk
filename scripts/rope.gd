@@ -162,7 +162,7 @@ func build_tube_mesh(
 	var uvs: PackedVector2Array = []
 	var n1 : Node3D = self.get_child(0)
 	var n2 : Node3D = self.get_child(1)
-	var offset_transform : Transform3D = segment_to_segment_trasnform_v2(points[0], points[points.size()-1], n1.position, n2.position)
+	var offset_transform : Transform3D = segment_to_segment_transform_v2(points[0], points[points.size()-1], n1.position, n2.position)
 
 	var ring_count = points.size()
 	var ring_size = sides
@@ -239,7 +239,7 @@ func build_tube_mesh(
 
 	return new_mesh
 	
-func segment_to_segment_trasnform_v2(
+func segment_to_segment_transform_v2(
 	p1: Vector3,
 	p2: Vector3,
 	p3: Vector3,
