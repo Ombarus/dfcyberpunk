@@ -23,7 +23,8 @@ enum AD_TYPE {
 	Fridge,
 	Table,
 	Cashing,
-	Other
+	Other,
+	Peep
 }
 
 enum NEEDS {

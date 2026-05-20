@@ -21,6 +21,7 @@ floor_block_on_wall = false
 floor_max_angle = 1.0472
 script = ExtResource("1_nu0po")
 MovePixSec = 1.5
+Type = 12
 ActionPlans = Array[ExtResource("2_twiet")]([ExtResource("3_o0pb1")])
 
 [node name="Sequencer" type="Node" parent="." unique_id=1773213298]

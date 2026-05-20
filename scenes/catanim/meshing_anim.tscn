@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://ccmgqh04ohlso" path="res://scenes/catanim/setup.gd" id="1_na41n"]
 [ext_resource type="Script" uid="uid://dulx57rd1df5e" path="res://scenes/catanim/angle.gd" id="2_wtoop"]
+[ext_resource type="Shader" uid="uid://4ioqqme60ir0" path="res://scenes/catanim/meshing_anim.gdshader" id="3_kf0f3"]
+[ext_resource type="Script" uid="uid://bheelxupbeicj" path="res://scenes/catanim/ropetmp.gd" id="4_krvvf"]
 
 [sub_resource type="Environment" id="Environment_na41n"]
 background_mode = 1
@@ -91,6 +93,62 @@ height = 0.2
 top_radius = 0.025
 bottom_radius = 0.025
 height = 3.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kf0f3"]
+albedo_color = Color(0, 0.5666666, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vsr2g"]
+material = SubResource("StandardMaterial3D_kf0f3")
+top_radius = 0.05
+bottom_radius = 0.05
+radial_segments = 32
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_krvvf"]
+material = SubResource("StandardMaterial3D_kf0f3")
+top_radius = 0.0
+bottom_radius = 0.2
+height = 0.5
+radial_segments = 32
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c1gak"]
+albedo_color = Color(0.7671269, 0.086536996, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_iqvuv"]
+material = SubResource("StandardMaterial3D_c1gak")
+top_radius = 0.05
+bottom_radius = 0.05
+radial_segments = 32
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_mygty"]
+material = SubResource("StandardMaterial3D_c1gak")
+top_radius = 0.0
+bottom_radius = 0.2
+height = 0.5
+radial_segments = 32
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tph58"]
+albedo_color = Color(0, 0.79, 0.47399995, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_8n2gm"]
+material = SubResource("StandardMaterial3D_tph58")
+top_radius = 0.05
+bottom_radius = 0.05
+radial_segments = 32
+rings = 1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bjk1i"]
+material = SubResource("StandardMaterial3D_tph58")
+top_radius = 0.0
+bottom_radius = 0.2
+height = 0.5
+radial_segments = 32
+rings = 1
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_krvvf"]
 
 [sub_resource type="Animation" id="Animation_3ry7o"]
 length = 0.001
@@ -622,6 +680,270 @@ tracks/43/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
+tracks/44/type = "value"
+tracks/44/imported = false
+tracks/44/enabled = true
+tracks/44/path = NodePath("Seg0:rotation")
+tracks/44/interp = 1
+tracks/44/loop_wrap = true
+tracks/44/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.90408057, 0, 0)]
+}
+tracks/45/type = "value"
+tracks/45/imported = false
+tracks/45/enabled = true
+tracks/45/path = NodePath("Seg1:rotation")
+tracks/45/interp = 1
+tracks/45/loop_wrap = true
+tracks/45/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.59864795, 0, 0)]
+}
+tracks/46/type = "value"
+tracks/46/imported = false
+tracks/46/enabled = true
+tracks/46/path = NodePath("Point1/Node3D/TangentArrow:scale")
+tracks/46/interp = 1
+tracks/46/loop_wrap = true
+tracks/46/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 0, 1)]
+}
+tracks/47/type = "value"
+tracks/47/imported = false
+tracks/47/enabled = true
+tracks/47/path = NodePath("Point1/Node3D/NormalArrow:scale")
+tracks/47/interp = 1
+tracks/47/loop_wrap = true
+tracks/47/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 0, 1)]
+}
+tracks/48/type = "value"
+tracks/48/imported = false
+tracks/48/enabled = true
+tracks/48/path = NodePath("Point1/Node3D/BiNormalArrow:scale")
+tracks/48/interp = 1
+tracks/48/loop_wrap = true
+tracks/48/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 0, 1)]
+}
+tracks/49/type = "value"
+tracks/49/imported = false
+tracks/49/enabled = true
+tracks/49/path = NodePath("Point1/Node3D/TangentArrow:rotation")
+tracks/49/interp = 1
+tracks/49/loop_wrap = true
+tracks/49/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5707964, 0, 0)]
+}
+tracks/50/type = "value"
+tracks/50/imported = false
+tracks/50/enabled = true
+tracks/50/path = NodePath("Point1/Node3D/NormalArrow:rotation")
+tracks/50/interp = 1
+tracks/50/loop_wrap = true
+tracks/50/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5707964, 1.5707964, 0)]
+}
+tracks/51/type = "value"
+tracks/51/imported = false
+tracks/51/enabled = true
+tracks/51/path = NodePath("Point1/Node3D/BiNormalArrow:rotation")
+tracks/51/interp = 1
+tracks/51/loop_wrap = true
+tracks/51/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/52/type = "value"
+tracks/52/imported = false
+tracks/52/enabled = true
+tracks/52/path = NodePath("Point0:visible")
+tracks/52/interp = 1
+tracks/52/loop_wrap = true
+tracks/52/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/53/type = "value"
+tracks/53/imported = false
+tracks/53/enabled = true
+tracks/53/path = NodePath("Point2:visible")
+tracks/53/interp = 1
+tracks/53/loop_wrap = true
+tracks/53/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/54/type = "value"
+tracks/54/imported = false
+tracks/54/enabled = true
+tracks/54/path = NodePath("Seg0:visible")
+tracks/54/interp = 1
+tracks/54/loop_wrap = true
+tracks/54/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/55/type = "value"
+tracks/55/imported = false
+tracks/55/enabled = true
+tracks/55/path = NodePath("Seg1:visible")
+tracks/55/interp = 1
+tracks/55/loop_wrap = true
+tracks/55/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/56/type = "value"
+tracks/56/imported = false
+tracks/56/enabled = true
+tracks/56/path = NodePath("Point1/Node3D/TangentArrow:visible")
+tracks/56/interp = 1
+tracks/56/loop_wrap = true
+tracks/56/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/57/type = "value"
+tracks/57/imported = false
+tracks/57/enabled = true
+tracks/57/path = NodePath("Point1/Node3D/NormalArrow:visible")
+tracks/57/interp = 1
+tracks/57/loop_wrap = true
+tracks/57/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/58/type = "value"
+tracks/58/imported = false
+tracks/58/enabled = true
+tracks/58/path = NodePath("Point1/Node3D/BiNormalArrow:visible")
+tracks/58/interp = 1
+tracks/58/loop_wrap = true
+tracks/58/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/59/type = "value"
+tracks/59/imported = false
+tracks/59/enabled = true
+tracks/59/path = NodePath("Avg:scale")
+tracks/59/interp = 1
+tracks/59/loop_wrap = true
+tracks/59/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 0, 1)]
+}
+tracks/60/type = "value"
+tracks/60/imported = false
+tracks/60/enabled = true
+tracks/60/path = NodePath("Avg:rotation")
+tracks/60/interp = 1
+tracks/60/loop_wrap = true
+tracks/60/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.4189527, 0, 0)]
+}
+tracks/61/type = "value"
+tracks/61/imported = false
+tracks/61/enabled = true
+tracks/61/path = NodePath("Avg/Radius2:mesh:material:shader_parameter/repeat")
+tracks/61/interp = 1
+tracks/61/loop_wrap = true
+tracks/61/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/62/type = "value"
+tracks/62/imported = false
+tracks/62/enabled = true
+tracks/62/path = NodePath("Point1/Node3D:position")
+tracks/62/interp = 1
+tracks/62/loop_wrap = true
+tracks/62/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/63/type = "value"
+tracks/63/imported = false
+tracks/63/enabled = true
+tracks/63/path = NodePath("Point1/Node3D:rotation")
+tracks/63/interp = 1
+tracks/63/loop_wrap = true
+tracks/63/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/64/type = "value"
+tracks/64/imported = false
+tracks/64/enabled = true
+tracks/64/path = NodePath("MeshInstance3D:mesh")
+tracks/64/interp = 1
+tracks/64/loop_wrap = true
+tracks/64/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ArrayMesh_krvvf")]
+}
+tracks/65/type = "value"
+tracks/65/imported = false
+tracks/65/enabled = true
+tracks/65/path = NodePath("MeshInstance3D:T")
+tracks/65/interp = 1
+tracks/65/loop_wrap = true
+tracks/65/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_0qfdx"]
 resource_name = "meshing"
@@ -1095,6 +1417,90 @@ tracks/38/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0)]
+}
+tracks/39/type = "value"
+tracks/39/imported = false
+tracks/39/enabled = true
+tracks/39/path = NodePath("Point0:visible")
+tracks/39/interp = 1
+tracks/39/loop_wrap = true
+tracks/39/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/40/type = "value"
+tracks/40/imported = false
+tracks/40/enabled = true
+tracks/40/path = NodePath("Point2:visible")
+tracks/40/interp = 1
+tracks/40/loop_wrap = true
+tracks/40/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/41/type = "value"
+tracks/41/imported = false
+tracks/41/enabled = true
+tracks/41/path = NodePath("Seg0:visible")
+tracks/41/interp = 1
+tracks/41/loop_wrap = true
+tracks/41/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/42/type = "value"
+tracks/42/imported = false
+tracks/42/enabled = true
+tracks/42/path = NodePath("Seg1:visible")
+tracks/42/interp = 1
+tracks/42/loop_wrap = true
+tracks/42/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/43/type = "value"
+tracks/43/imported = false
+tracks/43/enabled = true
+tracks/43/path = NodePath("Point1/Node3D/TangentArrow:visible")
+tracks/43/interp = 1
+tracks/43/loop_wrap = true
+tracks/43/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/44/type = "value"
+tracks/44/imported = false
+tracks/44/enabled = true
+tracks/44/path = NodePath("Point1/Node3D/NormalArrow:visible")
+tracks/44/interp = 1
+tracks/44/loop_wrap = true
+tracks/44/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/45/type = "value"
+tracks/45/imported = false
+tracks/45/enabled = true
+tracks/45/path = NodePath("Point1/Node3D/BiNormalArrow:visible")
+tracks/45/interp = 1
+tracks/45/loop_wrap = true
+tracks/45/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_vsr2g"]
@@ -1625,10 +2031,274 @@ tracks/43/path = NodePath("Point1:rotation")
 tracks/43/interp = 1
 tracks/43/loop_wrap = true
 tracks/43/keys = {
-"times": PackedFloat32Array(0, 2.5, 3.5, 5.2000003, 6.3, 20.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 2.5, 3.5, 5.2000003, 6.3, 8.5, 9.5, 11.200001, 12.3, 14.6, 16, 17, 20.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(-0.6981317, -0.28797933, 0.80285144), Vector3(0.46425757, 0, -0.47996554), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(-0.6981317, -0.28797933, 0.80285144), Vector3(0.46425757, 0, -0.47996554), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(-0.6981317, -0.28797933, 0.80285144), Vector3(0.46425757, 0, -0.47996554), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(-0.1582085, 0, 0), Vector3(-0.1582085, 0, 0)]
+}
+tracks/44/type = "value"
+tracks/44/imported = false
+tracks/44/enabled = true
+tracks/44/path = NodePath("Seg0:rotation")
+tracks/44/interp = 1
+tracks/44/loop_wrap = true
+tracks/44/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.90408057, 0, 0)]
+}
+tracks/45/type = "value"
+tracks/45/imported = false
+tracks/45/enabled = true
+tracks/45/path = NodePath("Seg1:rotation")
+tracks/45/interp = 1
+tracks/45/loop_wrap = true
+tracks/45/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.59864795, 0, 0)]
+}
+tracks/46/type = "value"
+tracks/46/imported = false
+tracks/46/enabled = true
+tracks/46/path = NodePath("Point1/Node3D/TangentArrow:scale")
+tracks/46/interp = 1
+tracks/46/loop_wrap = true
+tracks/46/keys = {
+"times": PackedFloat32Array(0, 7, 7.6, 20.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 0, 1), Vector3(1, 0, 1), Vector3(1, 1, 1), Vector3(1, 1, 1)]
+}
+tracks/47/type = "value"
+tracks/47/imported = false
+tracks/47/enabled = true
+tracks/47/path = NodePath("Point1/Node3D/NormalArrow:scale")
+tracks/47/interp = 1
+tracks/47/loop_wrap = true
+tracks/47/keys = {
+"times": PackedFloat32Array(0, 7, 7.6, 20.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 0, 1), Vector3(1, 0, 1), Vector3(1, 1, 1), Vector3(1, 1, 1)]
+}
+tracks/48/type = "value"
+tracks/48/imported = false
+tracks/48/enabled = true
+tracks/48/path = NodePath("Point1/Node3D/BiNormalArrow:scale")
+tracks/48/interp = 1
+tracks/48/loop_wrap = true
+tracks/48/keys = {
+"times": PackedFloat32Array(0, 7, 7.6, 20.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 0, 1), Vector3(1, 0, 1), Vector3(1, 1, 1), Vector3(1, 1, 1)]
+}
+tracks/49/type = "value"
+tracks/49/imported = false
+tracks/49/enabled = true
+tracks/49/path = NodePath("Point1/Node3D/TangentArrow:rotation")
+tracks/49/interp = 1
+tracks/49/loop_wrap = true
+tracks/49/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5707964, 0, 0)]
+}
+tracks/50/type = "value"
+tracks/50/imported = false
+tracks/50/enabled = true
+tracks/50/path = NodePath("Point1/Node3D/NormalArrow:rotation")
+tracks/50/interp = 1
+tracks/50/loop_wrap = true
+tracks/50/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5707964, 1.5707964, 0)]
+}
+tracks/51/type = "value"
+tracks/51/imported = false
+tracks/51/enabled = true
+tracks/51/path = NodePath("Point1/Node3D/BiNormalArrow:rotation")
+tracks/51/interp = 1
+tracks/51/loop_wrap = true
+tracks/51/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/52/type = "value"
+tracks/52/imported = false
+tracks/52/enabled = true
+tracks/52/path = NodePath("Point0:visible")
+tracks/52/interp = 1
+tracks/52/loop_wrap = true
+tracks/52/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/53/type = "value"
+tracks/53/imported = false
+tracks/53/enabled = true
+tracks/53/path = NodePath("Point2:visible")
+tracks/53/interp = 1
+tracks/53/loop_wrap = true
+tracks/53/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/54/type = "value"
+tracks/54/imported = false
+tracks/54/enabled = true
+tracks/54/path = NodePath("Seg0:visible")
+tracks/54/interp = 1
+tracks/54/loop_wrap = true
+tracks/54/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/55/type = "value"
+tracks/55/imported = false
+tracks/55/enabled = true
+tracks/55/path = NodePath("Seg1:visible")
+tracks/55/interp = 1
+tracks/55/loop_wrap = true
+tracks/55/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/56/type = "value"
+tracks/56/imported = false
+tracks/56/enabled = true
+tracks/56/path = NodePath("Point1/Node3D/TangentArrow:visible")
+tracks/56/interp = 1
+tracks/56/loop_wrap = true
+tracks/56/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/57/type = "value"
+tracks/57/imported = false
+tracks/57/enabled = true
+tracks/57/path = NodePath("Point1/Node3D/NormalArrow:visible")
+tracks/57/interp = 1
+tracks/57/loop_wrap = true
+tracks/57/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/58/type = "value"
+tracks/58/imported = false
+tracks/58/enabled = true
+tracks/58/path = NodePath("Point1/Node3D/BiNormalArrow:visible")
+tracks/58/interp = 1
+tracks/58/loop_wrap = true
+tracks/58/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/59/type = "value"
+tracks/59/imported = false
+tracks/59/enabled = true
+tracks/59/path = NodePath("Avg:scale")
+tracks/59/interp = 1
+tracks/59/loop_wrap = true
+tracks/59/keys = {
+"times": PackedFloat32Array(0, 13.3, 14.3, 20.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 0, 1), Vector3(1, 0, 1), Vector3(1, 1, 1), Vector3(1, 1, 1)]
+}
+tracks/60/type = "value"
+tracks/60/imported = false
+tracks/60/enabled = true
+tracks/60/path = NodePath("Avg:rotation")
+tracks/60/interp = 1
+tracks/60/loop_wrap = true
+tracks/60/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.4189527, 0, 0)]
+}
+tracks/61/type = "value"
+tracks/61/imported = false
+tracks/61/enabled = true
+tracks/61/path = NodePath("Avg/Radius2:mesh:material:shader_parameter/repeat")
+tracks/61/interp = 1
+tracks/61/loop_wrap = true
+tracks/61/keys = {
+"times": PackedFloat32Array(0, 13.3, 14.3, 20.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 30.0, 30.0]
+}
+tracks/62/type = "value"
+tracks/62/imported = false
+tracks/62/enabled = true
+tracks/62/path = NodePath("Point1/Node3D:position")
+tracks/62/interp = 1
+tracks/62/loop_wrap = true
+tracks/62/keys = {
+"times": PackedFloat32Array(0, 14.6, 16, 20.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 5.849259, -0.7524309), Vector3(0, 5.849259, -0.7524309)]
+}
+tracks/63/type = "value"
+tracks/63/imported = false
+tracks/63/enabled = true
+tracks/63/path = NodePath("Point1/Node3D:rotation")
+tracks/63/interp = 1
+tracks/63/loop_wrap = true
+tracks/63/keys = {
+"times": PackedFloat32Array(0, 20.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/64/type = "value"
+tracks/64/imported = false
+tracks/64/enabled = true
+tracks/64/path = NodePath("MeshInstance3D:mesh")
+tracks/64/interp = 1
+tracks/64/loop_wrap = true
+tracks/64/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ArrayMesh_krvvf")]
+}
+tracks/65/type = "value"
+tracks/65/imported = false
+tracks/65/enabled = true
+tracks/65/path = NodePath("MeshInstance3D:T")
+tracks/65/interp = 1
+tracks/65/loop_wrap = true
+tracks/65/keys = {
+"times": PackedFloat32Array(0, 17.5, 17.7, 19.1, 20.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.5, 1.0, 1.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3ry7o"]
@@ -1667,59 +2337,27 @@ height = 8.0
 radial_segments = 12
 rings = 1
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kf0f3"]
-albedo_color = Color(0, 0.5666666, 1, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_krvvf"]
+render_priority = 0
+shader = ExtResource("3_kf0f3")
+shader_parameter/repeat = 0.0
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_vsr2g"]
-material = SubResource("StandardMaterial3D_kf0f3")
-top_radius = 0.05
-bottom_radius = 0.05
-radial_segments = 32
+[sub_resource type="CylinderMesh" id="CylinderMesh_c1gak"]
+material = SubResource("ShaderMaterial_krvvf")
+top_radius = 0.025
+bottom_radius = 0.025
+height = 11.0
+radial_segments = 12
 rings = 1
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_krvvf"]
-material = SubResource("StandardMaterial3D_kf0f3")
-top_radius = 0.0
-bottom_radius = 0.2
-height = 0.5
-radial_segments = 32
-rings = 1
+[sub_resource type="ArrayMesh" id="ArrayMesh_c1gak"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c1gak"]
-albedo_color = Color(0.7671269, 0.086536996, 0, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_iqvuv"]
-material = SubResource("StandardMaterial3D_c1gak")
-top_radius = 0.05
-bottom_radius = 0.05
-radial_segments = 32
-rings = 1
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_mygty"]
-material = SubResource("StandardMaterial3D_c1gak")
-top_radius = 0.0
-bottom_radius = 0.2
-height = 0.5
-radial_segments = 32
-rings = 1
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tph58"]
-albedo_color = Color(0, 0.79, 0.47399995, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_8n2gm"]
-material = SubResource("StandardMaterial3D_tph58")
-top_radius = 0.05
-bottom_radius = 0.05
-radial_segments = 32
-rings = 1
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_bjk1i"]
-material = SubResource("StandardMaterial3D_tph58")
-top_radius = 0.0
-bottom_radius = 0.2
-height = 0.5
-radial_segments = 32
-rings = 1
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mygty"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0.51, 0.57533324, 1, 1)
+stencil_flags = 2
+stencil_outline_thickness = 0.1
 
 [node name="MeshingAnim" type="Node3D" unique_id=290098609]
 script = ExtResource("1_na41n")
@@ -1863,6 +2501,59 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 mesh = SubResource("CylinderMesh_wtoop")
 skeleton = NodePath("../../..")
 
+[node name="Node3D" type="Node3D" parent="Point1" unique_id=1865501063]
+
+[node name="TangentArrow" type="Node3D" parent="Point1/Node3D" unique_id=26493813]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 0, -4.371139e-08, 0, 0, 0)
+visible = false
+
+[node name="Body" type="MeshInstance3D" parent="Point1/Node3D/TangentArrow" unique_id=1518753521]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CylinderMesh_vsr2g")
+
+[node name="Head" type="MeshInstance3D" parent="Point1/Node3D/TangentArrow" unique_id=1452561053]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("CylinderMesh_krvvf")
+
+[node name="Label3D" type="Label3D" parent="Point1/Node3D/TangentArrow" unique_id=275939491]
+transform = Transform3D(4.371139e-08, 1, -8.742278e-08, 1, -4.371139e-08, 0, -3.5527137e-15, -8.742278e-08, -1, 0.32742608, 1.0252017, -4.481299e-08)
+text = "Tangent"
+font_size = 50
+
+[node name="NormalArrow" type="Node3D" parent="Point1/Node3D" unique_id=597919350]
+transform = Transform3D(-4.371139e-08, 0, -4.371139e-08, 0, 0, -1, -1, 0, 1.9106855e-15, 0, 0, 0)
+visible = false
+
+[node name="Body" type="MeshInstance3D" parent="Point1/Node3D/NormalArrow" unique_id=1856852199]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CylinderMesh_iqvuv")
+
+[node name="Head" type="MeshInstance3D" parent="Point1/Node3D/NormalArrow" unique_id=1556831282]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("CylinderMesh_mygty")
+
+[node name="Label3D" type="Label3D" parent="Point1/Node3D/NormalArrow" unique_id=1575577880]
+transform = Transform3D(4.371139e-08, 1, -8.742278e-08, 1, -4.371139e-08, 0, -3.5527137e-15, -8.742278e-08, -1, 0.32742608, 1.0252017, -4.481299e-08)
+text = "Normal"
+font_size = 50
+
+[node name="BiNormalArrow" type="Node3D" parent="Point1/Node3D" unique_id=612677183]
+transform = Transform3D(1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0)
+visible = false
+
+[node name="Body" type="MeshInstance3D" parent="Point1/Node3D/BiNormalArrow" unique_id=1664149023]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CylinderMesh_8n2gm")
+
+[node name="Head" type="MeshInstance3D" parent="Point1/Node3D/BiNormalArrow" unique_id=1112421975]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("CylinderMesh_bjk1i")
+
+[node name="Label3D" type="Label3D" parent="Point1/Node3D/BiNormalArrow" unique_id=1989190201]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0.32742608, 1.0252017, -4.481299e-08)
+text = "Binormal"
+font_size = 50
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1151146169]
 libraries/ = SubResource("AnimationLibrary_3ry7o")
 autoplay = &"meshing"
@@ -1872,14 +2563,17 @@ transform = Transform3D(0.89879405, 0.19628465, -0.39197144, 0, 0.89415425, 0.44
 
 [node name="Point0" type="MeshInstance3D" parent="." unique_id=947966361]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -6.33041)
+visible = false
 mesh = SubResource("SphereMesh_kf0f3")
 
 [node name="Point2" type="MeshInstance3D" parent="." unique_id=1527979312]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.672644, 4.557255)
+visible = false
 mesh = SubResource("SphereMesh_c1gak")
 
 [node name="Seg0" type="Node3D" parent="." unique_id=806920077]
-transform = Transform3D(1, 0, 0, 0, 0, 0.78369343, 0, 0, 0.6211478, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0, 0.7858569, 0, 0, 0.6184084, 0, 0, 0)
+visible = false
 
 [node name="Radius2" type="MeshInstance3D" parent="Seg0" unique_id=144206488]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
@@ -1887,56 +2581,30 @@ mesh = SubResource("CylinderMesh_tph58")
 skeleton = NodePath("../../Point1")
 
 [node name="Seg1" type="Node3D" parent="." unique_id=1023506974]
-transform = Transform3D(1, 0, 0, 0, 0, -0.564967, 0, 0, 0.82511353, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0, -0.5635261, 0, 0, 0.82609826, 0, 0, 0)
+visible = false
 
 [node name="Radius2" type="MeshInstance3D" parent="Seg1" unique_id=657779749]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 mesh = SubResource("CylinderMesh_tph58")
 skeleton = NodePath("../../Point1")
 
-[node name="TangentArrow" type="Node3D" parent="." unique_id=26493813]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+[node name="Avg" type="Node3D" parent="." unique_id=517741502]
+transform = Transform3D(1, 0, 0, 0, 0, -0.9884939, 0, 0, 0.1512608, 0, 5, -6.33041)
 
-[node name="Body" type="MeshInstance3D" parent="TangentArrow" unique_id=1518753521]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CylinderMesh_vsr2g")
+[node name="Radius2" type="MeshInstance3D" parent="Avg" unique_id=238942128]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+mesh = SubResource("CylinderMesh_c1gak")
+skeleton = NodePath("../../Point1")
 
-[node name="Head" type="MeshInstance3D" parent="TangentArrow" unique_id=1452561053]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-mesh = SubResource("CylinderMesh_krvvf")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2094731126]
+transform = Transform3D(0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 0, 0, 1, 0, 5.004617, -6.321073)
+mesh = SubResource("ArrayMesh_c1gak")
+script = ExtResource("4_krvvf")
+custom_points = Array[Vector3]([Vector3(0, 5.004617, -6.321073), Vector3(1.1, 0, 0), Vector3(-0.42, 6.67169, 4.57625)])
+mat = SubResource("StandardMaterial3D_mygty")
+A = 1.5
+Radius = 3.1
 
-[node name="Label3D" type="Label3D" parent="TangentArrow" unique_id=275939491]
-transform = Transform3D(4.371139e-08, 1, -8.742278e-08, 1, -4.371139e-08, 0, -3.5527137e-15, -8.742278e-08, -1, 0.32742608, 1.0252017, -4.481299e-08)
-text = "Tangent"
-font_size = 50
-
-[node name="NormalArrow" type="Node3D" parent="." unique_id=597919350]
-transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, 0, 0, 0)
-
-[node name="Body" type="MeshInstance3D" parent="NormalArrow" unique_id=1856852199]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CylinderMesh_iqvuv")
-
-[node name="Head" type="MeshInstance3D" parent="NormalArrow" unique_id=1556831282]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-mesh = SubResource("CylinderMesh_mygty")
-
-[node name="Label3D" type="Label3D" parent="NormalArrow" unique_id=1575577880]
-transform = Transform3D(4.371139e-08, 1, -8.742278e-08, 1, -4.371139e-08, 0, -3.5527137e-15, -8.742278e-08, -1, 0.32742608, 1.0252017, -4.481299e-08)
-text = "Normal"
-font_size = 50
-
-[node name="BiNormalArrow" type="Node3D" parent="." unique_id=612677183]
-
-[node name="Body" type="MeshInstance3D" parent="BiNormalArrow" unique_id=1664149023]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CylinderMesh_8n2gm")
-
-[node name="Head" type="MeshInstance3D" parent="BiNormalArrow" unique_id=1112421975]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-mesh = SubResource("CylinderMesh_bjk1i")
-
-[node name="Label3D" type="Label3D" parent="BiNormalArrow" unique_id=1989190201]
-transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0.32742608, 1.0252017, -4.481299e-08)
-text = "Binormal"
-font_size = 50
+[node name="Node3D" type="Node3D" parent="MeshInstance3D" unique_id=428460309]
+transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1, -0.42014217, 1.5591116, 10.897319)
