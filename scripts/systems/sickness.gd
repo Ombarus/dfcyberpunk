@@ -1,5 +1,5 @@
 extends Node
-class_name SicknessManager
+class_name Sickness
 
 #######################################
 # Sickness Manager

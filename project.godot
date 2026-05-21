@@ -35,6 +35,10 @@ window/vsync/vsync_mode=0
 
 import/blender/enabled=false
 
+[global_group]
+
+poi="Point of Interest"
+
 [input]
 
 pan_left={

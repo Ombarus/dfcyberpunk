@@ -5,6 +5,15 @@ var DEFAULT_TABLE_HEIGHT := 0.73
 var DAY_LENGTH_SEC := 900.0
 var DEBUG = true # Planing to use it to optimize out some costy logic while dev
 
+enum POI_TYPE {
+	DoctorOffice,
+	CEOOffice,
+	Appartment,
+	DeliveryWorker,
+	BarWorker,
+	MarketWorker
+}
+
 enum ACTION_STATE {
 	Running,
 	Finished,
