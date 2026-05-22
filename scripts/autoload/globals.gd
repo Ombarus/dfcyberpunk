@@ -53,7 +53,8 @@ enum NEEDS {
 enum SKILLS {
 	Cooking,
 	Fighting,
-	Driving
+	Driving,
+	Medicine
 }
 
 # To eventually help PCG most pieces should fit in a standard

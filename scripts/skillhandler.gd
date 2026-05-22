@@ -4,7 +4,8 @@ class_name SkillHandler
 var CurrentSkills := {
 	Globals.SKILLS.Cooking: 0.0,
 	Globals.SKILLS.Fighting: 0.0,
-	Globals.SKILLS.Driving: 0.0
+	Globals.SKILLS.Driving: 0.0,
+	Globals.SKILLS.Medicine: 0.0
 }
 
 # skill gain per skill check
@@ -12,7 +13,8 @@ var CurrentSkills := {
 var XPScale := {
 	Globals.SKILLS.Cooking: 0.001,
 	Globals.SKILLS.Fighting: 0.001,
-	Globals.SKILLS.Driving: 0.001
+	Globals.SKILLS.Driving: 0.001,
+	Globals.SKILLS.Medicine: 0.001
 }
 
 func GetSkill(n : Globals.SKILLS) -> float:
