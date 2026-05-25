@@ -1378,6 +1378,23 @@ func Steal(delta : float, param : Dictionary, actionDepth : int) -> int:
 	
 	return Globals.ACTION_STATE.Running
 	
+func WorkAtHospital(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	var plan : ActionPlan = param.get("current_plan", null)
+	var desk := param.get("plan_ad", null) as Entity
+	
+	var cur_hour = self.timeSystem.CurDateTime["hour"]
+	if cur_hour > plan.EndHour:
+		return Globals.ACTION_STATE.Finished
+		
+	return Globals.ACTION_STATE.Running
+	
+func GetTreatment(delta : float, param : Dictionary, actionDepth : int) -> int:
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	var plan : ActionPlan = param.get("current_plan", null)
+	var bed := param.get("plan_ad", null) as Entity
+	
+	return Globals.ACTION_STATE.Running
 
 ###################################################################################################
 ## ACTION FUNCTION (NEED REVISION)

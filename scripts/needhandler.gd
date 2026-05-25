@@ -39,11 +39,14 @@ func GetRewardScoreFromPlan(plan : ActionPlan) -> float:
 	for need_type in Globals.NEEDS.values():
 		var expected_reward : float = plan.GetExpectedReward(need_type)
 		if CurrentNeeds[need_type] + expected_reward > 1.0:
-			# Avoid selecting a plan that would put us above 1.0
-			# This is because otherwise sleeping would always be at the top because of
-			# How much energy it gives, even with the scale-down factor for already satisfied needs
-			# We might need to be a little more subtle at some point
-			score -= 1000
+			# Some reward are fixed (things don't cost less because you don't have the money)
+			# But some reward should adjust (The hospital can fix you up from 0 to 100, but if you're at 50% they can do that too)
+			# "Overflow" basically mean "make the reward dynamic up to a max of X"
+			# If there is no overflow than we actively discourage doing an action that would go above 1.0
+			if plan.AllowOverflow(need_type):
+				expected_reward = 1.0 - CurrentNeeds[need_type]
+			else:
+				score -= 1000
 		score += expected_reward / max(CurrentNeeds[need_type], 0.000001)
 	return score
 

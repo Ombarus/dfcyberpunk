@@ -15,27 +15,49 @@ var _securityReward : float
 var _curiosityReward : float
 var _comfortReward : float
 
+# Normally, if a plan's reward would put you over 100%, we penalize it
+# "Overflow = true" means : Don't penalize (for stuff like healing)
+# It will still be affected by normal scaling based on current need, but it won't penalize
+@export_group("Energy")
 @export var NewEnergyReward := Globals.GRADE.Unset
 @export var EnergyAdjustPer := 1.0
+@export var EnergyOverflow := true
+@export_group("Satiety")
 @export var NewSatietyReward := Globals.GRADE.Unset
 @export var SatietyAdjustPer := 1.0
+@export var SatietyOverflow := false
+@export_group("Satisfaction")
 @export var NewSatisfactionReward := Globals.GRADE.Unset
 @export var SatisfactionAdjustPer := 1.0
+@export var SatisfactionOverflow := false
+@export_group("Wealth")
 @export var NewWealthReward := Globals.GRADE.Unset
 @export var WealthAdjustPer := 1.0
-
+@export var WealthOverflow := false
+@export_group("Health")
 @export var HealthReward := Globals.GRADE.Unset
 @export var HealthAdjustPer := 1.0
+@export var HealthOverflow := true # For healing stuff, we're ok going over 100%
+@export_group("Humanity")
 @export var HumanityReward := Globals.GRADE.Unset
 @export var HumanityAdjustPer := 1.0
+@export var HumanityOverflow := false
+@export_group("Joy")
 @export var JoyReward := Globals.GRADE.Unset
 @export var JoyAdjustPer := 1.0
+@export var JoyOverflow := false
+@export_group("Security")
 @export var SecurityReward := Globals.GRADE.Unset
 @export var SecurityAdjustPer := 1.0
+@export var SecurityOverflow := false
+@export_group("Curiosity")
 @export var CuriosityReward := Globals.GRADE.Unset
 @export var CuriosityAdjustPer := 1.0
+@export var CuriosityOverflow := false
+@export_group("Comfort")
 @export var ComfortReward := Globals.GRADE.Unset
 @export var ComfortAdjustPer := 1.0
+@export var ComfortOverflow := false
 
 # This SpawnReward might not be necessary, maybe this
 # should be part of the ActionName
@@ -56,6 +78,8 @@ var _comfortReward : float
 # I'll probably want to expand this for more complex schedules (like weekends?)
 @export var StartHour : int = -1
 @export var EndHour : int = -1
+
+@export var SkillReq : Dictionary[Globals.SKILLS, float]
 
 func GetExpectedReward(need : Globals.NEEDS) -> float:
 	if need == Globals.NEEDS.Energy:
@@ -109,8 +133,31 @@ func GetExpectedReward(need : Globals.NEEDS) -> float:
 		else:
 			return Globals.REWARD_BASE[Globals.NEEDS.Comfort][ComfortReward] * ComfortAdjustPer
 			
-			
 	return 0.0
+	
+func AllowOverflow(need : Globals.NEEDS) -> bool:
+	if need == Globals.NEEDS.Energy:
+		return self.EnergyOverflow
+	if need == Globals.NEEDS.Satiety:
+		return self.SatietyOverflow
+	if need == Globals.NEEDS.Satisfaction:
+		return self.SatisfactionOverflow
+	if need == Globals.NEEDS.Wealth:
+		return self.WealthOverflow
+	if need == Globals.NEEDS.Health:
+		return self.HealthOverflow
+	if need == Globals.NEEDS.Humanity:
+		return self.HumanityOverflow
+	if need == Globals.NEEDS.Joy:
+		return self.JoyOverflow
+	if need == Globals.NEEDS.Security:
+		return self.SecurityOverflow
+	if need == Globals.NEEDS.Curiosity:
+		return self.CuriosityOverflow
+	if need == Globals.NEEDS.Comfort:
+		return self.ComfortOverflow
+			
+	return false
 
 # Right now it's generic and cover all Actions
 # but the idea is to inventually be able to customize the Rewards by Ads

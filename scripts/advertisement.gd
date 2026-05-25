@@ -37,9 +37,20 @@ func GetActionPlansFor(npc : Entity) -> Array:
 			var cur_hour = self.timeSystem.CurDateTime["hour"]
 			if cur_hour < plan.StartHour or cur_hour >= plan.EndHour:
 				continue
+
 		# Not sure I like hardcoding it. But the alternative is to have 
 		# a complex system of "tag matching" which I don't want to do right now
 		if plan.ActionName == "JobOffer" and not isunemployed:
+			continue
+
+		# "complex system" of "skill matching"...
+		var missing_skill = false
+		for req in plan.SkillReq:
+			var min_value = plan.SkillReq[req]
+			if npc.Skills.GetSkill(req) < min_value:
+				missing_skill = true
+				break
+		if missing_skill == true:
 			continue
 		var new_plan := plan.duplicate()
 		results.append(new_plan)

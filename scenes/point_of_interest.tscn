@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://yi6jedmkia2w" path="res://scripts/point_of_interest.gd" id="1_ebynj"]
 
-[node name="PointOfInterest" type="Node3D" unique_id=585146548 groups=["poi"]]
+[node name="PointOfInterest" type="Marker3D" unique_id=1460288802 groups=["poi"]]
 script = ExtResource("1_ebynj")
