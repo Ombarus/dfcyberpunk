@@ -1727,6 +1727,7 @@ ActionPlans = Array[ExtResource("26_ow1eu")]([ExtResource("26_fcivn")])
 
 [node name="Reception" parent="Interior" unique_id=330818634 instance=ExtResource("22_tjkew")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9.188359, -2.3841858e-07, -6.054365)
+surface_material_override/0 = null
 script = ExtResource("25_d8lkg")
 Type = 9
 ActionPlans = Array[ExtResource("26_ow1eu")]([ExtResource("27_cr743")])

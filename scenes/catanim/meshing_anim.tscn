@@ -944,6 +944,30 @@ tracks/65/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/66/type = "value"
+tracks/66/imported = false
+tracks/66/enabled = true
+tracks/66/path = NodePath("Camera3D:position")
+tracks/66/interp = 1
+tracks/66/loop_wrap = true
+tracks/66/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-2.5, 2.5, 5)]
+}
+tracks/67/type = "value"
+tracks/67/imported = false
+tracks/67/enabled = true
+tracks/67/path = NodePath("Camera3D:rotation")
+tracks/67/interp = 1
+tracks/67/loop_wrap = true
+tracks/67/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.4642575, -0.45378563, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_0qfdx"]
 resource_name = "meshing"
@@ -2300,6 +2324,30 @@ tracks/65/keys = {
 "update": 0,
 "values": [0.0, 0.0, 0.5, 1.0, 1.0]
 }
+tracks/66/type = "value"
+tracks/66/imported = false
+tracks/66/enabled = true
+tracks/66/path = NodePath("Camera3D:position")
+tracks/66/interp = 1
+tracks/66/loop_wrap = true
+tracks/66/keys = {
+"times": PackedFloat32Array(0, 1.8000001, 20.1),
+"transitions": PackedFloat32Array(-2, -2, 1),
+"update": 0,
+"values": [Vector3(-2.5, 2.5, 5), Vector3(-8.921133, 6.0691953, 3.9654346), Vector3(-11.95713, 8.6062, -1.52357)]
+}
+tracks/67/type = "value"
+tracks/67/imported = false
+tracks/67/enabled = true
+tracks/67/path = NodePath("Camera3D:rotation")
+tracks/67/interp = 1
+tracks/67/loop_wrap = true
+tracks/67/keys = {
+"times": PackedFloat32Array(0, 1.8000001, 20.1),
+"transitions": PackedFloat32Array(-2, -2, 1),
+"update": 0,
+"values": [Vector3(-0.4642575, -0.45378563, 0), Vector3(-0.46425748, -0.99328333, -1.4978484e-08), Vector3(-0.46425757, -1.6912241, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3ry7o"]
 _data = {
@@ -2556,10 +2604,10 @@ font_size = 50
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1151146169]
 libraries/ = SubResource("AnimationLibrary_3ry7o")
-autoplay = &"meshing"
+autoplay = &"normals"
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=2129889739]
-transform = Transform3D(0.89879405, 0.19628465, -0.39197144, 0, 0.89415425, 0.44775906, 0.43837115, -0.40244317, 0.8036605, -2.5, 2.5, 5)
+transform = Transform3D(0.89879405, 0.19628465, -0.39197147, 0, 0.89415425, 0.44775903, 0.43837118, -0.40244317, 0.8036605, -2.5, 2.5, 5)
 
 [node name="Point0" type="MeshInstance3D" parent="." unique_id=947966361]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -6.33041)
