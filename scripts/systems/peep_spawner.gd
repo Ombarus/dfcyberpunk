@@ -26,6 +26,21 @@ func _ready() -> void:
 	deferred_init.call_deferred()
 	
 func deferred_init() -> void:
+	for n in get_tree().get_nodes_in_group("Poi" + str(Globals.POI_TYPE.Debug)):
+		n = n as DebugPOI
+		if n == null:
+			print("ERROR: Debug Type POI is not a subclass of DebugPOI?!")
+			continue
+		
+		if n.Spawnable == false:
+			continue
+			
+		var peep := generic_spawn(n)
+		for s in n.NeedOverrides:
+			peep.Needs.SetNeed(s, n.NeedOverrides[s])
+		for s in n.SkillOverrides:
+			peep.Skills.UpdateSkill(s, n.SkillOverrides[s])
+	
 	# Doctor have priority over generic Appartment tenant
 	# Technically, CEO too, but right now CEOOffice also contain the appartment (weird I know)
 	for n in get_tree().get_nodes_in_group("Poi" + str(Globals.POI_TYPE.DoctorOffice)):

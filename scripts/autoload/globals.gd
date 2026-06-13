@@ -11,7 +11,8 @@ enum POI_TYPE {
 	Appartment,
 	DeliveryWorker,
 	BarWorker,
-	MarketWorker
+	MarketWorker,
+	Debug
 }
 
 enum ACTION_STATE {

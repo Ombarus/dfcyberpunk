@@ -64,6 +64,7 @@ var _comfortReward : float
 # (ie: ActionName is "CookSpaghetti" and the stats for making spaghetti is in the action)
 # (the "CookSpaghetti" action could just initialize a few parameters and call a generic "Cook" action)
 # (ex: CookSpaghetti init a list of ingredients and Cook action just tries to find them)
+@export_group("")
 @export var SpawnReward : PackedScene
 # At the same time, this SpawnRewardType might not be enough
 # We need a bunch of properties that might help the NPC take decision

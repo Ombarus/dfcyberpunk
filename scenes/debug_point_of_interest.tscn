@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b47oqkxywd5ai"]
+
+[ext_resource type="Script" uid="uid://ce7nm7f8clgbi" path="res://scripts/debug_point_of_interest.gd" id="1_kwrh2"]
+
+[node name="DebugPointOfInterest" type="Marker3D" unique_id=1460288802 groups=["poi"]]
+script = ExtResource("1_kwrh2")

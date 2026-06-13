@@ -233,6 +233,8 @@ BubbleScene = ExtResource("3_4wg5t")
 
 [node name="Sickness" type="Node" parent="Systems" unique_id=1307982820]
 script = ExtResource("4_4mccf")
+sicksPerDay = 5.0
+damagePerDay = -0.9
 joyDrop = 3
 
 [node name="PeepSpawner" type="Node" parent="Systems" unique_id=1170133917]

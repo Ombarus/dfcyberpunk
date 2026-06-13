@@ -1382,7 +1382,7 @@ func Steal(delta : float, param : Dictionary, actionDepth : int) -> int:
 func WorkAtHospital(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	var plan : ActionPlan = param.get("current_plan", null)
-	var desk := param.get("plan_ad", null) as Entity
+	var desk := param.get("plan_ad", null) as Advertisement
 	
 	if not is_top_of_stack:
 		return Globals.ACTION_STATE.Running
@@ -1410,12 +1410,34 @@ func WorkAtHospital(delta : float, param : Dictionary, actionDepth : int) -> int
 	
 func TreatPatient(delta : float, param : Dictionary, actionDepth : int) -> int:
 	#TODO: Go to patient's bed (param["patient"]) then play interact anim, increase health, if health > 0.9999 finished
+	var is_top_of_stack : bool = isTopOfStack(actionDepth)
+	var plan : ActionPlan = param.get("current_plan", null)
+	var desk := param.get("plan_ad", null) as Advertisement
+	var patient := param.get("patient") as Entity
+	
+	if not is_top_of_stack:
+		return Globals.ACTION_STATE.Running
+	
+	var target_pos : Vector3 = self.getClosestInteract(patient)
+	var precision : float = 0.5
+	if not isAtLocation(target_pos, precision):
+		param["target"] = target_pos
+		param["precision"] = precision
+		self.pushAction("Goto", actionDepth)
+		return Globals.ACTION_STATE.Running
+		
+	if self.isAtLocation(target_pos, precision):
+		patient.Needs.ApplyNeedOverTime(Globals.NEEDS.Health, 0.1, delta) # Arbitrary 0.1 health per second
+		self.travelAnimOneShot(self, "Interact")
+		if patient.Needs.Current(Globals.NEEDS.Health) >= 1.0:
+			return Globals.ACTION_STATE.Finished
+	
 	return Globals.ACTION_STATE.Running
 	
 func GetTreatment(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var is_top_of_stack : bool = isTopOfStack(actionDepth)
 	var plan : ActionPlan = param.get("current_plan", null)
-	var bed := param.get("plan_ad", null) as Entity
+	var bed := param.get("plan_ad", null) as Advertisement
 	var cur_health : float = self.Needs.GetNeed(Globals.NEEDS.Health)
 	
 	if not is_top_of_stack:
@@ -1444,6 +1466,7 @@ func GetTreatment(delta : float, param : Dictionary, actionDepth : int) -> int:
 		return Globals.ACTION_STATE.Running
 	
 	if player_state == "SleepBedIdle":
+		#TODO: Should repeat every X minutes in case doc was busy!s
 		self.messagingSystem.Say(self, "I need Treatment!")
 		self.pushAction("WaitForTreatment", actionDepth)
 	
