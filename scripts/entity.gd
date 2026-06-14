@@ -136,10 +136,11 @@ func Default(delta : float, param : Dictionary, actionDepth : int) -> int:
 	var random_goto_plan := ActionPlan.new()
 	random_goto_plan.ActionName = "WalkRandomly"
 	random_goto_plan.NewSatisfactionReward = Globals.GRADE.VSmall
+	random_goto_plan.CuriosityReward = Globals.GRADE.Small
 	
 	var fallback_sleep_plan := ActionPlan.new()
 	fallback_sleep_plan.ActionName = "SleepOnFloor"
-	fallback_sleep_plan.NewEnergyReward = Globals.GRADE.VSmall # Slightly faked to lower priority
+	fallback_sleep_plan.NewEnergyReward = Globals.GRADE.Small # Slightly faked to lower priority
 	fallback_sleep_plan.NewSatisfactionReward = Globals.GRADE.Big
 	fallback_sleep_plan.SatisfactionAdjustPer = -1.0
 	

@@ -55,10 +55,10 @@ func GetRewardScoreFromPlan(plan : ActionPlan) -> float:
 #
 # Trying with sigmoid function. Current values (100 & 10) 
 # should give a 100 multiplier around 0~0.4, 
-# then quickly drop and ~25 multiplier for anything above 0.6
+# then quickly drop and ~15 multiplier for anything above 0.6
 func Sigmoid(a):
 	var l := 100.0
-	var k := -10.0
+	var k := -20.0
 	var x0 := 0.5
 	var mult : float = l / (1 + exp(-k*(a-x0)))
 	return mult
